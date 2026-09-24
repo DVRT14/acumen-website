@@ -176,7 +176,7 @@
 	font-family: 'Atype Display';
 	font-style: normal;
 	font-weight: normal;
-	font-display: auto;
+	font-display: swap;
 	src: url('/wp-content/uploads/2024/05/AtypDisplay-Regular.eot');
 	src: url('/wp-content/uploads/2024/05/AtypDisplay-Regular.eot?#iefix') format('embedded-opentype'),
 		url('/wp-content/uploads/2024/05/AtypDisplay-Regular.woff2') format('woff2'),
@@ -188,7 +188,7 @@
 	font-family: 'Atype Display';
 	font-style: normal;
 	font-weight: 600;
-	font-display: auto;
+	font-display: swap;
 	src: url('/wp-content/uploads/2024/05/AtypDisplay-Semibold.eot');
 	src: url('/wp-content/uploads/2024/05/AtypDisplay-Semibold.eot?#iefix') format('embedded-opentype'),
 		url('/wp-content/uploads/2024/05/AtypDisplay-Semibold.woff2') format('woff2'),
@@ -200,7 +200,7 @@
 	font-family: 'Atype Display';
 	font-style: normal;
 	font-weight: 500;
-	font-display: auto;
+	font-display: swap;
 	src: url('/wp-content/uploads/2024/05/AtypDisplay-Medium.eot');
 	src: url('/wp-content/uploads/2024/05/AtypDisplay-Medium.eot?#iefix') format('embedded-opentype'),
 		url('/wp-content/uploads/2024/05/AtypDisplay-Medium.woff2') format('woff2'),
@@ -212,7 +212,7 @@
 	font-family: 'Atype Display';
 	font-style: normal;
 	font-weight: 300;
-	font-display: auto;
+	font-display: swap;
 	src: url('/wp-content/uploads/2024/05/AtypDisplay-Light.eot');
 	src: url('/wp-content/uploads/2024/05/AtypDisplay-Light.eot?#iefix') format('embedded-opentype'),
 		url('/wp-content/uploads/2024/05/AtypDisplay-Light.woff2') format('woff2'),
@@ -224,7 +224,7 @@
 	font-family: 'Atype Display';
 	font-style: normal;
 	font-weight: 700;
-	font-display: auto;
+	font-display: swap;
 	src: url('/wp-content/uploads/2024/05/AtypDisplay-Bold.eot');
 	src: url('/wp-content/uploads/2024/05/AtypDisplay-Bold.eot?#iefix') format('embedded-opentype'),
 		url('/wp-content/uploads/2024/05/AtypDisplay-Bold.woff2') format('woff2'),

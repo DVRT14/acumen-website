@@ -19,11 +19,10 @@ const pages = JSON.parse(fs.readFileSync(path.join(here, '../../docs/pages.json'
 
 // Things that never stop moving. Motion is reviewed separately; here we only compare layout.
 // New markup should tag such elements with data-vr-mask.
-const MASK_CSS = `
-video, [wb-data="marquee"], .typed, .typedContainer, .elementor-widget-lottie, .scrollingText,
-.sectionDataGroup__bgImg, .expand-section .bgImage, [data-vr-mask],
-.cky-consent-container, .cky-btn-revisit-wrapper, .cky-overlay, .cky-modal, [data-consent-ui]
-{ visibility: hidden !important; }`;
+const MASK_SELECTOR = `video, [wb-data="marquee"], .typed, .typedContainer, .elementor-widget-lottie, .scrollingText,
+.sectionDataGroup__bgImg, .expand-section .bgImage, [data-vr-mask]`;
+const MASK_CSS = `${MASK_SELECTOR} { visibility: hidden !important; }
+.cky-consent-container, .cky-btn-revisit-wrapper, .cky-overlay, .cky-modal, [data-consent-ui] { display: none !important; }`;
 
 const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.mjs': 'text/javascript',
   '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
@@ -47,10 +46,10 @@ function serve(dir) {
 }
 
 // Runs in the page: visible text nodes and images inside the viewport, keyed so they survive markup changes.
-function collectLayout() {
+function collectLayout(mask) {
   const vh = innerHeight, vw = innerWidth, seen = {}, items = [];
   const key = k => { seen[k] = (seen[k] || 0) + 1; return `${k}#${seen[k]}`; };
-  const visible = el => el.checkVisibility?.({ checkOpacity: true, checkVisibilityCSS: true }) ?? true;
+  const visible = el => !el.closest(mask) && (el.checkVisibility?.({ checkOpacity: true, checkVisibilityCSS: true }) ?? true);
   const push = (k, r, el) => {
     if (!r || r.width === 0 || r.bottom < 0 || r.top > vh || r.right < 0 || r.left > vw) return;
     const cs = getComputedStyle(el);
@@ -104,15 +103,25 @@ async function captureOne(browser, base, route, vw) {
   });
   page.on('response', r => r.status() >= 400 && r.url().includes('127.0.0.1') && report.failed.push(`${r.status()} ${r.url()}`));
 
+  // Fake clock: JS time (Date, timers, rAF → GSAP/Lenis) only advances when we say so, so runs are
+  // deterministic. CSS animations still run in real time; waitStable covers those.
+  await page.clock.install({ time: new Date('2026-01-01T00:00:00Z') });
+  await page.clock.pauseAt(new Date('2026-01-01T00:00:01Z'));
+  // Seeded Math.random (typed.js "humanizes" typing speed with it).
+  await page.addInitScript(() => { let x = 42; Math.random = () => ((x = (x * 1664525 + 1013904223) >>> 0) / 4294967296); });
   await page.goto(base + route, { waitUntil: 'load' });
   await page.addStyleTag({ content: MASK_CSS });
+  // Let load-time animations (hero intro, scroll-to-#start) finish so they can't override the first tile.
+  await page.clock.runFor(4000);
   for (let i = 0, y = 0; ; i++, y += vh) {
     await page.evaluate(y => window.scrollTo({ top: y, behavior: 'instant' }), y);
+    await page.waitForTimeout(100); // native scroll + IntersectionObserver delivery
+    await page.clock.runFor(3000);  // scrubs, entrance delays, tweens settle
     const { png, stable } = await waitStable(page);
     const scrollY = await page.evaluate(() => scrollY);
     const name = `tile-${String(i).padStart(2, '0')}`;
     fs.writeFileSync(path.join(dir, name + '.png'), png);
-    fs.writeFileSync(path.join(dir, name + '.json'), JSON.stringify(await page.evaluate(collectLayout)));
+    fs.writeFileSync(path.join(dir, name + '.json'), JSON.stringify(await page.evaluate(collectLayout, MASK_SELECTOR)));
     report.tiles.push({ name, y, scrollY, stable });
     const docH = await page.evaluate(() => document.documentElement.scrollHeight);
     if (y + vh >= docH || i > 60) { report.docHeight = docH; break; }

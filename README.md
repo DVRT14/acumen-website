@@ -1,64 +1,89 @@
-# acumen.be — static site (Vercel)
+# acumen.be — static site (Astro on Vercel)
 
-A static (HTML/CSS/JS, no PHP/WordPress/database) export of acumen.be, keeping the same look
-without the WordPress+Elementor backend.
+A static rebuild of acumen.be: same look and motion as the old WordPress + Elementor site,
+without WordPress, Elementor or jQuery at runtime. The rebuild is in progress — see
+`docs/REBUILD-PLAN.md` for phases and status.
 
-- `vercel-site/` — **the site.** The one and only copy; edit pages here directly.
+- `vercel-site/` — **the site** (an Astro project).
+- `tools/visual/` — visual regression harness (dev only, not deployed).
 - `docs/` — notes, not deployed:
-  - `FORMS.md` — the 34 forms that still need a backend
+  - `REBUILD-PLAN.md` — the Elementor/jQuery removal plan and decisions
+  - `FORMS.md` — pages with a form
   - `backlog.md` — content/SEO question backlog for the blog posts
-  - `pages.json` — the 55 URLs in scope
-  - `sweep*.tsv` — headless-browser sweeps (console errors / failed requests) from the export
-    (`sweep4.tsv` is the latest)
+  - `pages.json` — the 55 URLs in scope (also drives the harness)
 
-## Deploy
+## Develop / deploy
 
 ```
 cd vercel-site
-npx vercel          # first deploy — links/creates a project, gives you a preview URL
-npx vercel --prod   # promote to production
+npm install
+npm run dev         # http://localhost:4321
+npm run build       # → dist/
+npx vercel          # preview deploy
+npx vercel --prod   # production
 ```
 
-No build step; Vercel's "Other" preset serves it as-is. `vercel.json` sets
-`trailingSlash: true` (every page is `<path>/index.html`, so `/foo` → 308 → `/foo/`) and a
-sitewide `X-Robots-Tag: index, follow` header.
-
-Local check: `cd vercel-site && python -m http.server 8000`
+Vercel builds it with the Astro preset (`vercel.json` sets `framework: astro`, plus
+`trailingSlash`, cache headers and the 308 redirects from old WordPress URLs).
 
 ## Layout (`vercel-site/`)
 
-File path = URL. 55 pages:
+- `src/legacy/*.html` — pages not yet converted: the exported WordPress HTML with the old runtime
+  stripped out. File name = route, `~` = `/` (`knowledge~agentic-ai.html` → `/knowledge/agentic-ai/`).
+  Rendered verbatim by `src/pages/[...slug].astro`, which appends the consent banner and the
+  site script. Converted pages move to real Astro pages/components (Phase 3).
+- `src/scripts/` — the whole runtime, bundled by Astro:
+  - `site.js` — entry
+  - `scroll.js` — the single GSAP + ScrollTrigger + Lenis instance
+  - `animations.js` — the site's own animations (ported from the old theme bundle)
+  - `elementor.js` — replacements for Elementor/Pro/JetEngine behaviour (sticky header, entrance
+    animations, motion effects, carousels, tabs, share buttons, lottie, forms)
+  - `consent.js` — cookie consent and tracker loading
+- `src/components/ConsentBanner.astro` — consent banner/preferences markup.
+- `api/forms.js` — Vercel function every form posts to (a stub for now, see below).
+- `public/` — static files served as-is (`wp-content/uploads` images keep their WordPress paths
+  so OG images and external links don't break).
 
-- `index.html`, `contact/`, `culture/`, `partners/`, `our-expertise/`, `anaplan*/`,
-  `white-paper-download-page/` — top-level pages
-- `expertise/` — 8 service pages
-- `knowledge/` — blog index + all 32 posts/whitepapers/cases
-- `careers/` — careers page + vacatures
-- `legal/` — privacy policy, terms & conditions
-- `wp-content/`, `wp-includes/`, `assets/` — theme/plugin CSS+JS, uploads, CDN copies. Left at
-  WordPress paths on purpose: Elementor's JS builds some asset URLs at runtime from them.
+Runtime libraries are pinned to exact versions in `package.json` — the visual parity was checked
+against those versions.
 
-Posts used to live at the root (`/agentic-ai/`) and careers/legal at their WordPress slugs;
-`vercel.json` 308-redirects every old URL to its new home, so external links and search rankings
-carry over. New post → add `knowledge/<slug>/index.html`, no redirect needed.
+## Consent and trackers
 
-Images in `wp-content/uploads/` are WebP (max 2560px wide). The JPG/PNGs still there are
-`og:image`/`twitter:image` social previews (kept for link-preview compatibility) or files where
-WebP saved <20%. New images: add them as WebP.
+Nothing third-party loads before consent. `consent.js` loads the Google tag (`GT-57V29WMM`) +
+GTM (`GTM-K9LS6TDR`) after **Analytics** consent and LinkedIn Insight after **Advertisement**
+consent, with Google Consent Mode v2 set accordingly. The choice is stored in the
+`cookieyes-consent` cookie (same format as the old CookieYes plugin, so earlier choices still count).
+Tracker IDs live at the top of `consent.js`.
 
-Excludes WordPress tag/category/author archive listings — query pages, not authored content.
+## Forms
+
+All forms POST (FormData) to `/api/forms` and show Elementor's success/error message markup.
+The endpoint is a **stub**: it validates, logs the submission and returns success. Wire the real
+delivery at `TODO(forms-backend)` in `vercel-site/api/forms.js`.
+
+## Visual regression harness (`tools/visual/`)
+
+```
+cd tools/visual && npm install && npx playwright install chromium
+node capture.mjs --root ../../.baseline/vercel-site --out out/baseline   # reference
+node capture.mjs --root ../../vercel-site/dist --out out/candidate        # after npm run build
+node compare.mjs --a out/baseline --b out/candidate --consent denied --allow allow.json
+```
+
+`.baseline/` is a git worktree of the pre-rebuild site (`git worktree add .baseline 6251330`).
+Each page is captured in viewport-sized tiles at 8 widths with a paused, deterministic clock;
+`compare.mjs` diffs pixels and text/image positions and writes `out/report/index.html`.
+Options: `--pages knowledge,contact` (substring filter), `--vp 1440,390`, `--workers 8`, `--resume`.
+Intentional differences go in `allow.json` with a reason.
 
 ## Known limitations
 
-- **Forms don't submit.** Every Elementor Pro form POSTs to `/wp-admin/admin-ajax.php`, which
-  doesn't exist here; Elementor shows a generic failure message. Each is marked with a
-  `TODO(migration)` comment in its HTML — see `docs/FORMS.md`. Wire up Formspree, Vercel
-  functions, etc. before relying on them.
 - **No `robots.txt` / `sitemap.xml` yet** — add once the final domain is known.
 - **RSS/oEmbed/REST discovery links are dead** (`/feed/`, `/wp-json/*`, `/xmlrpc.php`) —
-  inert `<link>` tags with no visual effect.
-- **`/insights/`** was a WordPress 301 to `/knowledge/`; the nav link now points straight there.
-- **Pre-existing content bug in 23 of 32 blog posts:** a shared content block has its
-  `<img src>` filled with pasted body text ("AItechnologyiswidelyusedthroughoutindustry...")
-  instead of an image URL. Same text verbatim in every affected post — fix it once, the same
-  way, across all of them (`grep -rl AItechnologyiswidely vercel-site`).
+  inert `<link>` tags, removed in Phase 3.
+- **The whitepaper popup** on `/knowledge/de-riziv-controleshoft-is-ingezet/` has no trigger on
+  the old site either, so it never opens.
+- **Missing image in 23 of 32 blog posts:** a shared content block had its `<img src>` filled
+  with pasted body text ("AItechnologyiswidelyusedthroughoutindustry..."), so it never showed
+  anything. The broken `<img>` was removed (image widget `cc67132`, the motion-effects block
+  after the marquee); add the intended image there once known.

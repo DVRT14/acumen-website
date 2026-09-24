@@ -1,5 +1,7 @@
 ---
-// Legacy pages: the exported WordPress HTML, rendered verbatim. Replaced template by template.
+// Legacy pages: the exported WordPress HTML, rendered verbatim apart from the shared runtime
+// injected before </body>. Replaced template by template.
+import ConsentBanner from '../components/ConsentBanner.astro';
 
 export function getStaticPaths() {
   const files = import.meta.glob('../legacy/*.html', { query: '?raw', import: 'default', eager: true });
@@ -9,5 +11,10 @@ export function getStaticPaths() {
   });
 }
 const { html } = Astro.props;
+const end = html.lastIndexOf('</body>');
 ---
-<Fragment set:html={html} />
+<Fragment set:html={html.slice(0, end)} />
+<link rel="stylesheet" href="/css/consent.css" />
+<ConsentBanner />
+<script src="../scripts/site.js"></script>
+<Fragment set:html={html.slice(end)} />

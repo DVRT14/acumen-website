@@ -1,4 +1,5 @@
 {
+  "framework": "astro",
   "trailingSlash": true,
   "headers": [
     {

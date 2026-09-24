@@ -1,0 +1,22 @@
+# Acumen
+
+> Data, analytics and AI consulting firm based in Leuven, Belgium. Delivers tailor-made
+> data solutions — from data engineering and governance to AI/ML and reporting — for
+> mid-size and enterprise clients.
+
+## Key pages
+- [Our expertise](https://acumen.be/our-expertise/): overview of all service areas
+- [Data Science & AI](https://acumen.be/expertise/datascience-ai/): AI/ML and agentic AI implementation
+- [Data Strategy](https://acumen.be/expertise/data-strategy/): data strategy and roadmap consulting
+- [Data Governance](https://acumen.be/expertise/data-governance/): governance and compliance frameworks
+- [Data Integration & Engineering](https://acumen.be/expertise/dataintegration-engineering/): pipelines, ETL, orchestration
+- [Data Planning & EPM](https://acumen.be/expertise/data-planning-epm/): enterprise performance management, Anaplan
+- [Data Visualisation & Reporting](https://acumen.be/expertise/datavisualisation-reporting/): Power BI and dashboarding
+- [Support & Maintenance](https://acumen.be/expertise/support-maintenance/): ongoing data platform support
+- [Knowledge hub](https://acumen.be/knowledge/): blog with client cases, whitepapers, and technical write-ups
+- [Careers](https://acumen.be/careers/): open roles
+
+## Data policy
+- Client case studies and blog posts are written by Acumen consultants based on delivered
+  projects; publish/update dates are in each post's byline and structured data.
+- Cite as: Acumen (acumen.be)

@@ -1,0 +1,206 @@
+{
+  "trailingSlash": true,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/genarative-ai-and-power-bi/:path*",
+      "destination": "/knowledge/genarative-ai-and-power-bi/",
+      "permanent": true
+    },
+    {
+      "source": "/enhanced-sales-insights-leveraging-power-bi-reporting/:path*",
+      "destination": "/knowledge/enhanced-sales-insights-leveraging-power-bi-reporting/",
+      "permanent": true
+    },
+    {
+      "source": "/requirements-analysis-no-sexy-buzzword-but-nevertheless-indispensable/:path*",
+      "destination": "/knowledge/requirements-analysis-no-sexy-buzzword-but-nevertheless-indispensable/",
+      "permanent": true
+    },
+    {
+      "source": "/jump-start-your-data-lake-with-our-meta-data-driven-blueprint/:path*",
+      "destination": "/knowledge/jump-start-your-data-lake-with-our-meta-data-driven-blueprint/",
+      "permanent": true
+    },
+    {
+      "source": "/a-comparison-of-apache-iceberg-and-delta-lake/:path*",
+      "destination": "/knowledge/a-comparison-of-apache-iceberg-and-delta-lake/",
+      "permanent": true
+    },
+    {
+      "source": "/esg-reporting-data-deadlines/:path*",
+      "destination": "/knowledge/esg-reporting-data-deadlines/",
+      "permanent": true
+    },
+    {
+      "source": "/continuous-data-support/:path*",
+      "destination": "/knowledge/continuous-data-support/",
+      "permanent": true
+    },
+    {
+      "source": "/the-five-key-takeaways-you-should-know-about-the-eu-ai-act/:path*",
+      "destination": "/knowledge/the-five-key-takeaways-you-should-know-about-the-eu-ai-act/",
+      "permanent": true
+    },
+    {
+      "source": "/the-necessity-and-benefits-of-extensive-logging-and-auditing-in-data-integration/:path*",
+      "destination": "/knowledge/the-necessity-and-benefits-of-extensive-logging-and-auditing-in-data-integration/",
+      "permanent": true
+    },
+    {
+      "source": "/building-a-robust-csrd-reporting-strategy-a-path-to-successful-compliance/:path*",
+      "destination": "/knowledge/building-a-robust-csrd-reporting-strategy-a-path-to-successful-compliance/",
+      "permanent": true
+    },
+    {
+      "source": "/ai-project-roadmap/:path*",
+      "destination": "/knowledge/ai-project-roadmap/",
+      "permanent": true
+    },
+    {
+      "source": "/double-materiality-assessment/:path*",
+      "destination": "/knowledge/double-materiality-assessment/",
+      "permanent": true
+    },
+    {
+      "source": "/unlocking-data-orchestration-with-dagster/:path*",
+      "destination": "/knowledge/unlocking-data-orchestration-with-dagster/",
+      "permanent": true
+    },
+    {
+      "source": "/dagster-vs-airflow-data-orchestration/:path*",
+      "destination": "/knowledge/dagster-vs-airflow-data-orchestration/",
+      "permanent": true
+    },
+    {
+      "source": "/airflow-to-dagster-migration/:path*",
+      "destination": "/knowledge/airflow-to-dagster-migration/",
+      "permanent": true
+    },
+    {
+      "source": "/transforming-business-machine-learning-applications/:path*",
+      "destination": "/knowledge/transforming-business-machine-learning-applications/",
+      "permanent": true
+    },
+    {
+      "source": "/data-intelligence-platform-databricks/:path*",
+      "destination": "/knowledge/data-intelligence-platform-databricks/",
+      "permanent": true
+    },
+    {
+      "source": "/embracing-esg-csrd/:path*",
+      "destination": "/knowledge/embracing-esg-csrd/",
+      "permanent": true
+    },
+    {
+      "source": "/ai-legal-assistant-animo-law/:path*",
+      "destination": "/knowledge/ai-legal-assistant-animo-law/",
+      "permanent": true
+    },
+    {
+      "source": "/animo-ai-powered-legal-assistant/:path*",
+      "destination": "/knowledge/animo-ai-powered-legal-assistant/",
+      "permanent": true
+    },
+    {
+      "source": "/kaneka-powerbi-sap-datasphere/:path*",
+      "destination": "/knowledge/kaneka-powerbi-sap-datasphere/",
+      "permanent": true
+    },
+    {
+      "source": "/future-ready-data-strategy-microsoft-fabric/:path*",
+      "destination": "/knowledge/future-ready-data-strategy-microsoft-fabric/",
+      "permanent": true
+    },
+    {
+      "source": "/power-bi-whitepaper/:path*",
+      "destination": "/knowledge/power-bi-whitepaper/",
+      "permanent": true
+    },
+    {
+      "source": "/data-warehouse-to-lakehouse-whitepaper/:path*",
+      "destination": "/knowledge/data-warehouse-to-lakehouse-whitepaper/",
+      "permanent": true
+    },
+    {
+      "source": "/our-ai-and-ml-services-more-info/:path*",
+      "destination": "/knowledge/our-ai-and-ml-services-more-info/",
+      "permanent": true
+    },
+    {
+      "source": "/modern-data-platform-whitepaper/:path*",
+      "destination": "/knowledge/modern-data-platform-whitepaper/",
+      "permanent": true
+    },
+    {
+      "source": "/routing-optimization-essers-acumen/:path*",
+      "destination": "/knowledge/routing-optimization-essers-acumen/",
+      "permanent": true
+    },
+    {
+      "source": "/bionerga-future-ready-data-platform/:path*",
+      "destination": "/knowledge/bionerga-future-ready-data-platform/",
+      "permanent": true
+    },
+    {
+      "source": "/agentic-ai-from-experiments-to-work-that-runs-itself/:path*",
+      "destination": "/knowledge/agentic-ai-from-experiments-to-work-that-runs-itself/",
+      "permanent": true
+    },
+    {
+      "source": "/data-agents-insights-action/:path*",
+      "destination": "/knowledge/data-agents-insights-action/",
+      "permanent": true
+    },
+    {
+      "source": "/agentic-ai/:path*",
+      "destination": "/knowledge/agentic-ai/",
+      "permanent": true
+    },
+    {
+      "source": "/de-riziv-controleshoft-is-ingezet/:path*",
+      "destination": "/knowledge/de-riziv-controleshoft-is-ingezet/",
+      "permanent": true
+    },
+    {
+      "source": "/careers-a-great-team-for-great-results/:path*",
+      "destination": "/careers/",
+      "permanent": true
+    },
+    {
+      "source": "/vacature-ai-engineer/:path*",
+      "destination": "/careers/vacature-ai-engineer/",
+      "permanent": true
+    },
+    {
+      "source": "/vacature-analytics-engineer/:path*",
+      "destination": "/careers/vacature-analytics-engineer/",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy/:path*",
+      "destination": "/legal/privacy-policy/",
+      "permanent": true
+    },
+    {
+      "source": "/terms-conditions/:path*",
+      "destination": "/legal/terms-conditions/",
+      "permanent": true
+    },
+    {
+      "source": "/test/",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}

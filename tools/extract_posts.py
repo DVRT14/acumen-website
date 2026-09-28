@@ -253,8 +253,11 @@ def widget(src, data_id):
     w = by_id(src, data_id)
     if 'elementor-widget-image"' in w[:w.index('>')] or 'elementor-widget-image ' in w[:w.index('>')]:
         return img_attrs(re.search(r'<img [^>]*>', w).group(0))
+    if 'elementor-widget-icon' in w[:w.index('>')]:
+        return re.search(r'<svg.*?</svg>', w, re.S).group(0)
     if 'elementor-widget-button' in w[:w.index('>')]:
-        return {'label': inner(first(w, r'<span class="elementor-button-text')).strip(), 'href': re.search(r'<a [^>]*href="([^"]*)"', w).group(1)}
+        href = re.search(r'<a [^>]*href="([^"]*)"', w)
+        return {'label': inner(first(w, r'<span class="elementor-button-text')).strip(), 'href': href and href.group(1)}
     if 'elementor-heading-title' in w:
         return heading(src, data_id)
     return text_editor(src, data_id)
@@ -269,6 +272,25 @@ ONE_OFF = {
         'diffTitle': '5ea3e99',
         'cards': [['b3353af', '9175a3d'], ['3bb3467', 'fd5ad26'], ['bb4806b', '3e5b87b'], ['52b64f6', 'eed24f2'], ['e3f4078', 'bbd137a'], ['0c5ec87', '3d9f414']],
         'banner': 'b89301e', 'outro': '7935461',
+    },
+    'knowledge~agentic-ai': {
+        'title': '447557e', 'lead': '117f98f', 'tags': ['6afb0b7', '8bc608b', '7f60637', '9a4db71', '3e2932b', '3d83847'],
+        'whatKicker': 'c24b1d5', 'whatTitle': '0282c2e', 'whatText': '6c0ec28', 'compare': [['c1838cc', '66e2150'], ['bb69a1f', '8eaf29b']],
+        'canTitle': '1c73bb3',
+        'can': [['43b241b', 'c570e40', 'c794b91'], ['b1fdae5', 'bcfe474', '3ca179f'], ['cbb274a', 'c5e217b', '9cf496a'],
+                ['9e56a60', '67c142a', 'ec3c9f5'], ['8409041', '43d786e', '2d3c498'], ['3a2cb30', 'd5f733f', '67916b0']],
+        'valueKicker': '561ceff', 'valueTitle': 'fe663e4', 'value': [['9f86248', 'b8118b1'], ['a8b6122', '3e3749d'], ['24de051', '0ac7fb3'], ['d6cbea8', 'aad1b1d']],
+        'nowKicker': '0a3b3be', 'nowTitle': 'a837961', 'nowText': '49b4254',
+        'stats': [['295c51c', '5d0fd00', 'f7de694'], ['bb0c0be', '445db95', 'b377939'], ['15f96b5', '87972de', '3665f29']],
+        'meansKicker': 'f044057', 'meansTitle': '45d8379', 'meansText': '2c57bd8',
+        'uses': [['6bfde85', 'a2dbc5a', '375599f', '5f1767e', '1b4726c'], ['44c4149', '1237da2', '7b95645', 'ea3f05a', '786c782'],
+                 ['d2c102a', '9eabe32', 'c7a5ba0', '9545509', '6259735'], ['3f85b23', '4ca2bc0', 'c04d796', '7d334b7', '92e2563']],
+        'howKicker': 'f3aec21', 'howTitle': '7728b1b', 'steps': [['658df2f', 'e8103d5', 'd12b3f1'], ['c1c846d', 'ebebef2', 'e1fe48d'], ['8d8fc38', 'b510604', '362a261']],
+        'casesKicker': '50f8148', 'casesTitle': 'd2b04c7', 'casesIntro': '653e76b',
+        'cases': [['d8d6e09', '875e428', '54d6782', '17ea92a'], ['e133a47', '90cf9cb', '7c9da66', '726a090'], ['fc7014d', '16e5087', 'b1570b4', '80dfee3']],
+        'whyKicker': 'd0b5594', 'why': [['55aabdb', '684ba01'], ['7cd85a2', '07b19b2'], ['61184f0', 'ab50414'], ['926cc84', 'c31a8cc']],
+        'safeKicker': '9b7afec', 'safeTitle': 'edb765a', 'safe': [['8b3aa66', '29e5185'], ['50897fb', '31ee0f1'], ['615182b', '022a492']],
+        'ctaTitle': '021f931', 'ctaText': 'e4e6451', 'ctaButtons': ['403a833', 'be665a0'],
     },
     'culture': {
         'typedHero': '6804fcc', 'hero': '5da3408',
@@ -388,7 +410,11 @@ for f in sorted(glob.glob(os.path.join(LEGACY, '*.html'))):
     for pid, card in cards_from(src).items():
         cards.setdefault(pid, {}).update({k: v for k, v in card.items() if v is not None or k not in cards.get(pid, {})})
     name = os.path.basename(f)[:-5]
-    if name in ONE_OFF or name == 'anaplan-tabs':
+    if name == 'knowledge~agentic-ai':
+        os.makedirs(os.path.join(ROOT, 'src', 'content', 'one-off'), exist_ok=True)
+        with open(os.path.join(ROOT, 'src', 'content', 'one-off', 'agentic-ai.json'), 'w', encoding='utf8') as fh:
+            json.dump({**one_off(src, ONE_OFF[name]), 'appendix': appendix(src, '3891')}, fh, ensure_ascii=False, indent=1)
+    elif name in ONE_OFF or name == 'anaplan-tabs':
         os.makedirs(os.path.join(ROOT, 'src', 'content', 'one-off'), exist_ok=True)
         with open(os.path.join(ROOT, 'src', 'content', 'one-off', name + '.json'), 'w', encoding='utf8') as fh:
             json.dump(anaplan_tabs(src) if name == 'anaplan-tabs' else one_off(src, ONE_OFF[name]), fh, ensure_ascii=False, indent=1)

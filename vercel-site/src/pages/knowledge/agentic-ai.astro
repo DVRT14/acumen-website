@@ -1,0 +1,260 @@
+---
+// "Everything you need to know about Agentic AI" (was the free-form Elementor post 3891).
+// Content: src/content/one-off/agentic-ai.json. The FAQ section + JSON-LD after the page is kept as-is.
+import Base from '../../layouts/Base.astro';
+import meta from '../../data/meta.json';
+import c from '../../content/one-off/agentic-ai.json';
+import '../../styles/agentic-ai.css';
+
+const m = meta['knowledge~agentic-ai'];
+// Per-card details that differ in the old page (icon spacing, text width).
+const can = [
+  { m: '30px', w: '' }, { m: '30px 24px 30px 30px', w: '91%' }, { m: '30px 30px 30px 34px', w: '91%' },
+  { m: '30px 30px 30px 34px', w: '91%' }, { m: '32px 30px 25px 34px', w: '91%' }, { m: '32px 30px 25px 34px', w: '95%' },
+];
+const Sp = (h: number) => `<div class="ai-sp" style="height:${h}px"></div>`;
+---
+<Base {...m} bodyClass={`${m.bodyClass} p-spaced`}>
+  <div class="ai">
+    <section class="ai-sec ai-sec--hero">
+      <div class="ai-sec__in">
+        <Fragment set:html={Sp(50)} />
+        <div class="ai-hero-title"><h2 set:html={c.title} /></div>
+        <Fragment set:html={Sp(20)} />
+        <div class="ai-text" set:html={c.lead} />
+        <Fragment set:html={Sp(20)} />
+        <div class="ai-tags">
+          {c.tags.map(t => <div class="ai-btn ai-btn--tag"><div><a href={t.href}><span><span set:html={t.label} /></span></a></div></div>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="ai-sec ai-sec--white">
+      <div class="ai-sec__in">
+        <Fragment set:html={Sp(50)} />
+        <div class="ai-kicker"><h2 set:html={c.whatKicker} /></div>
+        <Fragment set:html={Sp(20)} />
+        <div class="ai-title"><h2 set:html={c.whatTitle} /></div>
+        <Fragment set:html={Sp(10)} />
+        <div class="ai-text" set:html={c.whatText} />
+        <Fragment set:html={Sp(20)} />
+        <div class="ai-compare">
+          <div class="ai-compare__row">
+            <div class="ai-compare__label ai-compare__label--muted"><div set:html={c.compare[0][0]} /></div>
+            <div class="ai-compare__text" set:html={c.compare[0][1]} />
+          </div>
+          <div class="ai-divider ai-compare__divider"><div><div class="ai-divider__line"><span></span></div></div></div>
+          <div class="ai-compare__row">
+            <div class="ai-compare__label"><div set:html={c.compare[1][0]} /></div>
+            <div class="ai-compare__text ai-compare__text--73" set:html={c.compare[1][1]} />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ai-sec">
+      <div class="ai-sec__in">
+        <Fragment set:html={Sp(70)} />
+        <div class="ai-title ai-title--26"><h2 set:html={c.canTitle} /></div>
+        <Fragment set:html={Sp(20)} />
+        <div class="ai-grid ai-grid--3">
+          {c.can.map(([icon, title, text], i) => (
+            <div class="ai-can">
+              <div class="ai-can__tile"><div class="ai-can__icon" style={`--m:${can[i].m}`}><div><div class="ai-icon" set:html={icon} /></div></div></div>
+              <div class="ai-can__body">
+                <div class="ai-can__inner">
+                  <div class="ai-can__title"><div><h5 set:html={title} /></div></div>
+                  <Fragment set:html={Sp(10)} />
+                  <div class="ai-can__text" style={can[i].w ? `width:${can[i].w};max-width:${can[i].w}` : undefined} set:html={text} />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="ai-sec">
+      <div class="ai-sec__in">
+        <Fragment set:html={Sp(70)} />
+        <div class="ai-value">
+          <div class="ai-kicker"><h2 set:html={c.valueKicker} /></div>
+          <Fragment set:html={Sp(20)} />
+          <div class="ai-title ai-title--78"><h2 set:html={c.valueTitle} /></div>
+          <Fragment set:html={Sp(20)} />
+          <div class="ai-value__row">
+            {c.value.map(([title, text]) => (
+              <div class="ai-value__card">
+                <div class="ai-value__title"><div><h5 set:html={title} /></div></div>
+                <div class="ai-value__text"><div set:html={text} /></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ai-sec ai-sec--white">
+      <div class="ai-sec__in">
+        <Fragment set:html={Sp(70)} />
+        <div class="ai-kicker"><h2 set:html={c.nowKicker} /></div>
+        <Fragment set:html={Sp(20)} />
+        <div class="ai-title"><h2 set:html={c.nowTitle} /></div>
+        <Fragment set:html={Sp(10)} />
+        <div class="ai-text" set:html={c.nowText} />
+        <Fragment set:html={Sp(20)} />
+        <div class="ai-row3">
+          {c.stats.map(([num, text, source]) => (
+            <div class="ai-box">
+              <div class="ai-divider ai-divider--stat"><div class="ai-divider__line"><span></span></div></div>
+              <div class="ai-title"><h2 set:html={num} /></div>
+              <div class="ai-box__text" set:html={text} />
+              <div class="ai-box__source" set:html={source} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="ai-sec">
+      <div class="ai-sec__in"><div class="ai-divider ai-divider--rule"><div><div class="ai-divider__line"><span></span></div></div></div></div>
+    </section>
+
+    <section class="ai-sec">
+      <div class="ai-sec__in">
+        <div class="ai-kicker"><h2 set:html={c.meansKicker} /></div>
+        <Fragment set:html={Sp(20)} />
+        <div class="ai-title ai-title--26"><h2 set:html={c.meansTitle} /></div>
+        <Fragment set:html={Sp(20)} />
+        <div class="ai-text ai-text--20" set:html={c.meansText} />
+        <Fragment set:html={Sp(20)} />
+        <div class="ai-grid ai-grid--2">
+          {c.uses.map(([icon, title, badge, text, examples]) => (
+            <div class="ai-use">
+              <div class="ai-use__frame">
+                <div class="ai-use__body">
+                  <div class="ai-use__head">
+                    <div class="ai-use__heading">
+                      <div class="ai-use__icon"><div><div class="ai-icon" set:html={icon} /></div></div>
+                      <div class="ai-use__title"><div><h5 set:html={title} /></div></div>
+                    </div>
+                    <div class="ai-btn ai-btn--badge"><div><a role="button"><span><span set:html={badge.label} /></span></a></div></div>
+                  </div>
+                  <Fragment set:html={Sp(10)} />
+                  <div class="ai-use__text"><div set:html={text} /></div>
+                  <Fragment set:html={Sp(20)} />
+                  <div class="ai-use__text ai-use__text--examples"><div set:html={examples} /></div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="ai-sec ai-sec--white">
+      <div class="ai-sec__in">
+        <div class="ai-divider ai-divider--rule"><div><div class="ai-divider__line"><span></span></div></div></div>
+        <div class="ai-kicker"><h2 set:html={c.howKicker} /></div>
+        <Fragment set:html={Sp(20)} />
+        <div class="ai-title"><h2 set:html={c.howTitle} /></div>
+        <Fragment set:html={Sp(20)} />
+        <div class="ai-row3">
+          {c.steps.map(([num, title, text]) => (
+            <div class="ai-box">
+              <div class="ai-box__step"><h2 set:html={num} /></div>
+              <Fragment set:html={Sp(20)} />
+              <div class="ai-box__head"><h2 set:html={title} /></div>
+              <Fragment set:html={Sp(20)} />
+              <div class="ai-box__text" set:html={text} />
+            </div>
+          ))}
+        </div>
+        <div class="ai-divider ai-divider--rule"><div><div class="ai-divider__line"><span></span></div></div></div>
+        <div class="ai-kicker"><h2 set:html={c.casesKicker} /></div>
+        <Fragment set:html={Sp(20)} />
+        <div class="ai-title"><h2 set:html={c.casesTitle} /></div>
+        <Fragment set:html={Sp(20)} />
+        <div class="ai-text ai-text--20" set:html={c.casesIntro} />
+        <Fragment set:html={Sp(20)} />
+        {c.cases.map(([client, sector, text, button], i) => (
+          <Fragment>
+            {i > 0 && <Fragment set:html={Sp(20)} />}
+            <div class="ai-case">
+              <div class="ai-case__row">
+                <div class="ai-case__who">
+                  <div class="ai-case__client" style={i === 0 ? 'width:19%;max-width:19%' : undefined} set:html={client} />
+                  <div class="ai-case__sector" set:html={sector} />
+                </div>
+                <div class="ai-case__text" set:html={text} />
+                <div class="ai-btn ai-btn--case"><div><div><a role="button"><span><span set:html={button.label} /></span></a></div></div></div>
+              </div>
+            </div>
+          </Fragment>
+        ))}
+      </div>
+    </section>
+
+    <section class="ai-sec">
+      <div class="ai-sec__in">
+        <div class="ai-divider ai-divider--rule"><div><div class="ai-divider__line"><span></span></div></div></div>
+        <div class="ai-kicker"><h2 set:html={c.whyKicker} /></div>
+        <Fragment set:html={Sp(20)} />
+        <div class="ai-grid ai-grid--2r">
+          {c.why.map(([title, text]) => (
+            <div class="ai-why">
+              <div class="ai-why__body">
+                <div class="ai-why__box">
+                  <div class="ai-why__in">
+                    <div class="ai-why__title"><div><h5 set:html={title} /></div></div>
+                    <Fragment set:html={Sp(10)} />
+                    <div class="ai-why__text" set:html={text} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="ai-sec ai-sec--white">
+      <div class="ai-sec__in">
+        <div class="ai-divider ai-divider--rule"><div><div class="ai-divider__line"><span></span></div></div></div>
+        <div class="ai-kicker"><h2 set:html={c.safeKicker} /></div>
+        <Fragment set:html={Sp(20)} />
+        <div class="ai-title"><h2 set:html={c.safeTitle} /></div>
+        <Fragment set:html={Sp(20)} />
+        <div class="ai-row3">
+          {c.safe.map(([title, text]) => (
+            <div class="ai-box ai-box--dark">
+              <div class="ai-box__head"><h2 set:html={title} /></div>
+              <Fragment set:html={Sp(20)} />
+              <div class="ai-box__text" set:html={text} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="ai-sec">
+      <div class="ai-sec__in">
+        <Fragment set:html={Sp(70)} />
+        <div class="ai-cta">
+          <div class="ai-cta__in">
+            <div class="ai-cta__intro">
+              <div class="ai-title ai-cta__title"><h2 set:html={c.ctaTitle} /></div>
+              <div class="ai-cta__text"><div set:html={c.ctaText} /></div>
+            </div>
+            <div class="ai-cta__actions">
+              <div class="ai-btn ai-btn--primary"><div><a href={c.ctaButtons[0].href}><span><span set:html={c.ctaButtons[0].label} /></span></a></div></div>
+              <Fragment set:html={Sp(15)} />
+              <div class="ai-btn ai-btn--outline"><div><a href={c.ctaButtons[1].href}><span><span set:html={c.ctaButtons[1].label} /></span></a></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <Fragment set:html={c.appendix} />
+</Base>

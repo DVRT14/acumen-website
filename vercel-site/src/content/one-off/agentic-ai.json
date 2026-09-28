@@ -1,0 +1,260 @@
+{
+ "title": "<span style=\"color:#002921\">Your team spends hours on work an agent could handle.</span>\n<span style=\"color:#B9D0D0\">We build the agent.</span>",
+ "lead": "<p>Agentic AI doesn&#8217;t just answer questions. It plans a task, works through the steps, and gets it done on its own. We help you turn the repetitive work in your business into a process that runs itself, from first idea to daily use.</p>",
+ "tags": [
+  {
+   "label": "Process automation",
+   "href": "#"
+  },
+  {
+   "label": "Human-in-the-loop",
+   "href": "#"
+  },
+  {
+   "label": "LangChain",
+   "href": "#"
+  },
+  {
+   "label": "Databricks",
+   "href": "#"
+  },
+  {
+   "label": "IBM watsonx Orchestrate",
+   "href": "#"
+  },
+  {
+   "label": "Microsoft Foundry",
+   "href": "#"
+  }
+ ],
+ "whatKicker": "WHAT IS AGENTIC AI",
+ "whatTitle": "Not a smarter chatbot. A colleague that finishes the task.",
+ "whatText": "<p>Most companies already use AI to answer questions or draft content. Agentic AI goes further. It plans multi-step work, uses your tools and systems on its own, and sees a task through to the end, checking in with a person only where that matters.</p>",
+ "compare": [
+  [
+   "<p>CHATBOT</p>",
+   "<p>Answers a question when you ask it. A person still does the work that follows.</p>"
+  ],
+  [
+   "<p>AGENT</p>",
+   "<p>Reads the incoming request, checks your systems, prepares the outcome, and hands off only the exception to a person.</p>"
+  ]
+ ],
+ "canTitle": "In practice, an agent can:",
+ "can": [
+  [
+   "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-far-file\" viewBox=\"0 0 384 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48z\"></path></svg>",
+   "Read and understand documents",
+   "<p>Extract the relevant fields from invoices, contracts, forms, drawings, or emails, whatever the format.</p>"
+  ],
+  [
+   "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-far-edit\" viewBox=\"0 0 576 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z\"></path></svg>",
+   "Enter and update data in your systems",
+   "<p>Fill in and update records directly in your ERP, CRM, or internal tools, no manual copy-paste.</p>"
+  ],
+  [
+   "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-check\" viewBox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z\"></path></svg>",
+   "Make decisions within clear rules",
+   "<p>Approve, flag, or escalate a case based on the criteria you define, consistently, every time.</p>"
+  ],
+  [
+   "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-link\" viewBox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z\"></path></svg>",
+   "Connect and act across systems",
+   "<p>Look something up in one system, check it against another, and complete the action in a third.</p>"
+  ],
+  [
+   "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-far-eye\" viewBox=\"0 0 576 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z\"></path></svg>",
+   "Watch for triggers and follow through",
+   "<p>Pick up a new email, order, or ticket the moment it arrives and start the process automatically.</p>"
+  ],
+  [
+   "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-user\" viewBox=\"0 0 448 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z\"></path></svg>",
+   "Keep a person informed and in control",
+   "<p>Notify the right person, ask for approval, or hand off the exception, so nothing happens unsupervised where it shouldn&#8217;t.</p>"
+  ]
+ ],
+ "valueKicker": "THE ADDED VALUE",
+ "valueTitle": "Why this earns a place in your business, not just your innovation budget",
+ "value": [
+  [
+   "Speed",
+   "<p>Work that took half a day happens in minutes, while your team moves on to the next thing.</p>"
+  ],
+  [
+   "Consistency",
+   "<p>The same steps, correctly, every time. No fatigue, no shortcuts under deadline pressure.</p>"
+  ],
+  [
+   "Availability",
+   "<p>Agents don&#8217;t wait for office hours. Requests get handled nights, weekends, and everything in between.</p>"
+  ],
+  [
+   "Focus",
+   "<p>Less time on repetitive steps means more time for the judgment calls that actually need a person.</p>"
+  ]
+ ],
+ "nowKicker": "WHY NOW",
+ "nowTitle": "The gap between testing and using",
+ "nowText": "<p>Most organisations aren&#8217;t short on AI experiments. They&#8217;re short on AI that runs, unsupervised, every single day.</p>",
+ "stats": [
+  [
+   "88%",
+   "<p>of companies already use AI in at least one part of the business</p>",
+   "<div class=\"stat-card\"><p class=\"stat-source\">McKinsey, 2025</p></div><div class=\"stat-card\"> </div>"
+  ],
+  [
+   "&lt;10%",
+   "<p>have scaled an AI agent far enough to deliver measurable value</p>",
+   "<div class=\"stat-card\"><p class=\"stat-source\">McKinsey, 2026</p></div><div class=\"stat-card\"> </div>"
+  ],
+  [
+   "40%",
+   "<p>of enterprise applications will include task-specific AI agents by end of 2026</p>",
+   "<div class=\"stat-card\"><p class=\"stat-source\">Gartner</p></div>"
+  ]
+ ],
+ "meansKicker": "WHAT IT MEANS FOR YOUR BUSINESS",
+ "meansTitle": "In practice, an agent can:",
+ "meansText": "<p>Every one of these starts small, proves value on one process, and expands from there. That&#8217;s deliberate: agentic AI works best as a series of contained wins, not one big transformation project.</p>",
+ "uses": [
+  [
+   "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-comment-alt\" viewBox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 9.8 11.2 15.5 19.1 9.7L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64z\"></path></svg>",
+   "Document intake",
+   {
+    "label": "Agent handles it",
+    "href": null
+   },
+   "<p>Manual document processing eats your team&#8217;s time. We build agents that read, classify, and route documents automatically, with a person checking only the exceptions.</p>",
+   "<div class=\"cap-examples\"><span class=\"cap-ex\">&#8211; Supplier fiches and safety data sheets</span></div><div class=\"cap-examples\"><span class=\"cap-ex\">&#8211; Invoices and purchase requests</span></div><div class=\"cap-examples\"><span class=\"cap-ex\">&#8211; Contracts and compliance forms</span></div>"
+  ],
+  [
+   "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-clock\" viewBox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M256,8C119,8,8,119,8,256S119,504,256,504,504,393,504,256,393,8,256,8Zm92.49,313h0l-20,25a16,16,0,0,1-22.49,2.5h0l-67-49.72a40,40,0,0,1-15-31.23V112a16,16,0,0,1,16-16h32a16,16,0,0,1,16,16V256l58,42.5A16,16,0,0,1,348.49,321Z\"></path></svg>",
+   "Quoting and pricing",
+   {
+    "label": "Minutes, not days",
+    "href": null
+   },
+   "<p>Slow, inconsistent quotes lose deals. We build agents that pull the right data, apply your pricing logic, and prepare a quote automatically.</p>",
+   "<div class=\"cap-examples\"><span class=\"cap-ex\">&#8211; Margin calculation</span></div><div class=\"cap-examples\"><span class=\"cap-ex\">&#8211; Configurable product quotes</span></div><div class=\"cap-examples\"><span class=\"cap-ex\">&#8211; Approval routing</span></div>"
+  ],
+  [
+   "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-list-alt\" viewBox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M464 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h416c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zM128 120c-22.091 0-40 17.909-40 40s17.909 40 40 40 40-17.909 40-40-17.909-40-40-40zm0 96c-22.091 0-40 17.909-40 40s17.909 40 40 40 40-17.909 40-40-17.909-40-40-40zm0 96c-22.091 0-40 17.909-40 40s17.909 40 40 40 40-17.909 40-40-17.909-40-40-40zm288-136v-32c0-6.627-5.373-12-12-12H204c-6.627 0-12 5.373-12 12v32c0 6.627 5.373 12 12 12h200c6.627 0 12-5.373 12-12zm0 96v-32c0-6.627-5.373-12-12-12H204c-6.627 0-12 5.373-12 12v32c0 6.627 5.373 12 12 12h200c6.627 0 12-5.373 12-12zm0 96v-32c0-6.627-5.373-12-12-12H204c-6.627 0-12 5.373-12 12v32c0 6.627 5.373 12 12 12h200c6.627 0 12-5.373 12-12z\"></path></svg>",
+   "Customer and support requests",
+   {
+    "label": "Always on",
+    "href": null
+   },
+   "<p>Support tickets pile up before the right person sees them. We build agents that categorise and route incoming requests instantly, day or night.</p>",
+   "<div class=\"cap-examples\"><span class=\"cap-ex\">&#8211; Ticket classification</span></div><div class=\"cap-examples\"><span class=\"cap-ex\">&#8211; First-line responses</span></div><div class=\"cap-examples\"><span class=\"cap-ex\">&#8211; Escalation to the right team</span></div>"
+  ],
+  [
+   "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-plus-square\" viewBox=\"0 0 448 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-32 252c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92H92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z\"></path></svg>",
+   "Cross-system decisions",
+   {
+    "label": "One source of truth",
+    "href": null
+   },
+   "<p>Good decisions get delayed because data lives in five systems. We build agents that connect those systems and surface exactly what a person needs to decide.</p>",
+   "<div class=\"cap-examples\"><span class=\"cap-ex\">&#8211; ERP and CRM lookups</span></div><div class=\"cap-examples\"><span class=\"cap-ex\">&#8211; Inventory and supplier checks</span></div><div class=\"cap-examples\"><span class=\"cap-ex\">&#8211; Consolidated reporting</span></div>"
+  ]
+ ],
+ "howKicker": "HOW WE WORK",
+ "howTitle": "Think big, start small",
+ "steps": [
+  [
+   "01. Identify",
+   "Find the right use case",
+   "<p>We help you brainstorm and pinpoint the use cases that fit your business, then check that the underlying data is ready. Most AI initiatives fail because the problem was unclear or the data wasn&#8217;t reliable, not because the model was weak.</p>"
+  ],
+  [
+   "02. Prove it",
+   "A scoped, end-to-end PoC",
+   "<p>We build a proof of concept that runs one clearly scoped part of your business from start to finish. Not a demo that only works on stage. A working solution you can watch handle real cases, with a person stepping in wherever a decision carries risk.</p>"
+  ],
+  [
+   "03. Scale",
+   "Into daily use",
+   "<p>Once value is proven, we integrate the agent into your existing systems and processes, then move on to the next use case.</p>"
+  ]
+ ],
+ "casesKicker": "DELIVERED BY ACUMEN",
+ "casesTitle": "Three examples already running",
+ "casesIntro": "<p class=\"section-intro\">Not concepts. Not demos. Systems that took over a real process and are still running it.</p>",
+ "cases": [
+  [
+   "<p>Creyten</p>",
+   "<div><p class=\"case-sector\">Tax / legal</p></div>",
+   "<p>An AI research assistant for Belgian tax law, built on Fisconetplus. Tax lawyers and advisors get precise, sourced answers in seconds instead of spending hours searching legal databases. Creyten is also Acumen&#8217;s own product, live in production today.</p>",
+   {
+    "label": "AI research assistant",
+    "href": null
+   }
+  ],
+  [
+   "<p class=\"case-client\">Manufacturing client</p>",
+   "<div>\n<p class=\"case-sector\">Industry</p>\n</div>",
+   "<p>An automated pipeline that interprets incoming technical input and matches it to the right options from a large catalogue, with a feedback loop that keeps improving accuracy over time. Work that used to be manual now runs automatically.</p>",
+   {
+    "label": "Automated pipeline",
+    "href": null
+   }
+  ],
+  [
+   "<p class=\"case-client\">Global materials group</p>",
+   "<div><p class=\"case-sector\">Industry / procurement</p></div>",
+   "<p>A multi-agent buying assistant integrated with SAP Ariba, ServiceNow, and internal procurement policy. It guides employees to the right purchasing channel conversationally, cutting policy violations and rework.</p>",
+   {
+    "label": "Multi-agent workflow",
+    "href": null
+   }
+  ]
+ ],
+ "whyKicker": "WHY ACUMEN",
+ "why": [
+  [
+   "Pragmatic, not hype-driven",
+   "<p>We match the technology to the problem. An agent only earns its place if it&#8217;s genuinely the right tool for the job.</p>"
+  ],
+  [
+   "Modular by design",
+   "<p>We start with one process, prove it, then expand. No big-bang transformation projects, no all-or-nothing bets.</p>"
+  ],
+  [
+   "End-to-end team",
+   "<p>Data engineers, ML engineers, and AI consultants under one roof. We take a use case from first idea to running in production, not just a proof of concept.</p>"
+  ],
+  [
+   "Your stack, not ours",
+   "<p>LangChain, Databricks, IBM watsonx Orchestrate, or Microsoft Foundry on Azure. We build on whatever fits the systems you already run.</p>"
+  ]
+ ],
+ "safeKicker": "HOW WE KEEP IT SAFE",
+ "safeTitle": "Three things we commit to on every project",
+ "safe": [
+  [
+   "Data-first",
+   "<p>We check that your data is ready before we build, and tell you upfront if there&#8217;s a gap. Getting this right early is the cheapest, and most decisive, part of a successful project.</p>"
+  ],
+  [
+   "You stay in control",
+   "<p>A person stays in the loop wherever a decision carries real risk. Agents handle the repetitive work and escalate anything outside their rules, so you keep full oversight.</p>"
+  ],
+  [
+   "Value in weeks",
+   "<p>We build a working version on one process first and prove the value fast. You see a real result before committing to a bigger rollout.</p>"
+  ]
+ ],
+ "ctaTitle": "Ready to find your <span style=\"color:#D6FF00\">first</span> use case?",
+ "ctaText": "<p>Start with a 30-minute call. We&#8217;ll look at where agentic AI fits in your business, no preparation needed. Prefer something more structured? Our AI Ideation Workshop helps your team surface the right use cases in a single session.</p>",
+ "ctaButtons": [
+  {
+   "label": "Book a 30-minute call",
+   "href": "/contact/"
+  },
+  {
+   "label": "Or book an ideation workshop",
+   "href": "#"
+  }
+ ],
+ "appendix": "<section class=\"acumen-faq\" style=\"max-width:800px;margin:0 auto;padding:60px 20px;\">\n\t\t\t\t\t<h2>Frequently asked questions</h2>\n\t\t\t\t\t<div class=\"acumen-faq-item\">\n\t\t\t\t\t\t<h3>What is agentic AI?</h3>\n\t\t\t\t\t\t<p>Agentic AI plans a multi-step task, works through it using your own tools and systems, and completes it on its own &#8212; checking in with a person only where that matters, rather than just answering a question like a chatbot.</p>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"acumen-faq-item\">\n\t\t\t\t\t\t<h3>How is agentic AI different from a chatbot?</h3>\n\t\t\t\t\t\t<p>A chatbot answers a question and a person still does the work that follows. An agent reads the incoming request, checks your systems, prepares the outcome, and hands off only the exception to a person.</p>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"acumen-faq-item\">\n\t\t\t\t\t\t<h3>How widely is agentic AI actually used today?</h3>\n\t\t\t\t\t\t<p>88% of companies already use AI in at least one part of the business (McKinsey, 2025), but fewer than 10% have scaled an AI agent far enough to deliver measurable value (McKinsey, 2026). Gartner projects 40% of enterprise applications will include task-specific AI agents by the end of 2026.</p>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"acumen-faq-item\">\n\t\t\t\t\t\t<h3>What kind of tasks can an agentic AI system handle?</h3>\n\t\t\t\t\t\t<p>Document intake and classification (invoices, contracts, forms), quoting and pricing, customer and support ticket routing, and cross-system decisions that pull data from ERP, CRM, and other tools.</p>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"acumen-faq-item\">\n\t\t\t\t\t\t<h3>How does Acumen build an agentic AI system?</h3>\n\t\t\t\t\t\t<p>Acumen follows a three-step process: identify the right use case and check the underlying data is ready, build a scoped end-to-end proof of concept, then integrate the proven agent into existing systems and scale to the next use case.</p>\n\t\t\t\t\t</div>\n\t\t\t\t</section>\n\t\t\t\t<script type=\"application/ld+json\">\n\t\t\t\t{\"@context\":\"https://schema.org\",\"@type\":\"FAQPage\",\"mainEntity\":[\n\t\t\t\t\t{\"@type\":\"Question\",\"name\":\"What is agentic AI?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Agentic AI plans a multi-step task, works through it using your own tools and systems, and completes it on its own — checking in with a person only where that matters, rather than just answering a question like a chatbot.\"}},\n\t\t\t\t\t{\"@type\":\"Question\",\"name\":\"How is agentic AI different from a chatbot?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"A chatbot answers a question and a person still does the work that follows. An agent reads the incoming request, checks your systems, prepares the outcome, and hands off only the exception to a person.\"}},\n\t\t\t\t\t{\"@type\":\"Question\",\"name\":\"How widely is agentic AI actually used today?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"88% of companies already use AI in at least one part of the business (McKinsey, 2025), but fewer than 10% have scaled an AI agent far enough to deliver measurable value (McKinsey, 2026). Gartner projects 40% of enterprise applications will include task-specific AI agents by the end of 2026.\"}},\n\t\t\t\t\t{\"@type\":\"Question\",\"name\":\"What kind of tasks can an agentic AI system handle?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Document intake and classification (invoices, contracts, forms), quoting and pricing, customer and support ticket routing, and cross-system decisions that pull data from ERP, CRM, and other tools.\"}},\n\t\t\t\t\t{\"@type\":\"Question\",\"name\":\"How does Acumen build an agentic AI system?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Acumen follows a three-step process: identify the right use case and check the underlying data is ready, build a scoped end-to-end proof of concept, then integrate the proven agent into existing systems and scale to the next use case.\"}}\n\t\t\t\t]}\n\t\t\t\t</script>"
+}

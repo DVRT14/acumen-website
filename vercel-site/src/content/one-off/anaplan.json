@@ -1,0 +1,84 @@
+{
+ "title": "What is <span>Anaplan?</span>",
+ "intro": "<p>In today&#8217;s fast-paced business environment, agility and foresight are essential to staying ahaed of the competition. Anaplan is a powerful cloud-based platform that enables businesses to streamline their planning, forecasting, and decision-making processes. Anaplan helps you connect data, people and plans seamlessly.</p>",
+ "quote": "<p style=\"text-align: center\">&#8220;Operating in <span>today&#8217;s environment</span> is <span>challenging</span> for businesses because of <span>incessant disruptions</span>. Companies struggle with making fast, accurate decisions.&#8221;\n</p>",
+ "honeycomb": {
+  "fetchpriority": "high",
+  "decoding": "async",
+  "width": "476",
+  "height": "517",
+  "src": "/wp-content/uploads/2025/05/svgexport-1.svg",
+  "alt": ""
+ },
+ "connectedTitle": "Anaplan's <span>Connected Planning</span>",
+ "connectedText": "<p>We consistently see that centrally aggregated financial plans are disconnected from operational tactics and events. Anaplan isn&#8217;t just financial planning. Anaplan is meant to connect people, data and plans within an enterprise. It breaks down silos and enables collabration and communication across the enterprise. Anaplan is built around this idea of &#8220;Connected Planning&#8221;. </p><p>Connected Planning serves as a catalyst for driving decision-making to new heights. It enables organizations to leverage real-time data, colloborate seamlessly acress functions, and align their plans and actions within strategic objectives. This holisitc approach drives a culture of agility, adaptability, and innovation, enabling organizations to respond swiftly to market changes and acts on emerging opportunities.</p>",
+ "bandLeft": {
+  "loading": "lazy",
+  "decoding": "async",
+  "width": "2560",
+  "height": "727",
+  "src": "/wp-content/uploads/2025/05/flecto-anaplan-luc-small.webp",
+  "alt": "",
+  "srcset": "/wp-content/uploads/2025/05/flecto-anaplan-luc-small.webp 2560w, /wp-content/uploads/2025/05/flecto-anaplan-luc-small-300x85.webp 300w, /wp-content/uploads/2025/05/flecto-anaplan-luc-small-1024x291.webp 1024w, /wp-content/uploads/2025/05/flecto-anaplan-luc-small-768x218.webp 768w, /wp-content/uploads/2025/05/flecto-anaplan-luc-small-1536x436.webp 1536w, /wp-content/uploads/2025/05/flecto-anaplan-luc-small-2048x581.webp 2048w",
+  "sizes": "(max-width: 2560px) 100vw, 2560px"
+ },
+ "useCasesText": "<p>Understanding exactly how a single strategic objective can be achieved only through execution of multiple use cases across multiple functions and how these use cases impact one another with downstream effects, is essential to determining the full value customers can get not just from planning, but from &#8220;Connected Planning&#8221; in Anaplan. </p><p>Examples of these use cases include long-term strategic planning, revenue forecasting and operational expenditure (OpEx) planning. In the honeycomb diagram above, these use cases are organized within a value chain, where each use case connectis within one or more others. This interconnectivity highlights the dependencies between the use cases, illustrating how information flows seamlessly across them.</p><p>For example, a company expanding into a new market aligns long-term strategic planning with revenue &amp; OpEx planning, ensuring financial goals support sales targets. Sales forecasts then influence quota modeling, marketing performance and incentives, creating a seamless flow where adjustments in one area (e.g. slower sales) trigger real-time strategy shifts across functions.</p>",
+ "useCasesImage": {
+  "loading": "lazy",
+  "decoding": "async",
+  "width": "800",
+  "height": "720",
+  "src": "/wp-content/uploads/2025/05/Screenshot-2025-05-12-163852-1024x922.webp",
+  "alt": "",
+  "srcset": "/wp-content/uploads/2025/05/Screenshot-2025-05-12-163852-1024x922.webp 1024w, /wp-content/uploads/2025/05/Screenshot-2025-05-12-163852-300x270.webp 300w, /wp-content/uploads/2025/05/Screenshot-2025-05-12-163852-768x691.webp 768w, /wp-content/uploads/2025/05/Screenshot-2025-05-12-163852.webp 1414w",
+  "sizes": "(max-width: 800px) 100vw, 800px"
+ },
+ "bandRight": {
+  "loading": "lazy",
+  "decoding": "async",
+  "width": "2560",
+  "height": "727",
+  "src": "/wp-content/uploads/2025/05/flecto-anaplan-rlc-small.webp",
+  "alt": "",
+  "srcset": "/wp-content/uploads/2025/05/flecto-anaplan-rlc-small.webp 2560w, /wp-content/uploads/2025/05/flecto-anaplan-rlc-small-300x85.webp 300w, /wp-content/uploads/2025/05/flecto-anaplan-rlc-small-1024x291.webp 1024w, /wp-content/uploads/2025/05/flecto-anaplan-rlc-small-768x218.webp 768w, /wp-content/uploads/2025/05/flecto-anaplan-rlc-small-1536x436.webp 1536w, /wp-content/uploads/2025/05/flecto-anaplan-rlc-small-2048x581.webp 2048w",
+  "sizes": "(max-width: 2560px) 100vw, 2560px"
+ },
+ "diffTitle": "What <span>differentiates</span> Anaplan?",
+ "cards": [
+  [
+   "Real-time insights",
+   "<p>Anaplan operates on an in-memory calculation engine, allowing businesses to gain instant insights and make data-driven decisions without delay. Changes in data are reflected across models and departments in real-time, ensuring that stakeholdes always have access to the most up-to-date information.</p>"
+  ],
+  [
+   "Speed",
+   "<p>Thanks to its Hyperblock™ technology, Anaplan processes large datasets at remarkable speeds, enabling businesses to conduct complex scenario planning and forecasting within drastically shorter planning cycles. This speed enhances agility, allowing companies to adapt quickly to market shifts and operational challenges.</p>"
+  ],
+  [
+   "<span data-start=\"754\" data-end=\"781\">Multidimensional models</span>",
+   "<p>Anaplan’s architecture supports multi-dimensional modeling, meaning organizations can structure and analyze data in ways that reflect their real-world operations. Whether planning by product, geography, department, or customer segment, businesses can easily adjust and expand their models free from rigid constraints of traditional systems.</p>"
+  ],
+  [
+   "Enterprise scale",
+   "<p>Anaplan is able to handle any amount of data needed for models, in any business unit across the enterprise, all in one workspace. Its cloud-native architecture ensures scalability, security and performance, making it suitable for any business environment, small to large, simple to complex.</p>"
+  ],
+  [
+   "Extensibility",
+   "<p class=\"\" data-start=\"1441\" data-end=\"1782\">Anaplan seamlessly connects with various data sources, including ERP, CRM, and BI systems, ensuring that businesses can leverage their existing infrastructure. With APIs, connectors, and integrations, Anaplan fits naturally into an organization’s broader analytical ecosystem, enhancing decision-making with unified data.</p>"
+  ],
+  [
+   "Collaborative",
+   "<p>Anaplan fosters cross-functional collaboration by breaking down data silos and ensuring that all teams—finance, sales, supply chain, HR, and operations—work from a single source of truth. With real-time data synchronization, multiple users can contribute to planning models simultaneously, ensuring alignment and transparency across the organization.</p>"
+  ]
+ ],
+ "banner": {
+  "loading": "lazy",
+  "decoding": "async",
+  "width": "2560",
+  "height": "728",
+  "src": "/wp-content/uploads/2025/05/ink-orange-stripe-desktop-tall-promo-banner-scaled.webp",
+  "alt": "",
+  "srcset": "/wp-content/uploads/2025/05/ink-orange-stripe-desktop-tall-promo-banner-scaled.webp 2560w, /wp-content/uploads/2025/05/ink-orange-stripe-desktop-tall-promo-banner-300x85.webp 300w, /wp-content/uploads/2025/05/ink-orange-stripe-desktop-tall-promo-banner-1024x291.webp 1024w, /wp-content/uploads/2025/05/ink-orange-stripe-desktop-tall-promo-banner-768x218.webp 768w, /wp-content/uploads/2025/05/ink-orange-stripe-desktop-tall-promo-banner-1536x437.webp 1536w, /wp-content/uploads/2025/05/ink-orange-stripe-desktop-tall-promo-banner-2048x582.webp 2048w",
+  "sizes": "(max-width: 2560px) 100vw, 2560px"
+ },
+ "outro": "<p>With year of expertise in data consulting as well as integrated business planning, we bring deep industry knowledge and technical excellence to every Anaplan project. Our hands-on approach ensures that your business achieves smarter planning, faster decision-making, and improved operational efficiency. <br /><br />Ready to revolutionize your planning process?<br />Get in touch with our Anaplan experts today!</p>"
+}

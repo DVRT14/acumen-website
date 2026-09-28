@@ -12,7 +12,9 @@ export function getStaticPaths() {
   const rebuilt = [
     ...Object.keys(import.meta.glob(['../content/knowledge/*.json', '../content/expertise/*.json'])).map(f => f.split('/').slice(-2).join('~')),
     ...Object.keys(import.meta.glob('../content/pages/*.json')).map(f => f.split('/').pop()),
-  ].map(f => f.replace(/\.json$/, ''));
+    // hand-written pages: ./partners.astro → partners, ./careers/x.astro → careers~x
+    ...Object.keys(import.meta.glob('./**/*.astro')).filter(f => !f.includes('[')).map(f => f.slice(2).replaceAll('/', '~')),
+  ].map(f => f.replace(/\.(json|astro)$/, '').replace(/~index$/, ''));
   return Object.entries(files).filter(([file]) => !rebuilt.includes(file.split('/').pop().replace(/\.html$/, ''))).map(([file, html]) => {
     const name = file.split('/').pop().replace(/\.html$/, '');
     return { params: { slug: name === 'index' ? undefined : name.replaceAll('~', '/') }, props: { html } };

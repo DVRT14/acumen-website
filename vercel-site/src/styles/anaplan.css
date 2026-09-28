@@ -1,0 +1,50 @@
+/* Anaplan pages (were Elementor pages 3504 / 3457 / 3410; they share their section styles). */
+.ap { overflow: hidden; }
+.ap-sec { position: relative; display: flex; flex-direction: column; padding: 0 50px; }
+.ap-sec__inner { display: flex; flex-direction: column; flex-grow: 1; width: 100%; max-width: min(100%, 1180px); margin: 0 auto; }
+.ap-sec__inner--65 { padding: 65px 0; }
+.ap-sec__inner--50 { padding: 50px 0; }
+.ap-sec__inner--gap { gap: 30px; }
+
+.ap-split { flex-direction: row; gap: 30px; }
+.ap-split__col { position: relative; display: flex; flex-direction: column; width: 50%; min-width: 0; }
+.ap-split__col--media { justify-content: space-around; }
+.ap-connected { margin-bottom: -85px; }
+
+.ap-band { position: relative; display: flex; flex-direction: column; }
+.ap-band__inner { flex-grow: 1; width: 100%; max-width: min(100%, 1180px); margin: 0 auto; }
+.ap-img { position: relative; text-align: center; }
+.ap-img img { display: inline-block; vertical-align: middle; }
+
+.ap-text { position: relative; font-size: 22px; font-weight: 400; line-height: 37px; color: #002921; }
+.ap-quote { position: relative; font-family: "Atype Display", Sans-serif; font-size: 34px; font-weight: 400; line-height: 47px; text-align: center; color: #002921; }
+.ap-quote span, .ap-heading span { color: #B9D0D0; }
+.ap-heading-wrap { position: relative; margin-bottom: 26px; text-align: left; }
+.ap-heading { margin: 0; font-family: "Atype Display", Sans-serif; font-size: 66px; font-weight: 400; text-transform: none; line-height: 1.07em; letter-spacing: -0.03em; color: #002921; }
+
+.ap-diff-title { position: relative; text-align: center; }
+.ap-diff-title > div { margin: -9% 0 2% -24%; }
+
+.ap-cards { position: relative; display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 1fr); grid-auto-flow: row; justify-content: start; align-content: start; gap: 40px; }
+.ap-card { position: relative; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; width: 100%; min-width: 0; border-radius: 8%; background-color: #F5FAFD; }
+.ap-card__title { position: relative; }
+.ap-card__title h2 { margin: 5%; line-height: 1; }
+.ap-card__text { position: relative; margin: 0 5% 1%; font-size: 22px; font-weight: 400; }
+
+@media (max-width: 1024px) {
+  .ap-heading { font-size: 40px; }
+}
+
+@media (max-width: 767px) {
+  .ap-sec { padding: 0 15px; }
+  .ap-sec__inner--65 { padding: 50px 0; }
+  .ap-sec--m30 .ap-sec__inner { padding: 30px 0 50px; }
+  .ap-sec__inner { flex-wrap: wrap; }
+  .ap-split__col { width: 100%; }
+  .ap-hide-mobile { display: none; }
+  .ap-text { font-size: 16px; line-height: 22px; }
+  .ap-quote { font-size: 27px; line-height: 1.382em; }
+  .ap-heading { line-height: 1.18em; }
+  .ap-cards { grid-template-columns: repeat(1, 1fr); }
+  .ap-card { flex-wrap: wrap; }
+}

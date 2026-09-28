@@ -141,12 +141,16 @@ function sticky() {
 
 /* ---------- Entrance animations (Elementor GlobalHandler) ---------- */
 function entranceAnimations() {
-  // Rebuilt markup: data-animate="fadeInUp" data-animate-delay="500".
-  $$('[data-animate]').forEach(el => {
+  // Rebuilt markup: data-animate="fadeInUp" data-animate-delay="500", optionally per device
+  // (data-animate-tablet / -mobile, same fallback as Elementor). Only data-animate starts hidden.
+  $$('[data-animate], [data-animate-tablet], [data-animate-mobile]').forEach(el => {
+    const d = el.dataset, name = deviceSetting({ a: d.animate, a_tablet: d.animateTablet, a_mobile: d.animateMobile }, 'a');
+    if (!name) return;
     const io = scrollObserver(inView => {
       if (!inView) return;
       io.unobserve(el);
-      setTimeout(() => el.classList.add('animated', el.dataset.animate), +el.dataset.animateDelay || 0);
+      if (name === 'none') { el.classList.add('animated'); return; }
+      setTimeout(() => el.classList.add('animated', name), +d.animateDelay || 0);
     });
     io.observe(el);
   });

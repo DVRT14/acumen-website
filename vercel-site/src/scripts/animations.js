@@ -253,10 +253,10 @@ function postItemHover() {
     const y = outerHeight(contents) - (outerHeight(title) + (parseInt(cs.paddingTop) + parseInt(cs.paddingBottom)));
     contents.style.transform = `translateY(${y}px)`;
   });
-  layout();
-  setTimeout(layout, 500);
-  let t;
-  addEventListener('resize', () => { clearTimeout(t); t = setTimeout(layout, 50); });
+  // fix: the old code re-measured once after 500ms; carousels that size their slides later (Swiper is
+  // loaded on demand) left the reveal offset wrong. Re-measure whenever a card changes size.
+  const ro = new ResizeObserver(layout);
+  $$('.postItem, .xcard').forEach(item => ro.observe(item));
 }
 
 function animateElements() {

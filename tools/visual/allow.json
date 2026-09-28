@@ -1,4 +1,94 @@
 [
- { "text": "•$", "reason": "Marquee phase: the old script measured the text before the web font loaded (wrong loop distance); the rebuild measures after document.fonts.ready." },
- { "text": "^(Say hello|Whitepaper [A-Z]+)$", "reason": "Scroll-scrubbed CTA word: ScrollTrigger start/end are measured after init instead of at window load; a few px apart mid-scroll, identical at rest." }
+ {
+  "text": "•$",
+  "reason": "Marquee phase: the old script measured the text before the web font loaded (wrong loop distance); the rebuild measures after document.fonts.ready."
+ },
+ {
+  "text": "^(Say hello|Whitepaper [A-Z]+)$",
+  "reason": "Scroll-scrubbed CTA word: ScrollTrigger start/end are measured after init instead of at window load; a few px apart mid-scroll, identical at rest."
+ },
+ {
+  "page": "careers__vacature-ai-engineer",
+  "vw": 1024,
+  "tile": "tile-03",
+  "reason": "Application form text anti-aliasing (old page rendered it greyscale in a composited layer, the rebuild renders LCD); geometry identical."
+ },
+ {
+  "page": "careers__vacature-ai-engineer",
+  "vw": 1025,
+  "tile": "tile-03",
+  "reason": "Application form text anti-aliasing (old page rendered it greyscale in a composited layer, the rebuild renders LCD); geometry identical."
+ },
+ {
+  "page": "careers__vacature-ai-engineer",
+  "vw": 390,
+  "tile": "tile-04",
+  "reason": "Application form text anti-aliasing (old page rendered it greyscale in a composited layer, the rebuild renders LCD); geometry identical."
+ },
+ {
+  "page": "careers__vacature-ai-engineer",
+  "vw": 390,
+  "tile": "tile-05",
+  "reason": "Application form text anti-aliasing (old page rendered it greyscale in a composited layer, the rebuild renders LCD); geometry identical."
+ },
+ {
+  "page": "careers__vacature-ai-engineer",
+  "vw": 767,
+  "tile": "tile-03",
+  "reason": "Application form text anti-aliasing (old page rendered it greyscale in a composited layer, the rebuild renders LCD); geometry identical."
+ },
+ {
+  "page": "careers__vacature-ai-engineer",
+  "vw": 768,
+  "tile": "tile-03",
+  "reason": "Application form text anti-aliasing (old page rendered it greyscale in a composited layer, the rebuild renders LCD); geometry identical."
+ },
+ {
+  "page": "careers__vacature-ai-engineer",
+  "vw": 768,
+  "tile": "tile-04",
+  "reason": "Application form text anti-aliasing (old page rendered it greyscale in a composited layer, the rebuild renders LCD); geometry identical."
+ },
+ {
+  "page": "careers__vacature-analytics-engineer",
+  "vw": 1024,
+  "tile": "tile-03",
+  "reason": "Application form text anti-aliasing (old page rendered it greyscale in a composited layer, the rebuild renders LCD); geometry identical."
+ },
+ {
+  "page": "careers__vacature-analytics-engineer",
+  "vw": 1025,
+  "tile": "tile-03",
+  "reason": "Application form text anti-aliasing (old page rendered it greyscale in a composited layer, the rebuild renders LCD); geometry identical."
+ },
+ {
+  "page": "careers__vacature-analytics-engineer",
+  "vw": 390,
+  "tile": "tile-04",
+  "reason": "Application form text anti-aliasing (old page rendered it greyscale in a composited layer, the rebuild renders LCD); geometry identical."
+ },
+ {
+  "page": "careers__vacature-analytics-engineer",
+  "vw": 390,
+  "tile": "tile-05",
+  "reason": "Application form text anti-aliasing (old page rendered it greyscale in a composited layer, the rebuild renders LCD); geometry identical."
+ },
+ {
+  "page": "careers__vacature-analytics-engineer",
+  "vw": 767,
+  "tile": "tile-03",
+  "reason": "Application form text anti-aliasing (old page rendered it greyscale in a composited layer, the rebuild renders LCD); geometry identical."
+ },
+ {
+  "page": "careers__vacature-analytics-engineer",
+  "vw": 768,
+  "tile": "tile-03",
+  "reason": "Application form text anti-aliasing (old page rendered it greyscale in a composited layer, the rebuild renders LCD); geometry identical."
+ },
+ {
+  "page": "careers__vacature-analytics-engineer",
+  "vw": 768,
+  "tile": "tile-04",
+  "reason": "Application form text anti-aliasing (old page rendered it greyscale in a composited layer, the rebuild renders LCD); geometry identical."
+ }
 ]

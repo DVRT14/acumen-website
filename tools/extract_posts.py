@@ -6,6 +6,9 @@ Writes
                                              of the whitepaper posts (templates 3311/3314/3537/3590/3625)
   vercel-site/src/content/expertise/*.json   fields of every expertise page (template 1047)
   vercel-site/src/data/expertise-cards.json  the "Our Expertise" slider cards (JetEngine listing 2137)
+  vercel-site/src/content/vacatures/*.json   vacancies (Elementor pages 4122/4165: one layout, copied)
+  vercel-site/src/content/one-off/*.json     named widget contents of hand-written one-off pages (ONE_OFF)
+  vercel-site/src/data/meta.json             SEO head + body class of every page, for hand-written pages
   vercel-site/src/content/pages/*.json       pages without Elementor content (legal, careers, the
                                              expertise archive): their HTML between header and footer
 Run from the repo root: python tools/extract_posts.py
@@ -218,15 +221,72 @@ def plain_body(src):
     return src[end:src.rfind('<', 0, footer)].strip()
 
 
+def vacature_fields(src, page_id):
+    """Both vacancy pages are copies of one layout: widgets addressed by position."""
+    m = re.search(rf'<div data-elementor-type="wp-page" data-elementor-id="{page_id}"', src)
+    ids = list(dict.fromkeys(re.findall(r'data-id="([0-9a-f]+)"', element(src, m.start()))))
+    form = by_id(src, ids[43])
+    card = lambda h, t: {'title': heading(src, ids[h]), 'text': text_editor(src, ids[t])}
+    return {
+        'title': heading(src, ids[1]),
+        'location': text_editor(src, ids[2]),
+        'aboutTitle': heading(src, ids[5]), 'aboutText': text_editor(src, ids[7]),
+        'roleTitle': heading(src, ids[9]), 'roleText': text_editor(src, ids[11]),
+        'cards': [card(15, 17), card(19, 21), card(25, 27), card(29, 31)],
+        'whyTitle': heading(src, ids[34]), 'whyText': text_editor(src, ids[36]),
+        'applyText': text_editor(src, ids[38]),
+        'applyTitle': heading(src, ids[40]),
+        'form': {
+            'name': html.unescape(re.search(r'<form [^>]*name="([^"]*)"', form).group(1)),
+            **{k: html.unescape(v) for k, v in re.findall(r'<input type="hidden" name="(\w+)" value="([^"]*)"', form)},
+        },
+    }
+
+
+def widget(src, data_id):
+    """A widget's content: heading/text HTML, or image attributes."""
+    w = by_id(src, data_id)
+    if 'elementor-widget-image"' in w[:w.index('>')] or 'elementor-widget-image ' in w[:w.index('>')]:
+        return img_attrs(re.search(r'<img [^>]*>', w).group(0))
+    if 'elementor-heading-title' in w:
+        return heading(src, data_id)
+    return text_editor(src, data_id)
+
+
+# One-off pages written by hand: name -> {field: widget id or [ids]}.
+ONE_OFF = {
+    'anaplan': {
+        'title': 'fb4139f', 'intro': 'd80487d', 'quote': '785e768',
+        'honeycomb': '53593e9', 'connectedTitle': '77ae143', 'connectedText': '3d7b795',
+        'bandLeft': 'fb6aa4f', 'useCasesText': 'ebdb783', 'useCasesImage': '43e38d3', 'bandRight': '19f3b45',
+        'diffTitle': '5ea3e99',
+        'cards': [['b3353af', '9175a3d'], ['3bb3467', 'fd5ad26'], ['bb4806b', '3e5b87b'], ['52b64f6', 'eed24f2'], ['e3f4078', 'bbd137a'], ['0c5ec87', '3d9f414']],
+        'banner': 'b89301e', 'outro': '7935461',
+    },
+}
+
+
+def one_off(src, spec):
+    get = lambda v: [get(x) for x in v] if isinstance(v, list) else widget(src, v)
+    return {k: get(v) for k, v in spec.items()}
+
+
 cards = {}
 posts = {}
 plain = {}
+meta = {}
+vacatures = {}
 expertise = {}
 for f in sorted(glob.glob(os.path.join(LEGACY, '*.html'))):
     src = open(f, encoding='utf8').read()
     for pid, card in cards_from(src).items():
         cards.setdefault(pid, {}).update({k: v for k, v in card.items() if v is not None or k not in cards.get(pid, {})})
     name = os.path.basename(f)[:-5]
+    if name in ONE_OFF:
+        os.makedirs(os.path.join(ROOT, 'src', 'content', 'one-off'), exist_ok=True)
+        with open(os.path.join(ROOT, 'src', 'content', 'one-off', name + '.json'), 'w', encoding='utf8') as fh:
+            json.dump(one_off(src, ONE_OFF[name]), fh, ensure_ascii=False, indent=1)
+    meta[name] = {'seo': seo_head(src), 'bodyClass': re.search(r'<body[^>]*class="([^"]*)"', src).group(1)}
     if 'data-elementor-type="single-post" data-elementor-id="996"' in src:
         slug = name.split('~', 1)[1]
         body_class = re.search(r'<body[^>]*class="([^"]*)"', src).group(1)
@@ -234,6 +294,9 @@ for f in sorted(glob.glob(os.path.join(LEGACY, '*.html'))):
     if set(re.findall(r'data-elementor-type="([\w-]+)"', src)) <= {'header', 'footer'}:
         body_class = re.search(r'<body[^>]*class="([^"]*)"', src).group(1)
         plain[name] = {'seo': seo_head(src), 'bodyClass': body_class, 'html': plain_body(src)}
+    vac = re.search(r'data-elementor-type="wp-page" data-elementor-id="(4122|4165)"', src)
+    if vac:
+        vacatures[name.split('~', 1)[1]] = {**meta[name], **vacature_fields(src, vac.group(1))}
     wp = re.search(r'data-elementor-type="single-post" data-elementor-id="(\d+)"', src)
     if wp and wp.group(1) in WHITEPAPER_TEMPLATES:
         body_class = re.search(r'<body[^>]*class="([^"]*)"', src).group(1)
@@ -246,9 +309,11 @@ for f in sorted(glob.glob(os.path.join(LEGACY, '*.html'))):
 os.makedirs(os.path.join(ROOT, 'src', 'data'), exist_ok=True)
 with open(os.path.join(ROOT, 'src', 'data', 'cards.json'), 'w', encoding='utf8') as fh:
     json.dump(cards, fh, ensure_ascii=False, indent=1)
+with open(os.path.join(ROOT, 'src', 'data', 'meta.json'), 'w', encoding='utf8') as fh:
+    json.dump(meta, fh, ensure_ascii=False, indent=1)
 with open(os.path.join(ROOT, 'src', 'data', 'expertise-cards.json'), 'w', encoding='utf8') as fh:
     json.dump(slider, fh, ensure_ascii=False, indent=1)
-for kind, pages in (('knowledge', posts), ('expertise', expertise), ('pages', plain)):
+for kind, pages in (('knowledge', posts), ('expertise', expertise), ('pages', plain), ('vacatures', vacatures)):
     out = os.path.join(ROOT, 'src', 'content', kind)
     os.makedirs(out, exist_ok=True)
     for slug, data in pages.items():

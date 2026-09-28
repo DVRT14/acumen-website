@@ -1,0 +1,38 @@
+---
+// Partners (was Elementor page 3430).
+import Base from '../layouts/Base.astro';
+import meta from '../data/meta.json';
+import '../styles/post.css';
+import '../styles/fonts-poppins.css';
+import '../styles/partners.css';
+
+const u = '/wp-content/uploads/2025/06/';
+const partners = [
+  { name: 'Anaplan', text: 'Enterprise Planning Leader', img: { fetchpriority: 'high', decoding: 'async', width: '800', height: '302', src: `${u}anaplan-logo-rgb-1-1024x386.webp`, alt: '', srcset: `${u}anaplan-logo-rgb-1-1024x386.webp 1024w, ${u}anaplan-logo-rgb-1-300x113.webp 300w, ${u}anaplan-logo-rgb-1-768x290.webp 768w, ${u}anaplan-logo-rgb-1-1536x579.webp 1536w, ${u}anaplan-logo-rgb-1-2048x772.webp 2048w`, sizes: '(max-width: 800px) 100vw, 800px' }, mobile: 'center' },
+  { name: 'Dagster', text: 'Data Orchestration Leader', img: { loading: 'lazy', decoding: 'async', width: '560', height: '560', src: `${u}dagster-primary-mark.svg`, alt: 'Dagster Partner Logo' }, mobile: 'center' },
+  { name: 'IBM', text: 'Industry Leader', img: { loading: 'lazy', decoding: 'async', width: '800', height: '624', src: `${u}IBM_Partner_Plus_silver_partner_mark_pos_black_RGB-1024x799.webp`, alt: '', srcset: `${u}IBM_Partner_Plus_silver_partner_mark_pos_black_RGB-1024x799.webp 1024w, ${u}IBM_Partner_Plus_silver_partner_mark_pos_black_RGB-300x234.webp 300w, ${u}IBM_Partner_Plus_silver_partner_mark_pos_black_RGB-768x599.webp 768w, ${u}IBM_Partner_Plus_silver_partner_mark_pos_black_RGB-1536x1198.webp 1536w, ${u}IBM_Partner_Plus_silver_partner_mark_pos_black_RGB-2048x1598.webp 2048w`, sizes: '(max-width: 800px) 100vw, 800px' }, mobile: 'align' },
+  { name: 'Microsoft', text: 'Cloud Leader', img: { loading: 'lazy', decoding: 'async', width: '800', height: '489', src: `${u}MS-Acumen-Mark-TransparentBackground-1024x626.webp`, alt: '', srcset: `${u}MS-Acumen-Mark-TransparentBackground-1024x626.webp 1024w, ${u}MS-Acumen-Mark-TransparentBackground-300x184.webp 300w, ${u}MS-Acumen-Mark-TransparentBackground-768x470.webp 768w, ${u}MS-Acumen-Mark-TransparentBackground.webp 1043w`, sizes: '(max-width: 800px) 100vw, 800px' } },
+];
+---
+<Base {...meta.partners} bodyClass={`${meta.partners.bodyClass} p-spaced`}>
+  <div class="partners">
+    <section class="post-sec post-hero">
+      <div class="post-sec__inner post-hero__inner">
+        <div class="post-hero__title"><h2>Our <span>Partners</span></h2></div>
+        <div class="partners__intro"><p>At Acumen, we’re proud to be certified partners of leading technology providers. These trusted partnerships reflect our ongoing commitment to excellence, innovation, and delivering impactful solutions to our clients. Being officially recognized by these organizations demonstrates that we meet the highest standards of expertise, service, and performance.</p></div>
+      </div>
+    </section>
+    <section class="post-sec">
+      <div class="post-sec__inner partners__inner">
+        <div class="partners__grid">
+          {partners.map(p => (
+            <div class={`partner${p.mobile ? ` partner--${p.mobile}` : ''}`}>
+              <div class="partner__logo" data-animate-tablet="slideInLeft"><img class="partner__img" {...p.img} /></div>
+              <div class="partner__box"><h3 class="partner__name">{p.name}</h3><p class="partner__text">{p.text}</p></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>

@@ -113,7 +113,7 @@ async function captureOne(browser, base, route, vw) {
   page.on('response', r => r.status() >= 400 && r.url().includes('127.0.0.1') && report.failed.push(`${r.status()} ${r.url()}`));
 
   // Fake clock: JS time (Date, timers, rAF → GSAP/Lenis) only advances when we say so, so runs are
-  // deterministic. CSS animations still run in real time; waitStable covers those.
+  // deterministic. CSS animations run in real time; finite ones are finished before each screenshot.
   await page.clock.install({ time: new Date('2026-01-01T00:00:00Z') });
   await page.clock.pauseAt(new Date('2026-01-01T00:00:01Z'));
   // Seeded Math.random (typed.js "humanizes" typing speed with it).
@@ -129,7 +129,7 @@ async function captureOne(browser, base, route, vw) {
     // Re-assert the position: residual smooth scrolling (Lenis) can leave it a pixel off.
     for (let tries = 0; tries < 4; tries++) {
       await page.evaluate(y => window.scrollTo({ top: y, behavior: 'instant' }), y);
-      await page.waitForTimeout(100); // native scroll + IntersectionObserver delivery
+      await page.waitForTimeout(250); // native scroll + IntersectionObserver delivery (real time: under load 100ms missed some)
       await advance(page, 4000); // scrubs (up to 3s smoothing), entrance delays, tweens settle
       const at = await page.evaluate(y => [scrollY, Math.min(y, document.documentElement.scrollHeight - innerHeight)], y);
       if (Math.abs(at[0] - at[1]) < 0.5) break;
@@ -154,6 +154,11 @@ async function captureOne(browser, base, route, vw) {
       return Promise.all([...css, ...imgs, ...vids]);
     });
     await page.waitForTimeout(50); // (rAF is faked by the paused clock, so wait in real time)
+    // CSS animations/transitions run in real time, outside the fake clock: jump finite ones to their
+    // end state so entrance animations are never caught mid-flight (infinite loops are left alone).
+    await page.evaluate(() => document.getAnimations().forEach(a => {
+      if (a.effect?.getComputedTiming().iterations !== Infinity) try { a.finish(); } catch { /* not finishable */ }
+    }));
     const { png, stable } = await waitStable(page);
     const scrollY = await page.evaluate(() => scrollY);
     const name = `tile-${String(i).padStart(2, '0')}`;

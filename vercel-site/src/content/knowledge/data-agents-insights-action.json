@@ -1,0 +1,185 @@
+{
+ "seo": "<meta name='robots' content='index, nofollow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />\n\n\t<!-- This site is optimized with the Yoast SEO plugin v22.8 - https://yoast.com/wordpress/plugins/seo/ -->\n\t<title>Data agents - from insights to action</title>\n\t<meta name=\"description\" content=\"Discover how to leverage AI agents for your business.\" />\n\t<link rel=\"canonical\" href=\"/knowledge/data-agents-insights-action/\" />\n\t<meta property=\"og:locale\" content=\"nl_BE\" />\n\t<meta property=\"og:type\" content=\"article\" />\n\t<meta property=\"og:title\" content=\"Data agents - from insights to action\" />\n\t<meta property=\"og:description\" content=\"Discover how to leverage AI agents for your business.\" />\n\t<meta property=\"og:url\" content=\"/knowledge/data-agents-insights-action/\" />\n\t<meta property=\"og:site_name\" content=\"Acumen\" />\n\t<meta property=\"article:published_time\" content=\"2026-05-27T13:42:37+00:00\" />\n\t<meta property=\"article:modified_time\" content=\"2026-07-29T09:09:46+00:00\" />\n\t<meta property=\"og:image\" content=\"/wp-content/uploads/2025/09/DSCF6731-scaled.jpg\" />\n\t<meta property=\"og:image:width\" content=\"1707\" />\n\t<meta property=\"og:image:height\" content=\"2560\" />\n\t<meta property=\"og:image:type\" content=\"image/jpeg\" />\n\t<meta name=\"author\" content=\"Keana Vanhoutteghem\" />\n\t<meta name=\"twitter:card\" content=\"summary_large_image\" />\n\t<meta name=\"twitter:label1\" content=\"Geschreven door\" />\n\t<meta name=\"twitter:data1\" content=\"Keana Vanhoutteghem\" />\n\t<meta name=\"twitter:label2\" content=\"Geschatte leestijd\" />\n\t<meta name=\"twitter:data2\" content=\"7 minuten\" />\n\t<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"Article\",\"@id\":\"/knowledge/data-agents-insights-action/#article\",\"isPartOf\":{\"@id\":\"/knowledge/data-agents-insights-action/\"},\"author\":{\"name\":\"Keana Vanhoutteghem\",\"@id\":\"/#/schema/person/1455d26a9b9044690ef560856928f606\"},\"headline\":\"Data agents: from insights to action\",\"datePublished\":\"2026-05-27T13:42:37+00:00\",\"dateModified\":\"2026-07-29T09:09:46+00:00\",\"mainEntityOfPage\":{\"@id\":\"/knowledge/data-agents-insights-action/\"},\"wordCount\":1395,\"commentCount\":0,\"publisher\":{\"@id\":\"/#organization\"},\"image\":{\"@id\":\"/knowledge/data-agents-insights-action/#primaryimage\"},\"thumbnailUrl\":\"/wp-content/uploads/2025/09/DSCF6731-scaled.webp\",\"keywords\":[\"Data Agents\",\"Data Engineering\",\"Data Integration\"],\"articleSection\":[\"Blog\",\"integration\"],\"inLanguage\":\"nl-BE\",\"potentialAction\":[{\"@type\":\"CommentAction\",\"name\":\"Comment\",\"target\":[\"/knowledge/data-agents-insights-action/#respond\"]}]},{\"@type\":\"WebPage\",\"@id\":\"/knowledge/data-agents-insights-action/\",\"url\":\"/knowledge/data-agents-insights-action/\",\"name\":\"Data agents - from insights to action\",\"isPartOf\":{\"@id\":\"/#website\"},\"primaryImageOfPage\":{\"@id\":\"/knowledge/data-agents-insights-action/#primaryimage\"},\"image\":{\"@id\":\"/knowledge/data-agents-insights-action/#primaryimage\"},\"thumbnailUrl\":\"/wp-content/uploads/2025/09/DSCF6731-scaled.webp\",\"datePublished\":\"2026-05-27T13:42:37+00:00\",\"dateModified\":\"2026-07-29T09:09:46+00:00\",\"description\":\"Discover how to leverage AI agents for your business.\",\"breadcrumb\":{\"@id\":\"/knowledge/data-agents-insights-action/#breadcrumb\"},\"inLanguage\":\"nl-BE\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"/knowledge/data-agents-insights-action/\"]}]},{\"@type\":\"ImageObject\",\"inLanguage\":\"nl-BE\",\"@id\":\"/knowledge/data-agents-insights-action/#primaryimage\",\"url\":\"/wp-content/uploads/2025/09/DSCF6731-scaled.webp\",\"contentUrl\":\"/wp-content/uploads/2025/09/DSCF6731-scaled.webp\",\"width\":1707,\"height\":2560},{\"@type\":\"BreadcrumbList\",\"@id\":\"/knowledge/data-agents-insights-action/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Data agents: from insights to action\"}]},{\"@type\":\"WebSite\",\"@id\":\"/#website\",\"url\":\"/\",\"name\":\"Acumen\",\"description\":\"\",\"publisher\":{\"@id\":\"/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"/?s={search_term_string}\"},\"query-input\":\"required name=search_term_string\"}],\"inLanguage\":\"nl-BE\"},{\"@type\":\"Organization\",\"@id\":\"/#organization\",\"name\":\"Acumen\",\"url\":\"/\",\"logo\":{\"@type\":\"ImageObject\",\"inLanguage\":\"nl-BE\",\"@id\":\"/#/schema/logo/image/\",\"url\":\"/wp-content/uploads/2025/05/cropped-acumen-logo-mark-dark-green-rgb-934px@72ppi.webp\",\"contentUrl\":\"/wp-content/uploads/2025/05/cropped-acumen-logo-mark-dark-green-rgb-934px@72ppi.webp\",\"width\":693,\"height\":569,\"caption\":\"Acumen\"},\"image\":{\"@id\":\"/#/schema/logo/image/\"}},{\"@type\":\"Person\",\"@id\":\"/#/schema/person/1455d26a9b9044690ef560856928f606\",\"name\":\"Keana Vanhoutteghem\",\"image\":{\"@type\":\"ImageObject\",\"inLanguage\":\"nl-BE\",\"@id\":\"/#/schema/person/image/\",\"url\":\"https://secure.gravatar.com/avatar/0cb64e31b69e2c63e7a6100e424af9e1?s=96&d=mm&r=g\",\"contentUrl\":\"https://secure.gravatar.com/avatar/0cb64e31b69e2c63e7a6100e424af9e1?s=96&d=mm&r=g\",\"caption\":\"Keana Vanhoutteghem\"},\"url\":\"/author/keana/\"}]}</script>\n\t<!-- / Yoast SEO plugin. -->\n<link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png\">\n<link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon-32x32.png\">\n<link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon-16x16.png\">\n<link rel=\"manifest\" href=\"/site.webmanifest\">\n<link rel=\"icon\" href=\"/wp-content/uploads/2024/05/Linkedin-kopie-150x150.webp\" sizes=\"32x32\" />\n<link rel=\"icon\" href=\"/wp-content/uploads/2024/05/Linkedin-kopie-300x300.webp\" sizes=\"192x192\" />\n<link rel=\"apple-touch-icon\" href=\"/wp-content/uploads/2024/05/Linkedin-kopie-300x300.webp\" />\n<meta name=\"msapplication-TileImage\" content=\"/wp-content/uploads/2024/05/Linkedin-kopie-300x300.webp\" />",
+ "bodyClass": "post-template-default single single-post postid-3782 single-format-standard wp-custom-logo elementor-default elementor-template-full-width elementor-kit-6 elementor-page elementor-page-3782 elementor-page-996",
+ "template": "article",
+ "blocks": [
+  {
+   "k": "heading",
+   "id": "afb8032",
+   "s": "title",
+   "tag": "h2",
+   "html": "Data agents"
+  },
+  {
+   "k": "heading",
+   "id": "776edf2",
+   "s": "subtitle",
+   "tag": "h2",
+   "html": "From insights to action"
+  },
+  {
+   "k": "spacer",
+   "id": "c232a4f",
+   "h": "50px"
+  },
+  {
+   "k": "heading",
+   "id": "5166ab8",
+   "tag": "h2",
+   "html": "What is a data agent?"
+  },
+  {
+   "k": "spacer",
+   "id": "7a8a4aa",
+   "h": "10px"
+  },
+  {
+   "k": "text-editor",
+   "id": "72e5ba57",
+   "html": "<p class=\"p1\">Most companies are not struggling because they have too little data. They are struggling because insights often stop at the dashboard. </p><p class=\"p1\">Traditional BI is very good at showing what happened. It gives you reports, charts, KPIs, and dashboards. But in many cases, people still need to interpret the numbers themselves, find the root cause, and decide what to do next. That is where a data agent adds value. </p><p class=\"p1\"><b>A data agent is an AI-powered assistant that can work with your data, understand business context, reason across different sources, </b>and help people move from “What happened?” to “Why did it happen?” and “What should we do next?” </p><p class=\"p1\">So, the difference is clear: traditional BI shows you the insight, a data agent helps you understand the insight and move toward action. </p><p class=\"p1\">Not every data agent is fully autonomous. Some only answer questions. Others explain root causes. More advanced agents can recommend actions or even trigger workflows, such as creating a follow-up task in the CRM or sending an alert to the sales team. </p><p class=\"p1\">The important question is: how far do you want the agent to go? </p>"
+  },
+  {
+   "k": "spacer",
+   "id": "0c658d1",
+   "h": "50px"
+  },
+  {
+   "k": "image",
+   "id": "006a290",
+   "s": "start",
+   "img": {
+    "fetchpriority": "high",
+    "decoding": "async",
+    "width": "768",
+    "height": "508",
+    "src": "/wp-content/uploads/2026/05/DSCF6525-768x508.webp",
+    "alt": "",
+    "srcset": "/wp-content/uploads/2026/05/DSCF6525-768x508.webp 768w, /wp-content/uploads/2026/05/DSCF6525-300x198.webp 300w, /wp-content/uploads/2026/05/DSCF6525-1024x677.webp 1024w, /wp-content/uploads/2026/05/DSCF6525-1536x1016.webp 1536w, /wp-content/uploads/2026/05/DSCF6525-2048x1354.webp 2048w",
+    "sizes": "(max-width: 768px) 100vw, 768px"
+   }
+  },
+  {
+   "k": "spacer",
+   "id": "787692c",
+   "h": "50px"
+  },
+  {
+   "k": "heading",
+   "id": "92cc8bf",
+   "tag": "h2",
+   "html": "Who can use a data agent?"
+  },
+  {
+   "k": "spacer",
+   "id": "0809104",
+   "h": "10px"
+  },
+  {
+   "k": "text-editor",
+   "id": "157dd0a",
+   "html": "<p><span data-contrast=\"auto\">A data agent can be useful for both business users and technical users, but in different ways.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">For </span><b><span data-contrast=\"auto\">business users</span></b><span data-contrast=\"auto\">, such as marketers, sales managers, finance teams, or operations leads, a </span><b><span data-contrast=\"auto\">data agent makes data easier to access</span></b><span data-contrast=\"auto\">. They can ask questions in natural language without needing to build reports, write SQL, or wait for an analyst. For example, a marketing manager could ask:</span> <br /><span data-contrast=\"auto\">“Why did our campaign performance drop this week, and what should we optimize first?”</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">For </span><b><span data-contrast=\"auto\">technical users</span></b><span data-contrast=\"auto\">, such as data analysts, data engineers, BI developers, and data architects, a data agent can speed up analysis, validation, and troubleshooting. They can use it to explore data, generate queries, investigate anomalies, or compare results across systems. For example, a data analyst could ask:</span> <br /><span data-contrast=\"auto\">“Check which data source explains the difference between reported revenue in the dashboard and the warehouse.”</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">But technical users also have another important role: they need to design the data platforms of the future with data agents in mind. That means building platforms with trusted data, clear definitions, strong governance, and well-structured metadata, so AI agents can understand and use the data correctly.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">So, the value is different for each group:</span> <br /><span data-contrast=\"auto\">business users get easier access to insights, while technical users get a faster way to investigate data and a new design principle for future-ready data platforms.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p>"
+  },
+  {
+   "k": "spacer",
+   "id": "040354e",
+   "h": "50px"
+  },
+  {
+   "k": "heading",
+   "id": "38ee3b8",
+   "tag": "h2",
+   "html": "What is needed for a data agent to work?"
+  },
+  {
+   "k": "spacer",
+   "id": "571c4cb",
+   "h": "10px"
+  },
+  {
+   "k": "text-editor",
+   "id": "54a99e5",
+   "html": "<p><span data-contrast=\"auto\">A data agent needs a few important things to work well.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">First, it needs </span><b><span data-contrast=\"auto\">access to the right data</span></b><span data-contrast=\"auto\">. That could be data from a CRM, advertising platforms, analytics tools, databases, data warehouses, or internal documents. Without access to the relevant sources, the agent cannot give useful answers.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">Second, it needs </span><b><span data-contrast=\"auto\">business context</span></b><span data-contrast=\"auto\">. A data agent should not only see the data, it should also understand what the data means. That includes your business goals, KPIs, metric definitions, and what “good” or “bad” performance looks like.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">This is where a semantic layer becomes important. A semantic layer is a trusted layer of business definitions, metrics, relationships, and logic that translates business language into the right data logic. It also helps if tables and columns are clearly described. The agent needs to know what each table represents, what each column means, how different datasets relate to each other, and which definitions should be used.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">Without that shared context, a data agent may give answers that sound useful but are not reliable. If your organization has three different definitions of revenue, the agent will not magically solve that. You need trusted data, clear metric definitions, and well-documented data models.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">Third, it needs </span><b><span data-contrast=\"auto\">clear permissions and boundaries</span></b><span data-contrast=\"auto\">. The agent should only access the data a user is allowed to see. You also need to define what the agent is allowed to do. Should it only analyze and recommend? Or can it also act, like creating a report, sending an alert, updating a CRM record, or triggering a workflow?</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">Finally, it needs </span><b><span data-contrast=\"auto\">governance and human oversight</span></b><span data-contrast=\"auto\">. The agent should be monitored, logged, and controlled, especially if it can trigger actions or share insights in tools like Slack, Teams, or Copilot.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">For decisions with financial, legal, or strategic impact, people should stay in control. A good data agent does not replace human judgment. It helps people make better decisions faster.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p>"
+  },
+  {
+   "k": "spacer",
+   "id": "08180b7",
+   "h": "50px"
+  },
+  {
+   "k": "heading",
+   "id": "c0ecbc6",
+   "tag": "h2",
+   "html": "What technology can be used for implementing a data agent?"
+  },
+  {
+   "k": "spacer",
+   "id": "aed13e1",
+   "h": "10px"
+  },
+  {
+   "k": "text-editor",
+   "id": "817ff37",
+   "html": "<p><span data-contrast=\"auto\">There are several ways to implement a data agent, depending on your existing data stack and where your users want to interact with it.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">If your organization already works with Databricks, you can </span><b><span data-contrast=\"auto\">use Databricks Genie</span></b><span data-contrast=\"auto\">. Genie allows business users to ask questions in natural language and get answers from governed enterprise data. It is especially useful when your data is already organized in Databricks, and you want a conversational layer on top of it. The metadata and definitions from the unity catalog will provide the relevant context for Genie to answer your questions and Genie will learn from the interactions it has from user feedback.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">If you are more in the Microsoft ecosystem, you can look at </span><b><span data-contrast=\"auto\">Microsoft Fabric Data Agent</span></b><span data-contrast=\"auto\">. This allows users to interact with data in Fabric through natural language, and it can connect with tools like Copilot so people can ask data questions in a more conversational way. Here, Fabric IQ provides the structured grounding and ontology for the agents</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">Both solutions help make the agent more reliable and enterprise ready over time. They can incorporate user feedback, expert instructions, example questions, and business definitions to improve the quality of the answers. They also support governance through access controls, activity monitoring, and permission management, so users only interact with the data they are allowed to see.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">Another important technology is </span><b><span data-contrast=\"auto\">MCP, or the Model Context Protocol</span></b><span data-contrast=\"auto\">. MCP makes it easier to connect AI agents to different tools and data sources in a standardized way. You can think of it as a bridge between the AI model and the systems it needs to work with.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">For example, MCP can help bring data access into the environments where people already work, such as Slack, Microsoft Teams, or custom AI agents. Instead of asking users to open a separate dashboard, the agent can become part of their daily workflow.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">MCP can also help connect different data agent experiences. For instance, it could allow you to bring capabilities from tools like Databricks Genie and Microsoft Fabric Data Agent into one more unified agent experience, depending on your architecture and integrations.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">You can also use MCP to create a custom data agent that combines information from multiple sources, such as a data warehouse, operational systems, documents, APIs, and BI tools.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><p><span data-contrast=\"auto\">So, in practice, the technology choice depends on three things:</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p><ul><li data-leveltext=\"\" data-font=\"Symbol\" data-listid=\"8\" data-list-defn-props=\"{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}\" data-aria-posinset=\"1\" data-aria-level=\"1\"><b><span data-contrast=\"auto\">Where your data, context and governance live</span></b><span data-contrast=\"auto\">: Databricks, Microsoft Fabric, a warehouse, CRM, or multiple systems.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></li></ul><ul><li data-leveltext=\"\" data-font=\"Symbol\" data-listid=\"8\" data-list-defn-props=\"{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}\" data-aria-posinset=\"2\" data-aria-level=\"1\"><b><span data-contrast=\"auto\">Where your users work</span></b><span data-contrast=\"auto\">: dashboards, Slack, Teams, Copilot, or a custom interface.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></li></ul><ul><li data-leveltext=\"\" data-font=\"Symbol\" data-listid=\"8\" data-list-defn-props=\"{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}\" data-aria-posinset=\"3\" data-aria-level=\"1\"><b><span data-contrast=\"auto\">What the agent should do</span></b><span data-contrast=\"auto\">: only answer questions, explain insights, trigger alerts, detect anomalies, or recommend actions.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></li></ul><div> </div><p><span data-contrast=\"auto\">The most important thing is not just choosing a tool. It is designing the agent around reliable data, clear business context, secure permissions, and well-defined actions.</span><span data-ccp-props=\"{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:240,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[0,0,0,0]}\"> </span></p>"
+  },
+  {
+   "k": "spacer",
+   "id": "912f0c3",
+   "h": "50px"
+  },
+  {
+   "k": "image",
+   "id": "cc4a380",
+   "img": {
+    "decoding": "async",
+    "src": "/wp-content/uploads/elementor/thumbs/DSCF6542-scaled-ro2rlxbdtf0q4o6hck68suqpwthbwtbcy4qyusefps.webp",
+    "title": "Data agents – how to get started?",
+    "alt": "Data agents - how to get started?",
+    "loading": "lazy"
+   }
+  },
+  {
+   "k": "spacer",
+   "id": "78fa09b",
+   "h": "50px"
+  },
+  {
+   "k": "heading",
+   "id": "9d4914b",
+   "tag": "h2",
+   "html": "How to get started?"
+  },
+  {
+   "k": "spacer",
+   "id": "187373d",
+   "h": "10px"
+  },
+  {
+   "k": "text-editor",
+   "id": "d278037",
+   "html": "<p><span data-contrast=\"auto\">The future of BI is not only about better dashboards. It is about making data more intelligent, more accessible, and more actionable. Data agents help teams move faster from question to decision, and from decision to action. They make it easier to understand insights, validate what is happening, and identify the next best step.</span><span data-ccp-props=\"{&quot;201341983&quot;:0,&quot;335551550&quot;:6,&quot;335551620&quot;:6,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:276,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[1,1,1,1]}\"> </span></p><p><span data-contrast=\"auto\">The goal is not to replace analysts or decision-makers, but to support them with better context, faster analysis, and more actionable recommendations.</span><span data-ccp-props=\"{&quot;201341983&quot;:0,&quot;335551550&quot;:6,&quot;335551620&quot;:6,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:276,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[1,1,1,1]}\"> </span></p><p><span data-contrast=\"auto\">The best way to start isn&#8217;t with a generic agent that knows everything. </span><b><span data-contrast=\"auto\">Pick one clear use case, one domain, trusted data. </span></b><span data-contrast=\"auto\">Build governance in from the start: who can access what, what the agent is allowed to do, how it&#8217;s monitored, and when a human needs to approve. Once that works reliably and securely, you expand from there. Because good data is still the foundation. But acting on it fast, that&#8217;s the new edge.</span><span data-ccp-props=\"{&quot;201341983&quot;:0,&quot;335551550&quot;:6,&quot;335551620&quot;:6,&quot;335559738&quot;:120,&quot;335559739&quot;:120,&quot;335559740&quot;:276,&quot;469777462&quot;:[567,1134,1701,2835],&quot;469777927&quot;:[0,0,0,0],&quot;469777928&quot;:[1,1,1,1]}\"> </span></p>"
+  },
+  {
+   "k": "spacer",
+   "id": "83b6405",
+   "h": "50px"
+  },
+  {
+   "k": "text-editor",
+   "id": "8ec1b7f",
+   "s": "lead",
+   "html": "<p>Wondering how to leverage AI agents for your business? </p>"
+  },
+  {
+   "k": "spacer",
+   "id": "5ae8d00",
+   "h": "16px"
+  },
+  {
+   "k": "button",
+   "id": "0f477c1",
+   "s": "cta",
+   "label": "Book your appointment here",
+   "href": "/contact/"
+  }
+ ]
+}

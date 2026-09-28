@@ -1,0 +1,48 @@
+---
+// Single-column post (were free-form Elementor posts 3782 / 3810): headings, text, images, spacers
+// a lead form (posts to the forms stub) and a call-to-action button, in order. Styles by block
+// style name (see article.css).
+import '../../styles/article.css';
+interface Field { label: string; tag: string; type?: string; name: string; placeholder?: string; rows?: string }
+interface Block {
+  k: string; id?: string; s?: string; tag?: string; html?: string; img?: Record<string, string>; h?: string; hm?: string; label?: string; href?: string;
+  name?: string; hidden?: Record<string, string>; fields?: Field[]; submit?: string;
+}
+interface Props { blocks: Block[] }
+const { blocks } = Astro.props;
+---
+<article class="art">
+  <div class="art__inner">
+    {blocks.map(b => {
+      const cls = `art-${b.k}${b.s ? ` art-${b.k}--${b.s}` : ''}`;
+      if (b.k === 'spacer') return <div class={cls} style={`--h:${b.h}${b.hm ? `;--hm:${b.hm}` : ''}`}></div>;
+      if (b.k === 'heading') { const Tag = b.tag as any; return <div class={cls}><Tag set:html={b.html} /></div>; }
+      if (b.k === 'image') return <div class={cls}><img {...b.img} /></div>;
+      if (b.k === 'form') return (
+        <div class="art-form">
+          <form class="art-form__form" method="post" name={b.name} data-form>
+            {Object.entries(b.hidden!).map(([name, value]) => <input type="hidden" name={name} value={value} />)}
+            <div class="art-form__fields">
+              {b.fields!.map((f, i) => {
+                const id = `art-${b.id}-${i}`;
+                return (
+                  <div class="art-form__group form-field">
+                    <label for={id} class="art-form__label">{f.label}</label>
+                    {f.tag === 'textarea'
+                      ? <textarea class="art-form__input art-form__input--area" name={f.name} id={id} rows={f.rows} placeholder={f.placeholder} required></textarea>
+                      : <input size="1" type={f.type} name={f.name} id={id} class="art-form__input" placeholder={f.placeholder} required />}
+                  </div>
+                );
+              })}
+              <div class="art-form__group art-form__group--submit form-field">
+                <button class="art-form__button" type="submit"><span><span set:html={b.submit} /></span></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      );
+      if (b.k === 'button') return <div class={cls}><a href={b.href}><span set:html={b.label} /></a></div>;
+      return <div class={cls} set:html={b.html} />;
+    })}
+  </div>
+</article>

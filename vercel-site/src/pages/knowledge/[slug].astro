@@ -8,6 +8,7 @@ import NewsletterForm from '../../components/post/NewsletterForm.astro';
 import PostsCarousel from '../../components/post/PostsCarousel.astro';
 import WhitepaperDownload from '../../components/post/WhitepaperDownload.astro';
 import ContactCta from '../../components/cta/ContactCta.astro';
+import Article from '../../components/post/Article.astro';
 import '../../styles/post.css';
 import '../../styles/post-card.css';
 
@@ -21,6 +22,7 @@ export function getStaticPaths() {
 const { post } = Astro.props;
 ---
 <Base seo={post.seo} bodyClass={post.template === 'whitepaper' ? post.bodyClass : `${post.bodyClass} p-spaced`}>
+  {post.template === 'article' ? <Article blocks={post.blocks} /> : (
   <article class="post">
     <section class="post-sec post-hero" id="start">
       <div class="post-sec__inner post-hero__inner">
@@ -120,5 +122,6 @@ const { post } = Astro.props;
       <div class="post-related__band"><div class="post-related__inner"><PostsCarousel ids={post.related} /></div></div>
     </section>
   </article>
+  )}
   {post.appendix && <Fragment set:html={post.appendix} />}
 </Base>

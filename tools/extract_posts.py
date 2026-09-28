@@ -8,6 +8,7 @@ Writes
   vercel-site/src/data/expertise-cards.json  the "Our Expertise" slider cards (JetEngine listing 2137)
   vercel-site/src/content/vacatures/*.json   vacancies (Elementor pages 4122/4165: one layout, copied)
   vercel-site/src/content/one-off/*.json     named widget contents of hand-written one-off pages (ONE_OFF)
+                                             and single-column posts (wp-post 3782, 3810) as a list of blocks
   vercel-site/src/data/meta.json             SEO head + body class of every page, for hand-written pages
   vercel-site/src/content/pages/*.json       pages without Elementor content (legal, careers, the
                                              expertise archive): their HTML between header and footer
@@ -301,6 +302,63 @@ def anaplan_tabs(src):
     return out
 
 
+def css_rule(css, data_id, prop, media=None):
+    """Value of a custom property Elementor set for an element (optionally inside a media query)."""
+    if media:
+        m = re.search(re.escape(media) + r'\{(.*?)\}\s*(?=@media|/\*|$)', css, re.S)
+        css = m.group(1) if m else ''
+    m = re.search(rf'elementor-element-{data_id}\{{[^}}]*{re.escape(prop)}:([^;}}]+)', css)
+    return m.group(1).strip() if m else None
+
+
+# Single-column posts: page -> (document id, {widget id: style name}); unnamed widgets use the default style.
+ARTICLES = {
+    'knowledge~data-agents-insights-action': ('3782', {'afb8032': 'title', '776edf2': 'subtitle', '006a290': 'start', '8ec1b7f': 'lead', '0f477c1': 'cta'}),
+    'knowledge~de-riziv-controleshoft-is-ingezet': ('3810', {'afb8032': 'title', '776edf2': 'subtitle', '35b948b': 'pull', '8ec1b7f': 'lead-left', '540195b': 'lead-left', '0f477c1': 'cta-dark'}),
+}
+
+
+def form_block(form):
+    """An Elementor form as data: name, hidden fields, visible fields, submit label."""
+    fields = []
+    for g in re.finditer(r'<label for="([^"]+)" class="elementor-field-label">\s*(.*?)\s*</label>\s*<(input|textarea)([^>]*)>', form, re.S):
+        attrs = dict(re.findall(r'([\w-]+)="([^"]*)"', g.group(4)))
+        fields.append({k: v for k, v in {'label': g.group(2), 'tag': g.group(3), 'type': attrs.get('type'), 'name': attrs['name'],
+                                         'placeholder': attrs.get('placeholder'), 'rows': attrs.get('rows')}.items() if v})
+    return {
+        'name': html.unescape(re.search(r'<form [^>]*name="([^"]*)"', form).group(1)),
+        'hidden': {k: html.unescape(v) for k, v in re.findall(r'<input type="hidden" name="(\w+)" value="([^"]*)"', form)},
+        'fields': fields,
+        'submit': inner(first(form, r'<span class="elementor-button-text')).strip(),
+    }
+
+
+def article_blocks(src, doc_id, styles):
+    css = open(os.path.join(ROOT, 'public', 'wp-content', 'uploads', 'elementor', 'css', f'post-{doc_id}.css'), encoding='utf8').read()
+    doc = element(src, re.search(rf'<div data-elementor-type="[\w-]+" data-elementor-id="{doc_id}"', src).start())
+    blocks = []
+    for m in re.finditer(r'<div class="[^"]*elementor-widget-(heading|text-editor|spacer|image|button|form)\b[^"]*" data-id="(\w+)"', doc):
+        kind, wid = m.groups()
+        if kind == 'form':
+            blocks.append({'k': 'form', 'id': wid, **form_block(first(by_id(src, wid), r'<form '))})
+            continue
+        b = {'k': kind, 'id': wid, 's': styles.get(wid)}
+        if kind == 'spacer':
+            b['h'] = css_rule(css, wid, '--spacer-size')
+            b['hm'] = css_rule(css, wid, '--spacer-size', '@media(max-width:767px)')
+        elif kind == 'button':
+            w = by_id(src, wid)
+            b['label'] = inner(first(w, r'<span class="elementor-button-text')).strip()
+            b['href'] = re.search(r'<a [^>]*href="([^"]*)"', w).group(1)
+        elif kind == 'heading':
+            b['tag'] = re.search(r'<(h\d|p|div|span) class="elementor-heading-title', by_id(src, wid)).group(1)
+            b['html'] = heading(src, wid)
+        else:
+            b['html' if kind == 'text-editor' else 'img'] = widget(src, wid)
+        blocks.append({k: v for k, v in b.items() if v is not None})
+    return blocks
+
+
 cards = {}
 posts = {}
 plain = {}
@@ -316,6 +374,10 @@ for f in sorted(glob.glob(os.path.join(LEGACY, '*.html'))):
         os.makedirs(os.path.join(ROOT, 'src', 'content', 'one-off'), exist_ok=True)
         with open(os.path.join(ROOT, 'src', 'content', 'one-off', name + '.json'), 'w', encoding='utf8') as fh:
             json.dump(anaplan_tabs(src) if name == 'anaplan-tabs' else one_off(src, ONE_OFF[name]), fh, ensure_ascii=False, indent=1)
+    if name in ARTICLES:
+        doc_id, styles = ARTICLES[name]
+        body_class = re.search(r'<body[^>]*class="([^"]*)"', src).group(1)
+        posts[name.split('~', 1)[1]] = {'seo': seo_head(src), 'bodyClass': body_class, 'template': 'article', 'blocks': article_blocks(src, doc_id, styles)}
     meta[name] = {'seo': seo_head(src), 'bodyClass': re.search(r'<body[^>]*class="([^"]*)"', src).group(1)}
     if 'data-elementor-type="single-post" data-elementor-id="996"' in src:
         slug = name.split('~', 1)[1]

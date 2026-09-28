@@ -1,0 +1,111 @@
+---
+// Culture (was Elementor page 135). Content: src/content/one-off/culture.json. Behaviour from the site
+// scripts: sticky hero (data-sticky), typed words (.typedContainer), story blocks fading in on scroll
+// (howWeHelpYouSectionAnimation). An empty, zero-height section of the old page is left out.
+import Base from '../layouts/Base.astro';
+import meta from '../data/meta.json';
+import c from '../content/one-off/culture.json';
+import '../styles/culture.css';
+const sticky = JSON.stringify({ sticky: 'top', sticky_on: ['desktop', 'tablet', 'mobile'], sticky_offset: 0, sticky_effects_offset: 0 });
+---
+<Base {...meta.culture}>
+  <div class="cu">
+    <section class="cu-hero" data-sticky={sticky}>
+      <div class="cu-hero__inner">
+        <div class="cu-typed typedContainer">
+          <div class="cu-typed__strings" set:html={c.typedHero} />
+          <div class="cu-hero__title"><h1 set:html={c.hero} /></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cu-photo"><div class="cu-photo__inner"></div></section>
+
+    <section class="cu-how howWeHelpYouSectionAnimation">
+      <div class="cu-how__inner">
+        <div class="cu-how__cols">
+          <div class="cu-how__images"></div>
+          <div class="cu-how__text">
+            {c.story.map(([title, text]) => (
+              <div class="cu-how__block howWeHelpYouSectionAnimation__text">
+                <div class="cu-how__heading"><h3 set:html={title} /></div>
+                <div class="cu-how__copy" set:html={text} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cu-team">
+      <div class="cu-team__quote-wrap"><div class="cu-team__quote"><div class="cu-team__quote-text" set:html={c.quote} /></div></div>
+      {[c.team.slice(0, 2), c.team.slice(2)].map(row => (
+        <div class="cu-team__row">
+          {row.map(([img, social, name]) => (
+            <div class="cu-member">
+              <div class="cu-member__box">
+                <div class="cu-member__card">
+                  <div class="cu-member__inner">
+                    <div class="cu-member__bg"><img {...img} /></div>
+                    <div class="cu-member__social"><div set:html={social} /></div>
+                    <div class="cu-member__name" set:html={name} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </section>
+
+    <section class="cu-box">
+      <div class="cu-box__inner">
+        <div class="cu-full"></div>
+        <div class="cu-banner"><div class="cu-banner__img cu-banner__img--support"></div></div>
+      </div>
+    </section>
+
+    <section class="cu-box">
+      <div class="cu-box__inner">
+        <div class="elementor-menu-anchor" id="careers"></div>
+        <div class="cu-join"><h2 set:html={c.joinTitle} /></div>
+        <div class="cu-open"><div><h2 set:html={c.positionsTitle} /></div></div>
+        <div class="cu-divider"><span></span></div>
+        <div class="cu-positions">
+          {c.positions.map(([title, button], i) => (
+            <div class="cu-position">
+              <div class={`cu-position__title${i === 0 ? ' cu-position__title--indent' : ''}`}><div set:html={title} /></div>
+              <div class="cu-position__action"><a href={button.href}><span><span set:html={button.label} /></span></a></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="cu-box cu-box--end">
+      <div class="cu-box__inner">
+        <div class="cu-banner"><div class="cu-banner__img cu-banner__img--office"></div></div>
+      </div>
+    </section>
+
+    <section class="cu-box">
+      <div class="cu-box__inner cu-quote">
+        <div class="cu-quote__photo"><div class="cu-quote__img"><img {...c.quoteImage} /></div></div>
+        <div class="cu-quote__body">
+          <div class="cu-typed cu-quote__typed typedContainer">
+            <div class="cu-typed__strings" set:html={c.typedQuote} />
+            <div class="cu-quote__title"><h1 set:html={c.quoteText} /></div>
+          </div>
+          <div class="cu-quote__author"><div set:html={c.quoteAuthor} /></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cu-box cu-pair">
+      <div class="cu-box__inner cu-pair__inner">
+        <div class="cu-pair__col"><div class="cu-pair__img" data-parallax="1"><img {...c.photoLeft} /></div></div>
+        <div class="cu-pair__col"><div class="cu-pair__img" data-parallax="2"><img {...c.photoRight} /></div></div>
+      </div>
+    </section>
+  </div>
+</Base>

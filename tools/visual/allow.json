@@ -8,6 +8,18 @@
   "reason": "Scroll-scrubbed CTA word: ScrollTrigger start/end are measured after init instead of at window load; a few px apart mid-scroll, identical at rest."
  },
  {
+  "prefixOf": [
+   "and sustainable growth.",
+   "is widely used throughout industry, government, and science.”"
+  ],
+  "reason": "Typed text (typed.js loop): its typing phase depends on timers and random humanising delays, so the partly typed state differs between runs of different code."
+ },
+ {
+  "text": "^“AI technology$",
+  "page": "^culture$",
+  "reason": "Shares a centred line with typed text, so its x follows the typing phase."
+ },
+ {
   "page": "careers__vacature-ai-engineer",
   "vw": 1024,
   "tile": "tile-03",

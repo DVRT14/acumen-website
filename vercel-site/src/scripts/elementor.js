@@ -126,8 +126,8 @@ class Sticky {
 const isContainer = el => !!el && (el.classList.contains('e-con') || el.classList.contains('e-con-inner'));
 
 function sticky() {
-  $$('[data-settings*="sticky"]').forEach(el => {
-    const s = settingsOf(el);
+  $$('[data-settings*="sticky"], [data-sticky]').forEach(el => {
+    const s = el.dataset.sticky ? JSON.parse(el.dataset.sticky) : settingsOf(el);
     if (!s.sticky || !(s.sticky_on || []).includes(deviceMode())) return;
     const topLevel = isContainer(el) && !isContainer(el.parentElement);
     new Sticky(el, {

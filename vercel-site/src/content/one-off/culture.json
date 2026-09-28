@@ -1,0 +1,128 @@
+{
+ "typedHero": "<div class=\"typed-strings\">\n  <p>and sustainable growth.</p>\n\n  <p>and sustainable growth.</p>\n\n</div>\n<!--<h2>Transfor data into <span id=\"typed\"></span></h2>-->\n\n\n<style>\n    .typed-strings {\n        color: #000;\n        display: none;\n    }\n    \n    .elementor-editor-active .typed-strings {\n        display: block;\n    }\n  \n</style>",
+ "hero": "We’re dedicated to a \nfriendly, innovative culture \nthat values trust, loyalty, <br><span class=\"typed\"></span>",
+ "story": [
+  [
+   "Our Story",
+   "<p>In 2007 Acumen was incepted because data consultancy required a dedicated more open culture. Since then sustainable growth has always been our focus.</p>"
+  ],
+  [
+   "Our Why",
+   "<p>It’s our mission to be the most no-nonsense and committed data one-stop-shop that cares about you.</p>"
+  ],
+  [
+   "Our intrapreneurship",
+   "<p>Next to knowledge sharing, we foster ownership and entrepreneurship. Everyone can become an Acumen shareholder.</p>"
+  ]
+ ],
+ "quote": "“At Acumen we are a young and dynamic team, with lots of responsibilities and expertise, all while having a bubbling atmosphere.”",
+ "team": [
+  [
+   {
+    "fetchpriority": "high",
+    "decoding": "async",
+    "width": "1761",
+    "height": "2035",
+    "src": "/wp-content/uploads/2024/06/Jan-Timmermans.jpg",
+    "alt": "",
+    "srcset": "/wp-content/uploads/2024/06/Jan-Timmermans.jpg 1761w, /wp-content/uploads/2024/06/Jan-Timmermans-260x300.webp 260w, /wp-content/uploads/2024/06/Jan-Timmermans-886x1024.webp 886w, /wp-content/uploads/2024/06/Jan-Timmermans-768x887.webp 768w, /wp-content/uploads/2024/06/Jan-Timmermans-1329x1536.webp 1329w",
+    "sizes": "(max-width: 1761px) 100vw, 1761px"
+   },
+   "<a href=\"#\">LINKEDIN</a>",
+   "Jan Timmermans\n<br>Data Engineer"
+  ],
+  [
+   {
+    "loading": "lazy",
+    "decoding": "async",
+    "width": "1761",
+    "height": "2035",
+    "src": "/wp-content/uploads/2024/06/Group-1491-1.jpg",
+    "alt": "",
+    "srcset": "/wp-content/uploads/2024/06/Group-1491-1.jpg 1761w, /wp-content/uploads/2024/06/Group-1491-1-260x300.webp 260w, /wp-content/uploads/2024/06/Group-1491-1-886x1024.webp 886w, /wp-content/uploads/2024/06/Group-1491-1-768x887.webp 768w, /wp-content/uploads/2024/06/Group-1491-1-1329x1536.webp 1329w",
+    "sizes": "(max-width: 1761px) 100vw, 1761px"
+   },
+   "<a href=\"#\">LINKEDIN</a>",
+   "Tjomme Vergauwen\n<br>Data Engineer"
+  ],
+  [
+   {
+    "loading": "lazy",
+    "decoding": "async",
+    "width": "1761",
+    "height": "2035",
+    "src": "/wp-content/uploads/2024/06/Hilde-Houtmeyers.webp",
+    "alt": "",
+    "srcset": "/wp-content/uploads/2024/06/Hilde-Houtmeyers.webp 1761w, /wp-content/uploads/2024/06/Hilde-Houtmeyers-260x300.webp 260w, /wp-content/uploads/2024/06/Hilde-Houtmeyers-886x1024.webp 886w, /wp-content/uploads/2024/06/Hilde-Houtmeyers-768x887.webp 768w, /wp-content/uploads/2024/06/Hilde-Houtmeyers-1329x1536.webp 1329w",
+    "sizes": "(max-width: 1761px) 100vw, 1761px"
+   },
+   "<a href=\"#\">LINKEDIN</a>",
+   "Hilde Houtmeyers\n<br>Functional Analist"
+  ],
+  [
+   {
+    "loading": "lazy",
+    "decoding": "async",
+    "width": "1761",
+    "height": "2035",
+    "src": "/wp-content/uploads/2024/06/Martijn-Wieers.jpg",
+    "alt": "",
+    "srcset": "/wp-content/uploads/2024/06/Martijn-Wieers.jpg 1761w, /wp-content/uploads/2024/06/Martijn-Wieers-260x300.webp 260w, /wp-content/uploads/2024/06/Martijn-Wieers-886x1024.webp 886w, /wp-content/uploads/2024/06/Martijn-Wieers-768x887.webp 768w, /wp-content/uploads/2024/06/Martijn-Wieers-1329x1536.webp 1329w",
+    "sizes": "(max-width: 1761px) 100vw, 1761px"
+   },
+   "<a href=\"#\">LINKEDIN</a>",
+   "Martijn Wieërs\n<br>Project Manager"
+  ]
+ ],
+ "joinTitle": "<br>Join us!",
+ "positionsTitle": "Open positions:",
+ "positions": [
+  [
+   "<p>Analytics Engineer Consultant</p>",
+   {
+    "label": "View job",
+    "href": "/careers/vacature-analytics-engineer/"
+   }
+  ],
+  [
+   "<p>AI Engineer Consultant&nbsp; &nbsp; &nbsp; &nbsp;</p>",
+   {
+    "label": "View job",
+    "href": "/careers/vacature-ai-engineer/"
+   }
+  ]
+ ],
+ "quoteImage": {
+  "loading": "lazy",
+  "decoding": "async",
+  "width": "321",
+  "height": "479",
+  "src": "/wp-content/uploads/2024/06/DSCF6572.webp",
+  "alt": "",
+  "srcset": "/wp-content/uploads/2024/06/DSCF6572.webp 321w, /wp-content/uploads/2024/06/DSCF6572-201x300.webp 201w",
+  "sizes": "(max-width: 321px) 100vw, 321px"
+ },
+ "typedQuote": "<div class=\"typed-strings\">\n  <p>is widely used \nthroughout industry, \ngovernment, and science.”</p>\n\n  <p>is widely used \nthroughout industry, \ngovernment, and science.”</p>\n\n</div>\n<!--<h2>Transfor data into <span id=\"typed\"></span></h2>-->\n\n\n<style>\n    .typed-strings {\n        color: #000;\n        display: none;\n    }\n    \n    .elementor-editor-active .typed-strings {\n        display: block;\n    }\n  \n</style>",
+ "quoteText": "“AI technology <span class=\"typed\"></span>",
+ "quoteAuthor": "Josse Marchoul",
+ "photoLeft": {
+  "loading": "lazy",
+  "decoding": "async",
+  "width": "495",
+  "height": "660",
+  "src": "/wp-content/uploads/2024/06/Mask-Group-20.webp",
+  "alt": "",
+  "srcset": "/wp-content/uploads/2024/06/Mask-Group-20.webp 495w, /wp-content/uploads/2024/06/Mask-Group-20-225x300.webp 225w",
+  "sizes": "(max-width: 495px) 100vw, 495px"
+ },
+ "photoRight": {
+  "loading": "lazy",
+  "decoding": "async",
+  "width": "495",
+  "height": "660",
+  "src": "/wp-content/uploads/2024/06/Mask-Group-21.webp",
+  "alt": "",
+  "srcset": "/wp-content/uploads/2024/06/Mask-Group-21.webp 495w, /wp-content/uploads/2024/06/Mask-Group-21-225x300.webp 225w",
+  "sizes": "(max-width: 495px) 100vw, 495px"
+ }
+}

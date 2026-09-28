@@ -18,7 +18,11 @@ const allow = args.allow && fs.existsSync(path.resolve(here, args.allow))
 //             { "text": "regex", "page": "regex", "reason": "…" } — ignores that text's layout and its rows
 //             of pixels (continuously animated things whose phase is not reproducible).
 const allowed = (page, vw, tile) => allow.find(a => !a.text && a.page === page && (!a.vw || a.vw === +vw) && (!a.tile || a.tile === tile));
-const animated = page => allow.filter(a => a.text && (!a.page || new RegExp(a.page).test(page))).map(a => new RegExp(a.text));
+//             { "prefixOf": ["typed text"] } — the same for any partly typed state of that text (typed.js).
+const norm = t => t.replace(/\s+/g, ' ').trim();
+const animated = page => allow.filter(a => (a.text || a.prefixOf) && (!a.page || new RegExp(a.page).test(page))).map(a => a.text
+  ? new RegExp(a.text)
+  : { test: t => !!norm(t) && a.prefixOf.some(p => norm(p).startsWith(norm(t))) });
 function maskAnimated(page, la, lb, ia, ib) {
   const res = animated(page);
   if (!res.length) return [la, lb];

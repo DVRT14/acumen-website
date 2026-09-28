@@ -1,0 +1,44 @@
+---
+// Anaplan in tabs (was Elementor page 3410): the "Tool" and "Market" pages as tabs, "Cases" empty.
+// Content: src/content/one-off/anaplan-tabs.json. elementor.js (nestedTabs) switches the tabs.
+import Base from '../layouts/Base.astro';
+import meta from '../data/meta.json';
+import AnaplanTool from '../components/anaplan/AnaplanTool.astro';
+import AnaplanMarket from '../components/anaplan/AnaplanMarket.astro';
+import c from '../content/one-off/anaplan-tabs.json';
+import '../styles/post.css';
+import '../styles/anaplan.css';
+const m = meta['anaplan-tabs'];
+const tab = (i: number) => ({ title: `ap-tab-${i}`, panel: `ap-tab-panel-${i}`, style: `--n-tabs-title-order: ${i};` });
+---
+<Base {...m} bodyClass={`${m.bodyClass} p-spaced`}>
+  <div class="ap">
+    <section class="ap-sec">
+      <div class="ap-sec__inner ap-sec__inner--65">
+        <div class="post-hero__title"><h2 set:html={c.title} /></div>
+        <div class="ap-text" set:html={c.intro} />
+      </div>
+    </section>
+
+    <section class="ap-band">
+      <div class="ap-band__inner">
+        <div class="ap-tabs">
+          <div class="e-n-tabs" aria-label="Tabbladen. Open items met Enter of Spatie, sluit met Escape en navigeer met de pijltjestoetsen.">
+            <div class="e-n-tabs-heading" role="tablist">
+              {c.tabs.map((label, i) => (
+                <button id={tab(i + 1).title} class="e-n-tab-title" aria-selected={i === 0 ? 'true' : 'false'} data-tab-index={i + 1} role="tab" tabindex={i === 0 ? '0' : '-1'} aria-controls={tab(i + 1).panel} style={tab(i + 1).style}>
+                  <span class="e-n-tab-title-text">{label}</span>
+                </button>
+              ))}
+            </div>
+            <div class="e-n-tabs-content">
+              <div id={tab(1).panel} role="tabpanel" aria-labelledby={tab(1).title} data-tab-index="1" style={tab(1).style} class="ap-tabs__panel e-active"><AnaplanTool c={c.tool} /></div>
+              <div id={tab(2).panel} role="tabpanel" aria-labelledby={tab(2).title} data-tab-index="2" style={tab(2).style} class="ap-tabs__panel"><AnaplanMarket c={c.market} /></div>
+              <div id={tab(3).panel} role="tabpanel" aria-labelledby={tab(3).title} data-tab-index="3" style={tab(3).style} class="ap-tabs__panel"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>

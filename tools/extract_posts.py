@@ -263,12 +263,42 @@ ONE_OFF = {
         'cards': [['b3353af', '9175a3d'], ['3bb3467', 'fd5ad26'], ['bb4806b', '3e5b87b'], ['52b64f6', 'eed24f2'], ['e3f4078', 'bbd137a'], ['0c5ec87', '3d9f414']],
         'banner': 'b89301e', 'outro': '7935461',
     },
+    'anaplan-market': {
+        'title': 'fb4139f', 'intro': 'd80487d', 'bandTop': 'fefd2de', 'quadrant': '12d7c47',
+        'cards': [['923ac87', '442e9e3'], ['f82df85', '4500365'], ['ab7b6fe', '59957bd'], ['183387c', 'a81a2e2']],
+        'supplyChain': 'b1227f8', 'bandLeft': 'fb6aa4f',
+        'epmTitle': 'b533447', 'epmText': 'd307e0d', 'epmTable': '9d68d41', 'bandRight': '332a241',
+        'scmText': 'b36f15e', 'scmTable': '6328881', 'banner': 'b89301e', 'outro': '7935461',
+    },
 }
 
 
 def one_off(src, spec):
     get = lambda v: [get(x) for x in v] if isinstance(v, list) else widget(src, v)
     return {k: get(v) for k, v in spec.items()}
+
+
+def ids_in(src, pattern):
+    return list(dict.fromkeys(re.findall(r'data-id="([0-9a-f]+)"', element(src, re.search(pattern, src).start()))))
+
+
+def remap(spec, source_ids, target_ids):
+    """A spec written for one page, applied to a copy of it (same structure, other ids)."""
+    to = dict(zip(source_ids, target_ids))
+    get = lambda v: [get(x) for x in v] if isinstance(v, list) else to[v]
+    return {k: get(v) for k, v in spec.items()}
+
+
+def anaplan_tabs(src):
+    """The tabs page holds copies of the "Tool" (3504) and "Market" (3457) pages in its first two tabs."""
+    out = one_off(src, {'title': 'fb4139f', 'intro': 'd80487d'})
+    for key, page, doc, panel in (('tool', 'anaplan', '3504', 'f37a7dd'), ('market', 'anaplan-market', '3457', '65ec279')):
+        page_src = open(os.path.join(LEGACY, page + '.html'), encoding='utf8').read()
+        source = ids_in(page_src, rf'<div data-elementor-type="wp-page" data-elementor-id="{doc}"')
+        target = ids_in(src, rf'<div [^>]*data-id="{panel}"')[1:]
+        out[key] = one_off(src, remap(ONE_OFF[page], source, target))
+    out['tabs'] = [t.strip() for t in re.findall(r'<span class="e-n-tab-title-text">(.*?)</span>', src, re.S)]
+    return out
 
 
 cards = {}
@@ -282,10 +312,10 @@ for f in sorted(glob.glob(os.path.join(LEGACY, '*.html'))):
     for pid, card in cards_from(src).items():
         cards.setdefault(pid, {}).update({k: v for k, v in card.items() if v is not None or k not in cards.get(pid, {})})
     name = os.path.basename(f)[:-5]
-    if name in ONE_OFF:
+    if name in ONE_OFF or name == 'anaplan-tabs':
         os.makedirs(os.path.join(ROOT, 'src', 'content', 'one-off'), exist_ok=True)
         with open(os.path.join(ROOT, 'src', 'content', 'one-off', name + '.json'), 'w', encoding='utf8') as fh:
-            json.dump(one_off(src, ONE_OFF[name]), fh, ensure_ascii=False, indent=1)
+            json.dump(anaplan_tabs(src) if name == 'anaplan-tabs' else one_off(src, ONE_OFF[name]), fh, ensure_ascii=False, indent=1)
     meta[name] = {'seo': seo_head(src), 'bodyClass': re.search(r'<body[^>]*class="([^"]*)"', src).group(1)}
     if 'data-elementor-type="single-post" data-elementor-id="996"' in src:
         slug = name.split('~', 1)[1]

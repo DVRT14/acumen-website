@@ -48,3 +48,88 @@
   .ap-cards { grid-template-columns: repeat(1, 1fr); }
   .ap-card { flex-wrap: wrap; }
 }
+
+/* anaplan-market (3457) */
+.am-hero__inner { padding: 65px 0 15px; }
+.am-quad { padding: 0 25px; }
+.am-quad__inner { gap: 30px; }
+.am-quad__row { position: relative; display: flex; gap: 30px; min-width: 0; padding: 50px; }
+.am-quad__cards { margin-bottom: -85px; }
+.am-cards { grid-template-rows: repeat(2, 1fr); }
+.am-card { background-color: #ECF1F4; }
+.am-card .ap-card__title { text-align: center; }
+.am-note { position: relative; display: flex; min-width: 0; }
+.am-note__spacer { position: relative; display: flex; width: 29%; min-width: 0; }
+.am-note__text { position: relative; display: flex; width: 100%; min-width: 0; }
+.am-band-left__img { margin-top: -60px; }
+.am-cmp__inner { padding: 75px 0 50px; gap: 30px; }
+.am-cmp__row { position: relative; display: flex; min-width: 0; }
+.am-cmp__intro { position: relative; display: flex; flex-direction: column; width: 50%; min-width: 0; }
+.am-cmp__spacer { position: relative; display: flex; flex-direction: column; justify-content: space-around; width: 50%; min-width: 0; }
+.am-cmp__title { position: relative; text-align: center; }
+.am-cmp__title > div { margin: 0 0 5%; }
+.am-cmp__table { position: relative; display: flex; flex-direction: column; min-width: 0; }
+.am-html { position: relative; }
+
+@media (max-width: 1024px) {
+  .am-band-top { padding: 0 25px; }
+  .am-quad__row { flex-direction: column; }
+  .am-note { padding: 10px 0; }
+  .am-note__text { margin-top: 29px; }
+  .am-band-left { padding: 0 25px; }
+  .am-cmp__spacer { display: none; }
+}
+
+@media (max-width: 767px) {
+  .am-hero { margin-top: 50px; }
+  .am-hero__inner { padding: 0; }
+  .ap-band.am-pad-m, .am-band-left { padding: 0 3%; }
+  .ap-band.am-pad-m > .ap-band__inner { padding: 1% 0; }
+  .am-band-top, .am-band-left__img { margin: 0; padding: 0; }
+  .am-quad { padding: 0 15px; }
+  .am-quad__row { flex-wrap: wrap; padding: 5% 0; }
+  .am-quad__cards { margin-bottom: 0; }
+  .am-note, .am-note__text, .am-cmp__row, .am-cmp__intro, .am-cmp__table { flex-wrap: wrap; }
+  .am-cmp__inner { padding: 0; }
+  .am-cmp__intro { width: 100%; }
+  .am-html--center-m { align-self: center; }
+  .am-banner__img { padding: 0 1%; }
+}
+
+/* anaplan-tabs (3410): Elementor nested-tabs look (theme accent/secondary colours) */
+.ap-tabs { position: relative; width: 100%; max-width: 100%; }
+.ap-tabs .e-n-tabs { display: flex; flex-direction: column; gap: 10px; min-width: 0; text-align: start; }
+.ap-tabs .e-n-tabs-heading { display: flex; flex-direction: row; flex-shrink: 0; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.ap-tabs .e-n-tabs-content { display: flex; flex-grow: 1; min-width: 0; }
+.ap-tabs__panel { position: relative; display: flex; flex-direction: column; width: 100%; min-width: 0; }
+.ap-tabs .e-n-tabs-content > .ap-tabs__panel:not(.e-active) { display: none; }
+.ap-tabs .e-n-tab-title {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-basis: content;
+  flex-grow: 0;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 15px 35px;
+  border-style: none;
+  border-radius: 0;
+  white-space: initial;
+  user-select: none;
+  transition: background .3s, color .3s, border .3s, box-shadow .3s, text-shadow .3s, transform .3s;
+}
+.ap-tabs .e-n-tab-title:focus:not(:focus-visible) { outline: none; }
+.ap-tabs .e-n-tab-title-text { display: flex; align-items: center; font-size: 1rem; text-align: center; }
+.ap-tabs .e-n-tab-title[aria-selected=false] { color: #54595F; background-color: #F1F2F3; }
+.ap-tabs .e-n-tab-title[aria-selected=true],
+.ap-tabs [data-touch-mode=false] .e-n-tab-title[aria-selected=false]:hover { color: #fff; background-color: #61CE70; }
+
+@media (max-width: 767px) {
+  .ap-tabs .e-n-tabs { gap: 0; }
+  .ap-tabs .e-n-tabs-heading, .ap-tabs .e-n-tabs-content { display: contents; }
+  .ap-tabs .e-n-tab-title, .ap-tabs .e-n-tabs-content > .ap-tabs__panel { order: var(--n-tabs-title-order); }
+  .ap-tabs .e-n-tab-title { width: auto; }
+  .ap-tabs .e-n-tab-title:not(:first-child) { margin-block-start: 10px; }
+  .ap-tabs .e-n-tab-title[aria-selected=true] { margin-block-end: 10px; }
+}

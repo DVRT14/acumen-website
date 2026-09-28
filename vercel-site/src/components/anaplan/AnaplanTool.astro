@@ -1,0 +1,60 @@
+---
+// Sections of "What is Anaplan?" (was Elementor page 3504); also the "Tool" tab of /anaplan-tabs/.
+interface Props { c: Record<string, any> }
+const { c } = Astro.props;
+---
+<section class="ap-sec">
+  <div class="ap-sec__inner ap-sec__inner--65">
+    <div class="post-hero__title"><h2 set:html={c.title} /></div>
+    <div class="ap-text" set:html={c.intro} />
+  </div>
+</section>
+
+<section class="ap-sec">
+  <div class="ap-sec__inner ap-sec__inner--50">
+    <div class="ap-quote" set:html={c.quote} />
+  </div>
+</section>
+
+<section class="ap-sec ap-sec--m30">
+  <div class="ap-sec__inner ap-sec__inner--50 ap-split">
+    <div class="ap-split__col ap-split__col--media ap-hide-mobile"><div class="ap-img"><img {...c.honeycomb} /></div></div>
+    <div class="ap-split__col ap-connected">
+      <div class="ap-heading-wrap"><h6 class="ap-heading" set:html={c.connectedTitle} /></div>
+      <div class="ap-text" set:html={c.connectedText} />
+    </div>
+  </div>
+</section>
+
+<section class="ap-band"><div class="ap-band__inner ap-img"><img {...c.bandLeft} /></div></section>
+
+<section class="ap-sec ap-sec--m30">
+  <div class="ap-sec__inner ap-sec__inner--50 ap-split">
+    <div class="ap-split__col"><div class="ap-text" set:html={c.useCasesText} /></div>
+    <div class="ap-split__col ap-split__col--media ap-split__col--last ap-hide-mobile"><div class="ap-img"><img {...c.useCasesImage} /></div></div>
+  </div>
+</section>
+
+<section class="ap-band"><div class="ap-band__inner ap-img"><img {...c.bandRight} /></div></section>
+
+<section class="ap-sec ap-sec--m30">
+  <div class="ap-sec__inner ap-sec__inner--50 ap-sec__inner--gap">
+    <div class="ap-diff-title"><div><h4 class="ap-heading" set:html={c.diffTitle} /></div></div>
+    <div class="ap-cards">
+      {c.cards.map(([title, text]) => (
+        <div class="ap-card">
+          <div class="ap-card__title"><h2 set:html={title} /></div>
+          <div class="ap-card__text" set:html={text} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="ap-band"><div class="ap-band__inner ap-img"><img {...c.banner} /></div></section>
+
+<section class="ap-sec ap-sec--m30">
+  <div class="ap-sec__inner ap-sec__inner--50 ap-split">
+    <div class="ap-text ap-outro" set:html={c.outro} />
+  </div>
+</section>

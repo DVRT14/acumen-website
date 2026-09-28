@@ -1,0 +1,70 @@
+---
+// Sections of "How is Anaplan positioned in the market?" (was Elementor page 3457); also the "Market" tab of /anaplan-tabs/.
+interface Props { c: Record<string, any> }
+const { c } = Astro.props;
+---
+<section class="ap-sec am-hero">
+  <div class="ap-sec__inner am-hero__inner">
+    <div class="post-hero__title"><h2 set:html={c.title} /></div>
+    <div class="ap-text" set:html={c.intro} />
+  </div>
+</section>
+
+<section class="ap-band am-pad-m"><div class="ap-band__inner"><div class="ap-img am-band-top"><img {...c.bandTop} /></div></div></section>
+
+<section class="ap-sec am-quad">
+  <div class="ap-sec__inner am-quad__inner">
+    <div class="am-quad__row">
+      <div class="ap-split__col ap-split__col--media ap-hide-mobile"><div class="ap-img ap-hide-mobile"><img {...c.quadrant} /></div></div>
+      <div class="ap-split__col am-quad__cards">
+        <div class="ap-cards am-cards">
+          {c.cards.map(([title, text]) => (
+            <div class="ap-card am-card">
+              <div class="ap-card__title"><h2 set:html={title} /></div>
+              <div class="ap-card__text" set:html={text} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+    <div class="am-note">
+      <div class="am-note__spacer ap-hide-mobile"></div>
+      <div class="am-note__text"><div class="ap-text" set:html={c.supplyChain} /></div>
+    </div>
+  </div>
+</section>
+
+<section class="ap-band am-band-left"><div class="ap-band__inner"><div class="ap-img am-band-left__img"><img {...c.bandLeft} /></div></div></section>
+
+<section class="ap-sec am-cmp">
+  <div class="ap-sec__inner am-cmp__inner">
+    <div class="am-cmp__row">
+      <div class="am-cmp__intro">
+        <div class="am-cmp__title"><div><h4 class="ap-heading" set:html={c.epmTitle} /></div></div>
+        <div class="ap-text" set:html={c.epmText} />
+      </div>
+      <div class="am-cmp__spacer"></div>
+    </div>
+    <div class="am-cmp__table"><div class="am-html" set:html={c.epmTable} /></div>
+  </div>
+</section>
+
+<section class="ap-band am-pad-m"><div class="ap-band__inner"><div class="ap-img"><img {...c.bandRight} /></div></div></section>
+
+<section class="ap-sec am-cmp">
+  <div class="ap-sec__inner am-cmp__inner">
+    <div class="am-cmp__row">
+      <div class="am-cmp__intro"><div class="ap-text" set:html={c.scmText} /></div>
+      <div class="am-cmp__spacer"></div>
+    </div>
+    <div class="am-cmp__table"><div class="am-html am-html--center-m" set:html={c.scmTable} /></div>
+  </div>
+</section>
+
+<section class="ap-band am-pad-m am-banner"><div class="ap-band__inner"><div class="ap-img am-banner__img"><img {...c.banner} /></div></div></section>
+
+<section class="ap-sec ap-sec--m30">
+  <div class="ap-sec__inner ap-sec__inner--50 ap-split">
+    <div class="ap-text ap-outro" set:html={c.outro} />
+  </div>
+</section>

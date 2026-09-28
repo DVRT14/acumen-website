@@ -5,8 +5,8 @@ import 'swiper/css/bundle';
 import PostCard from './PostCard.astro';
 import cards from '../../data/cards.json';
 
-interface Props { ids: string[] }
-const { ids } = Astro.props;
+interface Props { ids: string[]; info?: 'date' | 'terms' }
+const { ids, info } = Astro.props;
 const settings = {
   slides_to_show: '2', slides_to_show_tablet: '2', slides_to_show_mobile: '1', slides_to_scroll: '1',
   offset_sides: 'right', offset_width: { unit: 'px', size: 50, sizes: [] }, offset_width_mobile: { unit: 'px', size: 30, sizes: [] },
@@ -18,7 +18,7 @@ const settings = {
   <div class="swiper posts-carousel__swiper">
     <div class="swiper-wrapper">
       {ids.map((id, i) => cards[id] && (
-        <div class="swiper-slide posts-carousel__slide" role="group" aria-roledescription="slide"><PostCard card={cards[id]} /></div>
+        <div class="swiper-slide posts-carousel__slide" role="group" aria-roledescription="slide"><PostCard card={cards[id]} info={info} /></div>
       ))}
     </div>
   </div>

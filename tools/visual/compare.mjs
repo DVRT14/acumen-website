@@ -15,7 +15,21 @@ const reportDir = path.resolve(here, args.report || 'out/report');
 // allow.json: [{ "page": "home", "vw": 390, "tile": "tile-06", "reason": "…" }] — vw/tile optional.
 const allow = args.allow && fs.existsSync(path.resolve(here, args.allow))
   ? JSON.parse(fs.readFileSync(path.resolve(here, args.allow), 'utf8')) : [];
-const allowed = (page, vw, tile) => allow.find(a => a.page === page && (!a.vw || a.vw === +vw) && (!a.tile || a.tile === tile));
+//             { "text": "regex", "page": "regex", "reason": "…" } — ignores that text's layout and its rows
+//             of pixels (continuously animated things whose phase is not reproducible).
+const allowed = (page, vw, tile) => allow.find(a => !a.text && a.page === page && (!a.vw || a.vw === +vw) && (!a.tile || a.tile === tile));
+const animated = page => allow.filter(a => a.text && (!a.page || new RegExp(a.page).test(page))).map(a => new RegExp(a.text));
+function maskAnimated(page, la, lb, ia, ib) {
+  const res = animated(page);
+  if (!res.length) return [la, lb];
+  const hit = i => res.some(r => r.test(i.k.slice(2).replace(/#\d+$/, '')));
+  for (const i of [...la, ...lb].filter(hit)) {
+    for (let y = Math.max(0, Math.floor(i.y) - 8); y < Math.min(ia.height, Math.ceil(i.y + i.h) + 8); y++) { // + glyph overhang
+      ia.data.copy(ib.data, y * ia.width * 4, y * ia.width * 4, (y + 1) * ia.width * 4);
+    }
+  }
+  return [la.filter(i => !hit(i)), lb.filter(i => !hit(i))];
+}
 const TRACKERS = /googletagmanager|google-analytics|licdn|linkedin|leadinfo|doubleclick/;
 const readJSON = f => JSON.parse(fs.readFileSync(f, 'utf8'));
 
@@ -59,9 +73,10 @@ for (const page of fs.readdirSync(A).filter(d => fs.statSync(path.join(A, d)).is
       const ia = PNG.sync.read(fs.readFileSync(path.join(da, t.name + '.png')));
       const ib = PNG.sync.read(fs.readFileSync(fb));
       if (ia.width !== ib.width || ia.height !== ib.height) { tiles.push({ t: t.name, msg: 'size differs' }); continue; }
+      const [la, lb] = maskAnimated(page, readJSON(path.join(da, t.name + '.json')), readJSON(path.join(db, t.name + '.json')), ia, ib);
       const diff = new PNG({ width: ia.width, height: ia.height });
       const n = pixelmatch(ia.data, ib.data, diff.data, ia.width, ia.height, { threshold: 0.1 });
-      const lay = layoutDiff(readJSON(path.join(da, t.name + '.json')), readJSON(path.join(db, t.name + '.json')));
+      const lay = layoutDiff(la, lb);
       if (!n && !lay.length) continue;
       const id = `${page}_${vw}_${t.name}`;
       fs.copyFileSync(path.join(da, t.name + '.png'), path.join(reportDir, id + '_a.png'));

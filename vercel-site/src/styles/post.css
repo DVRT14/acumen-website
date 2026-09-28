@@ -1,8 +1,9 @@
 /* Knowledge post layout. Values reproduce the old single-post template (Elementor 996). */
 .post { overflow: hidden; }
 
-/* The old template's text blocks spaced paragraphs like this, page-wide. */
-p + p { margin-top: 40px; }
+/* Templates 996 and 1047 spaced paragraphs like this, page-wide (body class `p-spaced`); the
+   whitepaper templates did not. :where keeps the old selector's specificity. */
+:where(.p-spaced) p + p { margin-top: 40px; }
 
 /* Boxed section: full-width band, centred 1180px column. */
 .post-sec { position: relative; display: flex; flex-direction: column; padding: 0 50px; }
@@ -69,7 +70,7 @@ p + p { margin-top: 40px; }
 
 /* Two-column text sections (left column intentionally empty) */
 .post-split__inner { gap: 30px; padding: 50px 0; }
-.post-split__aside, .post-split__main { position: relative; display: flex; flex-direction: column; width: 50%; }
+.post-split__aside, .post-split__main { position: relative; display: flex; flex-direction: column; width: 50%; min-width: 0; }
 .post-parallax { position: relative; text-align: center; }
 .post-parallax__layer { margin-top: 190px; transition: transform var(--e-transform-transition-duration, .4s); }
 .post-author { position: relative; margin-bottom: 27px; font-size: 13px; font-weight: 400; line-height: 15px; letter-spacing: 0.36em; }
@@ -138,7 +139,8 @@ p + p { margin-top: 40px; }
   letter-spacing: -0.03em;
   color: #fff;
 }
-.contact-card__action { position: relative; margin-top: 30px; text-align: left; }
+/* padding, not margin: the old widget box included this space, and fadeInUp moves by 100% of it */
+.contact-card__action { position: relative; padding-top: 30px; text-align: left; }
 .contact-card__button {
   display: inline-block;
   padding: 12px 24px;
@@ -261,7 +263,7 @@ p + p { margin-top: 40px; }
 }
 
 @media (max-width: 767px) {
-  p + p { margin-top: 25px; }
+  :where(.p-spaced) p + p { margin-top: 25px; }
   .post-sec { padding: 0 15px; }
   .post-sec__inner { flex-wrap: wrap; }
   .post-hero__inner { padding: 50px 0; }
@@ -283,13 +285,13 @@ p + p { margin-top: 40px; }
   .post-cta__title, .contact-card__title { font-size: 34px; line-height: 1.18em; }
   .contact-card { min-height: 302px; padding: 20px; border-radius: 30px; }
   .contact-card__title { text-align: center; }
-  .contact-card__action { margin-top: 20px; }
+  .contact-card__action { padding-top: 20px; }
   .contact-card__button { font-size: 16px; }
   .post-newsletter { padding: 0 15px; }
   .newsletter-card { gap: 35px; min-height: 540px; padding: 30px; }
   .newsletter-card__title { font-size: 40px; line-height: 1.05em; }
   .newsletter-card__form { padding: 0; }
-  .newsletter-card__form-inner { padding-top: 0; }
+  .newsletter-card__form-inner { max-width: 100%; padding-top: 0; }
   .nl-form__group, .nl-form__group--wide, .nl-form__group--submit { width: 100%; }
   .nl-form__group--submit { justify-content: center; }
   .nl-form .nl-form__button { flex-basis: auto; }

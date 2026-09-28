@@ -529,11 +529,11 @@ function shareButtons() {
 
 /* ---------- Lottie (hover trigger only — the only mode this site uses) ---------- */
 async function lotties() {
-  const widgets = $$('.elementor-widget-lottie');
+  const widgets = $$('.elementor-widget-lottie, [data-lottie]');
   if (!widgets.length) return;
   const { default: lottie } = await import('lottie-web/build/player/lottie_svg');
   widgets.forEach(w => {
-    const s = settingsOf(w), container = w.querySelector('.e-lottie__container'), holder = w.querySelector('.e-lottie__animation');
+    const s = w.dataset.lottie ? JSON.parse(w.dataset.lottie) : settingsOf(w), container = w.querySelector('.e-lottie__container'), holder = w.querySelector('.e-lottie__animation');
     if (!holder) return;
     if (container && !container.querySelector('.e-lottie__caption')) {
       const p = document.createElement('p'); p.className = 'e-lottie__caption'; container.append(p);
@@ -556,7 +556,7 @@ async function lotties() {
       total = anim.totalFrames;
       if (s.play_speed?.size) anim.setSpeed(s.play_speed.size);
       anim.goToAndStop(startFrame(), true);
-      const area = s.hover_area === 'container' ? w.closest('.e-con') : container;
+      const area = s.hover_area === 'container' ? w.closest('.e-con, .xcard') : container;
       area?.addEventListener('mouseenter', () => { direction = 'forward'; play(); });
       if (s.on_hover_out === 'reverse' || s.on_hover_out === 'pause') {
         area?.addEventListener('mouseleave', () => { if (s.on_hover_out === 'pause') anim.pause(); else { direction = 'backward'; play(); } });

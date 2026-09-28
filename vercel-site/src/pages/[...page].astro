@@ -1,0 +1,18 @@
+---
+// Pages that never had Elementor content (legal texts, careers, the expertise archive): their old HTML
+// between header and footer. Content: src/content/pages/*.json (file name = path, "~" = "/").
+import Base from '../layouts/Base.astro';
+import '../styles/wp-content.css';
+
+export function getStaticPaths() {
+  const pages = import.meta.glob('../content/pages/*.json', { eager: true, import: 'default' });
+  return Object.entries(pages).map(([file, page]) => ({
+    params: { page: file.split('/').pop().replace(/\.json$/, '').replaceAll('~', '/') },
+    props: { page },
+  }));
+}
+const { page } = Astro.props;
+---
+<Base seo={page.seo} bodyClass={page.bodyClass}>
+  <Fragment set:html={page.html} />
+</Base>

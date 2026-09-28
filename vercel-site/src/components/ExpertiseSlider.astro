@@ -1,0 +1,32 @@
+---
+// "Our Expertise" slider (was JetEngine listing 2137 in a slick carousel). elementor.js builds the slick
+// DOM from data-slider_options; the lottie shape plays on hover.
+import '../styles/expertise-slider.css';
+import cards from '../data/expertise-cards.json';
+
+const options = { speed: 500, infinite: true, slidesToShow: { desktop: 3, tablet: 3, mobile: 2 } };
+const lottie = JSON.stringify({
+  trigger: 'on_hover', hover_area: 'container', on_hover_out: 'reverse', renderer: 'svg',
+  play_speed: { size: 1.3 }, start_point: { size: 0 }, end_point: { size: 50 },
+  source_external_url: { url: '/wp-content/uploads/2024/05/Athens-Grey-2.json' },
+});
+const arrow = '<svg xmlns="http://www.w3.org/2000/svg" width="46.819" height="46.819" viewBox="0 0 46.819 46.819"><path d="M5.838,24.92l19.7,19.7-2.127,2.2L0,23.409,23.409,0l2.128,2.2L5.838,21.9H46.819V24.92Z" transform="translate(46.819 46.819) rotate(180)"></path></svg>';
+---
+<div class="xslider animated-fast" data-animate="fadeIn" data-animate-delay="500">
+  <div class="jet-listing-grid__slider" data-slider_options={JSON.stringify(options)}>
+    <div class="jet-listing-grid__items xslider__items">
+      {cards.map(card => (
+        <div class="jet-listing-grid__item xslider__item">
+          <a class="xcard" href={card.href} style={`--xcard-bg:${card.bg}`}>
+            <div class="xcard__lottie" data-lottie={lottie}><div><div class="e-lottie__container"><div class="e-lottie__animation"></div></div></div></div>
+            <div class="xcard__arrow video-arrow"><div class="xcard__arrow-inner"><span class="xcard__icon" set:html={arrow} /></div></div>
+            <div class="xcard__contents">
+              <div class="xcard__title"><h3 set:html={card.title} /></div>
+              <div class="xcard__excerpt" set:html={card.excerpt} />
+            </div>
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>

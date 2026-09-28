@@ -1,0 +1,4 @@
+[
+ { "text": "•$", "reason": "Marquee phase: the old script measured the text before the web font loaded (wrong loop distance); the rebuild measures after document.fonts.ready." },
+ { "text": "^(Say hello|Whitepaper [A-Z]+)$", "reason": "Scroll-scrubbed CTA word: ScrollTrigger start/end are measured after init instead of at window load; a few px apart mid-scroll, identical at rest." }
+]

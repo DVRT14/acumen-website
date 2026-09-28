@@ -9,8 +9,8 @@ Goal: same site, same pixels, same motion — without jQuery, Elementor, WordPre
 |---|---|
 | 0 Harness | Done. Deterministic (paused fake clock, seeded `Math.random`, one browser per worker): 0 diffs in 238 tiles between two runs of the flakiest pages. |
 | 2 Astro (done before 1, so the JS swap happens in one place) | Done. Build output was byte-identical to the old static site. |
-| 1 JS swap | Done in code (`src/scripts/`). Full 55 × 8 gate run pending. |
-| 3 Elementor markup/CSS | Started: 3a dead WordPress CSS/head links removed. |
+| 1 JS swap | Done (`src/scripts/`). Full 55 × 8 gate: remaining diffs are animation phase/timing (see accepted list) and the one-off pages still to rebuild. |
+| 3 Elementor markup/CSS | In progress. Done: header, footer, consent banner, knowledge posts (template 996, 23 pages), expertise pages (template 1047, 7 pages, incl. the expertise slider). Left: whitepaper variants and the one-off pages. |
 | 4 Cleanup | — |
 
 ### Tooling (in `tools/`)
@@ -29,6 +29,10 @@ Goal: same site, same pixels, same motion — without jQuery, Elementor, WordPre
   load only after consent (no third-party requests by default).
 - 23 posts: broken `<img>` with body text as `src` removed (was invisible anyway).
 - Forms submit to the stub endpoint and show Elementor's success/error message.
+- Marquees measure their text after the web fonts load (the old script measured the fallback font,
+  so the loop distance was wrong); their scroll phase differs. Allowed in `tools/visual/allow.json`.
+- ScrollTrigger is refreshed once after all handlers ran (the old scripts relied on the window-load
+  refresh). Scrubbed headings ("Say hello") can be a few px apart mid-scroll; identical at rest.
 
 ## 1. What's there today (measured)
 

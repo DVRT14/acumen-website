@@ -1,0 +1,90 @@
+---
+// Expertise pages built on the old single-expertise template (1047). Content: src/content/expertise/*.json
+// (extracted from the old pages by tools/extract_posts.py). Shares its section styles with the posts.
+import Base from '../../layouts/Base.astro';
+import ExpertiseSlider from '../../components/ExpertiseSlider.astro';
+import PostsCarousel from '../../components/post/PostsCarousel.astro';
+import ContactCta from '../../components/cta/ContactCta.astro';
+import '../../styles/post.css';
+import '../../styles/post-card.css';
+import '../../styles/expertise.css';
+
+export function getStaticPaths() {
+  const pages = import.meta.glob('../../content/expertise/*.json', { eager: true, import: 'default' });
+  return Object.entries(pages).map(([file, page]) => ({
+    params: { slug: file.split('/').pop().replace(/\.json$/, '') },
+    props: { page },
+  }));
+}
+const { page } = Astro.props;
+---
+<Base seo={page.seo} bodyClass={`${page.bodyClass} p-spaced`}>
+  <article class="post xpage">
+    <section class="xsec">
+      <div class="post-hero__title"><h2>Our Expertise</h2></div>
+      <div class="xsec__box"><div class="xsec__inner"><ExpertiseSlider /></div></div>
+    </section>
+
+    <section class="post-sec post-hero" id="start">
+      <div class="post-sec__inner post-hero__inner">
+        <div class="post-hero__title"><h2 set:html={page.title} /></div>
+        <div class="post-hero__lead" set:html={page.content} />
+      </div>
+    </section>
+
+    <section class="post-banner" style={`background-image:url("${page.bannerImage}")`}>
+      <div class="post-banner__marquee marqueee" wb-data="marquee" duration="20" direction="left">
+        <div class="marquee-content"><h2 class="xmarquee__title" set:html={page.marquee} /></div>
+      </div>
+    </section>
+
+    <section class="post-sec post-split post-split--intro">
+      <div class="post-sec__inner post-split__inner">
+        <div class="post-split__aside">
+          <div class="post-parallax" data-parallax="2"><div class="post-parallax__layer"><img {...page.authorImage} /></div></div>
+        </div>
+        <div class="post-split__main">
+          <div class="post-author" set:html={page.author} />
+          <h2 class="post-heading" set:html={page.introTitle} />
+          <div class="post-text" set:html={page.introText} />
+        </div>
+      </div>
+    </section>
+
+    <section class="post-sec post-photo" style={`background-image:url("${page.photoImage}")`}>
+      <div class="post-sec__inner post-photo__inner"></div>
+    </section>
+
+    <section class="post-sec post-split post-split--features">
+      <div class="post-sec__inner post-split__inner">
+        <div class="post-split__aside post-split__aside--wide"></div>
+        <div class="post-split__main">
+          <h2 class="post-heading" set:html={page.featuresTitle} />
+          <div class="post-text" set:html={page.featuresText} />
+        </div>
+      </div>
+    </section>
+
+    <section class="post-sec post-quote">
+      <div class="post-sec__inner post-quote__inner">
+        <div class="post-quote__text" set:html={page.quote} />
+      </div>
+    </section>
+
+    <section class="post-sec post-split post-split--conclusion">
+      <div class="post-sec__inner post-split__inner">
+        <div class="post-split__aside post-split__aside--wide"></div>
+        <div class="post-split__main">
+          <h2 class="post-heading" set:html={page.conclusionTitle} />
+          <div class="post-text" set:html={page.conclusionText} />
+        </div>
+      </div>
+    </section>
+
+    <ContactCta hello="Say hello" image={page.contactImage} title={page.contactTitle} button={page.contactButton} />
+
+    <section class="post-related xrelated">
+      <div class="post-related__band"><div class="post-related__inner"><PostsCarousel ids={page.related} info="terms" /></div></div>
+    </section>
+  </article>
+</Base>

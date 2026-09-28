@@ -1,0 +1,24 @@
+/* Scroll-scrubbed word + contact card (templates 1047 and the whitepapers). */
+.xcta { overflow: hidden; }
+.xcta__inner { flex-direction: column; padding: 50px 0; }
+.xcta__hello { position: relative; display: flex; flex-direction: column; width: 100%; }
+.xcta__hello-title { position: relative; z-index: -1; flex-shrink: 0; white-space: nowrap; }
+.xcta__hello-title h2 {
+  margin: 0 0 -21px;
+  font-family: "Atype Display", Sans-serif;
+  font-size: 39vw;
+  font-weight: 400;
+  line-height: .6em;
+  letter-spacing: -0.04em;
+  color: #EDF1F4;
+}
+.xcta .contact-card { border-radius: 32px; }
+
+@media (max-width: 1024px) {
+  .xcta__hello-title h2 { font-size: 50vw; }
+  .xcta .contact-card { border-radius: 100px; }
+}
+
+@media (max-width: 767px) {
+  .xcta .contact-card { border-radius: 30px; }
+}

@@ -2,7 +2,12 @@
 
 Writes
   vercel-site/src/data/cards.json            post cards (as shown in the "related" carousels), by post id
-  vercel-site/src/content/knowledge/*.json   fields of every post that used single-post template 996
+  vercel-site/src/content/knowledge/*.json   fields of every post that used single-post template 996, and
+                                             of the whitepaper posts (templates 3311/3314/3537/3590/3625)
+  vercel-site/src/content/expertise/*.json   fields of every expertise page (template 1047)
+  vercel-site/src/data/expertise-cards.json  the "Our Expertise" slider cards (JetEngine listing 2137)
+  vercel-site/src/content/pages/*.json       pages without Elementor content (legal, careers, the
+                                             expertise archive): their HTML between header and footer
 Run from the repo root: python tools/extract_posts.py
 """
 import glob, html, json, os, re
@@ -70,7 +75,7 @@ def seo_head(src):
 
 def cards_from(src):
     out = {}
-    for m in re.finditer(r'<div data-elementor-type="loop-item" data-elementor-id="1145"', src):
+    for m in re.finditer(r'<div data-elementor-type="loop-item" data-elementor-id="(?:1145|1441)"', src):
         item = element(src, m.start())
         pid = re.search(r'e-loop-item-(\d+)', item).group(1)
         a = re.search(r'<a class="[^"]*postItem[^"]*"[^>]*href="([^"]*)"', item)
@@ -78,8 +83,9 @@ def cards_from(src):
         excerpt = re.search(r'postItem__excerpt.*?<div class="elementor-widget-container">(.*?)</div>', item, re.S)
         out[pid] = {
             'href': a.group(1),
-            'title': inner(first(item, r'<h1 class="elementor-heading-title')).strip(),
-            'date': re.search(r'<time>(.*?)</time>', item).group(1),
+            'title': inner(first(item, r'<h\d class="elementor-heading-title')).strip(),
+            'date': (re.search(r'<time>(.*?)</time>', item) or [None, None])[1],
+            'terms': (lambda t: inner(t).strip() if t else None)(first(item, r'<span class="elementor-post-info__terms-list">')),
             'excerpt': excerpt.group(1).strip() if excerpt else None,
             'image': img_attrs(img.group(0)) if img else None,
         }
@@ -118,11 +124,104 @@ def post_fields(src):
         'bannerImage': bg.get('59ffa65'),
         'photoImage': bg.get('a08f239'),
         'related': re.findall(r'e-loop-item-(\d+) post-', carousel),
+        'appendix': appendix(src, '996'),
     }
+
+
+def appendix(src, template):
+    """Hand-written HTML placed after the template (e.g. an FAQ section + its JSON-LD); None if none."""
+    m = re.search(rf'<div data-elementor-type="single-post" data-elementor-id="{template}"', src)
+    end = m.start() + len(element(src, m.start()))
+    footer = src.find('data-elementor-type="footer"', end)
+    return src[end:src.rfind('<', 0, footer)].strip() or None
+
+
+def expertise_fields(src):
+    bg = dict(re.findall(r'elementor-element-(1431f4ef|2f20deee):not\(\.elementor-motion-effects-element-type-background\), [^{]*\{background-image:url\("([^"]*)"\)', src))
+    img = lambda data_id: img_attrs(re.search(r'<img [^>]*>', by_id(src, data_id)).group(0))
+    button = by_id(src, 'c3b8981')
+    return {
+        'title': heading(src, '00865f1'),
+        'content': text_editor(src, 'e2c3888'),
+        'marquee': heading(src, '1bab047d'),
+        'bannerImage': bg['1431f4ef'],
+        'authorImage': img('3a7936c1'),
+        'author': heading(src, '617d945f'),
+        'introTitle': heading(src, '14e6008d'),
+        'introText': text_editor(src, '6a2c749f'),
+        'featuresTitle': heading(src, '15f2af36'),
+        'featuresText': text_editor(src, '2683c6cd'),
+        'photoImage': bg['2f20deee'],
+        'quote': text_editor(src, '4b9814dc'),
+        'conclusionTitle': heading(src, '4f36a8e1'),
+        'conclusionText': text_editor(src, '18a73961'),
+        'contactImage': img('4aa7306'),
+        'contactTitle': heading(src, '7e1d58d6'),
+        'contactButton': {
+            'label': inner(first(button, r'<span class="elementor-button-text')).strip(),
+            'href': re.search(r'<a [^>]*href="([^"]*)"', button).group(1),
+        },
+        'related': re.findall(r'e-loop-item-(\d+) post-', by_id(src, '84c593f')),
+    }
+
+
+def expertise_cards(src):
+    out = []
+    for m in re.finditer(r'<div class="jet-listing-grid__item jet-listing-dynamic-post-(\d+)"', src):
+        item = element(src, m.start())
+        out.append({
+            'href': re.search(r'<a [^>]*href="([^"]*)"', item).group(1),
+            'title': inner(first(item, r'<h\d class="elementor-heading-title')).strip(),
+            'excerpt': inner(first(first(item, r'<div class="[^"]*postItem__excerpt'), r'<div class="elementor-widget-container')).strip(),
+            'bg': re.search(rf'jet-listing-dynamic-post-{m.group(1)} [^{{]*\{{background-color:([^;]+);', src).group(1),
+        })
+    return out
+
+
+WHITEPAPER_TEMPLATES = ('3311', '3314', '3537', '3590', '3625')
+
+
+def whitepaper_fields(src, template):
+    """The five whitepaper templates are copies of one layout (same CSS once ids are normalised), so
+    widgets are addressed by their position in the document."""
+    m = re.search(rf'<div data-elementor-type="single-post" data-elementor-id="{template}"', src)
+    doc = element(src, m.start())
+    ids = list(dict.fromkeys(re.findall(r'data-id="([0-9a-f]+)"', doc.split('data-elementor-type="loop-item"')[0])))
+    form = by_id(src, ids[11])
+    button = by_id(src, ids[18])
+    return {
+        'template': 'whitepaper',
+        'title': heading(src, ids[1]),
+        'lead': text_editor(src, ids[2]),
+        'downloadTitle': heading(src, ids[7]),
+        'downloadText': text_editor(src, ids[8]),
+        'form': {
+            'name': html.unescape(re.search(r'<form [^>]*name="([^"]*)"', form).group(1)),
+            **{k: html.unescape(v) for k, v in re.findall(r'<input type="hidden" name="(\w+)" value="([^"]*)"', form)},
+        },
+        'hello': heading(src, ids[14]),
+        'contactImage': img_attrs(re.search(r'<img [^>]*>', by_id(src, ids[16])).group(0)),
+        'contactTitle': heading(src, ids[17]),
+        'contactButton': {
+            'label': inner(first(button, r'<span class="elementor-button-text')).strip(),
+            'href': re.search(r'<a [^>]*href="([^"]*)"', button).group(1),
+        },
+        'related': re.findall(r'e-loop-item-(\d+) post-', by_id(src, ids[21])),
+        'appendix': appendix(src, template),
+    }
+
+
+def plain_body(src):
+    header = re.search(r'<\w+ data-elementor-type="header"', src)
+    end = header.start() + len(element(src, header.start()))
+    footer = src.find('data-elementor-type="footer"', end)
+    return src[end:src.rfind('<', 0, footer)].strip()
 
 
 cards = {}
 posts = {}
+plain = {}
+expertise = {}
 for f in sorted(glob.glob(os.path.join(LEGACY, '*.html'))):
     src = open(f, encoding='utf8').read()
     for pid, card in cards_from(src).items():
@@ -132,16 +231,30 @@ for f in sorted(glob.glob(os.path.join(LEGACY, '*.html'))):
         slug = name.split('~', 1)[1]
         body_class = re.search(r'<body[^>]*class="([^"]*)"', src).group(1)
         posts[slug] = {'seo': seo_head(src), 'bodyClass': body_class, **post_fields(src)}
+    if set(re.findall(r'data-elementor-type="([\w-]+)"', src)) <= {'header', 'footer'}:
+        body_class = re.search(r'<body[^>]*class="([^"]*)"', src).group(1)
+        plain[name] = {'seo': seo_head(src), 'bodyClass': body_class, 'html': plain_body(src)}
+    wp = re.search(r'data-elementor-type="single-post" data-elementor-id="(\d+)"', src)
+    if wp and wp.group(1) in WHITEPAPER_TEMPLATES:
+        body_class = re.search(r'<body[^>]*class="([^"]*)"', src).group(1)
+        posts[name.split('~', 1)[1]] = {'seo': seo_head(src), 'bodyClass': body_class, **whitepaper_fields(src, wp.group(1))}
+    if 'data-elementor-type="single-post" data-elementor-id="1047"' in src:
+        body_class = re.search(r'<body[^>]*class="([^"]*)"', src).group(1)
+        slider = expertise_cards(by_id(src, 'f06ec46'))
+        expertise[name.split('~', 1)[1]] = {'seo': seo_head(src), 'bodyClass': body_class, **expertise_fields(src)}
 
 os.makedirs(os.path.join(ROOT, 'src', 'data'), exist_ok=True)
 with open(os.path.join(ROOT, 'src', 'data', 'cards.json'), 'w', encoding='utf8') as fh:
     json.dump(cards, fh, ensure_ascii=False, indent=1)
-out = os.path.join(ROOT, 'src', 'content', 'knowledge')
-os.makedirs(out, exist_ok=True)
-for slug, data in posts.items():
-    with open(os.path.join(out, slug + '.json'), 'w', encoding='utf8') as fh:
-        json.dump(data, fh, ensure_ascii=False, indent=1)
-print(f'{len(cards)} cards, {len(posts)} posts')
-for slug, data in posts.items():
-    missing = [k for k, v in data.items() if v in (None, '', [])]
+with open(os.path.join(ROOT, 'src', 'data', 'expertise-cards.json'), 'w', encoding='utf8') as fh:
+    json.dump(slider, fh, ensure_ascii=False, indent=1)
+for kind, pages in (('knowledge', posts), ('expertise', expertise), ('pages', plain)):
+    out = os.path.join(ROOT, 'src', 'content', kind)
+    os.makedirs(out, exist_ok=True)
+    for slug, data in pages.items():
+        with open(os.path.join(out, slug + '.json'), 'w', encoding='utf8') as fh:
+            json.dump(data, fh, ensure_ascii=False, indent=1)
+print(f'{len(cards)} cards, {len(posts)} posts, {len(expertise)} expertise pages')
+for slug, data in {**posts, **expertise}.items():
+    missing = [k for k, v in data.items() if v in (None, '', []) and k != 'appendix']
     if missing: print('  ', slug, 'missing:', missing)

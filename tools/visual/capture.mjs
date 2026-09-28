@@ -143,7 +143,14 @@ async function captureOne(browser, base, route, vw) {
       }
       const css = [...urls].map(u => { const i = new Image(); i.src = u; return i.decode().catch(() => {}); });
       const imgs = [...document.images].filter(i => i.complete && i.naturalWidth).map(i => i.decode().catch(() => {}));
-      const vids = [...document.querySelectorAll('video')].map(v => v.readyState >= 2 ? null : new Promise(r => { v.addEventListener('loadeddata', r, { once: true }); setTimeout(r, 2000); }));
+      // Autoplaying videos play without play(): pause and show frame 0 (seeked fires once it is ready).
+      const vids = [...document.querySelectorAll('video')].map(v => new Promise(r => {
+        v.pause();
+        if (v.readyState >= 2 && v.currentTime === 0) return r();
+        v.addEventListener('seeked', r, { once: true });
+        v.addEventListener('error', r, { once: true });
+        v.currentTime = 0;
+      }));
       return Promise.all([...css, ...imgs, ...vids]);
     });
     await page.waitForTimeout(50); // (rAF is faked by the paused clock, so wait in real time)

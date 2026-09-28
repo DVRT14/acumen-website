@@ -74,7 +74,8 @@ node compare.mjs --a out/baseline --b out/candidate --consent denied --allow all
 Each page is captured in viewport-sized tiles at 8 widths with a paused, deterministic clock;
 `compare.mjs` diffs pixels and text/image positions and writes `out/report/index.html`.
 Options: `--pages knowledge,contact` (substring filter), `--vp 1440,390`, `--workers 8`, `--resume`.
-Intentional differences go in `allow.json` with a reason.
+Intentional differences go in `allow.json` with a reason: per page/tile, or `{ "text": regex }` for a
+continuously animated text (its layout and its rows of pixels are then ignored).
 
 ## Known limitations
 

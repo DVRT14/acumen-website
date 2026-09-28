@@ -1,11 +1,12 @@
 ---
-// Knowledge post card (was loop item template 1145). Hover reveal handled by CSS + postItemHover.
-interface Props { card: { href: string; title: string; date: string; excerpt?: string | null; image?: Record<string, string> | null; bg?: string } }
-const { card } = Astro.props;
+// Knowledge post card (was loop item template 1145; 1441 showed the categories instead of the date).
+// Hover reveal handled by CSS + postItemHover.
+interface Props { card: { href: string; title: string; date: string; terms?: string | null; excerpt?: string | null; image?: Record<string, string> | null; bg?: string }; info?: 'date' | 'terms' }
+const { card, info = 'date' } = Astro.props;
 ---
 <a class="postItem" href={card.href} style={card.bg ? `background-color:${card.bg}` : undefined}>
   <div class="postItem__bg">{card.image && <img {...card.image} />}</div>
-  <div class="postItem__info"><time>{card.date}</time></div>
+  <div class="postItem__info">{info === 'terms' ? <span set:html={card.terms} /> : <time>{card.date}</time>}</div>
   <div class="postItem__contents">
     <div class="postItem__title"><h1 set:html={card.title} /></div>
     {card.excerpt && <div class="postItem__excerpt" set:html={card.excerpt} />}

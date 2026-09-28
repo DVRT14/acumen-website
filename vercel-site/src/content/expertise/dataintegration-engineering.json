@@ -1,0 +1,52 @@
+{
+ "seo": "<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />\n\n\t<!-- This site is optimized with the Yoast SEO plugin v22.8 - https://yoast.com/wordpress/plugins/seo/ -->\n\t<title>Data Integration&nbsp;&amp; Engineering - Acumen</title>\n\t<meta name=\"description\" content=\"Designing and building pipelines that transport data from various sources to a destination where it can be used effectively.\" />\n\t<link rel=\"canonical\" href=\"/expertise/dataintegration-engineering/\" />\n\t<meta property=\"og:locale\" content=\"nl_BE\" />\n\t<meta property=\"og:type\" content=\"article\" />\n\t<meta property=\"og:title\" content=\"Data Integration&nbsp;&amp; Engineering - Acumen\" />\n\t<meta property=\"og:description\" content=\"Designing and building pipelines that transport data from various sources to a destination where it can be used effectively.\" />\n\t<meta property=\"og:url\" content=\"/expertise/dataintegration-engineering/\" />\n\t<meta property=\"og:site_name\" content=\"Acumen\" />\n\t<meta property=\"article:modified_time\" content=\"2025-03-26T08:33:18+00:00\" />\n\t<meta name=\"twitter:card\" content=\"summary_large_image\" />\n\t<meta name=\"twitter:label1\" content=\"Geschatte leestijd\" />\n\t<meta name=\"twitter:data1\" content=\"1 minuut\" />\n\t<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"/expertise/dataintegration-engineering/\",\"url\":\"/expertise/dataintegration-engineering/\",\"name\":\"Data Integration&nbsp;& Engineering - Acumen\",\"isPartOf\":{\"@id\":\"/#website\"},\"datePublished\":\"2024-05-26T18:12:26+00:00\",\"dateModified\":\"2025-03-26T08:33:18+00:00\",\"description\":\"Designing and building pipelines that transport data from various sources to a destination where it can be used effectively.\",\"breadcrumb\":{\"@id\":\"/expertise/dataintegration-engineering/#breadcrumb\"},\"inLanguage\":\"nl-BE\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"/expertise/dataintegration-engineering/\"]}]},{\"@type\":\"BreadcrumbList\",\"@id\":\"/expertise/dataintegration-engineering/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Our Expertise\",\"item\":\"/expertise/\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"Data Integration&nbsp;&#038; Engineering\"}]},{\"@type\":\"WebSite\",\"@id\":\"/#website\",\"url\":\"/\",\"name\":\"Acumen\",\"description\":\"\",\"publisher\":{\"@id\":\"/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"/?s={search_term_string}\"},\"query-input\":\"required name=search_term_string\"}],\"inLanguage\":\"nl-BE\"},{\"@type\":\"Organization\",\"@id\":\"/#organization\",\"name\":\"Acumen\",\"url\":\"/\",\"logo\":{\"@type\":\"ImageObject\",\"inLanguage\":\"nl-BE\",\"@id\":\"/#/schema/logo/image/\",\"url\":\"/wp-content/uploads/2025/05/cropped-acumen-logo-mark-dark-green-rgb-934px@72ppi.webp\",\"contentUrl\":\"/wp-content/uploads/2025/05/cropped-acumen-logo-mark-dark-green-rgb-934px@72ppi.webp\",\"width\":693,\"height\":569,\"caption\":\"Acumen\"},\"image\":{\"@id\":\"/#/schema/logo/image/\"}}]}</script>\n\t<!-- / Yoast SEO plugin. -->\n<link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png\">\n<link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon-32x32.png\">\n<link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon-16x16.png\">\n<link rel=\"manifest\" href=\"/site.webmanifest\">\n<link rel=\"icon\" href=\"/wp-content/uploads/2024/05/Linkedin-kopie-150x150.webp\" sizes=\"32x32\" />\n<link rel=\"icon\" href=\"/wp-content/uploads/2024/05/Linkedin-kopie-300x300.webp\" sizes=\"192x192\" />\n<link rel=\"apple-touch-icon\" href=\"/wp-content/uploads/2024/05/Linkedin-kopie-300x300.webp\" />\n<meta name=\"msapplication-TileImage\" content=\"/wp-content/uploads/2024/05/Linkedin-kopie-300x300.webp\" />",
+ "bodyClass": "expertise-template-default single single-expertise postid-256 wp-custom-logo elementor-default elementor-kit-6 elementor-page-2616 elementor-page-1047",
+ "title": "Data Integration&nbsp;&#038; <br><span>Engineering</span>",
+ "content": "<p>Data engineering involves designing and building pipelines that transport data from various sources to a destination where it can be used effectively. These pipelines also clean, validate, and format the data, ensuring it is ready for analysis or machine learning. Data integration, a subset of data engineering, focuses on merging data from different sources into a single, unified view, making it easier to see the big picture.</p>",
+ "marquee": "Data Engineering &amp; Data Integration•",
+ "bannerImage": "/wp-content/uploads/2024/05/Yves_data-Integration-and-Engineering_2.webp",
+ "authorImage": {
+  "fetchpriority": "high",
+  "width": "800",
+  "height": "534",
+  "src": "/wp-content/uploads/2024/05/Tjomme_data-strategy-and-governance_2-1024x683.webp",
+  "alt": "Data Strategy & Governance",
+  "srcset": "/wp-content/uploads/2024/05/Tjomme_data-strategy-and-governance_2-1024x683.webp 1024w, /wp-content/uploads/2024/05/Tjomme_data-strategy-and-governance_2-300x200.webp 300w, /wp-content/uploads/2024/05/Tjomme_data-strategy-and-governance_2-768x512.webp 768w, /wp-content/uploads/2024/05/Tjomme_data-strategy-and-governance_2.webp 1268w",
+  "sizes": "(max-width: 800px) 100vw, 800px"
+ },
+ "author": "AUTHOR – Tjomme Vergauwen",
+ "introTitle": "<span>Increased efficiency</span> and high-level accuracy",
+ "introText": "These techniques address challenges associated with data scattered across different systems, stored in different formats, or using multiple standards. The primary benefits are increased efficiency and high-level accuracy. With robust data engineering and integration, we assure you that you can make better decisions more quickly and with fewer errors.<br>\n\nData engineering and data integration are both crucial fields in the realm of data management, but they serve different purposes and involve distinct processes.",
+ "featuresTitle": "Data <span>Engineering</span>",
+ "featuresText": "Data engineering focuses on preparing and making data usable for analytical purposes. It encompasses the entire lifecycle of data, from collection and storage to analysis and intelligent archiving. Data engineers are responsible for the architecture that supports data collection, storage, processing, and analysis. Their work enables end-users to combine data from various sources as needed, facilitating advanced analytics and informed decision-making.",
+ "photoImage": "/wp-content/uploads/2024/05/data-Integration-and-Engineering_3.webp",
+ "quote": "<span>Data integration </span> ensures that data is accurate and consistent, <br>ready for data engineers to build systems that <span> support data analysis and business intelligence workflows.</span>",
+ "conclusionTitle": "Data <span>Integration</span>",
+ "conclusionText": "Data integration, a subset of data engineering, focuses on collecting and combining data from various sources into a cohesive and usable format. This process involves ingesting, transforming, and integrating both structured and unstructured data, and then delivering it to a data warehouse. It utilizes ETL (Extract, Transform, Load) tools and methodologies to consolidate data from different sources into a single data warehouse. The goal is to create meaningful and valuable information from disparate data sources while ensuring data quality, governance, and compliance.",
+ "contactImage": {
+  "loading": "lazy",
+  "width": "1241",
+  "height": "751",
+  "src": "/wp-content/uploads/2024/05/Tjomme-1.webp",
+  "alt": "Tjomme",
+  "srcset": "/wp-content/uploads/2024/05/Tjomme-1.webp 1241w, /wp-content/uploads/2024/05/Tjomme-1-300x182.webp 300w, /wp-content/uploads/2024/05/Tjomme-1-1024x620.webp 1024w, /wp-content/uploads/2024/05/Tjomme-1-768x465.webp 768w",
+  "sizes": "(max-width: 1241px) 100vw, 1241px"
+ },
+ "contactTitle": "Tjomme has the answers",
+ "contactButton": {
+  "label": "Contact Tjomme",
+  "href": "mailto:info@acumen.be"
+ },
+ "related": [
+  "3891",
+  "3956",
+  "3810",
+  "3782",
+  "3755",
+  "3622",
+  "3589",
+  "3574",
+  "3555",
+  "3533"
+ ]
+}

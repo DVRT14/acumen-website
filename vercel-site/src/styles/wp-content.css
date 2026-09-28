@@ -1,0 +1,17 @@
+/* Plain WordPress content (legal texts, archive): the parts of Hello's theme.min.css these pages used.
+   (Its .site-header/.site-footer rules are left out: the site header/footer are components now.) */
+.page-content a { text-decoration: underline; }
+.post .entry-title a { text-decoration: none; }
+.alignright { float: right; margin-left: 1rem; }
+.alignleft { float: left; margin-right: 1rem; }
+.aligncenter { clear: both; display: block; margin-left: auto; margin-right: auto; }
+.screen-reader-text { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); word-wrap: normal !important; }
+
+.page-header .entry-title, body:not([class*=elementor-page-]) .site-main { width: 100%; margin-inline-start: auto; margin-inline-end: auto; }
+@media (max-width: 575px) {
+  .page-header .entry-title, body:not([class*=elementor-page-]) .site-main { padding-inline-start: 10px; padding-inline-end: 10px; }
+}
+@media (min-width: 576px) { .page-header .entry-title, body:not([class*=elementor-page-]) .site-main { max-width: 500px; } }
+@media (min-width: 768px) { .page-header .entry-title, body:not([class*=elementor-page-]) .site-main { max-width: 600px; } }
+@media (min-width: 992px) { .page-header .entry-title, body:not([class*=elementor-page-]) .site-main { max-width: 800px; } }
+@media (min-width: 1200px) { .page-header .entry-title, body:not([class*=elementor-page-]) .site-main { max-width: 1140px; } }

@@ -30,7 +30,7 @@ class P(HTMLParser):
             s.out.append('  ' * (len(s.stack) - s.depth) + f'{(wt or et).replace(".default","")} #{a.get("data-id")} {" ".join("."+c for c in cls)}'
                          + (f' hide:{",".join(hidden)}' if hidden else '') + (f' [{",".join(keys)}]' if keys else ''))
     def handle_endtag(s, tag):
-        if tag in VOID: return
+        if tag in VOID or tag not in s.stack: return  # stray end tags (e.g. "</span>" in titles)
         while s.stack:
             t = s.stack.pop()
             if s.depth is not None and len(s.stack) < s.depth: s.flush(); s.depth = None

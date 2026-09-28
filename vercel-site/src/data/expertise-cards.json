@@ -1,0 +1,38 @@
+[
+ {
+  "href": "/expertise/data-governance/",
+  "title": "Data Governance",
+  "excerpt": "Reduce risk and build trust in your data",
+  "bg": "#EDF1F4"
+ },
+ {
+  "href": "/expertise/data-strategy/",
+  "title": "Data Strategy",
+  "excerpt": "Boost decision-making and operational efficiency",
+  "bg": "#EDF1F4"
+ },
+ {
+  "href": "/expertise/dataintegration-engineering/",
+  "title": "Data Integration&nbsp;&#038; <br><span>Engineering</span>",
+  "excerpt": "Designing and building pipelines that transport data",
+  "bg": "#c8ef00"
+ },
+ {
+  "href": "/expertise/datavisualisation-reporting/",
+  "title": "Data Visualization <br><span>&#038;&nbsp;Reporting</span>",
+  "excerpt": "The visual representation of data using visual elements",
+  "bg": "#002921"
+ },
+ {
+  "href": "/expertise/datascience-ai/",
+  "title": "Data Science <br><span>&#038;&nbsp;AI</span>",
+  "excerpt": "Make your data work for you",
+  "bg": "#EDF1F4"
+ },
+ {
+  "href": "/expertise/data-planning-epm/",
+  "title": "Data Planning <br><span>&#038;&nbsp;EPM</span>",
+  "excerpt": "The process that translates an organization’s strategy into plans and execution",
+  "bg": "#EDF1F4"
+ }
+]

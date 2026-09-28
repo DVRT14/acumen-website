@@ -1,0 +1,20 @@
+---
+// Giant scroll-scrubbed word + contact card (expertise and whitepaper templates). Card base styles: post.css.
+import '../../styles/contact-cta.css';
+interface Props { hello: string; image: Record<string, string>; title: string; button: { href: string; label: string } }
+const { hello, image, title, button } = Astro.props;
+---
+<section class="post-sec xcta">
+  <div class="post-sec__inner xcta__inner">
+    <div class="xcta__hello">
+      <div class="xcta__hello-title textLeftOnScrollFlex" data-start="center bottom" data-end="top top" data-smooth="1.2" data-xpercent="-100"><h2 set:html={hello} /></div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-card__bg sectionBG"><img {...image} /></div>
+      <h2 class="contact-card__title" set:html={title} />
+      <div class="contact-card__action" data-animate="fadeInUp" data-animate-delay="500">
+        <a class="contact-card__button" href={button.href}><span set:html={button.label} /></a>
+      </div>
+    </div>
+  </div>
+</section>

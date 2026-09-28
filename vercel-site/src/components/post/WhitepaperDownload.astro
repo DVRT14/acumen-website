@@ -1,0 +1,46 @@
+---
+// "Download our white paper" band with the lead form (was an Elementor Pro form; posts to the forms stub).
+// Hidden fields match the old form so submissions stay identifiable.
+import '../../styles/whitepaper.css';
+interface Props { title: string; text: string; form: { name: string; post_id: string; form_id: string; referer_title: string; queried_id: string } }
+const { title, text, form } = Astro.props;
+const arrow = '<svg xmlns="http://www.w3.org/2000/svg" width="46.819" height="46.819" viewBox="0 0 46.819 46.819" aria-hidden="true"><path d="M5.838,24.92l19.7,19.7-2.127,2.2L0,23.409,23.409,0l2.128,2.2L5.838,21.9H46.819V24.92Z" transform="translate(46.819 46.819) rotate(180)"></path></svg>';
+---
+<section class="wp-dl">
+  <div class="wp-dl__inner">
+    <div class="wp-dl__intro">
+      <div class="wp-dl__box">
+        <div class="wp-dl__title animateFromBottom"><h2 set:html={title} /></div>
+        <div class="wp-dl__text animateFromBottom" set:html={text} />
+      </div>
+      <div class="wp-dl__spacer"></div>
+    </div>
+    <div class="wp-dl__form">
+      <form class="wp-form" method="post" name={form.name} data-form>
+        <input type="hidden" name="post_id" value={form.post_id} />
+        <input type="hidden" name="form_id" value={form.form_id} />
+        <input type="hidden" name="referer_title" value={form.referer_title} />
+        <input type="hidden" name="queried_id" value={form.queried_id} />
+        <div class="wp-form__fields">
+          <div class="wp-form__group wp-form__group--half form-field">
+            <label for="wp-first-name" class="wp-form__label">First name</label>
+            <input size="1" type="text" name="form_fields[name]" id="wp-first-name" class="wp-form__input" required />
+          </div>
+          <div class="wp-form__group wp-form__group--half form-field">
+            <label for="wp-last-name" class="wp-form__label">Last name</label>
+            <input size="1" type="text" name="form_fields[field_203132f]" id="wp-last-name" class="wp-form__input" required />
+          </div>
+          <div class="wp-form__group form-field">
+            <label for="wp-email" class="wp-form__label">Email</label>
+            <input size="1" type="email" name="form_fields[email]" id="wp-email" class="wp-form__input" required />
+          </div>
+          <div class="wp-form__group wp-form__group--submit form-field">
+            <button class="wp-form__button" type="submit">
+              <span class="wp-form__button-content"><span class="wp-form__button-icon" set:html={arrow} /><span>Download here</span></span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

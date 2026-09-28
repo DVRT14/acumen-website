@@ -245,9 +245,9 @@ function marqueeFunction() {
 }
 
 function postItemHover() {
-  if (!$('.postItem')) return;
-  const layout = () => $$('.postItem').forEach(item => {
-    const contents = item.querySelector('.postItem__contents'), title = item.querySelector('.postItem__title');
+  if (!$('.postItem, .xcard')) return;
+  const layout = () => $$('.postItem, .xcard').forEach(item => {
+    const contents = item.querySelector('.postItem__contents, .xcard__contents'), title = item.querySelector('.postItem__title, .xcard__title');
     if (!contents || !title) return;
     const cs = getComputedStyle(contents);
     const y = outerHeight(contents) - (outerHeight(title) + (parseInt(cs.paddingTop) + parseInt(cs.paddingBottom)));

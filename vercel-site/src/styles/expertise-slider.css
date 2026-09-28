@@ -1,0 +1,64 @@
+/* "Our Expertise" slider: JetEngine listing 2137 cards in the slick DOM built by elementor.js. */
+.xslider { position: relative; }
+.xslider .jet-listing-grid__slider { position: relative; }
+.xslider__items { display: flex; flex-wrap: wrap; width: calc(100% + 15px); margin: 0 -7.5px; }
+.xslider__items.slick-slider { position: relative; display: block !important; user-select: none; touch-action: pan-y; -webkit-tap-highlight-color: transparent; }
+.xslider .slick-list { position: relative; display: block; margin: 0; padding: 0; overflow: visible; }
+.xslider .slick-list, .xslider .slick-track { transform: translate3d(0, 0, 0); }
+.xslider .slick-track { position: relative; top: 0; left: 0; display: block; margin-left: auto; margin-right: auto; }
+.xslider .slick-track::before, .xslider .slick-track::after { content: ""; display: table; }
+.xslider .slick-track::after { clear: both; }
+.xslider__item { box-sizing: border-box; min-height: 1px; padding: 7.5px; }
+.xslider__items > .xslider__item { flex: 0 0 calc(100% / 3); max-width: calc(100% / 3); }
+.xslider .slick-slide { display: block; float: left; height: 100%; }
+
+.xcard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 30.93vw;
+  padding: 2.34vw;
+  overflow: hidden;
+  border-radius: 25px;
+  background-color: var(--xcard-bg);
+}
+.xcard__lottie { position: absolute; top: 0; right: 0; bottom: 0; left: 0; text-align: center; }
+.xcard__lottie .e-lottie__container { display: inline-block; width: 100%; }
+.xcard__lottie .e-lottie__container svg, .xcard__lottie .e-lottie__container svg * { transition: none !important; }
+
+.xcard__arrow { position: relative; align-self: flex-end; }
+.xcard:hover .xcard__arrow { animation: slide2 1s ease-in-out infinite; }
+.xcard__arrow-inner { display: flex; margin: -12px -12px 0 0; text-align: center; }
+.xcard__icon { display: inline-block; font-size: 6.2vw; line-height: 1; color: #002921; transition: all .3s; }
+.xcard__icon svg { position: relative; display: block; width: 1em; height: auto; fill: #002921; transform: rotate(-45deg); }
+
+.xcard__contents { position: relative; display: flex; flex-direction: column; overflow: hidden; transform: translateY(150%); transition: all .3s ease-in-out; }
+.xcard:hover .xcard__contents { transform: translateY(0) !important; }
+.xcard__title { position: relative; width: 73%; max-width: 73%; }
+.xcard__title h3 { margin: 0 0 .8vw; font-family: "Atype Display", Sans-serif; font-size: 2.3vw; font-weight: 400; line-height: 1.1em; color: #002921; }
+.xcard__excerpt { position: relative; width: 73%; max-width: 73%; font-size: 1.25vw; font-weight: 300; line-height: 1.375em; color: #002921; opacity: 0; }
+.xcard:hover .xcard__excerpt { opacity: 1; }
+
+@media (min-width: 768px) {
+  .xcard { background: transparent !important; }
+}
+@media (max-width: 1024px) {
+  .xcard { min-height: 27.23vw; }
+  .xcard__arrow-inner { margin: -5px -5px 0 0; }
+  .xcard__icon { font-size: 7.2vw; }
+  .xcard__excerpt { width: 68%; max-width: 68%; }
+}
+@media (max-width: 767px) {
+  .xslider__items { width: calc(100% + 10px); margin: 0 -5px; }
+  .xslider__item { padding: 5px; }
+  .xslider__items > .xslider__item { flex-basis: 50%; max-width: 50%; }
+  .xcard { flex-wrap: wrap; min-height: 54.5vw; padding: 4vw; border-radius: 15px; }
+  .xcard__lottie, .xcard__excerpt { display: none; }
+  .xcard__arrow-inner { margin: -2px -2px 0 0; }
+  .xcard__icon { font-size: 10.667vw; }
+  .xcard__contents { flex-wrap: nowrap; }
+  .xcard__title { width: 117px; max-width: 117px; }
+  .xcard__title h3 { font-size: 4.267vw; line-height: 1.188em; }
+  .xcard__excerpt { width: 47vw; max-width: 47vw; font-size: 3.7vw; }
+}

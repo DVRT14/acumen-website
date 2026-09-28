@@ -30,6 +30,7 @@ for (let i = 0; i <= +args.tile; i++) {
   await page.waitForTimeout(100);
   await advance(4000);
 }
+if (args.extra) await advance(+args.extra);
 if (args.expr) console.log(await page.evaluate(args.expr));
 if (args.out) await page.screenshot({ path: args.out });
 await browser.close(); server.close();

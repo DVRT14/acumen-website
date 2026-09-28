@@ -3,3 +3,4 @@ node_modules/
 start.bat
 .baseline/
 tools/visual/out/
+__pycache__/

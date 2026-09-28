@@ -73,7 +73,7 @@ node compare.mjs --a out/baseline --b out/candidate --consent denied --allow all
 `.baseline/` is a git worktree of the pre-rebuild site (`git worktree add .baseline 6251330`).
 Each page is captured in viewport-sized tiles at 8 widths with a paused, deterministic clock;
 `compare.mjs` diffs pixels and text/image positions and writes `out/report/index.html`.
-Options: `--pages knowledge,contact` (substring filter), `--vp 1440,390`, `--workers 8`, `--resume`.
+Options: `--pages knowledge,contact` (substring filter; `=/knowledge/` matches exactly), `--vp 1440,390`, `--workers 8`, `--resume`.
 Intentional differences go in `allow.json` with a reason: per page/tile, or `{ "text": regex }` for a
 continuously animated text (its layout and its rows of pixels are then ignored).
 

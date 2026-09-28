@@ -15,7 +15,7 @@ const viewports = String(args.vp || '1920,1440,1366,1025,1024,768,767,390').spli
 const workers = Number(args.workers || 8);
 const filter = args.pages ? String(args.pages).split(',') : null;
 const pages = JSON.parse(fs.readFileSync(path.join(here, '../../docs/pages.json'), 'utf8'))
-  .filter(p => !filter || filter.some(f => f === '/' ? p === '/' : p.includes(f)));
+  .filter(p => !filter || filter.some(f => f === '/' ? p === '/' : f.startsWith('=') ? p === f.slice(1) : p.includes(f))); // '=/knowledge/': exact
 
 // Nothing is hidden by default: GSAP, typed.js, lottie and the marquee run on the paused fake clock and
 // are deterministic, and videos are kept on their first frame (play() is stubbed below). Hiding

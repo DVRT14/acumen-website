@@ -1,0 +1,47 @@
+---
+// Knowledge overview (was Elementor page 143): three post carousels. The fourth section of the old page
+// ("Technical info") was hidden on every device and is left out.
+import Base from '../../layouts/Base.astro';
+import meta from '../../data/meta.json';
+import PostsCarousel from '../../components/post/PostsCarousel.astro';
+import '../../styles/post.css';
+import '../../styles/post-card.css';
+
+const sections = [
+  { title: 'Customer cases', ids: ['3755', '3574', '3555', '3275', '2858', '1187'] },
+  { title: 'Our insights', ids: ['3411', '3293', '3111', '3098', '3085', '3066', '3032', '3007', '2996', '2954'], hidden: true, clip: true },
+  { title: 'White papers', ids: ['3622', '3589', '3533', '3392', '3148', '2898'] },
+];
+---
+<Base {...meta.knowledge}>
+  {sections.map((s, i) => (
+    <section class={`kx kx--${i + 1}${s.clip ? ' kx--clip' : ''}`}>
+      <div class="kx__band">
+        <div class={`kx__title typingReveal${s.hidden ? ' kx__title--hidden' : ''}`}><h2>{s.title}</h2></div>
+        <div class="kx__box"><div class="post-related__inner"><PostsCarousel ids={s.ids} /></div></div>
+      </div>
+    </section>
+  ))}
+</Base>
+
+<style>
+  .kx { position: relative; display: flex; flex-direction: column; padding-top: 80px; }
+  .kx--clip { overflow: hidden; }
+  .kx__band { position: relative; display: flex; flex-direction: column; width: 100%; padding-left: 40px; overflow: hidden; }
+  .kx__title { position: relative; max-width: 100%; }
+  .kx__title--hidden { opacity: 0; visibility: hidden; }
+  .kx__title h2 { margin: 0 0 73px; font-family: "Atype Display", Sans-serif; font-size: 82px; font-weight: 400; text-transform: none; line-height: 1.05em; letter-spacing: -0.04em; color: #002921; }
+  .kx__box { position: relative; display: flex; flex-direction: column; width: 100%; }
+  @media (max-width: 1024px) {
+    .kx { padding-top: 50px; }
+    .kx--2 { padding-top: 100px; }
+    .kx__title h2 { margin-bottom: 50px; font-size: 40px; }
+  }
+  @media (max-width: 767px) {
+    .kx, .kx--3 { padding-top: 34px; }
+    .kx--2 { padding-top: 50px; }
+    .kx, .kx__band { flex-wrap: wrap; }
+    .kx__band { padding-left: 15px; }
+    .kx__title h2 { margin-bottom: 30px; }
+  }
+</style>

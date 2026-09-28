@@ -21,6 +21,19 @@ Goal: same site, same pixels, same motion — without jQuery, Elementor, WordPre
 - `rules.py` — authored Elementor CSS for given element ids, per media query (hover states etc.).
 - `outline.py` — container/widget tree of an Elementor document.
 
+### Reproducing Elementor layout (checklist for hand-written pages)
+
+- Containers are flex; children get `min-width: 0` (so text columns shrink) and `max-width: 100%`,
+  and containers default to `width: 100%`.
+- Below 768px every container gets `flex-wrap: wrap`; in a wrapping column the lines size to their
+  content, which is why the `width`/`max-width` rules above matter.
+- Boxed containers put the inline padding on the outer box and the block padding on the inner box
+  (percent paddings resolve against different widths).
+- Widget margins sit on the inner `.elementor-widget-container`: keep a wrapper where the box size
+  matters (entrance animations translate by 100% of the widget, scroll triggers use its height).
+- Per-template custom CSS (e.g. `p + p { margin-top: 40px }`, 25px on mobile) is page-wide; the
+  `p-spaced` body class opts a page in.
+
 ### Intentional differences (accepted)
 
 - Resize no longer kills every ScrollTrigger (`textLeftOnScroll*`); only their own triggers rebuild.

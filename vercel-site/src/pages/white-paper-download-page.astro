@@ -1,0 +1,35 @@
+---
+// White paper download page (was Elementor page 2628): the whitepaper layout with the posts carousel
+// on top. Content: src/content/one-off/white-paper-download-page.json.
+import Base from '../layouts/Base.astro';
+import meta from '../data/meta.json';
+import ShareButtons from '../components/post/ShareButtons.astro';
+import PostsCarousel from '../components/post/PostsCarousel.astro';
+import WhitepaperDownload from '../components/post/WhitepaperDownload.astro';
+import ContactCta from '../components/cta/ContactCta.astro';
+import c from '../content/one-off/white-paper-download-page.json';
+import '../styles/post.css';
+import '../styles/post-card.css';
+const m = meta['white-paper-download-page'];
+---
+<Base {...m}>
+  <article class="post">
+    <section class="post-related wpd-related">
+      <div class="post-related__band"><div class="post-related__inner"><PostsCarousel ids={c.related} info="terms" /></div></div>
+    </section>
+    <section class="post-sec post-hero" id="start">
+      <div class="post-sec__inner post-hero__inner">
+        <div class="post-hero__title"><h2 set:html={c.title} /></div>
+        <div class="post-hero__lead" set:html={c.lead} />
+        <ShareButtons />
+      </div>
+    </section>
+    <WhitepaperDownload title={c.downloadTitle} text={c.downloadText} form={c.form} fields={c.fields} />
+    <ContactCta hello={c.hello} image={c.contactImage} title={c.contactTitle} button={c.contactButton} />
+  </article>
+</Base>
+
+<style>
+  .post-related.wpd-related { padding-top: 40px; }
+  @media (max-width: 767px) { .post-related.wpd-related { padding: 95px 0 0; } }
+</style>

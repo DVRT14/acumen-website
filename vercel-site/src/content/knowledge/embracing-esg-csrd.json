@@ -13,6 +13,32 @@
   "referer_title": "Embracing ESG (& CSRD) - Acumen",
   "queried_id": "2898"
  },
+ "fields": [
+  {
+   "label": "First name",
+   "tag": "input",
+   "type": "text",
+   "name": "form_fields[name]",
+   "col": "50",
+   "required": true
+  },
+  {
+   "label": "Last name",
+   "tag": "input",
+   "type": "text",
+   "name": "form_fields[field_203132f]",
+   "col": "50",
+   "required": true
+  },
+  {
+   "label": "Email",
+   "tag": "input",
+   "type": "email",
+   "name": "form_fields[email]",
+   "col": "100",
+   "required": true
+  }
+ ],
  "hello": "Whitepaper ESG",
  "contactImage": {
   "fetchpriority": "high",

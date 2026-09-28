@@ -171,21 +171,27 @@
      "tag": "input",
      "type": "text",
      "name": "form_fields[name]",
-     "placeholder": "Naam"
+     "placeholder": "Naam",
+     "col": "100",
+     "required": true
     },
     {
      "label": "Email",
      "tag": "input",
      "type": "email",
      "name": "form_fields[email]",
-     "placeholder": "Email"
+     "placeholder": "Email",
+     "col": "100",
+     "required": true
     },
     {
      "label": "Bedrijf",
      "tag": "textarea",
      "name": "form_fields[message]",
      "placeholder": "Bedrijf",
-     "rows": "1"
+     "rows": "1",
+     "col": "100",
+     "required": true
     }
    ],
    "submit": "Download de whitepaper hier (NL/FR)!"

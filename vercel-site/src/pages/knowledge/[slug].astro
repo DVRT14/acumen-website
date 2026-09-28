@@ -34,7 +34,7 @@ const { post } = Astro.props;
 
     {post.template === 'whitepaper' ? (
       <Fragment>
-        <WhitepaperDownload title={post.downloadTitle} text={post.downloadText} form={post.form} />
+        <WhitepaperDownload title={post.downloadTitle} text={post.downloadText} form={post.form} fields={post.fields} />
         <ContactCta hello={post.hello} image={post.contactImage} title={post.contactTitle} button={post.contactButton} />
       </Fragment>
     ) : (

@@ -134,7 +134,7 @@ def post_fields(src):
 
 def appendix(src, template):
     """Hand-written HTML placed after the template (e.g. an FAQ section + its JSON-LD); None if none."""
-    m = re.search(rf'<div data-elementor-type="single-post" data-elementor-id="{template}"', src)
+    m = re.search(rf'<div data-elementor-type="[\w-]+" data-elementor-id="{template}"', src)
     end = m.start() + len(element(src, m.start()))
     footer = src.find('data-elementor-type="footer"', end)
     return src[end:src.rfind('<', 0, footer)].strip() or None
@@ -188,9 +188,12 @@ WHITEPAPER_TEMPLATES = ('3311', '3314', '3537', '3590', '3625')
 def whitepaper_fields(src, template):
     """The five whitepaper templates are copies of one layout (same CSS once ids are normalised), so
     widgets are addressed by their position in the document."""
-    m = re.search(rf'<div data-elementor-type="single-post" data-elementor-id="{template}"', src)
+    m = re.search(rf'<div data-elementor-type="[\w-]+" data-elementor-id="{template}"', src)
     doc = element(src, m.start())
-    ids = list(dict.fromkeys(re.findall(r'data-id="([0-9a-f]+)"', doc.split('data-elementor-type="loop-item"')[0])))
+    in_cards = {i for m in re.finditer(r'<div data-elementor-type="loop-item"', doc) for i in re.findall(r'data-id="([0-9a-f]+)"', element(doc, m.start()))}
+    ids = [i for i in dict.fromkeys(re.findall(r'data-id="([0-9a-f]+)"', doc)) if i not in in_cards]
+    if template == '2628':  # the white paper download page: same layout with the posts carousel moved to the top
+        ids = ids[3:] + ids[:3]
     form = by_id(src, ids[11])
     button = by_id(src, ids[18])
     return {
@@ -203,6 +206,7 @@ def whitepaper_fields(src, template):
             'name': html.unescape(re.search(r'<form [^>]*name="([^"]*)"', form).group(1)),
             **{k: html.unescape(v) for k, v in re.findall(r'<input type="hidden" name="(\w+)" value="([^"]*)"', form)},
         },
+        'fields': form_block(form)['fields'],
         'hello': heading(src, ids[14]),
         'contactImage': img_attrs(re.search(r'<img [^>]*>', by_id(src, ids[16])).group(0)),
         'contactTitle': heading(src, ids[17]),
@@ -321,10 +325,12 @@ ARTICLES = {
 def form_block(form):
     """An Elementor form as data: name, hidden fields, visible fields, submit label."""
     fields = []
-    for g in re.finditer(r'<label for="([^"]+)" class="elementor-field-label">\s*(.*?)\s*</label>\s*<(input|textarea)([^>]*)>', form, re.S):
-        attrs = dict(re.findall(r'([\w-]+)="([^"]*)"', g.group(4)))
-        fields.append({k: v for k, v in {'label': g.group(2), 'tag': g.group(3), 'type': attrs.get('type'), 'name': attrs['name'],
-                                         'placeholder': attrs.get('placeholder'), 'rows': attrs.get('rows')}.items() if v})
+    for g in re.finditer(r'<div class="([^"]*elementor-field-group[^"]*)">\s*<label for="([^"]+)" class="elementor-field-label">\s*(.*?)\s*</label>\s*<(input|textarea)([^>]*)>', form, re.S):
+        attrs = dict(re.findall(r'([\w-]+)="([^"]*)"', g.group(5)))
+        fields.append({k: v for k, v in {'label': g.group(3), 'tag': g.group(4), 'type': attrs.get('type'), 'name': attrs['name'],
+                                         'placeholder': attrs.get('placeholder'), 'rows': attrs.get('rows'),
+                                         'col': re.search(r'elementor-col-(\d+)', g.group(1)).group(1),
+                                         'required': 'required' in attrs or None}.items() if v})
     return {
         'name': html.unescape(re.search(r'<form [^>]*name="([^"]*)"', form).group(1)),
         'hidden': {k: html.unescape(v) for k, v in re.findall(r'<input type="hidden" name="(\w+)" value="([^"]*)"', form)},
@@ -389,6 +395,10 @@ for f in sorted(glob.glob(os.path.join(LEGACY, '*.html'))):
     vac = re.search(r'data-elementor-type="wp-page" data-elementor-id="(4122|4165)"', src)
     if vac:
         vacatures[name.split('~', 1)[1]] = {**meta[name], **vacature_fields(src, vac.group(1))}
+    if name == 'white-paper-download-page':
+        os.makedirs(os.path.join(ROOT, 'src', 'content', 'one-off'), exist_ok=True)
+        with open(os.path.join(ROOT, 'src', 'content', 'one-off', name + '.json'), 'w', encoding='utf8') as fh:
+            json.dump(whitepaper_fields(src, '2628'), fh, ensure_ascii=False, indent=1)
     wp = re.search(r'data-elementor-type="single-post" data-elementor-id="(\d+)"', src)
     if wp and wp.group(1) in WHITEPAPER_TEMPLATES:
         body_class = re.search(r'<body[^>]*class="([^"]*)"', src).group(1)

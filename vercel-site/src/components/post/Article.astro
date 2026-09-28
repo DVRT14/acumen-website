@@ -3,7 +3,7 @@
 // a lead form (posts to the forms stub) and a call-to-action button, in order. Styles by block
 // style name (see article.css).
 import '../../styles/article.css';
-interface Field { label: string; tag: string; type?: string; name: string; placeholder?: string; rows?: string }
+interface Field { label: string; tag: string; type?: string; name: string; placeholder?: string; rows?: string; required?: boolean }
 interface Block {
   k: string; id?: string; s?: string; tag?: string; html?: string; img?: Record<string, string>; h?: string; hm?: string; label?: string; href?: string;
   name?: string; hidden?: Record<string, string>; fields?: Field[]; submit?: string;
@@ -29,8 +29,8 @@ const { blocks } = Astro.props;
                   <div class="art-form__group form-field">
                     <label for={id} class="art-form__label">{f.label}</label>
                     {f.tag === 'textarea'
-                      ? <textarea class="art-form__input art-form__input--area" name={f.name} id={id} rows={f.rows} placeholder={f.placeholder} required></textarea>
-                      : <input size="1" type={f.type} name={f.name} id={id} class="art-form__input" placeholder={f.placeholder} required />}
+                      ? <textarea class="art-form__input art-form__input--area" name={f.name} id={id} rows={f.rows} placeholder={f.placeholder} required={f.required}></textarea>
+                      : <input size="1" type={f.type} name={f.name} id={id} class="art-form__input" placeholder={f.placeholder} required={f.required} />}
                   </div>
                 );
               })}

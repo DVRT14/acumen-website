@@ -261,7 +261,7 @@ function postItemHover() {
 
 function animateElements() {
   const tl = gsap.timeline();
-  const fields = $$('.elementor-field-group'), fromBottom = $$('.animateFromBottom');
+  const fields = $$('.elementor-field-group, .form-field'), fromBottom = $$('.animateFromBottom');
   if (fields.length) tl.to(fields, { opacity: 1, y: 0, stagger: 0.2, duration: 1, ease: 'power2.out' }, 'start');
   if (fromBottom.length) tl.to(fromBottom, { opacity: 1, y: 0, stagger: 0.2, duration: 1, ease: 'power2.out' }, 'start');
 }

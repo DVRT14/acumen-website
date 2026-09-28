@@ -1,5 +1,5 @@
 /* Site footer. Values reproduce the old Elementor footers (templates 3137 / 804). */
-.site-footer {
+.colophon {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -9,7 +9,7 @@
   background-color: #fff;
 }
 
-.site-footer__main {
+.colophon__main {
   position: relative;
   display: flex;
   gap: 20px;
@@ -17,12 +17,12 @@
   padding-bottom: 151px;
   border: 0 solid #BEBEBE;
 }
-.site-footer--home .site-footer__main { border-bottom-width: 1px; }
-.site-footer__brand, .site-footer__col { position: relative; display: flex; flex-direction: column; width: 50%; }
+.colophon--home .colophon__main { border-bottom-width: 1px; }
+.colophon__brand, .colophon__col { position: relative; display: flex; flex-direction: column; width: 50%; }
 
-.site-footer__logo { position: relative; text-align: left; }
-.site-footer__logo a { display: inline-block; }
-.site-footer__logo img { display: inline-block; width: 100%; max-width: 269px; vertical-align: middle; }
+.colophon__logo { position: relative; text-align: left; }
+.colophon__logo a { display: inline-block; }
+.colophon__logo img { display: inline-block; width: 100%; max-width: 269px; vertical-align: middle; }
 
 .footerMenu { position: relative; z-index: 2; margin: 0; padding: 0; list-style: none; }
 .footerMenu li { position: relative; display: block; margin: 0 0 14px; padding: 0; line-height: normal; }
@@ -50,7 +50,7 @@
 .footerSocial span { color: #002921; transition: color .3s; }
 .footerSocial li:hover span { color: #B9D0D0; }
 
-.site-footer__bottom {
+.colophon__bottom {
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -61,7 +61,7 @@
   border-top: 1px solid #BEBEBE;
   transition: all .5s ease-in-out;
 }
-.site-footer__legal {
+.colophon__legal {
   position: relative;
   font-size: 20px;
   font-weight: 300;
@@ -70,8 +70,8 @@
   opacity: .26;
   transition: all .3s ease-in-out;
 }
-.site-footer__legal:hover { opacity: 1; }
-.site-footer__legal a { color: inherit; }
+.colophon__legal:hover { opacity: 1; }
+.colophon__legal a { color: inherit; }
 
 /* Home: careers banner */
 .careers-banner {
@@ -106,10 +106,10 @@
 }
 
 @media (max-width: 1024px) {
-  .site-footer { padding-bottom: 20px; }
-  .site-footer__main { flex-wrap: wrap; gap: 0; padding-bottom: 45px; }
-  .site-footer__brand { width: 100%; padding-bottom: 50px; }
-  .site-footer__legal { font-size: 16px; }
+  .colophon { padding-bottom: 20px; }
+  .colophon__main { flex-wrap: wrap; gap: 0; padding-bottom: 45px; }
+  .colophon__brand { width: 100%; padding-bottom: 50px; }
+  .colophon__legal { font-size: 16px; }
   .careers-banner__bg { z-index: -1; }
   .careers-banner__kicker { font-size: 23px; }
   .careers-banner__title { font-size: 50px; }
@@ -117,10 +117,10 @@
 }
 
 @media (max-width: 767px) {
-  .site-footer { gap: 25px; padding: 50px 20px 10px; }
-  .site-footer__brand { padding-bottom: 58px; }
-  .site-footer__logo img { max-width: 137px; }
-  .site-footer__bottom { flex-wrap: wrap; align-items: center; gap: 10px; padding-top: 10px; }
+  .colophon { gap: 25px; padding: 50px 20px 10px; }
+  .colophon__brand { padding-bottom: 58px; }
+  .colophon__logo img { max-width: 137px; }
+  .colophon__bottom { flex-wrap: wrap; align-items: center; gap: 10px; padding-top: 10px; }
   .careers-banner { justify-content: flex-end; gap: 10px; min-height: 288px; padding: 25px; }
   .careers-banner__bg--wide { display: none; }
   .careers-banner__bg--mobile { display: block; }

@@ -1,0 +1,10 @@
+/* Entrance animations (as Elementor's): elements with data-animate start hidden; elementor.js adds
+   `animated <name>` once they scroll into view. */
+[data-animate]:not(.animated) { visibility: hidden; }
+.animated { animation-duration: 1.25s; }
+.animated.animated-fast { animation-duration: .75s; }
+@media (prefers-reduced-motion: reduce) { .animated { animation: none; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.fadeIn { animation-name: fadeIn; }
+@keyframes fadeInUp { from { opacity: 0; transform: translate3d(0, 100%, 0); } to { opacity: 1; transform: none; } }
+.fadeInUp { animation-name: fadeInUp; }

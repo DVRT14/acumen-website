@@ -8,7 +8,9 @@ import { parseLegacy, cutDiv, dropStyles } from '../lib/legacy.js';
 
 export function getStaticPaths() {
   const files = import.meta.glob('../legacy/*.html', { query: '?raw', import: 'default', eager: true });
-  return Object.entries(files).map(([file, html]) => {
+  // Pages that have been rebuilt as real Astro pages are served by those instead.
+  const rebuilt = Object.keys(import.meta.glob('../content/knowledge/*.json')).map(f => 'knowledge~' + f.split('/').pop().replace(/\.json$/, ''));
+  return Object.entries(files).filter(([file]) => !rebuilt.includes(file.split('/').pop().replace(/\.html$/, ''))).map(([file, html]) => {
     const name = file.split('/').pop().replace(/\.html$/, '');
     return { params: { slug: name === 'index' ? undefined : name.replaceAll('~', '/') }, props: { html } };
   });

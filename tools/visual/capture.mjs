@@ -17,12 +17,14 @@ const filter = args.pages ? String(args.pages).split(',') : null;
 const pages = JSON.parse(fs.readFileSync(path.join(here, '../../docs/pages.json'), 'utf8'))
   .filter(p => !filter || filter.some(f => f === '/' ? p === '/' : p.includes(f)));
 
-// Things that never stop moving. Motion is reviewed separately; here we only compare layout.
-// New markup should tag such elements with data-vr-mask.
-const MASK_SELECTOR = `video, [wb-data="marquee"], .typed, .typedContainer, .elementor-widget-lottie, .scrollingText,
-.sectionDataGroup__bgImg, .expand-section .bgImage, [data-vr-mask]`;
-const MASK_CSS = `${MASK_SELECTOR} { visibility: hidden !important; }
-.cky-consent-container, .cky-btn-revisit-wrapper, .cky-overlay, .cky-modal, [data-consent-ui] { display: none !important; }`;
+// Nothing is hidden by default: GSAP, typed.js, lottie and the marquee run on the paused fake clock and
+// are deterministic, and videos are kept on their first frame (play() is stubbed below). Hiding
+// elements changes compositing, and with it text anti-aliasing elsewhere. Opt out with data-vr-mask.
+const MASK_SELECTOR = `[data-vr-mask]`;
+const MASK_CSS = `${MASK_SELECTOR} { visibility: hidden !important; }`;
+// A stored "declined" choice (same cookie format old and new) keeps the consent banner closed on both
+// sides without hiding UI by CSS (display:none on fixed elements changes compositing/anti-aliasing).
+const CONSENT = 'consentid:harness,consent:yes,action:yes,necessary:yes,functional:no,analytics:no,performance:no,advertisement:no';
 
 const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.mjs': 'text/javascript',
   '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
@@ -96,6 +98,7 @@ async function captureOne(browser, base, route, vw) {
   fs.mkdirSync(dir, { recursive: true });
   const vh = vw >= 1024 ? 900 : vw >= 768 ? 1024 : 844;
   const ctx = await browser.newContext({ viewport: { width: vw, height: vh }, deviceScaleFactor: 1, reducedMotion: 'no-preference' });
+  await ctx.addCookies([{ name: 'cookieyes-consent', value: CONSENT, url: base }]);
   const page = await ctx.newPage();
   const report = { route, vw, vh, errors: [], failed: [], external: {}, tiles: [] };
   // Aborted third-party requests show up as ERR_FAILED console errors; local failures are tracked via responses.
@@ -114,9 +117,12 @@ async function captureOne(browser, base, route, vw) {
   await page.clock.install({ time: new Date('2026-01-01T00:00:00Z') });
   await page.clock.pauseAt(new Date('2026-01-01T00:00:01Z'));
   // Seeded Math.random (typed.js "humanizes" typing speed with it).
+  // Videos stay on their first frame (real-time playback would differ between runs).
+  await page.addInitScript(() => { HTMLMediaElement.prototype.play = function () { return Promise.resolve(); }; });
   await page.addInitScript(() => { let x = 42; Math.random = () => ((x = (x * 1664525 + 1013904223) >>> 0) / 4294967296); });
   await page.goto(base + route, { waitUntil: 'load' });
   await page.addStyleTag({ content: MASK_CSS });
+  if (args.eval) await page.evaluate(args.eval); // debugging: tweak the page before capturing
   // Let load-time animations (hero intro, scroll-to-#start) finish so they can't override the first tile.
   await advance(page, 4000);
   for (let i = 0, y = 0; ; i++, y += vh) {
@@ -129,7 +135,17 @@ async function captureOne(browser, base, route, vw) {
       if (Math.abs(at[0] - at[1]) < 0.5) break;
     }
     // Under load, large images may not be decoded/rastered yet; a blank frame can look "stable".
-    await page.evaluate(() => Promise.all([...document.images].filter(i => i.complete && i.naturalWidth).map(i => i.decode().catch(() => {}))));
+    await page.evaluate(() => {
+      const urls = new Set();
+      for (const el of document.querySelectorAll('*')) {
+        const bg = getComputedStyle(el).backgroundImage;
+        for (const m of bg.matchAll(/url\("([^"]+)"\)/g)) urls.add(m[1]);
+      }
+      const css = [...urls].map(u => { const i = new Image(); i.src = u; return i.decode().catch(() => {}); });
+      const imgs = [...document.images].filter(i => i.complete && i.naturalWidth).map(i => i.decode().catch(() => {}));
+      const vids = [...document.querySelectorAll('video')].map(v => v.readyState >= 2 ? null : new Promise(r => { v.addEventListener('loadeddata', r, { once: true }); setTimeout(r, 2000); }));
+      return Promise.all([...css, ...imgs, ...vids]);
+    });
     await page.waitForTimeout(50); // (rAF is faked by the paused clock, so wait in real time)
     const { png, stable } = await waitStable(page);
     const scrollY = await page.evaluate(() => scrollY);

@@ -1,0 +1,30 @@
+---
+// Page shell for rebuilt pages: SEO head (carried over from the old site), header, footer, consent.
+import '../styles/base.css';
+import '../styles/motion.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
+
+interface Props { seo: string; bodyClass?: string }
+const { seo, bodyClass } = Astro.props;
+const route = Astro.url.pathname;
+const home = route === '/';
+---
+<!doctype html>
+<html lang="nl-BE">
+<head>
+<meta charset="UTF-8">
+<link rel="preload" href="/wp-content/uploads/2024/05/AtypDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<Fragment set:html={seo} />
+<link rel="stylesheet" href="/css/consent.css" />
+</head>
+<body class={bodyClass}>
+<Header current={route} home={home} />
+<slot />
+<Footer current={route} home={home} />
+<ConsentBanner />
+<script src="../scripts/site.js"></script>
+</body>
+</html>

@@ -141,6 +141,15 @@ function sticky() {
 
 /* ---------- Entrance animations (Elementor GlobalHandler) ---------- */
 function entranceAnimations() {
+  // Rebuilt markup: data-animate="fadeInUp" data-animate-delay="500".
+  $$('[data-animate]').forEach(el => {
+    const io = scrollObserver(inView => {
+      if (!inView) return;
+      io.unobserve(el);
+      setTimeout(() => el.classList.add('animated', el.dataset.animate), +el.dataset.animateDelay || 0);
+    });
+    io.observe(el);
+  });
   $$('[data-settings*="animation"]').forEach(el => {
     const s = settingsOf(el);
     const name = deviceSetting(s, 'animation') || deviceSetting(s, '_animation');
@@ -191,7 +200,9 @@ class MotionFX {
     this.type = prefix === 'motion_fx' ? 'element' : 'background';
     let target = el, dims = null;
     const elType = el.dataset.element_type;
-    if (this.type === 'element' && !['section', 'container'].includes(elType)) {
+    if (el.dataset.parallax !== undefined) {
+      dims = el; target = el.firstElementChild; // rebuilt markup: wrapper + moving layer
+    } else if (this.type === 'element' && !['section', 'container'].includes(elType)) {
       dims = el;
       target = el.querySelector(':scope > ' + (elType === 'column' ? '.elementor-widget-wrap' : '.elementor-widget-container')) || el;
     }
@@ -307,6 +318,13 @@ class MotionFX {
 }
 
 function motionEffects() {
+  // Rebuilt markup: data-parallax="<speed>" = Elementor's vertical scrolling effect at that speed.
+  $$('[data-parallax]').forEach(el => new MotionFX(el, 'motion_fx', {
+    motion_fx_motion_fx_scrolling: 'yes',
+    motion_fx_translateY_effect: 'yes',
+    motion_fx_translateY_speed: { unit: 'px', size: +el.dataset.parallax, sizes: [] },
+    motion_fx_translateY_affectedRange: { unit: '%', size: '', sizes: { start: 0, end: 100 } },
+  }));
   $$('[data-settings*="motion_fx"]').forEach(el => {
     const s = settingsOf(el), device = deviceMode();
     for (const prefix of ['motion_fx', 'background_motion_fx']) {
@@ -358,9 +376,18 @@ async function carousels() {
     const list = wrap.querySelector(':scope > .jet-listing-grid__items');
     try { if (list) jetSlider(list, JSON.parse(wrap.dataset.slider_options)); } catch { /* bad options */ }
   });
-  const loops = $$('.elementor-widget-loop-carousel');
-  if (!loops.length) return;
+  const loops = $$('.elementor-widget-loop-carousel'), rebuilt = $$('.posts-carousel[data-carousel]');
+  if (!loops.length && !rebuilt.length) return;
   const { default: Swiper } = await import('swiper/bundle');
+
+  rebuilt.forEach(w => {
+    const s = JSON.parse(w.dataset.carousel), container = w.querySelector('.swiper');
+    const slides = $$('.swiper-slide', container);
+    if (slides.length < 2) return;
+    if (s.offset_sides && s.offset_sides !== 'none') container.classList.add('offset-' + s.offset_sides);
+    slides.forEach((sl, i) => sl.setAttribute('aria-label', `${i + 1} van ${slides.length}`));
+    new Swiper(container, loopCarouselConfig(s));
+  });
 
   loops.forEach(w => {
     const s = settingsOf(w), container = w.querySelector('.elementor-loop-container');
@@ -491,8 +518,8 @@ function shareButtons() {
     facebook: u => `https://www.facebook.com/sharer.php?u=${u}`,
     twitter: u => `https://twitter.com/intent/tweet?url=${u}`,
   };
-  $$('.elementor-share-btn').forEach(btn => {
-    const network = [...btn.classList].map(c => c.match(/^elementor-share-btn_(\w+)$/)?.[1]).find(Boolean);
+  $$('.elementor-share-btn, [data-share]').forEach(btn => {
+    const network = btn.dataset.share || [...btn.classList].map(c => c.match(/^elementor-share-btn_(\w+)$/)?.[1]).find(Boolean);
     if (!urls[network]) return;
     const open = () => window.open(urls[network](encodeURIComponent(location.href.split('#')[0])), '', 'width=640,height=480');
     btn.addEventListener('click', open);
@@ -549,7 +576,7 @@ async function lotties() {
 const FORM_MESSAGES = { success: 'Your submission was successful.', error: 'An error occurred.' };
 
 function forms() {
-  $$('form.elementor-form').forEach(form => {
+  $$('form.elementor-form, form[data-form]').forEach(form => {
     form.addEventListener('submit', async e => {
       e.preventDefault();
       const button = form.querySelector('[type="submit"]');

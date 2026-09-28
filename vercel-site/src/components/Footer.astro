@@ -24,14 +24,14 @@ const legal = [
   { href: 'https://thezeiners.com/', label: 'by THE ZEINERS' },
 ];
 ---
-<footer class:list={['site-footer', { 'site-footer--home': home }]}>
-  <div class="site-footer__main">
-    <div class="site-footer__brand">
-      <div class="site-footer__logo">
+<footer class:list={['colophon', { 'colophon--home': home }]}>
+  <div class="colophon__main">
+    <div class="colophon__brand">
+      <div class="colophon__logo">
         <a href="/" aria-label="Acumen home"><img loading="lazy" width="207" height="30" src="/wp-content/uploads/2024/05/dark-logo.svg" alt="Acumen" /></a>
       </div>
     </div>
-    <div class="site-footer__col">
+    <div class="colophon__col">
       <nav aria-label="Footer">
         <ul class="footerMenu">
           {nav.map(item => (
@@ -40,7 +40,7 @@ const legal = [
         </ul>
       </nav>
     </div>
-    <div class="site-footer__col">
+    <div class="colophon__col">
       <ul class="footerSocial">
         {socials.map(s => <li><a href={s.href} target="_blank" rel="noopener"><span>{s.label}</span></a></li>)}
       </ul>
@@ -67,7 +67,7 @@ const legal = [
     </a>
   )}
 
-  <div class="site-footer__bottom">
-    {legal.map(l => <div class="site-footer__legal"><a href={l.href}>{l.label}</a></div>)}
+  <div class="colophon__bottom">
+    {legal.map(l => <div class="colophon__legal"><a href={l.href}>{l.label}</a></div>)}
   </div>
 </footer>

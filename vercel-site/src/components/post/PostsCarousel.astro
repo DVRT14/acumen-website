@@ -1,0 +1,25 @@
+---
+// "Related posts" carousel (was an Elementor loop carousel). elementor.js initialises Swiper with the
+// same settings JSON the old widget carried.
+import 'swiper/css/bundle';
+import PostCard from './PostCard.astro';
+import cards from '../../data/cards.json';
+
+interface Props { ids: string[] }
+const { ids } = Astro.props;
+const settings = {
+  slides_to_show: '2', slides_to_show_tablet: '2', slides_to_show_mobile: '1', slides_to_scroll: '1',
+  offset_sides: 'right', offset_width: { unit: 'px', size: 50, sizes: [] }, offset_width_mobile: { unit: 'px', size: 30, sizes: [] },
+  image_spacing_custom: { unit: 'px', size: 25, sizes: [] }, image_spacing_custom_mobile: { unit: 'px', size: 15, sizes: [] },
+  infinite: 'yes', speed: 500,
+};
+---
+<div class="posts-carousel animated-fast" data-animate="fadeIn" data-animate-delay="500" data-carousel={JSON.stringify(settings)}>
+  <div class="swiper posts-carousel__swiper">
+    <div class="swiper-wrapper">
+      {ids.map((id, i) => cards[id] && (
+        <div class="swiper-slide posts-carousel__slide" role="group" aria-roledescription="slide"><PostCard card={cards[id]} /></div>
+      ))}
+    </div>
+  </div>
+</div>

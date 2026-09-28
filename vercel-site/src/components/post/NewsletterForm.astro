@@ -1,0 +1,29 @@
+---
+// Newsletter sign-up (posts to the forms stub like every site form). Hidden fields match the old form.
+interface Props { postId: string; title: string }
+const { postId, title } = Astro.props;
+---
+<form class="nl-form" method="post" name="Subscribe Form" data-form>
+  <input type="hidden" name="post_id" value="996" />
+  <input type="hidden" name="form_id" value="e914a34" />
+  <input type="hidden" name="referer_title" value={title} />
+  <input type="hidden" name="queried_id" value={postId} />
+  <div class="nl-form__fields">
+    <div class="nl-form__group nl-form__group--wide form-field">
+      <label for="nl-email" class="visually-hidden">Email</label>
+      <input size="1" type="email" name="form_fields[email]" id="nl-email" class="nl-form__input" placeholder="Enter your email adress" required />
+    </div>
+    <div class="nl-form__group nl-form__group--wide form-field">
+      <label for="nl-first-name" class="visually-hidden">First name</label>
+      <input size="1" type="text" name="form_fields[field_60ffdb1]" id="nl-first-name" class="nl-form__input" placeholder="Enter your First name" required />
+    </div>
+    <div class="nl-form__group nl-form__group--submit form-field">
+      <button class="nl-form__button" type="submit">
+        <span class="nl-form__button-content">
+          <span class="nl-form__button-icon"><svg xmlns="http://www.w3.org/2000/svg" width="46.819" height="46.819" viewBox="0 0 46.819 46.819" aria-hidden="true"><path d="M5.838,24.92l19.7,19.7-2.127,2.2L0,23.409,23.409,0l2.128,2.2L5.838,21.9H46.819V24.92Z" transform="translate(46.819 46.819) rotate(180)"></path></svg></span>
+          <span class="nl-form__button-text">Subscribe</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</form>

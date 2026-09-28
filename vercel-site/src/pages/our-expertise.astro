@@ -1,0 +1,19 @@
+---
+// Our Expertise (was Elementor page 151): the expertise cards in a two-column grid.
+import Base from '../layouts/Base.astro';
+import meta from '../data/meta.json';
+import ExpertiseCard from '../components/ExpertiseCard.astro';
+import cards from '../data/expertise-cards.json';
+import '../styles/our-expertise.css';
+const m = meta['our-expertise'];
+---
+<Base {...m}>
+  <section class="oxp">
+    <div class="oxp__spacer"></div>
+    <div class="oxp__grid">
+      <div class="oxp__items">
+        {cards.map(card => <div class="oxp__item"><ExpertiseCard card={card} /></div>)}
+      </div>
+    </div>
+  </section>
+</Base>

@@ -21,9 +21,31 @@ function headerNav() {
     toggle(dark(), 'hide', !on);
     headerDarkVisible = on;
   }
-  // jQuery's .css('height', NaN) was a no-op, so the height is only set when both headers exist.
-  const l = $('.headerLight'), d = $('.headerDark');
-  if (l && d) l.parentElement.style.height = Math.max(outerHeight(l), outerHeight(d)) + 'px';
+  const masthead = $('.masthead');
+  if (masthead) {
+    // Reserve the bars' natural (unscrolled) height, like Elementor's sticky spacer did.
+    const bars = $$('.header-bar', masthead);
+    const reserve = () => {
+      const scrolled = masthead.classList.contains('is-scrolled');
+      masthead.classList.remove('is-scrolled');
+      masthead.style.height = Math.max(...bars.map(b => {
+        const { display, transition } = b.style;
+        b.style.display = 'flex'; b.style.transition = 'none';
+        const h = b.getBoundingClientRect().height;
+        b.style.display = display; b.style.transition = transition;
+        return h;
+      })) + 'px';
+      masthead.classList.toggle('is-scrolled', scrolled);
+      document.documentElement.classList.toggle('is-scrollable', document.documentElement.scrollHeight > innerHeight);
+    };
+    reserve();
+    addEventListener('resize', reserve);
+    addEventListener('load', reserve);
+    // Tighter bar once scrolled (was Elementor sticky's "effects offset" of 100px).
+    const onScroll = () => masthead.classList.toggle('is-scrolled', scrollY >= 100);
+    addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
 
   const green = $('.greenSection');
   if (green) ScrollTrigger.create({
@@ -35,7 +57,7 @@ function headerNav() {
   const menuTl = gsap.timeline({ paused: true });
   menuTl.fromTo('.dropMenu .imagesParent', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.7, ease: 'power2.out' });
   menuTl.fromTo($$('.headerMenu .menu-item'), { opacity: 0, x: -50 }, { opacity: 1, x: 0, stagger: 0.2, duration: 1, ease: 'power2.out' }, '<');
-  menuTl.fromTo($$('.headerSocial .elementor-icon-list-item'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, stagger: 0.2, duration: 1, ease: 'power2.out' }, '<');
+  menuTl.fromTo($$('.headerSocial li'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, stagger: 0.2, duration: 1, ease: 'power2.out' }, '<');
 
   let openTimer, closeTimer;
   const dropMenu = () => $('.dropMenu');
@@ -82,7 +104,7 @@ function headerNav() {
   document.addEventListener('click', e => {
     if (isOpen() && !e.target.closest('.dropMenu') && !e.target.closest('.menuBtn')) toggleMenu();
   });
-  $$('.dropMenu .elementor-nav-menu--main li').forEach(li => {
+  $$('.headerMenu li').forEach(li => {
     li.addEventListener('mouseenter', () => showImage([...li.parentElement.children].indexOf(li) + 1));
     li.addEventListener('mouseleave', resetImage);
   });

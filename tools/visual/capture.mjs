@@ -12,7 +12,7 @@ const args = Object.fromEntries(process.argv.slice(2).reduce((a, v, i, all) =>
 const root = path.resolve(args.root || path.join(here, '../../vercel-site'));
 const out = path.resolve(here, args.out || 'out/candidate');
 const viewports = String(args.vp || '1920,1440,1366,1025,1024,768,767,390').split(',').map(Number);
-const workers = Number(args.workers || 4);
+const workers = Number(args.workers || 8);
 const filter = args.pages ? String(args.pages).split(',') : null;
 const pages = JSON.parse(fs.readFileSync(path.join(here, '../../docs/pages.json'), 'utf8'))
   .filter(p => !filter || filter.some(f => f === '/' ? p === '/' : p.includes(f)));
@@ -70,6 +70,12 @@ function collectLayout(mask) {
   return items;
 }
 
+// Advance the paused clock in 100ms jumps: far cheaper than runFor (which emulates every 16ms frame),
+// still deterministic, and small enough that GSAP lag smoothing (500ms) never kicks in.
+async function advance(page, ms) {
+  for (let t = 0; t < ms; t += 100) await page.clock.fastForward(100);
+}
+
 async function waitStable(page, maxMs = 3000) {
   let prev = await page.screenshot({ caret: 'hide' });
   const start = Date.now();
@@ -112,11 +118,19 @@ async function captureOne(browser, base, route, vw) {
   await page.goto(base + route, { waitUntil: 'load' });
   await page.addStyleTag({ content: MASK_CSS });
   // Let load-time animations (hero intro, scroll-to-#start) finish so they can't override the first tile.
-  await page.clock.runFor(4000);
+  await advance(page, 4000);
   for (let i = 0, y = 0; ; i++, y += vh) {
-    await page.evaluate(y => window.scrollTo({ top: y, behavior: 'instant' }), y);
-    await page.waitForTimeout(100); // native scroll + IntersectionObserver delivery
-    await page.clock.runFor(3000);  // scrubs, entrance delays, tweens settle
+    // Re-assert the position: residual smooth scrolling (Lenis) can leave it a pixel off.
+    for (let tries = 0; tries < 4; tries++) {
+      await page.evaluate(y => window.scrollTo({ top: y, behavior: 'instant' }), y);
+      await page.waitForTimeout(100); // native scroll + IntersectionObserver delivery
+      await advance(page, 4000); // scrubs (up to 3s smoothing), entrance delays, tweens settle
+      const at = await page.evaluate(y => [scrollY, Math.min(y, document.documentElement.scrollHeight - innerHeight)], y);
+      if (Math.abs(at[0] - at[1]) < 0.5) break;
+    }
+    // Under load, large images may not be decoded/rastered yet; a blank frame can look "stable".
+    await page.evaluate(() => Promise.all([...document.images].filter(i => i.complete && i.naturalWidth).map(i => i.decode().catch(() => {}))));
+    await page.waitForTimeout(50); // (rAF is faked by the paused clock, so wait in real time)
     const { png, stable } = await waitStable(page);
     const scrollY = await page.evaluate(() => scrollY);
     const name = `tile-${String(i).padStart(2, '0')}`;
@@ -133,10 +147,11 @@ async function captureOne(browser, base, route, vw) {
 
 const server = await serve(root);
 const base = `http://127.0.0.1:${server.address().port}`;
-const browser = await chromium.launch();
 const jobs = pages.flatMap(p => viewports.map(v => [p, v]));
 let done = 0;
+// One browser per worker: pages in a single browser share one compositor and serialize on it.
 await Promise.all(Array.from({ length: workers }, async () => {
+  const browser = await chromium.launch();
   for (let job; (job = jobs.shift());) {
     try {
       const r = await captureOne(browser, base, ...job);
@@ -145,6 +160,6 @@ await Promise.all(Array.from({ length: workers }, async () => {
       console.log(`[${++done}] ${job[0]} @${job[1]} ${r.tiles.length} tiles ${warn}`);
     } catch (e) { console.log(`[${++done}] ${job[0]} @${job[1]} FAILED ${e.message}`); }
   }
+  await browser.close();
 }));
-await browser.close();
 server.close();

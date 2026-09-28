@@ -1,0 +1,268 @@
+/* Site header + drop-down menu. Values reproduce the old Elementor header (template 48). */
+
+/* Bars are fixed (as the old Elementor sticky header was); the in-flow wrapper reserves their
+   natural height — set by headerNav, with a CSS fallback — so the tighter padding while scrolled
+   (≥100px, .is-scrolled) never moves the page. */
+.masthead {
+  position: relative;
+  height: calc(var(--bar-pad-top) + 46px);
+  --bar-pad-top: 50px;
+  --bar-pad-x: 50px;
+}
+.masthead--home { background: #002921; }
+
+.header-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 var(--bar-pad-x);
+  background-color: #fff;
+  transition: opacity .3s ease-in-out;
+}
+.header-bar--dark { background-color: #002921; }
+/* Home: the light bar only shows once headerNav adds .show (the dark one hides via .hide). */
+.masthead--home .headerLight { display: none; }
+.masthead--home .headerLight.show { display: flex; }
+
+.header-bar__inner {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--bar-pad-top);
+  transition: padding .3s ease-in-out;
+}
+.masthead.is-scrolled .header-bar__inner { padding-top: 20px; padding-bottom: 20px; }
+
+.header-bar__logo { position: relative; text-align: center; }
+.header-bar__logo a { display: inline-block; }
+.header-bar__logo img { display: inline-block; width: 100%; max-width: 206px; vertical-align: middle; }
+
+.header-bar__menu {
+  position: relative;
+  margin-left: auto;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  color: #002921;
+}
+.header-bar--dark .header-bar__menu { color: #fff; }
+.header-bar__menu a { color: inherit; }
+.header-bar__menu::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #B9D0D0;
+  opacity: 0;
+}
+.header-bar__menu:hover::after,
+.header-bar__menu.active::after { opacity: 1; }
+
+.header-bar__menu-mobile {
+  display: none;
+  position: relative;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font: inherit;
+  color: #000;
+  white-space: normal;
+  cursor: pointer;
+  transition: none;
+  overflow: hidden; /* as the old widget wrapper; also keeps the text anti-aliasing identical */
+}
+.header-bar--dark .header-bar__menu-mobile { color: #fff; }
+.header-bar__menu-mobile:hover,
+.header-bar__menu-mobile:focus { background: none; color: #000; }
+.header-bar--dark .header-bar__menu-mobile:hover,
+.header-bar--dark .header-bar__menu-mobile:focus { color: #fff; }
+.header-bar__menu-mobile:focus:not(:focus-visible) { outline: none; }
+.header-bar__menu-icon { display: flex; position: relative; }
+.header-bar__menu-icon svg { display: none; width: 33px; height: auto; margin: 0; }
+.header-bar__menu-icon path { fill: currentColor; stroke: currentColor; }
+.header-bar__menu-text { font-size: 20px; font-weight: 400; line-height: 1; transition: color .3s; }
+.header-bar__menu-mobile.active svg { display: inline-block; }
+.header-bar__menu-mobile.active .header-bar__menu-text { display: none; }
+
+.header-bar__cta { position: relative; margin-left: 40px; }
+
+.btn-pill {
+  display: inline-block;
+  padding: 12px 24px;
+  border: 1px solid #002921;
+  border-radius: 100px;
+  background-color: transparent;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  color: #002921;
+  fill: #002921;
+  transition: all .3s;
+}
+.btn-pill:hover, .btn-pill:focus { color: #002921; background-color: #C8EF00; border-color: #C8EF00; }
+.header-bar--dark .btn-pill { color: #fff; fill: #fff; border-color: #fff; }
+.header-bar--dark .btn-pill:hover, .header-bar--dark .btn-pill:focus { color: #002921; fill: #002921; background-color: #C8EF00; border-color: #C8EF00; }
+.btn-pill__content { display: flex; flex-direction: row-reverse; justify-content: center; gap: 20px; }
+.btn-pill__icon { display: flex; align-items: center; transform: rotate(-45deg); transition: all .3s ease-in-out; }
+/* On scrollable pages the old header rendered this icon on its own compositor layer (slightly softer
+   anti-aliasing); promoting it the same way keeps the pixels identical. */
+.is-scrollable .btn-pill__icon { will-change: transform; }
+.btn-pill:hover .btn-pill__icon { transform: rotate(0deg); }
+.btn-pill__icon svg { width: 1em; height: auto; }
+.btn-pill__text { display: inline-block; }
+
+/* ---------- Drop-down menu ---------- */
+.dropMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 555;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 98vh;
+  padding: 0 50px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #fff;
+  border-radius: 0 0 24px 24px;
+  box-shadow: 0 3px 6px 0 rgba(170, 170, 170, .3);
+  transform: translateY(-100%);
+  transition: transform .3s ease-in-out;
+}
+.dropMenu.show { transform: translateY(0); }
+.dropMenu__inner { display: flex; flex-direction: column; flex-grow: 1; padding: 135px 0 30px; }
+.dropMenu__row { display: flex; justify-content: space-between; gap: 50px; }
+
+.imagesParent { position: relative; display: flex; flex-direction: column; width: 50%; min-height: 21vw; }
+.imageContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+  padding: 25px;
+  overflow: hidden;
+  border-radius: 15px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity .5s ease-in-out;
+}
+.imageContainer--top { background-position: top center; }
+.imageContainer.show { opacity: 1; }
+.imageContainer__caption { width: 270px; max-width: 270px; margin: 0; font-size: 17px; font-weight: 300; line-height: 23px; color: #fff; }
+
+.dropMenu__nav { display: flex; flex-direction: column; justify-content: center; width: 50%; }
+.headerMenu ul { position: relative; z-index: 2; margin: 0; padding: 0; list-style: none; }
+.headerMenu li { position: relative; display: block; margin: 0 0 12px; padding: 0; line-height: normal; }
+.headerMenu li:last-child { margin-bottom: 0; }
+.headerMenu li.menuSmall { display: flex; margin-top: 3vw; }
+.headerMenu li.menuSmall ~ .menuSmall { margin-top: 0; }
+.headerMenu a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  font-family: "Atype Display", Sans-serif;
+  font-size: clamp(2.875rem, 1.1571rem + 2.6816vw, 4.375rem);
+  font-weight: 400;
+  line-height: 1.065em;
+  text-transform: capitalize;
+  color: #0E0F0C;
+  fill: #0E0F0C;
+  transition: .4s;
+}
+.headerMenu .menuSmall > a { min-width: 5.6em; font-size: 23px; }
+.headerMenu a:hover, .headerMenu a.is-active { padding-left: .609em; }
+.headerMenu a::before,
+.headerMenu a::after {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  transition: .3s;
+  transition-timing-function: cubic-bezier(.58, .3, .005, 1);
+}
+.headerMenu a::before { left: 0; width: .37em; height: .37em; border-radius: 50%; background: #B9D0D0; opacity: 0; }
+.headerMenu a:hover::before, .headerMenu a:focus::before, .headerMenu a.is-active::before { opacity: 1; transform: scale(1); }
+.headerMenu a::after {
+  right: 0;
+  width: 1em;
+  height: 1em;
+  background: url('/wp-content/uploads/2024/05/arrow-black-right.svg') no-repeat center / contain;
+  transform: rotate(-45deg);
+}
+.headerMenu a:hover::after, .headerMenu a.is-active::after { transform: rotate(0deg); }
+
+.dropMenu__social { display: flex; flex-direction: column; padding-top: 14px; }
+.menuSocial {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin: 0 -32.5px;
+  padding: 5px 0;
+  list-style: none;
+  text-align: right;
+}
+.menuSocial li { position: relative; display: flex; align-items: center; justify-content: flex-end; margin: 0 32.5px; }
+.menuSocial a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-family: "Atype Display", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 13px;
+  color: #0029214F;
+  transition: color .3s;
+}
+.menuSocial a:hover { color: #002921; }
+.menuSocial--mobile { display: none; }
+
+@media (max-width: 1024px) {
+  .header-bar__cta { margin-left: 20px; }
+  .dropMenu__row { gap: 25px; }
+  .headerMenu a { font-size: 40px; }
+  .dropMenu__social { padding-top: 22px; }
+  .menuSocial { margin: 0 -20px; }
+  .menuSocial li { margin: 0 20px; }
+}
+
+@media (max-width: 767px) {
+  .masthead { --bar-pad-top: 15px; --bar-pad-x: 20px; height: calc(var(--bar-pad-top) + 21.1px); }
+  .header-bar__inner { flex-wrap: wrap; }
+  .header-bar__logo img { max-width: 137px; }
+  .header-bar__menu, .header-bar__cta { display: none; }
+  .header-bar__menu-mobile { display: flex; }
+
+  .dropMenu { padding: 0 20px; }
+  .dropMenu__inner { padding: 100px 0 30px; }
+  .dropMenu__row { flex-wrap: wrap; gap: 32px; }
+  .imagesParent { order: 2; width: 100%; min-height: 57vw; }
+  .dropMenu__nav { order: 1; width: 100%; }
+  .headerMenu li { margin-bottom: 8px; }
+  .headerMenu li.menuSmall { margin-top: 6vw; }
+  .dropMenu__social { padding-top: 34px; }
+  .menuSocial--wide { display: none; }
+  .menuSocial--mobile { display: flex; justify-content: space-between; margin: 0 -12.5px; text-align: center; }
+  .menuSocial--mobile li { justify-content: center; margin: 0 12.5px; }
+  .menuSocial--mobile a { justify-content: center; font-size: 14px; }
+}
+@media (min-width: 468px) and (max-width: 767px) {
+  .menuSocial--mobile { justify-content: center; }
+}

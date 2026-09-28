@@ -1,0 +1,73 @@
+---
+// Site footer. `home` adds the careers banner and a divider under the link columns (old template 804;
+// every other page used template 3137).
+import '../styles/footer.css';
+
+interface Props { current?: string; home?: boolean }
+const { current = '', home = false } = Astro.props;
+
+const nav = [
+  { href: '/culture/', label: 'Culture' },
+  { href: '/our-expertise/', label: 'Expertise' },
+  { href: '/knowledge/', label: 'Knowledge' },
+  { href: '/contact/', label: 'Contact' },
+];
+const socials = [
+  { href: 'https://www.facebook.com/AcumenConsultingBE/', label: 'Facebook' },
+  { href: 'https://www.instagram.com/acumen.be', label: 'Instagram' },
+  { href: 'https://www.linkedin.com/company/acumen', label: 'Linkedin' },
+  { href: 'https://www.youtube.com/@Acumendrivenbydata', label: 'Youtube' },
+];
+const legal = [
+  { href: '/legal/privacy-policy/', label: 'Privacy & Cookie Policy' },
+  { href: '/legal/terms-conditions/', label: 'Terms & Conditions' },
+  { href: 'https://thezeiners.com/', label: 'by THE ZEINERS' },
+];
+---
+<footer class:list={['site-footer', { 'site-footer--home': home }]}>
+  <div class="site-footer__main">
+    <div class="site-footer__brand">
+      <div class="site-footer__logo">
+        <a href="/" aria-label="Acumen home"><img loading="lazy" width="207" height="30" src="/wp-content/uploads/2024/05/dark-logo.svg" alt="Acumen" /></a>
+      </div>
+    </div>
+    <div class="site-footer__col">
+      <nav aria-label="Footer">
+        <ul class="footerMenu">
+          {nav.map(item => (
+            <li><a href={item.href} class:list={{ 'is-active': current === item.href }} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+    <div class="site-footer__col">
+      <ul class="footerSocial">
+        {socials.map(s => <li><a href={s.href} target="_blank" rel="noopener"><span>{s.label}</span></a></li>)}
+      </ul>
+    </div>
+  </div>
+
+  {home && (
+    <a class="careers-banner" href="/culture/#careers">
+      <div class="careers-banner__bg careers-banner__bg--wide">
+        <img width="2560" height="755" src="/wp-content/uploads/2024/06/Mask-Group-23-x3-scaled.webp" alt=""
+          srcset="/wp-content/uploads/2024/06/Mask-Group-23-x3-scaled.webp 2560w, /wp-content/uploads/2024/06/Mask-Group-23-x3-300x88.webp 300w, /wp-content/uploads/2024/06/Mask-Group-23-x3-1024x302.webp 1024w, /wp-content/uploads/2024/06/Mask-Group-23-x3-768x226.webp 768w, /wp-content/uploads/2024/06/Mask-Group-23-x3-1536x453.webp 1536w, /wp-content/uploads/2024/06/Mask-Group-23-x3-2048x604.webp 2048w"
+          sizes="(max-width: 2560px) 100vw, 2560px" />
+      </div>
+      <div class="careers-banner__bg careers-banner__bg--mobile">
+        <img width="675" height="578" src="/wp-content/uploads/2024/06/footer-bg-mob-1-opt.webp" alt=""
+          srcset="/wp-content/uploads/2024/06/footer-bg-mob-1-opt.webp 675w, /wp-content/uploads/2024/06/footer-bg-mob-1-opt-300x257.webp 300w"
+          sizes="(max-width: 675px) 100vw, 675px" />
+      </div>
+      <span class="careers-banner__kicker">Ready to join our data adventure?</span>
+      <span class="careers-banner__title">Careers</span>
+      <span class="careers-banner__icon footer-icon" aria-hidden="true">
+        <span class="careers-banner__icon-inner"><svg xmlns="http://www.w3.org/2000/svg" width="46.819" height="46.819" viewBox="0 0 46.819 46.819"><path d="M5.838,24.92l19.7,19.7-2.127,2.2L0,23.409,23.409,0l2.128,2.2L5.838,21.9H46.819V24.92Z" transform="translate(46.819 46.819) rotate(180)"></path></svg></span>
+      </span>
+    </a>
+  )}
+
+  <div class="site-footer__bottom">
+    {legal.map(l => <div class="site-footer__legal"><a href={l.href}>{l.label}</a></div>)}
+  </div>
+</footer>

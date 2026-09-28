@@ -1,0 +1,93 @@
+---
+// Site header: sticky top bar + full-width drop-down menu (animated by headerNav in animations.js).
+// `home`: the home page starts with the dark bar; headerNav swaps to the light bar after the green hero.
+import '../styles/header.css';
+
+interface Props { current?: string; home?: boolean }
+const { current = '', home = false } = Astro.props;
+
+const nav = [
+  { href: '/our-expertise/', label: 'Expertise' },
+  { href: '/knowledge/', label: 'Knowledge' },
+  { href: '/partners/', label: 'Partners' },
+  { href: '/culture/#careers', label: 'Careers', small: true },
+  { href: '/culture/', label: 'Culture', small: true },
+  { href: '/contact/', label: 'Contact', small: true },
+];
+const socials = [
+  { href: 'https://www.facebook.com/AcumenConsultingBE/', label: 'Facebook' },
+  { href: 'https://www.instagram.com/acumen.be', label: 'Instagram' },
+  { href: 'https://www.linkedin.com/company/acumen', label: 'Linkedin' },
+];
+const previews = [
+  { cls: 'default show', img: '/wp-content/uploads/2024/05/Mask-Group-76.webp' },
+  { cls: 'image-culture', img: '/wp-content/uploads/2024/05/Mask-Group-2.webp' },
+  { cls: 'image-expertise', img: '/wp-content/uploads/2024/05/Mask-Group-79.webp' },
+  { cls: 'image-insights', img: '/wp-content/uploads/2024/05/Mask-Group-80.webp', top: true },
+];
+const bars = home ? ['light', 'dark'] : ['light'];
+---
+<div class:list={['masthead', { 'masthead--home': home }]}>
+  {bars.map(v => (
+    <div class:list={['header-bar', 'show-hide-header', v === 'light' ? 'headerLight' : 'headerDark', `header-bar--${v}`]}>
+      <div class="header-bar__inner">
+        <div class="header-bar__logo">
+          <a href="/" aria-label="Acumen home">
+            {v === 'light'
+              ? <img width="207" height="30" src="/wp-content/uploads/2024/05/dark-logo.svg" alt="Acumen" />
+              : <img width="206" height="30" src="/wp-content/uploads/2024/05/white-logo.svg" alt="Acumen" />}
+          </a>
+        </div>
+        <div class="header-bar__menu menuBtn"><a href="#drop-menu" aria-controls="drop-menu" aria-expanded="false">Menu</a></div>
+        <button type="button" class="header-bar__menu-mobile menuBtn" aria-controls="drop-menu" aria-expanded="false">
+          <span class="header-bar__menu-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="57.983" height="57.983" viewBox="0 0 57.983 57.983" aria-hidden="true"><path d="M271.241-686.241H252v-2.518h19.241V-708h2.518v19.241H293v2.518H273.759V-667h-2.518Z" transform="translate(322.441 707.814) rotate(-45)"></path></svg>
+          </span>
+          <span class="header-bar__menu-text">Menu</span>
+        </button>
+        <div class="header-bar__cta">
+          <a class="btn-pill" href="/contact/">
+            <span class="btn-pill__content">
+              <span class="btn-pill__icon"><svg xmlns="http://www.w3.org/2000/svg" width="46.819" height="46.819" viewBox="0 0 46.819 46.819" aria-hidden="true"><path d="M5.838,24.92l19.7,19.7-2.127,2.2L0,23.409,23.409,0l2.128,2.2L5.838,21.9H46.819V24.92Z" transform="translate(46.819 46.819) rotate(180)"></path></svg></span>
+              <span class="btn-pill__text">Get in touch</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<div class="dropMenu" id="drop-menu">
+  <div class="dropMenu__inner">
+    <div class="dropMenu__row">
+      <div class="imagesParent">
+        {previews.map(p => (
+          <div class:list={['imageContainer', p.cls, { 'imageContainer--top': p.top }]} style={`background-image:url("${p.img}")`}>
+            <p class="imageContainer__caption">Our team specializes in analyzing data and crafting strategies.</p>
+          </div>
+        ))}
+      </div>
+      <div class="dropMenu__nav">
+        <nav class="headerMenu" aria-label="Menu">
+          <ul>
+            {nav.map(item => (
+              <li class:list={['menu-item', { menuSmall: item.small }]}>
+                <a href={item.href} class:list={{ 'is-active': current === item.href }} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="dropMenu__social">
+      {/* Two lists, as before: headerNav staggers in the desktop/tablet one; the mobile one is static. */}
+      <ul class="menuSocial menuSocial--wide headerSocial">
+        {socials.map(s => <li><a href={s.href} target="_blank" rel="noopener">{s.label}</a></li>)}
+      </ul>
+      <ul class="menuSocial menuSocial--mobile">
+        {socials.map(s => <li><a href={s.href} target="_blank" rel="noopener">{s.label}</a></li>)}
+      </ul>
+    </div>
+  </div>
+</div>

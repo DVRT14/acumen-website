@@ -3,6 +3,33 @@
 Goal: same site, same pixels, same motion — without jQuery, Elementor, WordPress JS or the
 `wp-*` asset tree. Written 2026-09-24 against commit `6251330`.
 
+## Status
+
+| Phase | State |
+|---|---|
+| 0 Harness | Done. Deterministic (paused fake clock, seeded `Math.random`, one browser per worker): 0 diffs in 238 tiles between two runs of the flakiest pages. |
+| 2 Astro (done before 1, so the JS swap happens in one place) | Done. Build output was byte-identical to the old static site. |
+| 1 JS swap | Done in code (`src/scripts/`). Full 55 × 8 gate run pending. |
+| 3 Elementor markup/CSS | Started: 3a dead WordPress CSS/head links removed. |
+| 4 Cleanup | — |
+
+### Tooling (in `tools/`)
+
+- `visual/capture.mjs` + `compare.mjs` — the gate (see README).
+- `visual/domdiff.mjs` — what scripts change in the DOM after load (used to port Elementor exactly).
+- `visual/spec.mjs` — computed-style spec of a subtree per viewport (for rewriting a component).
+- `rules.py` — authored Elementor CSS for given element ids, per media query (hover states etc.).
+- `outline.py` — container/widget tree of an Elementor document.
+
+### Intentional differences (accepted)
+
+- Resize no longer kills every ScrollTrigger (`textLeftOnScroll*`); only their own triggers rebuild.
+- Menu open animation always at 1× speed (was 3× after the first close).
+- Consent: banner shown until a choice; preference centre has working category switches; trackers
+  load only after consent (no third-party requests by default).
+- 23 posts: broken `<img>` with body text as `src` removed (was invisible anyway).
+- Forms submit to the stub endpoint and show Elementor's success/error message.
+
 ## 1. What's there today (measured)
 
 **Pages.** 55 static HTML files, 87–230 KB each. Every file is a full Elementor render: header,

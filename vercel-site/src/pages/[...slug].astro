@@ -1,7 +1,10 @@
 ---
-// Legacy pages: the exported WordPress HTML, rendered verbatim apart from the shared runtime
-// injected before </body>. Replaced template by template.
+// Legacy pages: the exported WordPress HTML, split into head / body so shared components can
+// replace their Elementor markup one at a time. Pages move out of here as they are rebuilt.
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
+import { parseLegacy, cutDiv, dropStyles } from '../lib/legacy.js';
 
 export function getStaticPaths() {
   const files = import.meta.glob('../legacy/*.html', { query: '?raw', import: 'default', eager: true });
@@ -10,11 +13,23 @@ export function getStaticPaths() {
     return { params: { slug: name === 'index' ? undefined : name.replaceAll('~', '/') }, props: { html } };
   });
 }
-const { html } = Astro.props;
-const end = html.lastIndexOf('</body>');
+const route = Astro.url.pathname;
+let { head, bodyAttrs, body } = parseLegacy(Astro.props.html);
+body = cutDiv(body, 'data-elementor-type="header"').html;
+body = cutDiv(body, 'data-elementor-type="footer"').html;
+head = dropStyles(head, ['elementor-post-48-css', 'elementor-post-3137-css', 'elementor-post-804-css']);
 ---
-<Fragment set:html={html.slice(0, end)} />
+<!doctype html>
+<html lang="nl-BE">
+<head>
+<Fragment set:html={head} />
 <link rel="stylesheet" href="/css/consent.css" />
+</head>
+<body {...bodyAttrs}>
+<Header current={route} home={route === '/'} />
+<Fragment set:html={body} />
+<Footer current={route} home={route === '/'} />
 <ConsentBanner />
 <script src="../scripts/site.js"></script>
-<Fragment set:html={html.slice(end)} />
+</body>
+</html>

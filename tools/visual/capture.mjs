@@ -156,9 +156,17 @@ async function captureOne(browser, base, route, vw) {
     await page.waitForTimeout(50); // (rAF is faked by the paused clock, so wait in real time)
     // CSS animations/transitions run in real time, outside the fake clock: jump finite ones to their
     // end state so entrance animations are never caught mid-flight (infinite loops are left alone).
-    await page.evaluate(() => document.getAnimations().forEach(a => {
+    const finish = () => page.evaluate(() => document.getAnimations().forEach(a => {
       if (a.effect?.getComputedTiming().iterations !== Infinity) try { a.finish(); } catch { /* not finishable */ }
     }));
+    await finish();
+    // Scroll effects (motion-fx) only recompute when scrollY changes; an entrance animation that moved
+    // their element after the last scroll leaves them at a timing-dependent value. Nudge and settle.
+    await page.evaluate(() => window.scrollBy({ top: 1, behavior: 'instant' }));
+    await advance(page, 200);
+    await page.evaluate(() => window.scrollBy({ top: -1, behavior: 'instant' }));
+    await advance(page, 200);
+    await finish();
     const { png, stable } = await waitStable(page);
     const scrollY = await page.evaluate(() => scrollY);
     const name = `tile-${String(i).padStart(2, '0')}`;

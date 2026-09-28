@@ -31,6 +31,8 @@ Goal: same site, same pixels, same motion — without jQuery, Elementor, WordPre
   (percent paddings resolve against different widths).
 - Widget margins sit on the inner `.elementor-widget-container`: keep a wrapper where the box size
   matters (entrance animations translate by 100% of the widget, scroll triggers use its height).
+- Scroll motion effects measure the element's *parent* (the old document wrapper, a BFC): keep
+  sections that use them inside one `display: flow-root` wrapper.
 - Per-template custom CSS (e.g. `p + p { margin-top: 40px }`, 25px on mobile) is page-wide; the
   `p-spaced` body class opts a page in.
 

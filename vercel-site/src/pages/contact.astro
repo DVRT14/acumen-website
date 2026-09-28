@@ -1,0 +1,88 @@
+---
+// Contact (was Elementor page 167): intro, links and addresses next to the contact form (links and
+// addresses move below the form on tablet/mobile), then a photo with a background scroll effect.
+import Base from '../layouts/Base.astro';
+import meta from '../data/meta.json';
+import '../styles/whitepaper.css';
+import '../styles/contact.css';
+
+const arrow = '<svg xmlns="http://www.w3.org/2000/svg" width="46.819" height="46.819" viewBox="0 0 46.819 46.819" aria-hidden="true"><path d="M5.838,24.92l19.7,19.7-2.127,2.2L0,23.409,23.409,0l2.128,2.2L5.838,21.9H46.819V24.92Z" transform="translate(46.819 46.819) rotate(180)"></path></svg>';
+const fields = [
+  { label: 'Full name', name: 'form_fields[name]', type: 'text', col: 50 },
+  { label: 'Company', name: 'form_fields[field_203132f]', type: 'text', col: 50 },
+  { label: 'Email', name: 'form_fields[email]', type: 'email', col: 50, required: true },
+  { label: 'Phone', name: 'form_fields[field_3bd6fd1]', type: 'text', col: 50, required: true },
+];
+const motion = JSON.stringify({
+  background_motion_fx_motion_fx_scrolling: 'yes',
+  background_motion_fx_translateY_effect: 'yes',
+  background_motion_fx_translateY_speed: { unit: 'px', size: 4, sizes: [] },
+  background_motion_fx_translateY_affectedRange: { unit: '%', size: '', sizes: { start: 0, end: 100 } },
+  background_motion_fx_scale_effect: 'yes',
+  background_motion_fx_scale_speed: { unit: 'px', size: 2, sizes: [] },
+  background_motion_fx_scale_direction: 'out-in',
+  background_motion_fx_scale_range: { unit: '%', size: '', sizes: { start: 20, end: 80 } },
+  background_motion_fx_devices: ['desktop', 'tablet', 'mobile'],
+});
+---
+<Base {...meta.contact}>
+  <!-- One wrapper around both sections, as the old page document: the photo's scroll effect measures its parent. -->
+  <div class="ct-page">
+  <section class="ct">
+    <div class="ct__inner">
+      <div class="ct__intro">
+        <div class="ct__box">
+          <div class="ct__title animateFromBottom"><h2>Reach out to us</h2></div>
+          <div class="ct__text animateFromBottom">Reach out to us to find out more about our consulting services or to talk about your project. We’re here for you.</div>
+        </div>
+        <div class="ct__space ct__space--61"></div>
+        <div class="ct__links ct--desktop">
+          <div class="ct__link ct__link--call animateFromBottom"><div><a href="mailto:info@acumen.be?subject=Online%20Call" target="_blank">Book an online call</a></div></div>
+          <div class="ct__link animateFromBottom"><div><a href="mailto:info@acumen.be">info@acumen.be</a></div></div>
+          <div class="ct__link animateFromBottom"><div><a href="tel:+32%20016%2040%2089%2086">+32 (0)16 40 89 86</a></div></div>
+        </div>
+        <div class="ct__space ct__space--88 ct--desktop"></div>
+        <div class="ct__addresses ct--desktop">
+          <div class="ct__address animateFromBottom"><p>Ambachtenlaan 14/8<br />3001 Leuven<br />Belgium<br />BE 0891.078.523</p></div>
+          <div class="ct__address animateFromBottom"><p>Piata Bisericii 8<br />300233 Timișoara<br />Romania<br />RO34294547</p></div>
+        </div>
+      </div>
+      <div class="ct__form">
+        <form class="wp-form ct-form" method="post" name="New Form" data-form>
+          <input type="hidden" name="post_id" value="167" />
+          <input type="hidden" name="form_id" value="748be11" />
+          <input type="hidden" name="referer_title" value="Contact - Acumen" />
+          <input type="hidden" name="queried_id" value="167" />
+          <div class="wp-form__fields">
+            {fields.map((f, i) => (
+              <div class="wp-form__group wp-form__group--half form-field">
+                <label for={`ct-field-${i}`} class="wp-form__label">{f.label}</label>
+                <input size="1" type={f.type} name={f.name} id={`ct-field-${i}`} class="wp-form__input" required={f.required} />
+              </div>
+            ))}
+            <div class="wp-form__group form-field">
+              <label for="ct-message" class="wp-form__label">Message</label>
+              <textarea class="wp-form__input wp-form__input--area" name="form_fields[message]" id="ct-message" rows="4"></textarea>
+            </div>
+            <div class="wp-form__group wp-form__group--submit form-field">
+              <button class="wp-form__button" type="submit">
+                <span class="wp-form__button-content"><span class="wp-form__button-icon" set:html={arrow} /><span>Send message</span></span>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="ct__links ct__links--below ct--mobile">
+          <div class="ct__link animateFromBottom"><div><a href="mailto:info@acumen.be?subject=Online%20Call" info="">Book an online call</a></div></div>
+          <div class="ct__link animateFromBottom"><div><a href="mailto:info@acumen.be">info@acumen.be</a></div></div>
+          <div class="ct__link animateFromBottom"><div><a href="tel:+32%20(0)16%2040%2089%2086">+32 (0)16 40 89 86</a></div></div>
+        </div>
+        <div class="ct__addresses ct__addresses--below ct--mobile">
+          <div class="ct__address animateFromBottom"><p>Ambachtenlaan 14<br />3001 Leuven<br />Belgium</p></div>
+          <div class="ct__address animateFromBottom"><p>Piata Bisericii 8<br />300233 Timișoara<br />Romania</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="ct-photo" data-animate="fadeInUp" data-motion={motion}><div class="ct-photo__inner"></div></section>
+  </div>
+</Base>

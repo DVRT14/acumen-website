@@ -1,0 +1,74 @@
+/* Contact page (was Elementor page 167). The form reuses the whitepaper form styles (whitepaper.css). */
+.ct-page { display: flow-root; } /* keeps the photo margin inside, like the old document wrapper */
+.ct { position: relative; display: flex; flex-direction: column; padding: 0 50px; }
+.ct__inner { display: flex; flex-grow: 1; width: 100%; max-width: min(100%, 1180px); margin: 0 auto; padding: 150px 0 95px; }
+.ct__intro { position: relative; display: flex; flex-direction: column; width: 45%; min-width: 0; padding-right: 80px; }
+.ct__form { position: relative; display: flex; flex-direction: column; width: 55%; min-width: 0; }
+.ct__box { position: relative; display: flex; flex-direction: column; }
+.ct__title { position: relative; }
+.ct__title h2 { margin: 0 0 17px; font-family: "Atype Display", Sans-serif; font-size: 44px; font-weight: 400; line-height: 1em; color: #002921; }
+.ct__text { position: relative; width: 355px; max-width: 100%; font-size: 16px; font-weight: 300; line-height: 22px; color: #AAAAAA; }
+.ct__space { position: relative; flex-shrink: 0; }
+.ct__space--61 { height: 61px; }
+.ct__space--88 { height: 88px; }
+
+.ct__links { position: relative; display: flex; flex-direction: column; }
+.ct__link { position: relative; max-width: 100%; }
+.ct__link > div { margin-bottom: 17px; font-family: "Atype Display", Sans-serif; font-size: 26px; font-weight: 400; line-height: 1.154em; color: #002921; }
+.ct__link a { color: inherit; transition: color .3s ease-in-out; }
+.ct__link a:hover { color: #B9D0D0; }
+.ct__link--call { align-self: flex-start; }
+.ct__link--call > div { position: relative; cursor: pointer; transition: all .3s ease-in-out; }
+.ct__link--call a:hover { color: inherit; }
+.ct__link--call > div::after { content: ''; position: absolute; bottom: -4px; left: 50%; width: 90%; height: 2px; background: #B9D0D0; opacity: 0; transform: translateX(-50%); transition: all .3s ease-in-out; }
+.ct__link--call > div:hover::after { opacity: 1; }
+
+.ct__addresses { position: relative; display: flex; justify-content: space-between; gap: 20px; }
+.ct__address { position: relative; max-width: 100%; padding-left: 10px; font-size: 16px; font-weight: 300; line-height: 22px; color: #AAAAAA; }
+.ct__address::before { content: ''; position: absolute; top: 10%; left: 0; width: 1px; height: 80%; background: #809490; }
+.ct__address p { margin: 0; }
+
+.ct-form .wp-form__label { color: inherit; }
+.ct-form .wp-form__input--area { min-height: 40px; padding: 5px 14px; }
+.ct-form .wp-form__button-icon svg { top: 3px; }
+.ct-form .wp-form__button:hover { color: #C8EF00; background-color: #002921; }
+.ct-form .wp-form__button:hover path { fill: #C8EF00; }
+
+.ct--mobile { display: none; }
+
+.ct-photo { position: relative; display: flex; flex-direction: column; min-height: 100vh; margin-bottom: 50px; }
+.ct-photo:not(.elementor-motion-effects-element-type-background),
+.ct-photo > .elementor-motion-effects-container > .elementor-motion-effects-layer {
+  background-image: url("/wp-content/uploads/2024/06/DSCF6504-full-size-scaled.webp");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.ct-photo__inner { display: flex; flex-direction: column; flex-grow: 1; width: 100%; max-width: min(100%, 1180px); margin: 0 auto; }
+
+@media (min-width: 1025px) {
+  .ct-photo:not(.elementor-motion-effects-element-type-background),
+  .ct-photo > .elementor-motion-effects-container > .elementor-motion-effects-layer { background-attachment: fixed; }
+}
+
+@media (max-width: 1024px) {
+  .ct__inner { flex-wrap: wrap; padding: 100px 0; }
+  .ct__intro, .ct__form { width: 100%; }
+  .ct__intro { padding-right: 0; }
+  .ct__title h2 { font-size: 40px; }
+  .ct__text { width: 100%; }
+  .ct--desktop { display: none; }
+  .ct--mobile { display: flex; }
+  .ct__addresses { flex-direction: column; }
+  .ct__links--below { margin: 82px 0 54px; }
+}
+
+@media (max-width: 767px) {
+  .ct { padding: 0 15px; }
+  .ct__inner { padding: 40px 0 35px; }
+  .ct__intro, .ct__form, .ct__box, .ct__links, .ct__addresses, .ct-photo, .ct-photo__inner { flex-wrap: wrap; }
+  .ct__space--61 { height: 35px; }
+  .ct__links--below { margin: 82px 0 43px; }
+  .ct__addresses--below { gap: 25px; }
+  .ct-photo { min-height: 685px; }
+}

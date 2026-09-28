@@ -329,8 +329,9 @@ function motionEffects() {
     motion_fx_translateY_speed: { unit: 'px', size: +el.dataset.parallax, sizes: [] },
     motion_fx_translateY_affectedRange: { unit: '%', size: '', sizes: { start: 0, end: 100 } },
   }));
-  $$('[data-settings*="motion_fx"]').forEach(el => {
-    const s = settingsOf(el), device = deviceMode();
+  // Rebuilt markup may carry the same settings in data-motion (e.g. background scroll effects).
+  $$('[data-settings*="motion_fx"], [data-motion]').forEach(el => {
+    const s = el.dataset.motion ? JSON.parse(el.dataset.motion) : settingsOf(el), device = deviceMode();
     for (const prefix of ['motion_fx', 'background_motion_fx']) {
       const devices = s[prefix + '_devices'];
       if ((devices && !devices.includes(device)) || !(s[prefix + '_motion_fx_scrolling'] || s[prefix + '_motion_fx_mouse'])) continue;

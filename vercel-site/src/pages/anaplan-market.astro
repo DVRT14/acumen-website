@@ -1,5 +1,5 @@
 ---
-// "How is Anaplan positioned in the market?" (was Elementor page 3457). Content: src/content/one-off/anaplan-market.json.
+// "How is Anaplan positioned in the market?" (old site page 3457). Content: src/content/one-off/anaplan-market.json.
 import Base from '../layouts/Base.astro';
 import meta from '../data/meta.json';
 import AnaplanMarket from '../components/anaplan/AnaplanMarket.astro';
@@ -8,6 +8,6 @@ import '../styles/post.css';
 import '../styles/anaplan.css';
 const m = meta['anaplan-market'];
 ---
-<Base {...m} bodyClass={`${m.bodyClass} p-spaced`}>
+<Base {...m} bodyClass="p-spaced">
   <div class="ap"><AnaplanMarket c={c} /></div>
 </Base>

@@ -23,7 +23,7 @@ function headerNav() {
   }
   const masthead = $('.masthead');
   if (masthead) {
-    // Reserve the bars' natural (unscrolled) height, like Elementor's sticky spacer did.
+    // Reserve the bars' natural (unscrolled) height, like the old sticky header spacer did.
     const bars = $$('.header-bar', masthead);
     const reserve = () => {
       const scrolled = masthead.classList.contains('is-scrolled');
@@ -41,7 +41,7 @@ function headerNav() {
     reserve();
     addEventListener('resize', reserve);
     addEventListener('load', reserve);
-    // Tighter bar once scrolled (was Elementor sticky's "effects offset" of 100px).
+    // Tighter bar once scrolled (the old sticky header's "effects offset" of 100px).
     const onScroll = () => masthead.classList.toggle('is-scrolled', scrollY >= 100);
     addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -261,7 +261,7 @@ function postItemHover() {
 
 function animateElements() {
   const tl = gsap.timeline();
-  const fields = $$('.elementor-field-group, .form-field'), fromBottom = $$('.animateFromBottom');
+  const fields = $$('.form-field'), fromBottom = $$('.animateFromBottom');
   if (fields.length) tl.to(fields, { opacity: 1, y: 0, stagger: 0.2, duration: 1, ease: 'power2.out' }, 'start');
   if (fromBottom.length) tl.to(fromBottom, { opacity: 1, y: 0, stagger: 0.2, duration: 1, ease: 'power2.out' }, 'start');
 }

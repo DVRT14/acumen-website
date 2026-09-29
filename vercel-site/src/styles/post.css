@@ -1,4 +1,4 @@
-/* Knowledge post layout. Values reproduce the old single-post template (Elementor 996). */
+/* Knowledge post layout. Values reproduce the old single-post template (template 996). */
 .post { overflow: hidden; }
 
 /* Templates 996 and 1047 spaced paragraphs like this, page-wide (body class `p-spaced`); the
@@ -196,7 +196,7 @@
 .newsletter-card__note { position: relative; width: 767px; max-width: 100%; font-size: 21px; font-weight: 300; line-height: 33px; text-align: center; color: #000; }
 .newsletter-card__note a { text-decoration: underline !important; }
 
-/* Newsletter form (was an Elementor Pro form) */
+/* Newsletter form */
 .nl-form__fields { display: flex; flex-wrap: wrap; margin: 0 -5px -10px; }
 .nl-form__group { position: relative; display: flex; flex-wrap: wrap; align-items: center; min-height: 1px; margin-bottom: 10px; padding: 0 5px; }
 .nl-form__group--wide { width: 66.666%; }

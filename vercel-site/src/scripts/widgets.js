@@ -1,20 +1,19 @@
-// Replacements for the Elementor / Elementor Pro / JetEngine frontend scripts, driven by the same
-// data-settings JSON the markup already carries. Ported from their minified sources so the
-// resulting DOM state (classes, inline styles) matches what the old scripts produced.
+// Widget behaviour driven by data attributes on the markup: sticky elements (data-sticky), entrance
+// animations (data-animate), scroll/mouse motion (data-parallax, data-motion), carousels
+// (data-carousel, data-slider_options), tabs, share buttons (data-share), lottie (data-lottie) and
+// forms (data-form). Settings keep the old page builder's JSON shape, so the values carried over as-is.
 import { $$ } from './scroll.js';
 
 const BREAKPOINTS = { mobile: 767, tablet: 1024 };
-const settingsOf = el => { try { return JSON.parse(el.dataset.settings || '{}'); } catch { return {}; } };
 const deviceMode = () => innerWidth <= BREAKPOINTS.mobile ? 'mobile' : innerWidth <= BREAKPOINTS.tablet ? 'tablet' : 'desktop';
 
-// Elementor's getCurrentDeviceSetting: mobile → tablet → desktop fallback; '' counts as unset.
+// Per-device setting: mobile → tablet → desktop fallback; '' counts as unset.
 function deviceSetting(s, key, device = deviceMode()) {
   const chain = { mobile: ['_mobile', '_tablet', ''], tablet: ['_tablet', ''], desktop: [''] }[device];
   for (const suffix of chain) { const v = s[key + suffix]; if (v !== undefined && v !== '' && !(v?.size === '' && !Object.keys(v?.sizes || {}).length)) return v; }
   return undefined;
 }
 
-// Elementor's `elementorModules.utils.Scroll.scrollObserver`.
 function scrollObserver(callback, offset = '0px') {
   return new IntersectionObserver(entries => callback(entries[0].isIntersecting), { rootMargin: offset, threshold: [0] });
 }
@@ -26,21 +25,14 @@ function contentHeight(el) {
   return h;
 }
 
-/* ---------- User-agent class (apple-webkit.min.css targets .e--ua-appleWebkit) ---------- */
-function userAgentClasses() {
-  const ua = navigator.userAgent;
-  const blink = ua.includes('Chrome') && !!window.CSS;
-  if (ua.includes('AppleWebKit') && !blink) document.body.classList.add('e--ua-appleWebkit');
-}
-
-/* ---------- Sticky (jquery.sticky + Elementor sticky handler) ---------- */
+/* ---------- Sticky (the behaviour of jquery.sticky) ---------- */
 class Sticky {
   constructor(el, opts) {
     this.el = el;
     this.o = { to: 'top', offset: 0, effectsOffset: 0, parent: false, ...opts };
     this.active = false; this.notFollowing = false; this.effects = false;
-    el.classList.add('elementor-sticky');
-    if (this.o.parent) this.parent = this.o.parent === true ? el.parentElement : el.parentElement.closest(this.o.parent);
+    el.classList.add('sticky');
+    if (this.o.parent) this.parent = el.parentElement;
     addEventListener('scroll', () => this.check(), { passive: true });
     addEventListener('resize', () => this.onResize());
     this.check();
@@ -64,7 +56,7 @@ class Sticky {
   }
   addSpacer() {
     this.spacer = this.el.cloneNode(true);
-    this.spacer.classList.add('elementor-sticky__spacer');
+    this.spacer.classList.add('sticky__spacer');
     Object.assign(this.spacer.style, { visibility: 'hidden', transition: 'none', animation: 'none' });
     this.el.after(this.spacer);
   }
@@ -74,9 +66,9 @@ class Sticky {
     s.position = 'fixed'; s.width = this.width + 'px'; s.marginTop = '0px'; s.marginBottom = '0px';
     s[this.o.to] = this.o.offset + 'px'; s[this.o.to === 'top' ? 'bottom' : 'top'] = '';
     if (this.left) s.setProperty('inset-inline-start', this.left + 'px');
-    this.el.classList.add('elementor-sticky--active', 'elementor-section--handles-inside');
+    this.el.classList.add('sticky--active');
   }
-  unstickStyles() { this.restore(this.el, '_unsticky'); this.el.classList.remove('elementor-sticky--active', 'elementor-section--handles-inside'); }
+  unstickStyles() { this.restore(this.el, '_unsticky'); this.el.classList.remove('sticky--active'); }
   followParent() {
     const t = this.measure(this.el), top = this.o.to === 'top';
     if (this.notFollowing) {
@@ -112,8 +104,8 @@ class Sticky {
       t = this.o.to === 'top' ? n.top.fromTop - this.o.offset : -n.bottom.fromBottom - this.o.offset;
       if (t <= 0) { this.measureBox(); this.addSpacer(); this.stick(); this.active = true; if (this.parent) this.followParent(); }
     }
-    if (this.effects && -t < this.o.effectsOffset) { this.el.classList.remove('elementor-sticky--effects'); this.effects = false; }
-    else if (!this.effects && -t >= this.o.effectsOffset) { this.el.classList.add('elementor-sticky--effects'); this.effects = true; }
+    if (this.effects && -t < this.o.effectsOffset) { this.el.classList.remove('sticky--effects'); this.effects = false; }
+    else if (!this.effects && -t >= this.o.effectsOffset) { this.el.classList.add('sticky--effects'); this.effects = true; }
   }
   onResize() {
     if (!this.active) return;
@@ -123,27 +115,23 @@ class Sticky {
   }
 }
 
-const isContainer = el => !!el && (el.classList.contains('e-con') || el.classList.contains('e-con-inner'));
-
 function sticky() {
-  $$('[data-settings*="sticky"], [data-sticky]').forEach(el => {
-    const s = el.dataset.sticky ? JSON.parse(el.dataset.sticky) : settingsOf(el);
+  $$('[data-sticky]').forEach(el => {
+    const s = JSON.parse(el.dataset.sticky);
     if (!s.sticky || !(s.sticky_on || []).includes(deviceMode())) return;
-    const topLevel = isContainer(el) && !isContainer(el.parentElement);
     new Sticky(el, {
       to: s.sticky,
       offset: +deviceSetting(s, 'sticky_offset') || 0,
       effectsOffset: +deviceSetting(s, 'sticky_effects_offset') || 0,
-      // Rebuilt markup (data-sticky): the parent is simply the element's parent.
-      parent: s.sticky_parent && (el.dataset.sticky || !topLevel) ? (el.dataset.sticky ? true : '.e-con, .e-con-inner, .elementor-widget-wrap') : false,
+      parent: !!s.sticky_parent, // stay within the parent element
     });
   });
 }
 
-/* ---------- Entrance animations (Elementor GlobalHandler) ---------- */
+/* ---------- Entrance animations ---------- */
 function entranceAnimations() {
-  // Rebuilt markup: data-animate="fadeInUp" data-animate-delay="500", optionally per device
-  // (data-animate-tablet / -mobile, same fallback as Elementor). Only data-animate starts hidden.
+  // data-animate="fadeInUp" data-animate-delay="500", optionally per device (data-animate-tablet /
+  // -mobile, same fallback as deviceSetting). Only data-animate starts hidden.
   $$('[data-animate], [data-animate-tablet], [data-animate-mobile]').forEach(el => {
     const d = el.dataset, name = deviceSetting({ a: d.animate, a_tablet: d.animateTablet, a_mobile: d.animateMobile }, 'a');
     if (!name) return;
@@ -155,22 +143,9 @@ function entranceAnimations() {
     });
     io.observe(el);
   });
-  $$('[data-settings*="animation"]').forEach(el => {
-    const s = settingsOf(el);
-    const name = deviceSetting(s, 'animation') || deviceSetting(s, '_animation');
-    if (!name) return;
-    const io = scrollObserver(inView => {
-      if (!inView) return;
-      io.unobserve(el);
-      if (name === 'none') { el.classList.remove('elementor-invisible'); return; }
-      el.classList.remove(name);
-      setTimeout(() => { el.classList.remove('elementor-invisible'); el.classList.add('animated', name); }, s._animation_delay || s.animation_delay || 0);
-    });
-    io.observe(el);
-  });
 }
 
-/* ---------- Motion effects (Elementor Pro motion-fx) ---------- */
+/* ---------- Motion effects (scroll / mouse) ---------- */
 const EFFECTS = {
   translateY: ['scroll', ['translateY']], translateX: ['scroll', ['translateX']], rotateZ: ['scroll', ['rotateZ']],
   scale: ['scroll', ['scale']], opacity: ['scroll', ['opacity']], blur: ['scroll', ['blur']],
@@ -203,22 +178,15 @@ class MotionFX {
   constructor(el, prefix, s) {
     this.widget = el; this.prefix = prefix; this.s = s;
     this.type = prefix === 'motion_fx' ? 'element' : 'background';
-    let target = el, dims = null;
-    const elType = el.dataset.element_type;
-    if (el.dataset.parallax !== undefined) {
-      dims = el; target = el.firstElementChild; // rebuilt markup: wrapper + moving layer
-    } else if (this.type === 'element' && !['section', 'container'].includes(elType)) {
-      dims = el;
-      target = el.querySelector(':scope > ' + (elType === 'column' ? '.elementor-widget-wrap' : '.elementor-widget-container')) || el;
-    }
-    this.el = target; this.dimsEl = dims || target; this.parent = target.parentElement;
+    // data-parallax: a wrapper (measured) around the moving layer; data-motion: the element itself.
+    const target = el.dataset.parallax !== undefined ? el.firstElementChild : el;
+    this.el = target; this.dimsEl = el; this.parent = target.parentElement;
     this.interactions = this.prepare();
-    this.el.classList.add('elementor-motion-effects-element');
-    this.parent.classList.add('elementor-motion-effects-parent');
+    this.el.classList.add('fx-element');
     if (this.type === 'background') {
-      this.el.classList.add('elementor-motion-effects-element-type-background');
-      this.container = document.createElement('div'); this.container.className = 'elementor-motion-effects-container';
-      this.layer = document.createElement('div'); this.layer.className = 'elementor-motion-effects-layer';
+      this.el.classList.add('fx-background');
+      this.container = document.createElement('div'); this.container.className = 'fx-container';
+      this.layer = document.createElement('div'); this.layer.className = 'fx-layer';
       this.container.prepend(this.layer); this.el.prepend(this.container);
       this.sizeLayer();
     }
@@ -226,11 +194,10 @@ class MotionFX {
     this.defineDimensions();
     this.reset(); this.run();
     addEventListener('resize', () => this.defineDimensions());
-    // Elementor's handler re-applies itself on resize (debounced 200ms).
+    // Re-apply on resize (debounced 200ms).
     let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => { this.interactions = this.prepare(); if (this.type === 'background') { this.sizeLayer(); this.defineDimensions(); } this.reset(); this.run(); }, 200); });
     if (s.motion_fx_motion_fx_scrolling) {
-      const c = el.querySelector('.elementor-widget-container') || el;
-      c.addEventListener('mouseenter', () => c.style.setProperty('--e-transform-transition-duration', ''));
+      el.addEventListener('mouseenter', () => el.style.setProperty('--e-transform-transition-duration', ''));
     }
   }
   prepare() {
@@ -323,16 +290,16 @@ class MotionFX {
 }
 
 function motionEffects() {
-  // Rebuilt markup: data-parallax="<speed>" = Elementor's vertical scrolling effect at that speed.
+  // data-parallax="<speed>": vertical scrolling effect at that speed.
   $$('[data-parallax]').forEach(el => new MotionFX(el, 'motion_fx', {
     motion_fx_motion_fx_scrolling: 'yes',
     motion_fx_translateY_effect: 'yes',
     motion_fx_translateY_speed: { unit: 'px', size: +el.dataset.parallax, sizes: [] },
     motion_fx_translateY_affectedRange: { unit: '%', size: '', sizes: { start: 0, end: 100 } },
   }));
-  // Rebuilt markup may carry the same settings in data-motion (e.g. background scroll effects).
-  $$('[data-settings*="motion_fx"], [data-motion]').forEach(el => {
-    const s = el.dataset.motion ? JSON.parse(el.dataset.motion) : settingsOf(el), device = deviceMode();
+  // data-motion: the full settings (e.g. background scroll effects, mouse tracking).
+  $$('[data-motion]').forEach(el => {
+    const s = JSON.parse(el.dataset.motion), device = deviceMode();
     for (const prefix of ['motion_fx', 'background_motion_fx']) {
       const devices = s[prefix + '_devices'];
       if ((devices && !devices.includes(device)) || !(s[prefix + '_motion_fx_scrolling'] || s[prefix + '_motion_fx_mouse'])) continue;
@@ -342,12 +309,12 @@ function motionEffects() {
   });
 }
 
-/* ---------- Carousels: Elementor loop carousel (Swiper 8) + JetEngine listing slider (was slick) ---------- */
+/* ---------- Carousels: posts carousel (Swiper 8) + expertise listing slider (was slick) ---------- */
 const I18N = {
   prev: 'Vorige slide', next: 'Volgende slide', first: 'Ga naar de eerste slide', last: 'Ga naar de laatste slide',
 };
 
-// Elementor's CarouselHandlerBase.getSwiperSettings + SwiperHandler.adjustConfig.
+// Swiper settings from the carousel's data-carousel options.
 function loopCarouselConfig(s) {
   const show = +s.slides_to_show || 3, single = show === 1;
   const spacing = device => { const v = deviceSetting(s, 'image_spacing_custom', device); return Number(v?.size ?? v) || 0; };
@@ -366,7 +333,7 @@ function loopCarouselConfig(s) {
   if (s.image_spacing_custom) cfg.spaceBetween = spacing('desktop');
   cfg.a11y = { enabled: true, prevSlideMessage: I18N.prev, nextSlideMessage: I18N.next, firstSlideMessage: I18N.first, lastSlideMessage: I18N.last };
   if (s.offset_sides === 'right' || s.offset_sides === 'both') cfg.slidesPerView = show + 0.001;
-  // adjustConfig: Elementor keys breakpoints by max-width; Swiper wants min-width.
+  // The options key breakpoints by max-width; Swiper wants min-width.
   const values = [BREAKPOINTS.mobile, BREAKPOINTS.tablet];
   for (const key of Object.keys(cfg.breakpoints)) {
     const i = parseInt(key);
@@ -382,8 +349,8 @@ async function carousels() {
     const list = wrap.querySelector(':scope > .jet-listing-grid__items');
     try { if (list) jetSlider(list, JSON.parse(wrap.dataset.slider_options)); } catch { /* bad options */ }
   });
-  const loops = $$('.elementor-widget-loop-carousel'), rebuilt = $$('.posts-carousel[data-carousel]');
-  if (!loops.length && !rebuilt.length) return;
+  const rebuilt = $$('.posts-carousel[data-carousel]');
+  if (!rebuilt.length) return;
   const { default: Swiper } = await import('swiper/bundle');
 
   rebuilt.forEach(w => {
@@ -395,23 +362,9 @@ async function carousels() {
     new Swiper(container, loopCarouselConfig(s));
   });
 
-  loops.forEach(w => {
-    const s = settingsOf(w), container = w.querySelector('.elementor-loop-container');
-    if (!container) return;
-    const slides = $$('.swiper-slide', container);
-    if (slides.length < 2) return;
-    const cfg = loopCarouselConfig(s);
-    if (s.offset_sides && s.offset_sides !== 'none') container.classList.add('offset-' + s.offset_sides);
-    if (s.arrows === 'yes') cfg.navigation = { prevEl: w.querySelector('.elementor-swiper-button-prev'), nextEl: w.querySelector('.elementor-swiper-button-next') };
-    slides.forEach((sl, i) => sl.setAttribute('aria-label', `${i + 1} van ${slides.length}`));
-    w.closest('.elementor-widget-wrap')?.classList.add('e-swiper-container');
-    w.classList.add('e-widget-swiper');
-    new Swiper(container, cfg);
-  });
-
 }
 
-// JetEngine listing slider. It used slick; this builds the same DOM slick produced (list/track, clones,
+// Expertise listing slider. It used slick; this builds the same DOM slick produced (list/track, clones,
 // px widths) so the existing CSS applies unchanged. Only what this site uses: no arrows/dots/autoplay.
 function jetSlider(list, o) {
   const items = [...list.children], n = items.length;
@@ -524,8 +477,8 @@ function shareButtons() {
     facebook: u => `https://www.facebook.com/sharer.php?u=${u}`,
     twitter: u => `https://twitter.com/intent/tweet?url=${u}`,
   };
-  $$('.elementor-share-btn, [data-share]').forEach(btn => {
-    const network = btn.dataset.share || [...btn.classList].map(c => c.match(/^elementor-share-btn_(\w+)$/)?.[1]).find(Boolean);
+  $$('[data-share]').forEach(btn => {
+    const network = btn.dataset.share;
     if (!urls[network]) return;
     const open = () => window.open(urls[network](encodeURIComponent(location.href.split('#')[0])), '', 'width=640,height=480');
     btn.addEventListener('click', open);
@@ -535,11 +488,11 @@ function shareButtons() {
 
 /* ---------- Lottie (hover trigger only — the only mode this site uses) ---------- */
 async function lotties() {
-  const widgets = $$('.elementor-widget-lottie, [data-lottie]');
+  const widgets = $$('[data-lottie]');
   if (!widgets.length) return;
   const { default: lottie } = await import('lottie-web/build/player/lottie_svg');
   widgets.forEach(w => {
-    const s = w.dataset.lottie ? JSON.parse(w.dataset.lottie) : settingsOf(w), container = w.querySelector('.e-lottie__container'), holder = w.querySelector('.e-lottie__animation');
+    const s = JSON.parse(w.dataset.lottie), container = w.querySelector('.e-lottie__container'), holder = w.querySelector('.e-lottie__animation');
     if (!holder) return;
     if (container && !container.querySelector('.e-lottie__caption')) {
       const p = document.createElement('p'); p.className = 'e-lottie__caption'; container.append(p);
@@ -562,7 +515,7 @@ async function lotties() {
       total = anim.totalFrames;
       if (s.play_speed?.size) anim.setSpeed(s.play_speed.size);
       anim.goToAndStop(startFrame(), true);
-      const area = s.hover_area === 'container' ? w.closest('.e-con, .xcard') : container;
+      const area = s.hover_area === 'container' ? w.closest('.xcard') : container;
       area?.addEventListener('mouseenter', () => { direction = 'forward'; play(); });
       if (s.on_hover_out === 'reverse' || s.on_hover_out === 'pause') {
         area?.addEventListener('mouseleave', () => { if (s.on_hover_out === 'pause') anim.pause(); else { direction = 'backward'; play(); } });
@@ -578,26 +531,26 @@ async function lotties() {
   });
 }
 
-/* ---------- Forms: POST to the stub endpoint, show Elementor's message markup ---------- */
+/* ---------- Forms: POST to the stub endpoint, show a success/error message ---------- */
 const FORM_MESSAGES = { success: 'Your submission was successful.', error: 'An error occurred.' };
 
 function forms() {
-  $$('form.elementor-form, form[data-form]').forEach(form => {
+  $$('form[data-form]').forEach(form => {
     form.addEventListener('submit', async e => {
       e.preventDefault();
       const button = form.querySelector('[type="submit"]');
-      form.querySelectorAll('.elementor-message').forEach(m => m.remove());
-      form.classList.add('elementor-form-waiting');
+      form.querySelectorAll('.form-message').forEach(m => m.remove());
+      form.classList.add('form-waiting');
       if (button) button.disabled = true;
       let ok = false;
       try {
         const res = await fetch('/api/forms', { method: 'POST', body: new FormData(form) });
         ok = res.ok && (await res.json()).success;
       } catch { /* network error → error message */ }
-      form.classList.remove('elementor-form-waiting');
+      form.classList.remove('form-waiting');
       if (button) button.disabled = false;
       const msg = document.createElement('div');
-      msg.className = `elementor-message elementor-message-${ok ? 'success' : 'danger'}`;
+      msg.className = `form-message form-message--${ok ? 'success' : 'error'}`;
       msg.setAttribute('role', 'alert');
       msg.textContent = ok ? FORM_MESSAGES.success : FORM_MESSAGES.error;
       if (ok) form.reset();
@@ -606,9 +559,8 @@ function forms() {
   });
 }
 
-// Elementor initialised its handlers in this order after the theme script.
-export function initElementor() {
-  userAgentClasses();
+// Same order as the old handlers, after the theme animations.
+export function initWidgets() {
   sticky();
   entranceAnimations();
   motionEffects();

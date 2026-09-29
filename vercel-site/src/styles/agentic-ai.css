@@ -1,4 +1,4 @@
-/* Agentic AI page (was Elementor post 3891). Text inherits the kit body type (25px/1.24em). */
+/* Agentic AI page (old site post 3891). Text inherits the kit body type (25px/1.24em). */
 .ai-sec { position: relative; display: flex; flex-direction: column; }
 .ai-sec--hero { flex-shrink: 0; }
 .ai-sec--white { background-color: #fff; }
@@ -21,7 +21,7 @@
 .ai-icon { display: inline-block; font-size: 39px; line-height: 1; text-align: center; color: #002921; transition: all .3s; }
 .ai-icon svg { position: relative; display: block; width: 1em; height: 1em; fill: currentColor; }
 
-/* Buttons (Elementor small button look) */
+/* Buttons (the old small button look) */
 .ai-btn a { display: inline-block; padding: 12px 24px; border-radius: 3px; background-color: #69727D; font-size: 15px; line-height: 1; text-align: center; color: #fff; fill: #fff; transition: all .3s; }
 .ai-btn a > span { display: flex; justify-content: center; gap: 5px; }
 .ai-btn a > span > span { display: block; }

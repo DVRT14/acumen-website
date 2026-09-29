@@ -1,5 +1,5 @@
 ---
-// Culture (was Elementor page 135). Content: src/content/one-off/culture.json. Behaviour from the site
+// Culture (old site page 135). Content: src/content/one-off/culture.json. Behaviour from the site
 // scripts: sticky hero (data-sticky), typed words (.typedContainer), story blocks fading in on scroll
 // (howWeHelpYouSectionAnimation). An empty, zero-height section of the old page is left out.
 import Base from '../layouts/Base.astro';
@@ -67,7 +67,7 @@ const sticky = JSON.stringify({ sticky: 'top', sticky_on: ['desktop', 'tablet', 
 
     <section class="cu-box">
       <div class="cu-box__inner">
-        <div class="elementor-menu-anchor" id="careers"></div>
+        <div id="careers"></div>
         <div class="cu-join"><h2 set:html={c.joinTitle} /></div>
         <div class="cu-open"><div><h2 set:html={c.positionsTitle} /></div></div>
         <div class="cu-divider"><span></span></div>

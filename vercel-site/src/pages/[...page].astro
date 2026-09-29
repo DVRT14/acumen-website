@@ -1,5 +1,5 @@
 ---
-// Pages that never had Elementor content (legal texts, careers, the expertise archive): their old HTML
+// Pages that were plain WordPress content (legal texts, careers, the expertise archive): their old HTML
 // between header and footer. Content: src/content/pages/*.json (file name = path, "~" = "/").
 import Base from '../layouts/Base.astro';
 import '../styles/wp-content.css';
@@ -13,6 +13,6 @@ export function getStaticPaths() {
 }
 const { page } = Astro.props;
 ---
-<Base seo={page.seo} bodyClass={page.bodyClass}>
+<Base seo={page.seo}>
   <Fragment set:html={page.html} />
 </Base>

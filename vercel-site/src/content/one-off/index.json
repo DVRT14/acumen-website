@@ -1,5 +1,5 @@
 {
- "typed": "<div class=\"typed-strings\">\n  <p>value</p>\n  <p>decisions</p>\n  <p>opportunities</p>\n  <p>profit</p>\n</div>\n<!--<h2>Transfor data into <span id=\"typed\"></span></h2>-->\n\n\n<style>\n    .typed-strings {\n        color: #fff;\n        display: none;\n    }\n    \n    .elementor-editor-active .typed-strings {\n        display: block;\n    }\n  \n</style>",
+ "typed": "<div class=\"typed-strings\">\n  <p>value</p>\n  <p>decisions</p>\n  <p>opportunities</p>\n  <p>profit</p>\n</div>\n<!--<h2>Transfor data into <span id=\"typed\"></span></h2>-->\n\n\n<style>\n    .typed-strings {\n        color: #fff;\n        display: none;\n    }\n  \n</style>",
  "heroTitle": "Transform data into <br><span class=\"typed\"></span>",
  "heroText": "Your data &amp; AI consultancy partner.",
  "heroButton": {

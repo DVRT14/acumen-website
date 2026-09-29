@@ -37,8 +37,8 @@ Vercel builds it with the Astro preset (`vercel.json` sets `framework: astro`, p
   - `site.js` — entry
   - `scroll.js` — the single GSAP + ScrollTrigger + Lenis instance
   - `animations.js` — the site's own animations (ported from the old theme bundle)
-  - `elementor.js` — replacements for Elementor/Pro/JetEngine behaviour (sticky header, entrance
-    animations, motion effects, carousels, tabs, share buttons, lottie, forms)
+  - `widgets.js` — widget behaviour from data attributes (sticky elements, entrance animations,
+    motion effects, carousels, tabs, share buttons, lottie, forms)
   - `consent.js` — cookie consent and tracker loading
 - `src/components/ConsentBanner.astro` — consent banner/preferences markup.
 - `api/forms.js` — Vercel function every form posts to (a stub for now, see below).

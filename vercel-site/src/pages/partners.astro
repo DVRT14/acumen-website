@@ -1,5 +1,5 @@
 ---
-// Partners (was Elementor page 3430).
+// Partners (old site page 3430).
 import Base from '../layouts/Base.astro';
 import meta from '../data/meta.json';
 import '../styles/post.css';
@@ -14,7 +14,7 @@ const partners = [
   { name: 'Microsoft', text: 'Cloud Leader', img: { loading: 'lazy', decoding: 'async', width: '800', height: '489', src: `${u}MS-Acumen-Mark-TransparentBackground-1024x626.webp`, alt: '', srcset: `${u}MS-Acumen-Mark-TransparentBackground-1024x626.webp 1024w, ${u}MS-Acumen-Mark-TransparentBackground-300x184.webp 300w, ${u}MS-Acumen-Mark-TransparentBackground-768x470.webp 768w, ${u}MS-Acumen-Mark-TransparentBackground.webp 1043w`, sizes: '(max-width: 800px) 100vw, 800px' } },
 ];
 ---
-<Base {...meta.partners} bodyClass={`${meta.partners.bodyClass} p-spaced`}>
+<Base {...meta.partners} bodyClass="p-spaced">
   <div class="partners">
     <section class="post-sec post-hero">
       <div class="post-sec__inner post-hero__inner">

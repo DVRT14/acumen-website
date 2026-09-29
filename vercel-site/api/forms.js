@@ -1,4 +1,4 @@
-// Form submission stub. Every site form POSTs here (multipart FormData, Elementor field names).
+// Form submission stub. Every site form POSTs here (multipart FormData, the old form field names).
 // TODO(forms-backend): the backend is not decided yet — deliver the submission (mail, CRM, …) here.
 const MAX_BYTES = 100_000;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

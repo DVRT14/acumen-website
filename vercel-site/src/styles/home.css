@@ -1,4 +1,4 @@
-/* Home (was Elementor page 2774). Expertise cards: expertise-slider.css; posts: post-card.css. */
+/* Home (old site page 2774). Expertise cards: expertise-slider.css; posts: post-card.css. */
 .hm > section { position: relative; display: flex; flex-direction: column; width: 100%; }
 .hm section *, .hm section *::before, .hm section *::after { box-sizing: border-box; }
 .hm-full { position: relative; display: flex; flex-direction: column; width: 100%; }
@@ -9,7 +9,7 @@
 .hm-box__in { display: flex; flex-direction: column; justify-content: center; gap: 30px; flex-grow: 1; width: 100%; max-width: 1180px; margin: 0 auto; }
 .hm-box__in > * { position: relative; min-width: 0; max-width: 100%; }
 
-/* Buttons (Elementor button widget) */
+/* Buttons */
 .hm-btn a { display: inline-block; padding: 12px 24px; border-radius: 3px; font-size: 15px; line-height: 1; text-align: center; color: #fff; fill: #fff; transition: all .3s; }
 .hm-btn a > span { display: flex; flex-direction: row-reverse; justify-content: center; gap: 5px; }
 .hm-btn a > span > span { display: block; }
@@ -81,7 +81,7 @@
 .hm-benefit__title h3 { margin: 0 0 5px; font-family: "DM Sans", Sans-serif; font-size: 25px; font-weight: 400; line-height: 1.24em; color: #000; }
 .hm-benefit__text { width: 502px; font-family: "DM Sans", Sans-serif; font-size: 25px; font-weight: 400; line-height: 1.24em; color: #AAAAAA; }
 
-/* Videos (Elementor video widget) */
+/* Videos */
 .hm-video { position: relative; width: 100%; max-width: 100%; pointer-events: none; }
 .hm-video > div { overflow: hidden; transform: translateZ(0); }
 .hm-video video { display: flex; width: 100%; max-width: 100%; height: 100%; aspect-ratio: 1; border: none; object-fit: cover; background: transparent; }
@@ -224,7 +224,7 @@
 }
 
 @media (max-width: 767px) {
-  /* Elementor containers wrap on mobile; in a wrapping column each line sizes to its content */
+  /* Containers wrap on mobile (as on the old site); in a wrapping column each line sizes to its content */
   .hm > section, .hm-hero__box, .hm-hero__typed, .hm-photo__frame, .hm-photo__content, .hm-box__in, .hm-benefits-m__list, .hm-benefits-m__item, .hm-benefits-m__img,
   .hm-group__in, .hm-group__col, .hm-how__col, .hm-how__step, .hm-tools__row, .hm-tools__card, .hm-duo__row, .hm-duo__col, .hm-values__row, .hm-values__list,
   .hm-values__item, .hm-values__photos, .hm-culture__row, .hm-culture__row > div, .hm-culture__card, .hm-cta__card, .hm-cta__actions, .hm-full, .hm-expertise__spacer,

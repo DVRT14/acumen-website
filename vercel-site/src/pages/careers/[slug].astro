@@ -1,5 +1,5 @@
 ---
-// Vacancies (were Elementor pages 4122 / 4165, one layout). Content: src/content/vacatures/*.json.
+// Vacancies (old site pages 4122 / 4165, one layout). Content: src/content/vacatures/*.json.
 // The application form posts to the forms stub like every site form.
 import Base from '../../layouts/Base.astro';
 import '../../styles/vacature.css';
@@ -19,7 +19,7 @@ const fields = [
   { id: 'vac-email', name: 'form_fields[email]', type: 'email', label: 'Email', placeholder: 'E-mail' },
 ];
 ---
-<Base seo={page.seo} bodyClass={page.bodyClass}>
+<Base seo={page.seo}>
   <div class="vac">
     <section class="vac__sec">
       <div class="vac__inner">

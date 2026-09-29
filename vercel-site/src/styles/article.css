@@ -1,4 +1,4 @@
-/* Single-column posts (were Elementor posts 3782 / 3810). Text uses the kit body type. */
+/* Single-column posts (old site posts 3782 / 3810). Text uses the kit body type. */
 .art { position: relative; display: flex; flex-direction: column; }
 .art__inner { display: flex; flex-direction: column; flex-grow: 1; width: 100%; max-width: min(100%, 1180px); margin: 0 auto; }
 .art > .art__inner > * { position: relative; min-width: 0; max-width: 100%; }

@@ -1,6 +1,6 @@
 ---
 // Knowledge posts: the old single-post template (996), or the whitepaper template (`template: "whitepaper"`,
-// was five identical Elementor copies). Content: src/content/knowledge/*.json, extracted from the old
+// was five identical template copies). Content: src/content/knowledge/*.json, extracted from the old
 // pages by tools/extract_posts.py.
 import Base from '../../layouts/Base.astro';
 import ShareButtons from '../../components/post/ShareButtons.astro';
@@ -21,7 +21,7 @@ export function getStaticPaths() {
 }
 const { post } = Astro.props;
 ---
-<Base seo={post.seo} bodyClass={post.template === 'whitepaper' ? post.bodyClass : `${post.bodyClass} p-spaced`}>
+<Base seo={post.seo} bodyClass={post.template === 'whitepaper' ? undefined : 'p-spaced'}>
   {post.template === 'article' ? <Article blocks={post.blocks} /> : (
   <article class="post">
     <section class="post-sec post-hero" id="start">

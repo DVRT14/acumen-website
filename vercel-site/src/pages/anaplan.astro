@@ -1,5 +1,5 @@
 ---
-// "What is Anaplan?" (was Elementor page 3504). Content: src/content/one-off/anaplan.json.
+// "What is Anaplan?" (old site page 3504). Content: src/content/one-off/anaplan.json.
 import Base from '../layouts/Base.astro';
 import meta from '../data/meta.json';
 import AnaplanTool from '../components/anaplan/AnaplanTool.astro';
@@ -7,6 +7,6 @@ import c from '../content/one-off/anaplan.json';
 import '../styles/post.css';
 import '../styles/anaplan.css';
 ---
-<Base {...meta.anaplan} bodyClass={`${meta.anaplan.bodyClass} p-spaced`}>
+<Base {...meta.anaplan} bodyClass="p-spaced">
   <div class="ap"><AnaplanTool c={c} /></div>
 </Base>

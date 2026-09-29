@@ -1,4 +1,4 @@
-/* Contact page (was Elementor page 167). The form reuses the whitepaper form styles (whitepaper.css). */
+/* Contact page (old site page 167). The form reuses the whitepaper form styles (whitepaper.css). */
 .ct-page { display: flow-root; } /* keeps the photo margin inside, like the old document wrapper */
 .ct { position: relative; display: flex; flex-direction: column; padding: 0 50px; }
 .ct__inner { display: flex; flex-grow: 1; width: 100%; max-width: min(100%, 1180px); margin: 0 auto; padding: 150px 0 95px; }
@@ -37,8 +37,8 @@
 .ct--mobile { display: none; }
 
 .ct-photo { position: relative; display: flex; flex-direction: column; min-height: 100vh; margin-bottom: 50px; }
-.ct-photo:not(.elementor-motion-effects-element-type-background),
-.ct-photo > .elementor-motion-effects-container > .elementor-motion-effects-layer {
+.ct-photo:not(.fx-background),
+.ct-photo > .fx-container > .fx-layer {
   background-image: url("/wp-content/uploads/2024/06/DSCF6504-full-size-scaled.webp");
   background-position: center center;
   background-repeat: no-repeat;
@@ -47,8 +47,8 @@
 .ct-photo__inner { display: flex; flex-direction: column; flex-grow: 1; width: 100%; max-width: min(100%, 1180px); margin: 0 auto; }
 
 @media (min-width: 1025px) {
-  .ct-photo:not(.elementor-motion-effects-element-type-background),
-  .ct-photo > .elementor-motion-effects-container > .elementor-motion-effects-layer { background-attachment: fixed; }
+  .ct-photo:not(.fx-background),
+  .ct-photo > .fx-container > .fx-layer { background-attachment: fixed; }
 }
 
 @media (max-width: 1024px) {

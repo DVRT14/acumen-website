@@ -406,7 +406,7 @@ def form_block(form):
 
 
 def article_blocks(src, doc_id, styles):
-    css = open(os.path.join(ROOT, 'public', 'wp-content', 'uploads', 'elementor', 'css', f'post-{doc_id}.css'), encoding='utf8').read()
+    css = open(os.path.join(EXPORT, 'wp-content', 'uploads', 'elementor', 'css', f'post-{doc_id}.css'), encoding='utf8').read()
     doc = element(src, re.search(rf'<div data-elementor-type="[\w-]+" data-elementor-id="{doc_id}"', src).start())
     blocks = []
     for m in re.finditer(r'<div class="[^"]*elementor-widget-(heading|text-editor|spacer|image|button|form)\b[^"]*" data-id="(\w+)"', doc):
@@ -431,6 +431,27 @@ def article_blocks(src, doc_id, styles):
     return blocks
 
 
+# Output carries no Elementor traces: its class names, widget attributes and editor-only CSS were
+# layout hooks for Elementor's stylesheets, which the site no longer has.
+ELEMENTOR_ATTRS = re.compile(r' data-(?:id|element_type|widget_type)="[^"]*"')
+EDITOR_CSS = re.compile(r'\s*\.elementor-editor-active [^{]*\{[^}]*\}')
+
+
+def scrub(o):
+    if isinstance(o, dict):
+        return {k: scrub(v) for k, v in o.items()}
+    if isinstance(o, list):
+        return [scrub(v) for v in o]
+    if not isinstance(o, str) or 'elementor' not in o:
+        return o
+    o = EDITOR_CSS.sub('', ELEMENTOR_ATTRS.sub('', o))
+    o = o.replace('/uploads/elementor/', '/uploads/')  # its thumbnails were moved up a level
+    def classes(m):
+        keep = [c for c in m.group(1).split() if 'elementor' not in c]
+        return f' class="{" ".join(keep)}"' if keep else ''
+    return re.sub(r' class="([^"]*)"', classes, o)
+
+
 cards = {}
 posts = {}
 plain = {}
@@ -444,52 +465,47 @@ for name, f in PAGES.items():
     if name == 'knowledge~agentic-ai':
         os.makedirs(os.path.join(ROOT, 'src', 'content', 'one-off'), exist_ok=True)
         with open(os.path.join(ROOT, 'src', 'content', 'one-off', 'agentic-ai.json'), 'w', encoding='utf8') as fh:
-            json.dump({**one_off(src, ONE_OFF[name]), 'appendix': appendix(src, '3891')}, fh, ensure_ascii=False, indent=1)
+            json.dump(scrub({**one_off(src, ONE_OFF[name]), 'appendix': appendix(src, '3891')}), fh, ensure_ascii=False, indent=1)
     elif name in ONE_OFF or name == 'anaplan-tabs':
         os.makedirs(os.path.join(ROOT, 'src', 'content', 'one-off'), exist_ok=True)
         with open(os.path.join(ROOT, 'src', 'content', 'one-off', name + '.json'), 'w', encoding='utf8') as fh:
-            json.dump(anaplan_tabs(src) if name == 'anaplan-tabs' else one_off(src, ONE_OFF[name]), fh, ensure_ascii=False, indent=1)
+            json.dump(scrub(anaplan_tabs(src) if name == 'anaplan-tabs' else one_off(src, ONE_OFF[name])), fh, ensure_ascii=False, indent=1)
     if name in ARTICLES:
         doc_id, styles = ARTICLES[name]
-        body_class = re.search(r'<body[^>]*class="([^"]*)"', src).group(1)
-        posts[name.split('~', 1)[1]] = {'seo': seo_head(src), 'bodyClass': body_class, 'template': 'article', 'blocks': article_blocks(src, doc_id, styles)}
-    meta[name] = {'seo': seo_head(src), 'bodyClass': re.search(r'<body[^>]*class="([^"]*)"', src).group(1)}
+        posts[name.split('~', 1)[1]] = {'seo': seo_head(src), 'template': 'article', 'blocks': article_blocks(src, doc_id, styles)}
+    meta[name] = {'seo': seo_head(src)}
     if 'data-elementor-type="single-post" data-elementor-id="996"' in src:
         slug = name.split('~', 1)[1]
-        body_class = re.search(r'<body[^>]*class="([^"]*)"', src).group(1)
-        posts[slug] = {'seo': seo_head(src), 'bodyClass': body_class, **post_fields(src)}
+        posts[slug] = {'seo': seo_head(src), **post_fields(src)}
     if set(re.findall(r'data-elementor-type="([\w-]+)"', src)) <= {'header', 'footer'}:
-        body_class = re.search(r'<body[^>]*class="([^"]*)"', src).group(1)
-        plain[name] = {'seo': seo_head(src), 'bodyClass': body_class, 'html': plain_body(src)}
+        plain[name] = {'seo': seo_head(src), 'html': plain_body(src)}
     vac = re.search(r'data-elementor-type="wp-page" data-elementor-id="(4122|4165)"', src)
     if vac:
         vacatures[name.split('~', 1)[1]] = {**meta[name], **vacature_fields(src, vac.group(1))}
     if name == 'white-paper-download-page':
         os.makedirs(os.path.join(ROOT, 'src', 'content', 'one-off'), exist_ok=True)
         with open(os.path.join(ROOT, 'src', 'content', 'one-off', name + '.json'), 'w', encoding='utf8') as fh:
-            json.dump(whitepaper_fields(src, '2628'), fh, ensure_ascii=False, indent=1)
+            json.dump(scrub(whitepaper_fields(src, '2628')), fh, ensure_ascii=False, indent=1)
     wp = re.search(r'data-elementor-type="single-post" data-elementor-id="(\d+)"', src)
     if wp and wp.group(1) in WHITEPAPER_TEMPLATES:
-        body_class = re.search(r'<body[^>]*class="([^"]*)"', src).group(1)
-        posts[name.split('~', 1)[1]] = {'seo': seo_head(src), 'bodyClass': body_class, **whitepaper_fields(src, wp.group(1))}
+        posts[name.split('~', 1)[1]] = {'seo': seo_head(src), **whitepaper_fields(src, wp.group(1))}
     if 'data-elementor-type="single-post" data-elementor-id="1047"' in src:
-        body_class = re.search(r'<body[^>]*class="([^"]*)"', src).group(1)
         slider = expertise_cards(by_id(src, 'f06ec46'))
-        expertise[name.split('~', 1)[1]] = {'seo': seo_head(src), 'bodyClass': body_class, **expertise_fields(src)}
+        expertise[name.split('~', 1)[1]] = {'seo': seo_head(src), **expertise_fields(src)}
 
 os.makedirs(os.path.join(ROOT, 'src', 'data'), exist_ok=True)
 with open(os.path.join(ROOT, 'src', 'data', 'cards.json'), 'w', encoding='utf8') as fh:
-    json.dump(cards, fh, ensure_ascii=False, indent=1)
+    json.dump(scrub(cards), fh, ensure_ascii=False, indent=1)
 with open(os.path.join(ROOT, 'src', 'data', 'meta.json'), 'w', encoding='utf8') as fh:
-    json.dump(meta, fh, ensure_ascii=False, indent=1)
+    json.dump(scrub(meta), fh, ensure_ascii=False, indent=1)
 with open(os.path.join(ROOT, 'src', 'data', 'expertise-cards.json'), 'w', encoding='utf8') as fh:
-    json.dump(slider, fh, ensure_ascii=False, indent=1)
+    json.dump(scrub(slider), fh, ensure_ascii=False, indent=1)
 for kind, pages in (('knowledge', posts), ('expertise', expertise), ('pages', plain), ('vacatures', vacatures)):
     out = os.path.join(ROOT, 'src', 'content', kind)
     os.makedirs(out, exist_ok=True)
     for slug, data in pages.items():
         with open(os.path.join(out, slug + '.json'), 'w', encoding='utf8') as fh:
-            json.dump(data, fh, ensure_ascii=False, indent=1)
+            json.dump(scrub(data), fh, ensure_ascii=False, indent=1)
 print(f'{len(cards)} cards, {len(posts)} posts, {len(expertise)} expertise pages')
 for slug, data in {**posts, **expertise}.items():
     missing = [k for k, v in data.items() if v in (None, '', []) and k != 'appendix']

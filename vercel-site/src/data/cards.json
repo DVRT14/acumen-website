@@ -3,7 +3,7 @@
   "href": "/knowledge/agentic-ai/",
   "title": "Everything you need to know about Agentic AI",
   "date": "28 augustus 2026",
-  "terms": "<span class=\"elementor-post-info__terms-list-item\">AI</span>",
+  "terms": "<span>AI</span>",
   "excerpt": null,
   "image": {
    "fetchpriority": "high",
@@ -21,7 +21,7 @@
   "href": "/knowledge/agentic-ai-from-experiments-to-work-that-runs-itself/",
   "title": "Agentic AI:<span><br>From experiments to work that runs itself</span>",
   "date": "29 juli 2026",
-  "terms": "<span class=\"elementor-post-info__terms-list-item\">AI</span>, <span class=\"elementor-post-info__terms-list-item\">Blog</span>",
+  "terms": "<span>AI</span>, <span>Blog</span>",
   "excerpt": "Most companies already test AI, but few get it running in daily operations. Agentic AI closes that gap: instead of just answering, an agent plans multi-step work, uses your own systems and data, and only involves a person where one is truly needed. We explain what that looks like in practice, where it pays off, and how we build it so it holds up in real operations, not just in a demo.",
   "image": {
    "loading": "lazy",
@@ -39,7 +39,7 @@
   "href": "/knowledge/de-riziv-controleshoft-is-ingezet/",
   "title": "De RIZIV controleshift is ingezet.",
   "date": "15 juni 2026",
-  "terms": "<span class=\"elementor-post-info__terms-list-item\">integration</span>",
+  "terms": "<span>integration</span>",
   "excerpt": "De manier waarop zorgdata wordt gevalideerd, gecontroleerd en gerapporteerd verandert. Ontdek wat de RIZIV controleshift betekent voor mutualiteiten, ziekenhuizen en andere zorgorganisaties. Is uw organisatie voldoende voorbereid?",
   "image": {
    "loading": "lazy",
@@ -57,7 +57,7 @@
   "href": "/knowledge/data-agents-insights-action/",
   "title": "Data agents: from insights to action",
   "date": "27 mei 2026",
-  "terms": "<span class=\"elementor-post-info__terms-list-item\">Blog</span>, <span class=\"elementor-post-info__terms-list-item\">integration</span>",
+  "terms": "<span>Blog</span>, <span>integration</span>",
   "excerpt": "Data agents bridge the gap between insights and action. By combining AI, trusted data, and business context, they help teams understand what happened, why it happened, and what to do next. Turning data into faster and smarter decisions.",
   "image": {
    "loading": "lazy",
@@ -75,7 +75,7 @@
   "href": "/knowledge/routing-optimization-essers-acumen/",
   "title": "Routing Optimization:<span><br>A commercial simulation engine for smarter logistics decisions<span />",
   "date": "24 maart 2026",
-  "terms": "<span class=\"elementor-post-info__terms-list-item\">AI</span>, <span class=\"elementor-post-info__terms-list-item\">Customer cases</span>",
+  "terms": "<span>AI</span>, <span>Customer cases</span>",
   "excerpt": "Together with Essers, Acumen developed a routing optimization simulation that makes complex logistics networks manageable. By analyzing large volumes of orders across multiple scenarios, the solution reveals efficiency gains and supports more informed, data-driven customer conversations.",
   "image": {
    "loading": "lazy",
@@ -93,7 +93,7 @@
   "href": "/knowledge/modern-data-platform-whitepaper/",
   "title": "</span>Modernizing your data platform<br><span>From technical complexity to sustainable business value",
   "date": "5 februari 2026",
-  "terms": "<span class=\"elementor-post-info__terms-list-item\">reporting</span>, <span class=\"elementor-post-info__terms-list-item\">White papers</span>",
+  "terms": "<span>reporting</span>, <span>White papers</span>",
   "excerpt": "This whitepaper walks through a real migration from a classic Kimball-based warehouse with rigid ETL to a modern, scalable lakehouse on Databricks. You’ll learn why the shift was needed, the phased approach taken, key wins for the business and technical teams, and practical lessons you can reuse.",
   "image": {
    "loading": "lazy",
@@ -111,7 +111,7 @@
   "href": "/knowledge/data-warehouse-to-lakehouse-whitepaper/",
   "title": "</span>From traditional data warehousing to a modern lakehouse<br><span>A practical journey with Databricks",
   "date": "5 september 2025",
-  "terms": "<span class=\"elementor-post-info__terms-list-item\">reporting</span>, <span class=\"elementor-post-info__terms-list-item\">White papers</span>",
+  "terms": "<span>reporting</span>, <span>White papers</span>",
   "excerpt": "This whitepaper walks through a real migration from a classic Kimball-based warehouse with rigid ETL to a modern, scalable lakehouse on Databricks. You’ll learn why the shift was needed, the phased approach taken, key wins for the business and technical teams, and practical lessons you can reuse.",
   "image": {
    "loading": "lazy",
@@ -129,7 +129,7 @@
   "href": "/knowledge/bionerga-future-ready-data-platform/",
   "title": "Turning complex data into actionable insights<br>at Bionerga<br><span>",
   "date": "4 september 2025",
-  "terms": "<span class=\"elementor-post-info__terms-list-item\">Customer cases</span>",
+  "terms": "<span>Customer cases</span>",
   "excerpt": "Transforming Bionerga's reporting environment into a scalable, future-ready data platform powered by Microsoft Fabric and Dagster.",
   "image": {
    "loading": "lazy",
@@ -147,7 +147,7 @@
   "href": "/knowledge/kaneka-powerbi-sap-datasphere/",
   "title": "Driving efficiency <br>and insights at Kaneka<br><span>with PowerBI <br>and SAP Datasphere",
   "date": "4 juli 2025",
-  "terms": "<span class=\"elementor-post-info__terms-list-item\">Customer cases</span>, <span class=\"elementor-post-info__terms-list-item\">reporting</span>",
+  "terms": "<span>Customer cases</span>, <span>reporting</span>",
   "excerpt": "Kaneka partnered with Acumen to overcome data fragmentation by integrating SAP Datasphere and Power BI. The result? Real-time insights, improved reporting and scalable analytics tailored to their growth ambitions.",
   "image": {
    "loading": "lazy",
@@ -165,7 +165,7 @@
   "href": "/knowledge/power-bi-whitepaper/",
   "title": "</span>Discover how Power BI <br>transforms reporting <br><span>into real business value",
   "date": "12 juni 2025",
-  "terms": "<span class=\"elementor-post-info__terms-list-item\">reporting</span>, <span class=\"elementor-post-info__terms-list-item\">White papers</span>",
+  "terms": "<span>reporting</span>, <span>White papers</span>",
   "excerpt": "Find out how Power BI can simplify your reporting processes, connect your data, and drive real business results. Learn from real-life projects at Spaas and DHL in our newest whitepaper.",
   "image": {
    "loading": "lazy",

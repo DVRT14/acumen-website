@@ -1,4 +1,4 @@
-/* Anaplan pages (were Elementor pages 3504 / 3457 / 3410; they share their section styles). */
+/* Anaplan pages (old site pages 3504 / 3457 / 3410; they share their section styles). */
 .ap { overflow: hidden; }
 .ap-sec { position: relative; display: flex; flex-direction: column; padding: 0 50px; }
 .ap-sec__inner { display: flex; flex-direction: column; flex-grow: 1; width: 100%; max-width: min(100%, 1180px); margin: 0 auto; }
@@ -96,7 +96,7 @@
   .am-banner__img { padding: 0 1%; }
 }
 
-/* anaplan-tabs (3410): Elementor nested-tabs look (theme accent/secondary colours) */
+/* anaplan-tabs (3410): the old nested-tabs look (theme accent/secondary colours) */
 .ap-tabs { position: relative; width: 100%; max-width: 100%; }
 .ap-tabs .e-n-tabs { display: flex; flex-direction: column; gap: 10px; min-width: 0; text-align: start; }
 .ap-tabs .e-n-tabs-heading { display: flex; flex-direction: row; flex-shrink: 0; flex-wrap: wrap; justify-content: center; gap: 10px; }

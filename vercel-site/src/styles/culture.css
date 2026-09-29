@@ -1,4 +1,4 @@
-/* Culture page (was Elementor page 135). */
+/* Culture page (old site page 135). */
 .cu { overflow: hidden; }
 .cu > section { position: relative; display: flex; flex-direction: column; width: 100%; }
 
@@ -43,7 +43,7 @@
   border-radius: 27px;
   background: url("/wp-content/uploads/2024/06/Mask-Group-22-not-compress-1683x2048.webp") 0vw -15vw / cover no-repeat;
 }
-/* Elementor background overlay: black at 14% (under the photo on the member cards) */
+/* Background overlay: black at 14% (under the photo on the member cards) */
 .cu-team__quote::before, .cu-member__card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: inherit; background-color: #000; opacity: .14; transition: .3s; }
 .cu-team__quote-text { position: relative; max-width: 100%; font-family: "Atype Display", Sans-serif; font-size: 54px; font-weight: 400; text-transform: none; line-height: 1.074em; letter-spacing: -0.01em; color: #fff; }
 .cu-team__row { position: relative; display: flex; gap: 25px; width: 100%; }

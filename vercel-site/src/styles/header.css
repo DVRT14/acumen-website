@@ -1,6 +1,6 @@
-/* Site header + drop-down menu. Values reproduce the old Elementor header (template 48). */
+/* Site header + drop-down menu. Values reproduce the old header (template 48). */
 
-/* Bars are fixed (as the old Elementor sticky header was); the in-flow wrapper reserves their
+/* Bars are fixed (as the old sticky header was); the in-flow wrapper reserves their
    natural height — set by headerNav, with a CSS fallback — so the tighter padding while scrolled
    (≥100px, .is-scrolled) never moves the page. */
 .masthead {

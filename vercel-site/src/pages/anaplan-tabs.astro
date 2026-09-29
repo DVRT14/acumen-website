@@ -1,6 +1,6 @@
 ---
-// Anaplan in tabs (was Elementor page 3410): the "Tool" and "Market" pages as tabs, "Cases" empty.
-// Content: src/content/one-off/anaplan-tabs.json. elementor.js (nestedTabs) switches the tabs.
+// Anaplan in tabs (old site page 3410): the "Tool" and "Market" pages as tabs, "Cases" empty.
+// Content: src/content/one-off/anaplan-tabs.json. widgets.js (nestedTabs) switches the tabs.
 import Base from '../layouts/Base.astro';
 import meta from '../data/meta.json';
 import AnaplanTool from '../components/anaplan/AnaplanTool.astro';
@@ -11,7 +11,7 @@ import '../styles/anaplan.css';
 const m = meta['anaplan-tabs'];
 const tab = (i: number) => ({ title: `ap-tab-${i}`, panel: `ap-tab-panel-${i}`, style: `--n-tabs-title-order: ${i};` });
 ---
-<Base {...m} bodyClass={`${m.bodyClass} p-spaced`}>
+<Base {...m} bodyClass="p-spaced">
   <div class="ap">
     <section class="ap-sec">
       <div class="ap-sec__inner ap-sec__inner--65">

@@ -1,4 +1,4 @@
-/* Vacancy pages (were Elementor pages 4122 / 4165). Text inherits the kit body type (25px/1.24em). */
+/* Vacancy pages (old site pages 4122 / 4165). Text inherits the kit body type (25px/1.24em). */
 .vac { overflow: hidden; }
 .vac__sec { position: relative; display: flex; flex-direction: column; }
 .vac__inner { display: flex; flex-direction: column; flex-grow: 1; width: 100%; max-width: min(100%, 1180px); margin: 0 auto; }

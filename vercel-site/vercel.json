@@ -12,7 +12,7 @@
       ]
     },
     {
-      "source": "/wp-content/(.*)",
+      "source": "/(wp-content|fonts)/(.*)",
       "headers": [
         {
           "key": "Cache-Control",

@@ -1,4 +1,4 @@
-/* "Our Expertise" slider: JetEngine listing 2137 cards in the slick DOM built by elementor.js. */
+/* "Our Expertise" slider: listing 2137 cards in the slick DOM built by widgets.js. */
 .xslider { position: relative; }
 .xslider .jet-listing-grid__slider { position: relative; }
 .xslider__items { display: flex; flex-wrap: wrap; width: calc(100% + 15px); margin: 0 -7.5px; }

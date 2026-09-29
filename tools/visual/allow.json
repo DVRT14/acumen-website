@@ -116,5 +116,53 @@
   "vw": 768,
   "tile": "tile-04",
   "reason": "Application form text anti-aliasing (old page rendered it greyscale in a composited layer, the rebuild renders LCD); geometry identical."
+ },
+ {
+  "page": "knowledge__ai-project-roadmap",
+  "vw": 767,
+  "tile": "tile-05",
+  "reason": "Newsletter field text anti-aliasing where a fixed element (header logo, cookie button) overlaps it: the old page composited it greyscale, the rebuild LCD; geometry identical."
+ },
+ {
+  "page": "knowledge__bionerga-future-ready-data-platform",
+  "vw": 767,
+  "tile": "tile-04",
+  "reason": "Newsletter field text anti-aliasing where a fixed element (header logo, cookie button) overlaps it: the old page composited it greyscale, the rebuild LCD; geometry identical."
+ },
+ {
+  "page": "knowledge__continuous-data-support",
+  "vw": 390,
+  "tile": "tile-05",
+  "reason": "Newsletter field text anti-aliasing where a fixed element (header logo, cookie button) overlaps it: the old page composited it greyscale, the rebuild LCD; geometry identical."
+ },
+ {
+  "page": "knowledge__continuous-data-support",
+  "vw": 768,
+  "tile": "tile-07",
+  "reason": "Newsletter field text anti-aliasing where a fixed element (header logo, cookie button) overlaps it: the old page composited it greyscale, the rebuild LCD; geometry identical."
+ },
+ {
+  "page": "knowledge__dagster-vs-airflow-data-orchestration",
+  "vw": 390,
+  "tile": "tile-07",
+  "reason": "Newsletter field text anti-aliasing where a fixed element (header logo, cookie button) overlaps it: the old page composited it greyscale, the rebuild LCD; geometry identical."
+ },
+ {
+  "page": "knowledge__the-five-key-takeaways-you-should-know-about-the-eu-ai-act",
+  "vw": 390,
+  "tile": "tile-05",
+  "reason": "Newsletter field text anti-aliasing where a fixed element (header logo, cookie button) overlaps it: the old page composited it greyscale, the rebuild LCD; geometry identical."
+ },
+ {
+  "page": "knowledge__the-five-key-takeaways-you-should-know-about-the-eu-ai-act",
+  "vw": 767,
+  "tile": "tile-04",
+  "reason": "Newsletter field text anti-aliasing where a fixed element (header logo, cookie button) overlaps it: the old page composited it greyscale, the rebuild LCD; geometry identical."
+ },
+ {
+  "page": "knowledge__transforming-business-machine-learning-applications",
+  "vw": 768,
+  "tile": "tile-09",
+  "reason": "Newsletter field text anti-aliasing where a fixed element (header logo, cookie button) overlaps it: the old page composited it greyscale, the rebuild LCD; geometry identical."
  }
-]
+]

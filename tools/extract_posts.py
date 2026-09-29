@@ -45,6 +45,10 @@ def first(src, pattern):
     return element(src, m.start()) if m else None
 
 
+# ASCII whitespace only: authored no-break spaces at the edges are content (they take up width).
+WS = ' \t\r\n'
+
+
 def heading(src, data_id):
     """Inner HTML of a heading widget's title element (tags like <span>/<br> kept); None if the
     widget is absent (Elementor drops widgets whose dynamic value is empty)."""
@@ -52,14 +56,14 @@ def heading(src, data_id):
     if w is None:
         return None
     t = first(w, r'<(h[1-6]|div|p|span)[^>]*class="elementor-heading-title')
-    return inner(t).strip()
+    return inner(t).strip(WS)
 
 
 def text_editor(src, data_id):
     w = by_id(src, data_id)
     if w is None:
         return None
-    return inner(first(w, r'<div class="elementor-widget-container')).strip()
+    return inner(first(w, r'<div class="elementor-widget-container')).strip(WS)
 
 
 def img_attrs(tag):
@@ -301,6 +305,22 @@ ONE_OFF = {
         'positions': [['f67edbf', '3ae667d'], ['bbba7c5', 'c237d32']],
         'quoteImage': '61a4a41', 'typedQuote': '7510728', 'quoteText': '448bbde', 'quoteAuthor': 'e7d9a7b',
         'photoLeft': 'f562b2d', 'photoRight': '19ad05b',
+    },
+    'index': {
+        'typed': '1fe7dcb7', 'heroTitle': '7f1c8441', 'heroText': '4e12a72e', 'heroButton': '67d45422',
+        'photo': '7ddad3e1', 'photoText': '3b5288d5',
+        'logos': ['2b3c5101', '3380bcdf', '1a2964e7', '5bfa3140', '5a684bca', '4d7f5f4a', '1f483184', '4af73fe3', 'ccdd621', '1c492d78', '2938afa6'],
+        'benefits': [['7057cf44', '1fb4be47'], ['790e6cc8', '7499afb5'], ['7e1d6902', '10d05673']],
+        'benefitImages': ['1a0b5c10', '2011c88e', 'e4a3b76'],
+        'groupImage': '35702987', 'groupTitle': '440f2868', 'groupText': '3f6eb724', 'groupButton': '24de8fb8',
+        'howTitle': '583fda0d',
+        'steps': [['1402fe14', '7e73a933'], ['4142bd4', '2a29ce36'], ['11944b62', '5410b30c'], ['d513fc4', '1f8a1204'], ['6dfb911b', '208de9e1']],
+        'toolsTitle': '6747e376', 'toolsText': '4002a1ca', 'toolsImage': 'd86eab6',
+        'supportText': '757f0a62', 'pricingText': '52995a9d',
+        'values': [['72da9c1a', '420c93ec'], ['102dcff2', '6f9df9ff'], ['48848f3a', 'a18c57e'], ['74f18c7d', '7b0e0ec']],
+        'valueImages': ['52e93765', '3b47cc5d', '3209d9fa', '69b008af'],
+        'cultureTitle': '20264c55', 'cultureText': '22a0d513', 'cultureButton': '19d64546', 'cultureMarquee': '7090e411',
+        'ctaTitle': '531eccc5', 'ctaButtons': ['44004dd2', '8c1c9cd'],
     },
     'anaplan-market': {
         'title': 'fb4139f', 'intro': 'd80487d', 'bandTop': 'fefd2de', 'quadrant': '12d7c47',

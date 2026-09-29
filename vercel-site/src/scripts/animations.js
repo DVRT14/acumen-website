@@ -146,7 +146,7 @@ function expandSection() {
   gsap.to(section, { width: '100%', scrollTrigger: { trigger: section[0], start: 'top 70%', end: 'top 5%', scrub: true, pinSpacing: false } });
   const parent = $('.parent');
   if (!parent) return;
-  $$('.textAnim .elementor-heading-title').forEach(title => {
+  $$('.textAnim').forEach(title => {
     const split = new SplitType(title, { types: 'words, chars' });
     gsap.from(split.chars, {
       scrollTrigger: {

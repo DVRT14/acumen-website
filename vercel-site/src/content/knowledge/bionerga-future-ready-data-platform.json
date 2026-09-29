@@ -13,7 +13,7 @@
  "quote": "From complex data flows to clear, actionable insights. <br><span> Scalable and reliable, ready for the future. </span>",
  "conclusionTitle": "Visibility and control <br> with Dagster",
  "conclusionText": "An important challenge at the start was gaining visibility into how data was flowing through the system. That is where Dagster came in. Dagster acts as a smart control center for everything that happens in the data platform. It tracks every step from collecting the data to refreshing dashboards and gives users a clear user-friendly overview. This improves monitoring and reliability and helps teams understand how the data is used and maintained. Dagster also makes it easy to quickly plug-in new data environments from new companies joining the Bionerga group. <br><br> <b>Data that drives decisions</b> <br><br>  Finally, we created several new Power BI datasets based on best practices. These are now used in reliable reports that support smarter and faster decision-making across Bionerga. These datasets make it also possible for self-service users to quickly explore the validated data.",
- "ctaTitle": "Would you like to see how our experience could optimize your organization?",
+ "ctaTitle": "Would you like to see how our experience could optimize your organization? ",
  "ctaText": "Reach out below!",
  "contactTitle": "Acumen has the answers",
  "contactImage": {

@@ -10,7 +10,11 @@
  {
   "prefixOf": [
    "and sustainable growth.",
-   "is widely used throughout industry, government, and science.”"
+   "is widely used throughout industry, government, and science.”",
+   "value",
+   "decisions",
+   "opportunities",
+   "profit"
   ],
   "reason": "Typed text (typed.js loop): its typing phase depends on timers and random humanising delays, so the partly typed state differs between runs of different code."
  },
@@ -18,6 +22,16 @@
   "text": "^“AI technology$",
   "page": "^culture$",
   "reason": "Shares a centred line with typed text, so its x follows the typing phase."
+ },
+ {
+  "text": "^Transform data into$",
+  "page": "^home$",
+  "reason": "Shares a centred line with typed text (hero, wide screens), so its x follows the typing phase."
+ },
+ {
+  "text": "(trifinance|kaneka|h-essers|q8-oiols|carglass|damler|vdab|cordeel|jbc|baloise|agc)\\.webp$|sec5bg[-.]",
+  "page": "^home$",
+  "reason": "Endless time-based tweens (logo marquee, data group background zoom): the rebuild starts them after document.fonts.ready, one 100ms clock step later than the old scripts, so their phase is a fraction of a second apart."
  },
  {
   "page": "careers__vacature-ai-engineer",
@@ -103,4 +117,4 @@
   "tile": "tile-04",
   "reason": "Application form text anti-aliasing (old page rendered it greyscale in a composited layer, the rebuild renders LCD); geometry identical."
  }
-]
+]

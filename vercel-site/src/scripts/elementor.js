@@ -40,7 +40,7 @@ class Sticky {
     this.o = { to: 'top', offset: 0, effectsOffset: 0, parent: false, ...opts };
     this.active = false; this.notFollowing = false; this.effects = false;
     el.classList.add('elementor-sticky');
-    if (this.o.parent) this.parent = el.parentElement.closest(this.o.parent);
+    if (this.o.parent) this.parent = this.o.parent === true ? el.parentElement : el.parentElement.closest(this.o.parent);
     addEventListener('scroll', () => this.check(), { passive: true });
     addEventListener('resize', () => this.onResize());
     this.check();
@@ -134,7 +134,8 @@ function sticky() {
       to: s.sticky,
       offset: +deviceSetting(s, 'sticky_offset') || 0,
       effectsOffset: +deviceSetting(s, 'sticky_effects_offset') || 0,
-      parent: s.sticky_parent && !topLevel ? '.e-con, .e-con-inner, .elementor-widget-wrap' : false,
+      // Rebuilt markup (data-sticky): the parent is simply the element's parent.
+      parent: s.sticky_parent && (el.dataset.sticky || !topLevel) ? (el.dataset.sticky ? true : '.e-con, .e-con-inner, .elementor-widget-wrap') : false,
     });
   });
 }

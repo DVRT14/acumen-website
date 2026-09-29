@@ -1,0 +1,205 @@
+---
+// Home (was Elementor page 2774). Content: src/content/one-off/index.json. Behaviour from the site
+// scripts, keyed on the old class names: hero timeline (heroAnim1-4) + typed words, photo that widens
+// and pins while its text lights up (expand-section / parent / textAnim), logo and "Culture" marquees,
+// benefits with sticky videos (home-scroll_*), sticky data group section the next one scrolls over,
+// story steps fading in (howWeHelpYouSectionAnimation), values revealing photos on hover.
+import Base from '../layouts/Base.astro';
+import meta from '../data/meta.json';
+import c from '../content/one-off/index.json';
+import ExpertiseCard from '../components/ExpertiseCard.astro';
+import PostsCarousel from '../components/post/PostsCarousel.astro';
+import cards from '../data/expertise-cards.json';
+import '../styles/post-card.css';
+import '../styles/home.css';
+
+const arrow = '<svg xmlns="http://www.w3.org/2000/svg" width="46.819" height="46.819" viewBox="0 0 46.819 46.819"><path d="M5.838,24.92l19.7,19.7-2.127,2.2L0,23.409,23.409,0l2.128,2.2L5.838,21.9H46.819V24.92Z" transform="translate(46.819 46.819) rotate(180)"></path></svg>';
+const sticky = (o: object = {}) => JSON.stringify({ sticky: 'top', sticky_on: ['desktop', 'tablet', 'mobile'], sticky_offset: 0, sticky_effects_offset: 0, ...o });
+const mouseTrack = JSON.stringify({ motion_fx_motion_fx_mouse: 'yes', motion_fx_mouseTrack_effect: 'yes', motion_fx_mouseTrack_speed: { unit: 'px', size: 0.1, sizes: [] } });
+const benefitVideos = ['/wp-content/uploads/2024/06/WEBSITE_BLOK_11.mp4', '/wp-content/uploads/2024/06/WEBSITE_BLOK_22.mp4', '/wp-content/uploads/2024/06/WEBSITE_BLOK_33.mp4'];
+const posts = ['3891', '3956', '3810', '3782', '3755', '3622', '3589', '3574', '3555', '3533'];
+---
+<Base {...meta.index}>
+  <div class="hm">
+    <section class="hm-hero greenSection">
+      <div class="hm-hero__box">
+        <div class="hm-hero__typed typedContainer delay">
+          <div class="hm-hero__strings" set:html={c.typed} />
+          <div class="hm-hero__title heroAnim1"><h1 set:html={c.heroTitle} /></div>
+        </div>
+        <div class="hm-hero__text heroAnim2"><div set:html={c.heroText} /></div>
+        <div class="hm-btn hm-btn--ghost heroAnim3"><a href={c.heroButton.href}><span><span class="hm-btn__icon" set:html={arrow} /><span set:html={c.heroButton.label} /></span></a></div>
+      </div>
+    </section>
+
+    <section class="hm-photo parent">
+      <div class="hm-photo__frame expand-section heroAnim4">
+        <div class="hm-photo__img bgImage"><img {...c.photo} /></div>
+        <div class="hm-photo__content"><div class="hm-photo__text textAnim" set:html={c.photoText} /></div>
+      </div>
+    </section>
+
+    <section class="hm-logos">
+      <div class="hm-logos__track marqueee" wb-data="marquee" duration="40" direction="left">
+        <div class="hm-logos__row marquee-content">
+          {c.logos.map(img => <div class="hm-logos__logo"><img {...img} /></div>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="hm-expertise">
+      <div class="hm-expertise__spacer"></div>
+      <div class="hm-expertise__grid">
+        <div class="hm-expertise__items">
+          {cards.map(card => <div class="hm-expertise__item"><ExpertiseCard card={card} /></div>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="hm-box hm-gap"><div class="hm-box__in"></div></section>
+
+    <section class="hm-benefits home-scroll_section">
+      <div class="hm-benefits__visual" data-sticky={sticky({ sticky_parent: 'yes' })}>
+        {benefitVideos.map(src => (
+          <div class="hm-benefits__media home-scroll_img-item">
+            <div class="hm-video playInViewRepeat0"><div><video src={src} preload="metadata" muted controlslist="nodownload"></video></div></div>
+          </div>
+        ))}
+      </div>
+      <div class="hm-benefits__content">
+        <div class="hm-benefits__list">
+          {c.benefits.map(([title, text]) => (
+            <div class="hm-benefits__item home-scroll_text-item">
+              <div class="hm-benefit">
+                <div class="hm-benefit__title"><h3 set:html={title} /></div>
+                <div class="hm-benefit__text" set:html={text} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="hm-benefits-m">
+      <div class="hm-benefits-m__list">
+        {c.benefits.map(([title, text], i) => (
+          <div class="hm-benefits-m__item">
+            <div class="hm-benefits-m__img"><img {...c.benefitImages[i]} /></div>
+            <div class="hm-benefit">
+              <div class="hm-benefit__title"><h3 set:html={title} /></div>
+              <div class="hm-benefit__text" set:html={text} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="hm-group sectionDataGroup" data-sticky={sticky()}>
+      <div class="hm-group__in">
+        <div class="hm-group__bg sectionDataGroup__bgImg"><div><img {...c.groupImage} /></div></div>
+        <div class="hm-group__col hm-group__col--title"><div class="hm-group__title"><h2 set:html={c.groupTitle} /></div></div>
+        <div class="hm-group__col">
+          <div class="hm-group__text" set:html={c.groupText} />
+          <div class="hm-group__space"></div>
+          <div class="hm-btn hm-btn--link"><a href={c.groupButton.href}><span><span class="hm-btn__icon" set:html={arrow} /><span set:html={c.groupButton.label} /></span></a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hm-box hm-how howWeHelpYouSectionAnimation">
+      <div class="hm-box__in">
+        <div class="hm-how__col"><div class="hm-how__title" data-sticky={sticky({ sticky_parent: 'yes', sticky_offset: 100 })}><h2 set:html={c.howTitle} /></div></div>
+        <div class="hm-how__col">
+          {c.steps.map(([title, text], i) => (
+            <div class="hm-how__step howWeHelpYouSectionAnimation__text">
+              <div class="hm-how__heading"><h3 set:html={title} /></div>
+              <div class="hm-how__text" set:html={text} />
+              {i < c.steps.length - 1 && <div class="hm-how__space"></div>}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="hm-box hm-tools">
+      <div class="hm-box__in">
+        <div class="hm-full"></div>
+        <div class="hm-tools__row">
+          <div class="hm-tools__card">
+            <div class="hm-tools__head">
+              <div class="hm-tools__title"><h2 set:html={c.toolsTitle} /></div>
+              <div class="hm-tools__text" set:html={c.toolsText} />
+            </div>
+            <div class="hm-tools__img"><div data-motion={mouseTrack}><img {...c.toolsImage} /></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hm-box hm-duo">
+      <div class="hm-box__in">
+        <div class="hm-duo__row">
+          <div class="hm-duo__col hm-duo__col--text hm-duo__col--last"><div class="hm-duo__text" set:html={c.supportText} /></div>
+          <div class="hm-duo__col"><div class="hm-video hm-video--single playInViewSingle"><div><video src="/wp-content/uploads/2024/05/WEBSITE_BLOK_2.mp4" preload="metadata" muted controlslist="nodownload"></video></div></div></div>
+        </div>
+        <div class="hm-duo__row">
+          <div class="hm-duo__col"><div class="hm-video hm-video--single playInViewSingle"><div><video src="/wp-content/uploads/2024/06/WEBSITE_BLOK_3.mp4" preload="metadata" muted controlslist="nodownload"></video></div></div></div>
+          <div class="hm-duo__col hm-duo__col--text hm-duo__col--right"><div class="hm-duo__text" set:html={c.pricingText} /></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hm-box hm-values revealOnHoverSection">
+      <div class="hm-box__in">
+        <div class="hm-values__space"></div>
+        <div class="hm-values__row">
+          <div class="hm-values__list">
+            {c.values.map(([title, text], i) => (
+              <div class={`hm-values__item revealOnHoverSection__text${i === 0 ? ' active' : ''}`}>
+                <div class="hm-values__title"><h2 set:html={title} /></div>
+                <div class="hm-values__text" set:html={text} />
+              </div>
+            ))}
+          </div>
+          <div class="hm-values__photos">
+            {c.valueImages.map((img, i) => <div class={`hm-values__photo revealOnHoverSection__img${i === 0 ? ' show' : ''}`}><div><img {...img} /></div></div>)}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hm-box hm-culture">
+      <div class="hm-box__in">
+        <div class="hm-culture__row">
+          <div class="hm-culture__intro">
+            <div class="hm-culture__title"><h2 set:html={c.cultureTitle} /></div>
+            <div class="hm-culture__text" set:html={c.cultureText} />
+            <div class="hm-btn hm-btn--outline" data-animate="fadeInUp" data-animate-delay="500"><div><a href={c.cultureButton.href}><span><span class="hm-btn__icon" set:html={arrow} /><span set:html={c.cultureButton.label} /></span></a></div></div>
+          </div>
+          <div class="hm-culture__side">
+            <div class="hm-culture__card">
+              <div class="hm-culture__marquee marqueee" wb-data="marquee" duration="20" direction="left">
+                <div class="hm-culture__words marquee-content"><div class="hm-culture__word"><h2 set:html={c.cultureMarquee} /></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hm-cta">
+      <div class="hm-cta__card">
+        <div class="hm-cta__video playInViewRepeat"><div><video src="/wp-content/uploads/2024/05/Background-video_subscribe.mp4" autoplay loop muted playsinline controlslist="nodownload"></video></div></div>
+        <div class="hm-cta__title"><h2 set:html={c.ctaTitle} /></div>
+        <div class="hm-cta__actions">
+          {c.ctaButtons.map((b, i) => <div class={`hm-btn hm-btn--cta${i ? ' hm-btn--cta-alt' : ''}`}><a href={b.href}><span><span class="hm-btn__icon" set:html={arrow} /><span set:html={b.label} /></span></a></div>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="hm-posts">
+      <div class="hm-full"></div>
+      <div class="hm-posts__band"><div class="hm-posts__in"><PostsCarousel ids={posts} info="terms" animate={false} /></div></div>
+    </section>
+  </div>
+</Base>

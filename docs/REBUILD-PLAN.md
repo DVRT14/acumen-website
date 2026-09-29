@@ -10,7 +10,7 @@ Goal: same site, same pixels, same motion — without jQuery, Elementor, WordPre
 | 0 Harness | Done. Deterministic (paused fake clock, seeded `Math.random`, one browser per worker): 0 diffs in 238 tiles between two runs of the flakiest pages. |
 | 2 Astro (done before 1, so the JS swap happens in one place) | Done. Build output was byte-identical to the old static site. |
 | 1 JS swap | Done (`src/scripts/`). Full 55 × 8 gate: remaining diffs are animation phase/timing (see accepted list) and the one-off pages still to rebuild. |
-| 3 Elementor markup/CSS | In progress. Done: header, footer, consent banner, knowledge posts (template 996, 23 pages), expertise pages (template 1047, 7 pages, incl. the expertise slider). Left: whitepaper variants and the one-off pages. |
+| 3 Elementor markup/CSS | Done: every page is hand-written Astro (header, footer, consent banner, knowledge posts, expertise pages, whitepapers, articles, plain pages, partners, anaplan ×3, careers, our-expertise, knowledge index, contact, culture, agentic AI, home). No page renders from `src/legacy/` any more. |
 | 4 Cleanup | — |
 
 ### Tooling (in `tools/`)
@@ -46,6 +46,8 @@ Goal: same site, same pixels, same motion — without jQuery, Elementor, WordPre
 - Forms submit to the stub endpoint and show Elementor's success/error message.
 - Marquees measure their text after the web fonts load (the old script measured the fallback font,
   so the loop distance was wrong); their scroll phase differs. Allowed in `tools/visual/allow.json`.
+- Endless time-based tweens (home logo marquee, data-group background zoom) start after
+  `document.fonts.ready`, one frame later than before: same motion, phase a fraction of a second apart.
 - ScrollTrigger is refreshed once after all handlers ran (the old scripts relied on the window-load
   refresh). Scrubbed headings ("Say hello") can be a few px apart mid-scroll; identical at rest.
 

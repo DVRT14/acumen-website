@@ -1,8 +1,8 @@
 # acumen.be — static site (Astro on Vercel)
 
 A static rebuild of acumen.be: same look and motion as the old WordPress + Elementor site,
-without WordPress, Elementor or jQuery at runtime. The rebuild is in progress — see
-`docs/REBUILD-PLAN.md` for phases and status.
+without WordPress, Elementor or jQuery. Every page is a hand-written Astro page; see
+`docs/REBUILD-PLAN.md` for how it was done and what differs on purpose.
 
 - `vercel-site/` — **the site** (an Astro project).
 - `tools/visual/` — visual regression harness (dev only, not deployed).
@@ -28,10 +28,11 @@ Vercel builds it with the Astro preset (`vercel.json` sets `framework: astro`, p
 
 ## Layout (`vercel-site/`)
 
-- `src/legacy/*.html` — pages not yet converted: the exported WordPress HTML with the old runtime
-  stripped out. File name = route, `~` = `/` (`knowledge~agentic-ai.html` → `/knowledge/agentic-ai/`).
-  Rendered verbatim by `src/pages/[...slug].astro`, which appends the consent banner and the
-  site script. Converted pages move to real Astro pages/components (Phase 3).
+- `src/pages/` — one Astro page per layout; `src/components/` — header, footer, consent banner,
+  cards, carousels, post blocks.
+- `src/content/`, `src/data/` — page content as JSON (text, image attributes, SEO head), extracted
+  once from the exported WordPress pages by `tools/extract_posts.py`; edit these for content changes.
+- `src/styles/` — plain CSS per page/component (Elementor's layout rules, written out).
 - `src/scripts/` — the whole runtime, bundled by Astro:
   - `site.js` — entry
   - `scroll.js` — the single GSAP + ScrollTrigger + Lenis instance
@@ -41,8 +42,8 @@ Vercel builds it with the Astro preset (`vercel.json` sets `framework: astro`, p
   - `consent.js` — cookie consent and tracker loading
 - `src/components/ConsentBanner.astro` — consent banner/preferences markup.
 - `api/forms.js` — Vercel function every form posts to (a stub for now, see below).
-- `public/` — static files served as-is (`wp-content/uploads` images keep their WordPress paths
-  so OG images and external links don't break).
+- `public/` — static files served as-is: uploads keep their WordPress paths (`/wp-content/uploads/`)
+  so OG images and external links don't break; the Elementor, theme and `wp-includes` files are gone.
 
 Runtime libraries are pinned to exact versions in `package.json` — the visual parity was checked
 against those versions.

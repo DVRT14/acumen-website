@@ -11,7 +11,7 @@ Goal: same site, same pixels, same motion — without jQuery, Elementor, WordPre
 | 2 Astro (done before 1, so the JS swap happens in one place) | Done. Build output was byte-identical to the old static site. |
 | 1 JS swap | Done (`src/scripts/`). Full 55 × 8 gate: remaining diffs are animation phase/timing (see accepted list) and the one-off pages still to rebuild. |
 | 3 Elementor markup/CSS | Done: every page is hand-written Astro (header, footer, consent banner, knowledge posts, expertise pages, whitepapers, articles, plain pages, partners, anaplan ×3, careers, our-expertise, knowledge index, contact, culture, agentic AI, home). No page renders from `src/legacy/` any more. |
-| 4 Cleanup | — |
+| 4 Cleanup | Done: `src/legacy/` and its catch-all route removed; 107 unreferenced Elementor/theme/`wp-includes`/vendored files deleted from `public/` (uploads kept: external links). Extraction now reads the pre-rebuild export in `.baseline/`. Open: `robots.txt` / `sitemap.xml` (need the final domain). |
 
 ### Tooling (in `tools/`)
 
@@ -19,6 +19,8 @@ Goal: same site, same pixels, same motion — without jQuery, Elementor, WordPre
 - `visual/domdiff.mjs` — what scripts change in the DOM after load (used to port Elementor exactly).
 - `visual/spec.mjs` — computed-style spec of a subtree per viewport (for rewriting a component).
 - `rules.py` — authored Elementor CSS for given element ids, per media query (hover states etc.).
+- `extract_posts.py` — page content → `src/content`, `src/data` (reads the export in `.baseline/`).
+- `dump.py`, `outline.py`, `fields.py` — inspect an exported page (`.baseline/vercel-site/<route>/index.html`).
 - `outline.py` — container/widget tree of an Elementor document.
 
 ### Reproducing Elementor layout (checklist for hand-written pages)

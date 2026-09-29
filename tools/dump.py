@@ -1,6 +1,6 @@
 """Dump an Elementor document as a compact tree with widget content (for hand-porting one-off pages):
 containers with boxed/full + classes, widgets with their text HTML / image attributes / link.
-usage: python tools/dump.py <legacy-html> <data-elementor-id>"""
+usage: python tools/dump.py <exported page> <data-elementor-id>"""
 import re, sys, html
 
 src = open(sys.argv[1], encoding='utf8').read()

@@ -12,20 +12,11 @@
       ]
     },
     {
-      "source": "/(wp-content|wp-includes|assets)/(.*)",
+      "source": "/wp-content/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/wp-content/(uploads/elementor/css|themes)/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=604800"
         }
       ]
     }

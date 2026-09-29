@@ -1,5 +1,5 @@
 """For an Elementor template shared by several pages: which widgets vary per page (fields) vs are static.
-usage: python tools/fields.py <template-id> <legacy html>..."""
+usage: python tools/fields.py <template-id> <exported page>..."""
 import sys, re, collections
 
 def element(src, start):

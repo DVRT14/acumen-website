@@ -12,12 +12,24 @@ Writes
   vercel-site/src/data/meta.json             SEO head + body class of every page, for hand-written pages
   vercel-site/src/content/pages/*.json       pages without Elementor content (legal, careers, the
                                              expertise archive): their HTML between header and footer
+Source: the exported site as it was before the rebuild (the `.baseline` worktree, see README).
 Run from the repo root: python tools/extract_posts.py
 """
 import glob, html, json, os, re
 
 ROOT = os.path.join(os.path.dirname(__file__), '..', 'vercel-site')
-LEGACY = os.path.join(ROOT, 'src', 'legacy')
+EXPORT = os.path.join(ROOT, '..', '.baseline', 'vercel-site')
+
+
+def export_pages():
+    """(name, path) of every exported page; name is the route with / as ~ ('index' for the home page)."""
+    for f in sorted(glob.glob(os.path.join(EXPORT, '**', 'index.html'), recursive=True)):
+        rel = os.path.relpath(os.path.dirname(f), EXPORT).replace(os.sep, '~')
+        if not rel.startswith(('wp-', 'assets')):
+            yield ('index' if rel == '.' else rel), f
+
+
+PAGES = dict(sorted(export_pages(), key=lambda p: p[0] + '.html'))  # old file order
 
 
 def element(src, start):
@@ -352,7 +364,7 @@ def anaplan_tabs(src):
     """The tabs page holds copies of the "Tool" (3504) and "Market" (3457) pages in its first two tabs."""
     out = one_off(src, {'title': 'fb4139f', 'intro': 'd80487d'})
     for key, page, doc, panel in (('tool', 'anaplan', '3504', 'f37a7dd'), ('market', 'anaplan-market', '3457', '65ec279')):
-        page_src = open(os.path.join(LEGACY, page + '.html'), encoding='utf8').read()
+        page_src = open(PAGES[page], encoding='utf8').read()
         source = ids_in(page_src, rf'<div data-elementor-type="wp-page" data-elementor-id="{doc}"')
         target = ids_in(src, rf'<div [^>]*data-id="{panel}"')[1:]
         out[key] = one_off(src, remap(ONE_OFF[page], source, target))
@@ -425,11 +437,10 @@ plain = {}
 meta = {}
 vacatures = {}
 expertise = {}
-for f in sorted(glob.glob(os.path.join(LEGACY, '*.html'))):
+for name, f in PAGES.items():
     src = open(f, encoding='utf8').read()
     for pid, card in cards_from(src).items():
         cards.setdefault(pid, {}).update({k: v for k, v in card.items() if v is not None or k not in cards.get(pid, {})})
-    name = os.path.basename(f)[:-5]
     if name == 'knowledge~agentic-ai':
         os.makedirs(os.path.join(ROOT, 'src', 'content', 'one-off'), exist_ok=True)
         with open(os.path.join(ROOT, 'src', 'content', 'one-off', 'agentic-ai.json'), 'w', encoding='utf8') as fh:

@@ -1,5 +1,5 @@
 """Print an outline of Elementor documents in a page: containers, widgets, custom classes, text.
-usage: python tools/outline.py <legacy-html> [data-elementor-id ...]"""
+usage: python tools/outline.py <exported page> [data-elementor-id ...]"""
 import sys, re, json, html as H
 from html.parser import HTMLParser
 

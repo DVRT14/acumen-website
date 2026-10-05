@@ -9,7 +9,7 @@ import Whitepaper from '../../components/knowledge/Whitepaper.astro';
 import { related, card, readingTime, TYPE_LABEL } from '../../lib/knowledge';
 
 export async function getStaticPaths() {
-  return (await getCollection('knowledge', p => !p.data.custom)).map(post => ({ params: { slug: post.id }, props: { post } }));
+  return (await getCollection('knowledge')).map(post => ({ params: { slug: post.id }, props: { post } }));
 }
 const { post } = Astro.props;
 const d = post.data;

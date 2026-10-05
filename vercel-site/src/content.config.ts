@@ -24,7 +24,6 @@ const knowledge = defineCollection({
     ogImage: z.string().optional(),            // share image (jpg: LinkedIn ignores webp)
     cardBg: z.string().optional(),
     noindex: z.boolean().optional(),
-    custom: z.boolean().optional(),            // page is hand-built elsewhere; listed only
     // Customer cases
     client: z.string().optional(),
     clientLogo: image.optional(),

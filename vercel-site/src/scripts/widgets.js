@@ -311,10 +311,10 @@ function motionEffects() {
   });
 }
 
-/* ---------- Carousels: posts carousel (Swiper 8) + expertise listing slider (was slick) ---------- */
+/* ---------- Carousels: posts carousel + "Our Expertise" slider (Swiper 8) ---------- */
 const I18N = document.documentElement.lang.startsWith('nl')
-  ? { prev: 'Vorige slide', next: 'Volgende slide', first: 'Ga naar de eerste slide', last: 'Ga naar de laatste slide', of: 'van' }
-  : { prev: 'Previous slide', next: 'Next slide', first: 'This is the first slide', last: 'This is the last slide', of: 'of' };
+  ? { of: 'van', goTo: 'Ga naar slide' }
+  : { of: 'of', goTo: 'Go to slide' };
 
 // Swiper settings from the carousel's data-carousel options.
 function loopCarouselConfig(s) {
@@ -333,7 +333,6 @@ function loopCarouselConfig(s) {
   if (single) { cfg.effect = s.effect; if (s.effect === 'fade') cfg.fadeEffect = { crossFade: true }; }
   else cfg.slidesPerGroup = +s.slides_to_scroll || 1;
   if (s.image_spacing_custom) cfg.spaceBetween = spacing('desktop');
-  cfg.a11y = { enabled: true, prevSlideMessage: I18N.prev, nextSlideMessage: I18N.next, firstSlideMessage: I18N.first, lastSlideMessage: I18N.last, slideLabelMessage: `{{index}} ${I18N.of} {{slidesLength}}` };
   if (s.offset_sides === 'right' || s.offset_sides === 'both') cfg.slidesPerView = show + 0.001;
   // The options key breakpoints by max-width; Swiper wants min-width.
   const values = [BREAKPOINTS.mobile, BREAKPOINTS.tablet];
@@ -347,114 +346,36 @@ function loopCarouselConfig(s) {
 }
 
 async function carousels() {
-  $$('.jet-listing-grid__slider[data-slider_options]').forEach(wrap => {
-    const list = wrap.querySelector(':scope > .jet-listing-grid__items');
-    try { if (list) jetSlider(list, JSON.parse(wrap.dataset.slider_options)); } catch { /* bad options */ }
-  });
-  const rebuilt = $$('.posts-carousel[data-carousel]');
-  if (!rebuilt.length) return;
-  // Core + the modules the carousels use (their settings have no autoplay or effect).
-  const { default: Swiper, A11y, Navigation } = await import('swiper');
-  Swiper.use([A11y, Navigation]);
+  const posts = $$('.posts-carousel[data-carousel]'), xsliders = $$('.xslider');
+  if (!posts.length && !xsliders.length) return;
+  const { default: Swiper, A11y, Mousewheel, Pagination } = await import('swiper');
+  Swiper.use([A11y, Mousewheel, Pagination]);
 
-  rebuilt.forEach(w => {
-    const s = JSON.parse(w.dataset.carousel), container = w.querySelector('.swiper');
-    const slides = $$('.swiper-slide', container), nav = w.querySelector('.posts-carousel__nav');
-    if (slides.length < 2) return;
-    if (s.offset_sides && s.offset_sides !== 'none') container.classList.add('offset-' + s.offset_sides);
-    // Loop clones stay clickable (they are what shows past the last card) but out of the tab order and
-    // hidden from assistive tech; the nav hides when every card fits. Both redone when a breakpoint
-    // re-creates the clones.
-    const sync = sw => {
-      $$('.swiper-slide-duplicate', container).forEach(d => {
-        d.setAttribute('aria-hidden', 'true');
-        $$('a, button, [tabindex]', d).forEach(el => el.setAttribute('tabindex', '-1'));
-      });
-      if (nav) nav.hidden = slides.length <= Math.floor(sw.params.slidesPerView);
-    };
-    const cfg = loopCarouselConfig(s);
-    if (nav) cfg.navigation = { prevEl: nav.querySelector('.posts-carousel__btn--prev'), nextEl: nav.querySelector('.posts-carousel__btn--next') };
-    cfg.on = { init: sync, breakpoint: sync };
+  // Shared feel: sideways trackpad swipes, clickable dots, arrow keys while focus is inside.
+  // No loop, so a drag past either end springs back.
+  const carousel = (w, cfg) => {
+    const container = w.querySelector('.swiper');
+    if ($$('.swiper-slide', container).length < 2) return;
+    Object.assign(cfg, {
+      mousewheel: { forceToAxis: true },
+      pagination: { el: w.querySelector('.carousel-dots'), clickable: true, bulletElement: 'button', bulletClass: 'carousel-dots__dot', bulletActiveClass: 'is-active' },
+      a11y: { enabled: true, paginationBulletMessage: `${I18N.goTo} {{index}}`, slideLabelMessage: `{{index}} ${I18N.of} {{slidesLength}}` },
+    });
     const sw = new Swiper(container, cfg);
     // Arrow keys only while focus is inside this carousel (Swiper 8's Keyboard module listens page-wide).
     w.addEventListener('keydown', e => {
       if (e.key === 'ArrowRight') sw.slideNext(); else if (e.key === 'ArrowLeft') sw.slidePrev(); else return;
       e.preventDefault();
     });
+  };
+
+  posts.forEach(w => {
+    const s = JSON.parse(w.dataset.carousel), container = w.querySelector('.swiper');
+    if (s.offset_sides && s.offset_sides !== 'none') container.classList.add('offset-' + s.offset_sides);
+    carousel(w, loopCarouselConfig(s));
   });
-
-}
-
-// Expertise listing slider. It used slick; this builds the same DOM slick produced (list/track, clones,
-// px widths) so the existing CSS applies unchanged. Only what this site uses: no arrows/dots/autoplay.
-function jetSlider(list, o) {
-  const items = [...list.children], n = items.length;
-  let show, slideWidth, current = 0, slides = [], listEl, track, device;
-
-  function slide(el, index, cloned) {
-    const s = cloned ? el.cloneNode(true) : el;
-    s.classList.add('slick-slide');
-    if (cloned) { s.classList.add('slick-cloned'); s.id = ''; s.tabIndex = -1; }
-    s.dataset.slickIndex = index;
-    return s;
-  }
-  function build() {
-    device = deviceMode();
-    show = o.slidesToShow[device] || 1;
-    current = 0;
-    const loop = o.infinite && n > show;
-    listEl = document.createElement('div'); listEl.className = 'slick-list draggable';
-    track = document.createElement('div'); track.className = 'slick-track';
-    items.forEach(i => i.classList.remove('slick-slide', 'slick-current', 'slick-active'));
-    slides = [
-      ...(loop ? items.slice(n - show).map((el, i) => slide(el, i - show, true)) : []),
-      ...items.map((el, i) => slide(el, i, false)),
-      ...(loop ? items.map((el, i) => slide(el, n + i, true)) : []),
-    ];
-    track.append(...slides); listEl.append(track); list.replaceChildren(listEl);
-    list.classList.add('slick-initialized', 'slick-slider');
-    track.style.opacity = '1';
-    layout();
-  }
-  const offset = () => (o.infinite && n > show ? show : 0);
-  function setPosition(animate) {
-    track.style.transition = animate ? `transform ${o.speed}ms ease` : '';
-    track.style.transform = `translate3d(${-(slideWidth * (current + offset()))}px, 0px, 0px)`;
-    slides.forEach(s => {
-      const i = +s.dataset.slickIndex, active = i >= current && i < current + show;
-      s.classList.toggle('slick-active', active);
-      s.classList.toggle('slick-current', i === current);
-      s.setAttribute('aria-hidden', String(!active));
-    });
-  }
-  function layout() {
-    slideWidth = Math.ceil(contentWidth(listEl) / show);
-    track.style.width = Math.ceil(slideWidth * slides.length) + 'px';
-    slides.forEach(s => { s.style.width = slideWidth + 'px'; });
-    setPosition(false);
-  }
-  function goTo(index) {
-    current = index;
-    setPosition(true);
-    setTimeout(() => { if (current < 0 || current >= n) { current = (current + n) % n; setPosition(false); } }, o.speed);
-  }
-
-  let startX = null, dx = 0;
-  list.addEventListener('pointerdown', e => { if (n > show) { startX = e.clientX; dx = 0; track.style.transition = ''; } });
-  addEventListener('pointermove', e => {
-    if (startX === null) return;
-    dx = e.clientX - startX;
-    track.style.transform = `translate3d(${-(slideWidth * (current + offset())) + dx}px, 0px, 0px)`;
-  });
-  addEventListener('pointerup', () => {
-    if (startX === null) return;
-    startX = null;
-    if (Math.abs(dx) > contentWidth(listEl) / 5) goTo(current + (dx < 0 ? 1 : -1)); else setPosition(true);
-  });
-  list.addEventListener('click', e => { if (Math.abs(dx) > 5) { e.preventDefault(); e.stopPropagation(); } }, true);
-  list.style.touchAction = 'pan-y';
-  addEventListener('resize', () => { if (deviceMode() !== device) build(); else layout(); });
-  build();
+  // Next card peeks in on mobile, three cards from tablet up.
+  xsliders.forEach(w => carousel(w, { speed: 500, slidesPerView: 2.2, breakpoints: { [BREAKPOINTS.mobile + 1]: { slidesPerView: 3 } } }));
 }
 
 function contentWidth(el) {

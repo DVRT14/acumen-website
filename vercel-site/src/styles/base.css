@@ -537,3 +537,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-v
 :root :is(.btn--on-dark, .btn--outline-on-dark, .case-cta__button):focus-visible { outline-color: var(--lime); }
 @media (prefers-reduced-motion: reduce) { .btn:active, .case-cta__button:active { transform: none; } }
 @media (max-width: 767px) { .btn { padding: 10px 22px; font-size: 16px; } }
+
+/* Carousel dots (Swiper pagination, widgets.js): 24px hit area around a 10px dot; active one stretches. */
+.carousel-dots { display: flex; flex-wrap: wrap; align-items: center; }
+.carousel-dots.swiper-pagination-lock { display: none; }
+.carousel-dots__dot, .carousel-dots__dot:hover, .carousel-dots__dot:focus { display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border: 0; background: none; cursor: pointer; }
+.carousel-dots__dot::before { content: ""; width: 10px; height: 10px; box-sizing: border-box; border: 2px solid #D6FF00; border-radius: 5px; background: #002921; transition: background-color .3s; }
+.carousel-dots__dot.is-active { width: 38px; }
+.carousel-dots__dot.is-active::before { width: 24px; background: #D6FF00; }
+.carousel-dots__dot:focus-visible { outline: 3px solid #002921; outline-offset: 1px; border-radius: 6px; box-shadow: 0 0 0 3px #D6FF00; }

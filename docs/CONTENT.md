@@ -103,9 +103,6 @@ Plain Markdown: `##` sections (they become the blog's table of contents when the
 sub-headings, lists, `> quote` (a lime quote card), images `![alt text](/wp-content/uploads/…)`.
 Write real lists and headings — no "•" lines or bold paragraphs used as headings.
 
-`agentic-ai.md` has `custom: true`: it is listed like a post, but its page is hand-built
-(`src/pages/knowledge/agentic-ai.astro`).
-
 ## Authors (`src/data/authors.json`)
 
 ```json

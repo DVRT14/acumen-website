@@ -1,16 +1,10 @@
-/* "Our Expertise" slider: listing 2137 cards in the slick DOM built by widgets.js. */
-.xslider { position: relative; }
-.xslider .jet-listing-grid__slider { position: relative; }
-.xslider__items { display: flex; flex-wrap: wrap; width: calc(100% + 15px); margin: 0 -7.5px; }
-.xslider__items.slick-slider { position: relative; display: block !important; user-select: none; touch-action: pan-y; -webkit-tap-highlight-color: transparent; }
-.xslider .slick-list { position: relative; display: block; margin: 0; padding: 0; overflow: visible; }
-.xslider .slick-list, .xslider .slick-track { transform: translate3d(0, 0, 0); }
-.xslider .slick-track { position: relative; top: 0; left: 0; display: block; margin-left: auto; margin-right: auto; }
-.xslider .slick-track::before, .xslider .slick-track::after { content: ""; display: table; }
-.xslider .slick-track::after { clear: both; }
-.xslider__item { box-sizing: border-box; min-height: 1px; padding: 7.5px; }
-.xslider__items > .xslider__item { flex: 0 0 calc(100% / 3); max-width: calc(100% / 3); }
-.xslider .slick-slide { display: block; float: left; height: 100%; }
+/* "Our Expertise" slider: listing 2137 cards in a Swiper set up by widgets.js. */
+/* contain: the mobile section is a wrapping flex column (sized by content), and Swiper sizes slides
+   from the container, so without it the two grow each other without bound. */
+.xslider { position: relative; contain: inline-size; }
+.xslider__swiper { overflow: visible; margin: 0 -7.5px; }
+.xslider__item { box-sizing: border-box; width: calc(100% / 3); height: auto; padding: 7.5px; }
+.xslider__dots { margin-top: 30px; }
 
 .xcard {
   position: relative;
@@ -50,9 +44,9 @@
   .xcard__excerpt { width: 68%; max-width: 68%; }
 }
 @media (max-width: 767px) {
-  .xslider__items { width: calc(100% + 10px); margin: 0 -5px; }
-  .xslider__item { padding: 5px; }
-  .xslider__items > .xslider__item { flex-basis: 50%; max-width: 50%; }
+  .xslider__swiper { margin: 0 -5px; }
+  .xslider__item { width: calc(100% / 2.2); padding: 5px; }
+  .xslider__dots { margin-top: 20px; }
   .xcard { flex-wrap: wrap; min-height: 54.5vw; padding: 4vw; border-radius: 15px; }
   .xcard__lottie, .xcard__excerpt { display: none; }
   .xcard__arrow-inner { margin: -2px -2px 0 0; }

@@ -1,8 +1,7 @@
-/* Home page concept (pages/concept/home.astro). Builds on case.css (tokens, label, CTA card) and home.css (hero, photo, tools).
-   Rules that override case.css / home.css are prefixed with .cx: the bundled stylesheet order is not guaranteed.
+/* Home page (pages/index.astro). Builds on case.css (tokens, label, CTA card) and home-hero.css (hero, photo, tools).
+   Rules that override case.css / home-hero.css are prefixed with .cx: the bundled stylesheet order is not guaranteed.
    H2 ladder: need/approach 48 → proof 72 (the peak) → tools/team 44 → CTA 56 (case.css).
    Section rhythm: 120px between sections on desktop, 90 at ≤1024, 64 at ≤767. */
-.cx-draft { margin: 0; padding: 20px 16px 0; font-size: 12px; text-align: center; color: var(--label); }
 
 /* Shared */
 .cx-h2 { margin: 0; font-family: var(--display); font-size: 48px; font-weight: 400; line-height: 1.06; letter-spacing: -0.04em; text-wrap: balance; }
@@ -10,7 +9,7 @@
 .cx-head__text { margin: 20px 0 0; max-width: 40em; font-size: 20px; color: var(--text-soft); }
 .cx-nowrap { white-space: nowrap; }
 .cx-meta { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.4; color: var(--label); }
-.cx .hm-hero__title .cx-h1 { color: inherit; } /* home.css tints every span in the title; only the typed word is lime */
+.cx .hm-hero__title .cx-h1 { color: inherit; } /* home-hero.css tints every span in the title; only the typed word is lime */
 
 /* Buttons: shared .btn family (base.css); the CTA card uses .btn--on-dark / .btn--outline-on-dark. */
 
@@ -81,7 +80,7 @@
 .cx-more { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 28px; border-bottom: 1px solid var(--green); font-size: 18px; color: var(--green); }
 .cx-more:hover { border-bottom-width: 2px; }
 
-/* Tools block (home.css), tuned to this page's type and palette. Scoped under .cx so / is unaffected. */
+/* Tools block (home-hero.css), tuned to this page's type and palette. */
 .cx .hm-tools .hm-box__in { padding: 120px 0 0; }
 .cx .hm-tools__card { background-color: var(--grey); }
 .cx .hm-tools__title h2 { font-size: 44px; line-height: 1.08; letter-spacing: -0.04em; color: var(--green); text-wrap: balance; }

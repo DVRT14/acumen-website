@@ -1,375 +1,211 @@
 {
-  "typed": "<div class=\"typed-strings\"><p>value</p><p>decisions</p><p>opportunities</p><p>profit</p></div>",
-  "heroTitle": "Transform data into <br><span class=\"typed\"></span>",
-  "heroText": "Your data &amp; AI consultancy partner.",
-  "heroButton": {
-    "label": "Get to know us",
-    "href": "/culture/"
+ "photo": {
+  "fetchpriority": "high",
+  "decoding": "async",
+  "width": "1749",
+  "height": "1472",
+  "src": "/wp-content/uploads/2026/06/DSCF6533-scaled-e1782802625587.webp",
+  "alt": "",
+  "srcset": "/wp-content/uploads/2026/06/DSCF6533-scaled-e1782802625587.webp 1749w, /wp-content/uploads/2026/06/DSCF6533-scaled-e1782802625587-300x252.webp 300w, /wp-content/uploads/2026/06/DSCF6533-scaled-e1782802625587-1024x862.webp 1024w, /wp-content/uploads/2026/06/DSCF6533-scaled-e1782802625587-768x646.webp 768w, /wp-content/uploads/2026/06/DSCF6533-scaled-e1782802625587-1536x1293.webp 1536w",
+  "sizes": "(max-width: 1749px) 100vw, 1749px"
+ },
+ "logos": [
+  {
+   "loading": "lazy",
+   "decoding": "async",
+   "width": "162",
+   "height": "78",
+   "src": "/wp-content/uploads/2024/08/trifinance.webp",
+   "alt": "TriFinance"
   },
-  "photo": {
-    "fetchpriority": "high",
-    "decoding": "async",
-    "width": "1749",
-    "height": "1472",
-    "src": "/wp-content/uploads/2026/06/DSCF6533-scaled-e1782802625587.webp",
-    "alt": "",
-    "srcset": "/wp-content/uploads/2026/06/DSCF6533-scaled-e1782802625587.webp 1749w, /wp-content/uploads/2026/06/DSCF6533-scaled-e1782802625587-300x252.webp 300w, /wp-content/uploads/2026/06/DSCF6533-scaled-e1782802625587-1024x862.webp 1024w, /wp-content/uploads/2026/06/DSCF6533-scaled-e1782802625587-768x646.webp 768w, /wp-content/uploads/2026/06/DSCF6533-scaled-e1782802625587-1536x1293.webp 1536w",
-    "sizes": "(max-width: 1749px) 100vw, 1749px"
+  {
+   "loading": "lazy",
+   "decoding": "async",
+   "width": "162",
+   "height": "78",
+   "src": "/wp-content/uploads/2024/08/kaneka.webp",
+   "alt": "Kaneka"
   },
-  "photoText": "From strategy and governance to analytics, AI and modern data platforms, we help organizations unlock the full value of their data.",
-  "logosTitle": "Trusted by",
-  "logos": [
-    {
-      "loading": "lazy",
-      "decoding": "async",
-      "width": "162",
-      "height": "78",
-      "src": "/wp-content/uploads/2024/08/trifinance.webp",
-      "alt": "TriFinance"
-    },
-    {
-      "loading": "lazy",
-      "decoding": "async",
-      "width": "162",
-      "height": "78",
-      "src": "/wp-content/uploads/2024/08/kaneka.webp",
-      "alt": "Kaneka"
-    },
-    {
-      "loading": "lazy",
-      "decoding": "async",
-      "width": "102",
-      "height": "64",
-      "src": "/wp-content/uploads/2024/05/h-essers.webp",
-      "alt": "H.Essers"
-    },
-    {
-      "loading": "lazy",
-      "decoding": "async",
-      "width": "160",
-      "height": "76",
-      "src": "/wp-content/uploads/2024/05/q8-oiols.webp",
-      "alt": "Q8 Oils"
-    },
-    {
-      "loading": "lazy",
-      "decoding": "async",
-      "width": "162",
-      "height": "78",
-      "src": "/wp-content/uploads/2024/05/carglass.webp",
-      "alt": "Carglass"
-    },
-    {
-      "loading": "lazy",
-      "decoding": "async",
-      "width": "216",
-      "height": "102",
-      "src": "/wp-content/uploads/2024/05/damler.webp",
-      "alt": "Daimler"
-    },
-    {
-      "loading": "lazy",
-      "decoding": "async",
-      "width": "132",
-      "height": "62",
-      "src": "/wp-content/uploads/2024/05/vdab.webp",
-      "alt": "VDAB"
-    },
-    {
-      "loading": "lazy",
-      "decoding": "async",
-      "width": "162",
-      "height": "78",
-      "src": "/wp-content/uploads/2024/08/cordeel.webp",
-      "alt": "Cordeel"
-    },
-    {
-      "loading": "lazy",
-      "decoding": "async",
-      "width": "94",
-      "height": "58",
-      "src": "/wp-content/uploads/2024/05/jbc.webp",
-      "alt": "JBC"
-    },
-    {
-      "loading": "lazy",
-      "decoding": "async",
-      "width": "162",
-      "height": "78",
-      "src": "/wp-content/uploads/2024/08/baloise.webp",
-      "alt": "Baloise"
-    },
-    {
-      "loading": "lazy",
-      "decoding": "async",
-      "width": "162",
-      "height": "78",
-      "src": "/wp-content/uploads/2024/08/agc.webp",
-      "alt": "AGC"
-    }
-  ],
-  "benefits": [
-    [
-      "Clarity",
-      "Understanding your data can be complex, but we’re here to simplify it for you. Our aim is to provide actionable insights that empower confident decision-making and drive your business towards success"
-    ],
-    [
-      "Relief",
-      "<p>Dealing with data can feel overwhelming. With our expertise, clients can breathe easy, knowing that their data challenges are in capable hands. Freeing up time and resources for our customers to focus on what truly matters.</p>"
-    ],
-    [
-      "Goal orientation",
-      "<p>We’re here to make your goals our mission. By aligning data analytics with strategic objectives, we tailor solutions that drive your business forward. Count on us for actionable insights that truly make a difference.</p>"
-    ]
-  ],
-  "benefitImages": [
-    {
-      "loading": "lazy",
-      "decoding": "async",
-      "width": "1142",
-      "height": "1142",
-      "src": "/wp-content/uploads/2024/06/video1.webp",
-      "alt": "",
-      "srcset": "/wp-content/uploads/2024/06/video1.webp 1142w, /wp-content/uploads/2024/06/video1-300x300.webp 300w, /wp-content/uploads/2024/06/video1-1024x1024.webp 1024w, /wp-content/uploads/2024/06/video1-150x150.webp 150w, /wp-content/uploads/2024/06/video1-768x768.webp 768w",
-      "sizes": "(max-width: 1142px) 100vw, 1142px"
-    },
-    {
-      "loading": "lazy",
-      "decoding": "async",
-      "width": "1144",
-      "height": "1144",
-      "src": "/wp-content/uploads/2024/06/video2.webp",
-      "alt": "",
-      "srcset": "/wp-content/uploads/2024/06/video2.webp 1144w, /wp-content/uploads/2024/06/video2-300x300.webp 300w, /wp-content/uploads/2024/06/video2-1024x1024.webp 1024w, /wp-content/uploads/2024/06/video2-150x150.webp 150w, /wp-content/uploads/2024/06/video2-768x768.webp 768w",
-      "sizes": "(max-width: 1144px) 100vw, 1144px"
-    },
-    {
-      "loading": "lazy",
-      "decoding": "async",
-      "width": "1144",
-      "height": "1144",
-      "src": "/wp-content/uploads/2024/06/video3.webp",
-      "alt": "",
-      "srcset": "/wp-content/uploads/2024/06/video3.webp 1144w, /wp-content/uploads/2024/06/video3-300x300.webp 300w, /wp-content/uploads/2024/06/video3-1024x1024.webp 1024w, /wp-content/uploads/2024/06/video3-150x150.webp 150w, /wp-content/uploads/2024/06/video3-768x768.webp 768w",
-      "sizes": "(max-width: 1144px) 100vw, 1144px"
-    }
-  ],
-  "groupImage": {
-    "loading": "lazy",
-    "decoding": "async",
-    "width": "1681",
-    "height": "1121",
-    "src": "/wp-content/uploads/2024/05/sec5bg.webp",
-    "alt": "",
-    "srcset": "/wp-content/uploads/2024/05/sec5bg.webp 1681w, /wp-content/uploads/2024/05/sec5bg-300x200.webp 300w, /wp-content/uploads/2024/05/sec5bg-1024x683.webp 1024w, /wp-content/uploads/2024/05/sec5bg-768x512.webp 768w, /wp-content/uploads/2024/05/sec5bg-1536x1024.webp 1536w",
-    "sizes": "(max-width: 1681px) 100vw, 1681px"
+  {
+   "loading": "lazy",
+   "decoding": "async",
+   "width": "102",
+   "height": "64",
+   "src": "/wp-content/uploads/2024/05/h-essers.webp",
+   "alt": "H.Essers"
   },
-  "groupTitle": "Backed by a data collective.",
-  "groupText": "<p>Acumen is part of collecd, a collective of data companies with a shared commitment to excellence, innovation and customer satisfaction.</p>",
-  "groupButton": {
-    "label": "Part of Collecd",
-    "href": "https://www.collecd.com/"
+  {
+   "loading": "lazy",
+   "decoding": "async",
+   "width": "160",
+   "height": "76",
+   "src": "/wp-content/uploads/2024/05/q8-oiols.webp",
+   "alt": "Q8 Oils"
   },
-  "howTitle": "How we help you",
-  "steps": [
-    [
-      "Step 1: Access data",
-      "<p>We make data accessible, which is vital for every business, driving informed decisions and sustainable growth in a competitive market.</p>"
-    ],
-    [
-      "Step 2: Integrate data",
-      "<p>Integrating data is essential &#8211; it’s your business’s memory bank, safeguarding valuable insights and opportunities.</p>"
-    ],
-    [
-      "Step 3: Model data",
-      "<p>Modeling data is the secret to actionable insights and making informed choices</p>"
-    ],
-    [
-      "Step 4: Analyse &amp; Visualize",
-      "<p>Analyzing and visualizing data is like painting a picture of your business &#8211; it reveals patterns and insights that guide smarter decisions and spark innovation.</p>"
-    ],
-    [
-      "Step 5: Predict &amp; Report",
-      "<p>Data reporting paints a clear picture of your business journey, guiding decisions and fostering transparency with stakeholders.</p>"
-    ]
-  ],
-  "toolsTitle": "Fluent in the modern data &amp; AI stack",
-  "toolsText": "Databricks, Microsoft Fabric, dbt, Power BI and more. We know them in depth and choose the one that fits the problem.",
-  "tools": [
-    {
-      "alt": "Microsoft",
-      "src": "/logos/tools/microsoft.svg",
-      "width": 338,
-      "height": 72,
-      "size": "l"
-    },
-    {
-      "alt": "AWS",
-      "src": "/logos/tools/aws.svg",
-      "width": 304,
-      "height": 182,
-      "size": "s"
-    },
-    {
-      "alt": "Python",
-      "src": "/logos/tools/python.svg",
-      "width": 24,
-      "height": 24,
-      "size": "m"
-    },
-    {
-      "alt": "IBM",
-      "src": "/logos/tools/ibm.svg",
-      "width": 1075,
-      "height": 401,
-      "size": "l"
-    },
-    {
-      "alt": "Tableau",
-      "src": "/logos/tools/tableau.png",
-      "width": 506,
-      "height": 497,
-      "size": "s"
-    },
-    {
-      "alt": "MLflow",
-      "src": "/logos/tools/mlflow.svg",
-      "width": 109,
-      "height": 40,
-      "size": "m"
-    },
-    {
-      "alt": "Dagster",
-      "src": "/wp-content/uploads/2025/06/dagster-primary-mark.svg",
-      "width": 560,
-      "height": 560,
-      "size": "l"
-    },
-    {
-      "alt": "Databricks",
-      "src": "/logos/tools/databricks.svg",
-      "width": 24,
-      "height": 24,
-      "size": "m"
-    },
-    {
-      "alt": "dbt",
-      "src": "/logos/tools/dbt.svg",
-      "width": 391,
-      "height": 90,
-      "size": "m"
-    },
-    {
-      "alt": "Apache Airflow",
-      "src": "/logos/tools/apacheairflow.svg",
-      "width": 453,
-      "height": 175,
-      "size": "m"
-    },
-    {
-      "alt": "Terraform",
-      "src": "/logos/tools/terraform.svg",
-      "width": 24,
-      "height": 24,
-      "size": "m"
-    },
-    {
-      "alt": "Microsoft Fabric",
-      "src": "/logos/tools/fabric.svg",
-      "width": 48,
-      "height": 48,
-      "size": "l"
-    },
-    {
-      "alt": "Power BI",
-      "src": "/logos/tools/powerbi.svg",
-      "width": 48,
-      "height": 48,
-      "size": "s"
-    }
-  ],
-  "toolsLink": {
-    "label": "Our technology partners",
-    "href": "/partners/"
+  {
+   "loading": "lazy",
+   "decoding": "async",
+   "width": "162",
+   "height": "78",
+   "src": "/wp-content/uploads/2024/05/carglass.webp",
+   "alt": "Carglass"
   },
-  "supportText": "<p>Count on us for ongoing support in your data journey. We’re here to help, every step of the way.</p>",
-  "pricingText": "<p>A boutique team that stays with you. The experts who design your solution also build it, without consultant rotation: a tailored alternative to the Big Four.</p>",
-  "values": [
-    [
-      "No-nonsense.",
-      "<p>We take a straightforward,<br />no-nonsense approach to delivering top-notch solutions and services.</p>"
-    ],
-    [
-      "Innovation.",
-      "<p>We embrace innovation and technology advancements to stay ahead of the curve. We thrive on staying at the forefront of industry trends</p>"
-    ],
-    [
-      "Trusted experts.",
-      "<p>With a team of seasoned experts, founded in 2007, we’ve been here providing unparalleled guidance and support throughout your data journey for quite some time.</p>"
-    ],
-    [
-      "Loyalty",
-      "<p>We’re all about building genuine, lasting connections with our clients. When you work with us, you’re not just a project &#8211; you’re part of our extended family.</p>"
-    ]
-  ],
-  "valueImages": [
-    {
-      "loading": "lazy",
-      "decoding": "async",
-      "width": "683",
-      "height": "1024",
-      "src": "/wp-content/uploads/2024/06/acumen-data-group-1-683x1024.webp",
-      "alt": "",
-      "srcset": "/wp-content/uploads/2024/06/acumen-data-group-1-683x1024.webp 683w, /wp-content/uploads/2024/06/acumen-data-group-1-200x300.webp 200w, /wp-content/uploads/2024/06/acumen-data-group-1-768x1152.webp 768w, /wp-content/uploads/2024/06/acumen-data-group-1.webp 800w",
-      "sizes": "(max-width: 683px) 100vw, 683px"
-    },
-    {
-      "loading": "lazy",
-      "decoding": "async",
-      "width": "779",
-      "height": "1024",
-      "src": "/wp-content/uploads/2024/06/acumen-data-group-2-779x1024.webp",
-      "alt": "",
-      "srcset": "/wp-content/uploads/2024/06/acumen-data-group-2-779x1024.webp 779w, /wp-content/uploads/2024/06/acumen-data-group-2-228x300.webp 228w, /wp-content/uploads/2024/06/acumen-data-group-2-768x1009.webp 768w, /wp-content/uploads/2024/06/acumen-data-group-2-1169x1536.webp 1169w, /wp-content/uploads/2024/06/acumen-data-group-2-1559x2048.webp 1559w, /wp-content/uploads/2024/06/acumen-data-group-2-scaled.webp 1949w",
-      "sizes": "(max-width: 779px) 100vw, 779px"
-    },
-    {
-      "loading": "lazy",
-      "decoding": "async",
-      "width": "713",
-      "height": "1024",
-      "src": "/wp-content/uploads/2024/06/acumen-data-group-4-713x1024.webp",
-      "alt": "",
-      "srcset": "/wp-content/uploads/2024/06/acumen-data-group-4-713x1024.webp 713w, /wp-content/uploads/2024/06/acumen-data-group-4-209x300.webp 209w, /wp-content/uploads/2024/06/acumen-data-group-4-768x1104.webp 768w, /wp-content/uploads/2024/06/acumen-data-group-4.webp 835w",
-      "sizes": "(max-width: 713px) 100vw, 713px"
-    },
-    {
-      "loading": "lazy",
-      "decoding": "async",
-      "width": "686",
-      "height": "1024",
-      "src": "/wp-content/uploads/2024/06/acumen-data-group-3-686x1024.webp",
-      "alt": "",
-      "srcset": "/wp-content/uploads/2024/06/acumen-data-group-3-686x1024.webp 686w, /wp-content/uploads/2024/06/acumen-data-group-3-201x300.webp 201w, /wp-content/uploads/2024/06/acumen-data-group-3-768x1147.webp 768w, /wp-content/uploads/2024/06/acumen-data-group-3.webp 803w",
-      "sizes": "(max-width: 686px) 100vw, 686px"
-    }
-  ],
-  "cultureTitle": "Our culture",
-  "cultureText": "<p>At Acumen, trust and ownership drive everything we do. We believe in each team member owning their work, fostering collaboration and innovation. Together, we’re a close team making a big impact through data.</p>",
-  "cultureButton": {
-    "label": "Read more",
-    "href": "/culture/"
+  {
+   "loading": "lazy",
+   "decoding": "async",
+   "width": "216",
+   "height": "102",
+   "src": "/wp-content/uploads/2024/05/damler.webp",
+   "alt": "Daimler"
   },
-  "cultureMarquee": "Culture•",
-  "ctaTitle": "Make informed business decisions",
-  "ctaButtons": [
-    {
-      "label": "Schedule a call with us",
-      "href": "/contact/"
-    },
-    {
-      "label": "Explore our expertise",
-      "href": "/our-expertise/"
-    }
-  ]
+  {
+   "loading": "lazy",
+   "decoding": "async",
+   "width": "132",
+   "height": "62",
+   "src": "/wp-content/uploads/2024/05/vdab.webp",
+   "alt": "VDAB"
+  },
+  {
+   "loading": "lazy",
+   "decoding": "async",
+   "width": "162",
+   "height": "78",
+   "src": "/wp-content/uploads/2024/08/cordeel.webp",
+   "alt": "Cordeel"
+  },
+  {
+   "loading": "lazy",
+   "decoding": "async",
+   "width": "94",
+   "height": "58",
+   "src": "/wp-content/uploads/2024/05/jbc.webp",
+   "alt": "JBC"
+  },
+  {
+   "loading": "lazy",
+   "decoding": "async",
+   "width": "162",
+   "height": "78",
+   "src": "/wp-content/uploads/2024/08/baloise.webp",
+   "alt": "Baloise"
+  },
+  {
+   "loading": "lazy",
+   "decoding": "async",
+   "width": "162",
+   "height": "78",
+   "src": "/wp-content/uploads/2024/08/agc.webp",
+   "alt": "AGC"
+  }
+ ],
+ "toolsTitle": "Fluent in the modern data &amp; AI stack",
+ "toolsText": "Databricks, Microsoft Fabric, dbt, Power BI and more. We know them in depth and choose the one that fits the problem.",
+ "tools": [
+  {
+   "alt": "Microsoft",
+   "src": "/logos/tools/microsoft.svg",
+   "width": 338,
+   "height": 72,
+   "size": "l"
+  },
+  {
+   "alt": "AWS",
+   "src": "/logos/tools/aws.svg",
+   "width": 304,
+   "height": 182,
+   "size": "s"
+  },
+  {
+   "alt": "Python",
+   "src": "/logos/tools/python.svg",
+   "width": 24,
+   "height": 24,
+   "size": "m"
+  },
+  {
+   "alt": "IBM",
+   "src": "/logos/tools/ibm.svg",
+   "width": 1075,
+   "height": 401,
+   "size": "l"
+  },
+  {
+   "alt": "Tableau",
+   "src": "/logos/tools/tableau.png",
+   "width": 506,
+   "height": 497,
+   "size": "s"
+  },
+  {
+   "alt": "MLflow",
+   "src": "/logos/tools/mlflow.svg",
+   "width": 109,
+   "height": 40,
+   "size": "m"
+  },
+  {
+   "alt": "Dagster",
+   "src": "/wp-content/uploads/2025/06/dagster-primary-mark.svg",
+   "width": 560,
+   "height": 560,
+   "size": "l"
+  },
+  {
+   "alt": "Databricks",
+   "src": "/logos/tools/databricks.svg",
+   "width": 24,
+   "height": 24,
+   "size": "m"
+  },
+  {
+   "alt": "dbt",
+   "src": "/logos/tools/dbt.svg",
+   "width": 391,
+   "height": 90,
+   "size": "m"
+  },
+  {
+   "alt": "Apache Airflow",
+   "src": "/logos/tools/apacheairflow.svg",
+   "width": 453,
+   "height": 175,
+   "size": "m"
+  },
+  {
+   "alt": "Terraform",
+   "src": "/logos/tools/terraform.svg",
+   "width": 24,
+   "height": 24,
+   "size": "m"
+  },
+  {
+   "alt": "Microsoft Fabric",
+   "src": "/logos/tools/fabric.svg",
+   "width": 48,
+   "height": 48,
+   "size": "l"
+  },
+  {
+   "alt": "Power BI",
+   "src": "/logos/tools/powerbi.svg",
+   "width": 48,
+   "height": 48,
+   "size": "s"
+  }
+ ],
+ "toolsLink": {
+  "label": "Our technology partners",
+  "href": "/partners/"
+ },
+ "teamImage": {
+  "loading": "lazy",
+  "decoding": "async",
+  "width": "779",
+  "height": "1024",
+  "src": "/wp-content/uploads/2024/06/acumen-data-group-2-779x1024.webp",
+  "alt": "",
+  "srcset": "/wp-content/uploads/2024/06/acumen-data-group-2-779x1024.webp 779w, /wp-content/uploads/2024/06/acumen-data-group-2-228x300.webp 228w, /wp-content/uploads/2024/06/acumen-data-group-2-768x1009.webp 768w, /wp-content/uploads/2024/06/acumen-data-group-2-1169x1536.webp 1169w, /wp-content/uploads/2024/06/acumen-data-group-2-1559x2048.webp 1559w, /wp-content/uploads/2024/06/acumen-data-group-2-scaled.webp 1949w",
+  "sizes": "(max-width: 779px) 100vw, 779px"
+ }
 }

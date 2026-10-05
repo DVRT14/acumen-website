@@ -1,4 +1,4 @@
-/* Home hero, photo, tools block, boxes and buttons: shared by the home page (with home.css) and /concept/home/. */
+/* Home hero, photo, tools block, boxes and buttons: used by the home page (with concept.css). */
 .hm > section { position: relative; display: flex; flex-direction: column; width: 100%; }
 .hm section *, .hm section *::before, .hm section *::after { box-sizing: border-box; }
 .hm-full { position: relative; display: flex; flex-direction: column; width: 100%; }

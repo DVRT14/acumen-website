@@ -1,15 +1,15 @@
 ---
-// "Our Expertise" slider (was listing 2137 in a slick carousel). widgets.js builds the slick
-// DOM from data-slider_options.
+// "Our Expertise" slider (was listing 2137 in a slick carousel). widgets.js initialises Swiper.
+import 'swiper/css';
+import 'swiper/css/a11y';
 import ExpertiseCard from './ExpertiseCard.astro';
 import cards from '../data/expertise-cards.json';
-
-const options = { speed: 500, infinite: true, slidesToShow: { desktop: 3, tablet: 3, mobile: 2 } };
 ---
 <div class="xslider animated-fast" data-animate="fadeIn" data-animate-delay="500">
-  <div class="jet-listing-grid__slider" data-slider_options={JSON.stringify(options)}>
-    <div class="jet-listing-grid__items xslider__items">
-      {cards.map(card => <div class="jet-listing-grid__item xslider__item"><ExpertiseCard card={card} /></div>)}
+  <div class="swiper xslider__swiper">
+    <div class="swiper-wrapper">
+      {cards.map(card => <div class="swiper-slide xslider__item" role="group" aria-roledescription="slide"><ExpertiseCard card={card} /></div>)}
     </div>
   </div>
+  <div class="carousel-dots xslider__dots"></div>
 </div>

@@ -1,28 +1,114 @@
 ---
-// Page shell for rebuilt pages: SEO head (carried over from the old site), header, footer, consent.
+// Page shell: head (SEO tags + JSON-LD built from the page's `seo` data), header, footer, consent.
+// consent.css first: it was linked ahead of the page styles.
+import '../styles/consent.css';
 import '../styles/base.css';
 import '../styles/motion.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
 
-interface Props { seo: string; bodyClass?: string }
-const { seo, bodyClass } = Astro.props;
+export interface Seo { title: string; description?: string; image?: string; published?: string | Date; modified?: string | Date; noindex?: boolean; lang?: string }
+export interface ArticleMeta { type: 'Article' | 'BlogPosting'; headline: string; author: { name: string; org?: boolean; url?: string; sameAs?: string; jobTitle?: string }; tags?: string[]; section?: string }
+interface Props {
+  seo: Seo;
+  bodyClass?: string;
+  article?: ArticleMeta;                          // knowledge posts: Article/BlogPosting node + og:type article
+  breadcrumbs?: { name: string; href?: string }[]; // default: derived from the path
+  schema?: object[];                              // extra JSON-LD nodes (e.g. FAQPage)
+  home?: boolean;                                 // home header/footer treatment (default: route is /)
+}
+const { seo, bodyClass, article, schema = [] } = Astro.props;
 const route = Astro.url.pathname;
-const home = route === '/';
+const home = Astro.props.home ?? route === '/';
+const site = Astro.site!.origin;
+const url = site + route;
+const abs = (u?: string) => u && (u.startsWith('/') ? site + u : u);
+const iso = (d?: string | Date) => d && new Date(d).toISOString();
+const lang = seo.lang ?? 'en-GB';
+// Pages without their own share image use the home page's.
+const image = abs(seo.image) ?? `${site}/wp-content/uploads/2026/06/DSCF6533-scaled-e1782802625587.jpg`;
+
+// Breadcrumbs: Home › section › page. Sections without an overview page are skipped.
+const SECTIONS: Record<string, [string, string]> = {
+  knowledge: ['Knowledge', '/knowledge/'], expertise: ['Our expertise', '/our-expertise/'],
+  partners: ['Partners', '/partners/'], careers: ['Careers', '/culture/#careers'],
+};
+const pageName = seo.title.replace(/\s*[-–|]\s*Acumen.*$/, '');
+const segments = route.split('/').filter(Boolean);
+const breadcrumbs = Astro.props.breadcrumbs ?? [
+  { name: 'Home', href: '/' },
+  ...segments.slice(0, -1).filter(s => SECTIONS[s]).map(s => ({ name: SECTIONS[s][0], href: SECTIONS[s][1] })),
+  ...(home ? [] : [{ name: article?.headline ?? pageName }]),
+];
+
+const org = { '@id': `${site}/#organization` };
+const graph = [
+  {
+    '@type': 'Organization', ...org, name: 'Acumen', url: `${site}/`, email: 'info@acumen.be', foundingDate: '2007',
+    logo: { '@type': 'ImageObject', url: `${site}/wp-content/uploads/2025/05/cropped-acumen-logo-mark-dark-green-rgb-934px@72ppi.webp`, width: 693, height: 569 },
+    address: { '@type': 'PostalAddress', streetAddress: 'Ambachtenlaan 14/8', postalCode: '3001', addressLocality: 'Leuven', addressCountry: 'BE' },
+    sameAs: ['https://www.linkedin.com/company/acumen', 'https://www.facebook.com/AcumenConsultingBE/', 'https://www.instagram.com/acumen.be', 'https://www.youtube.com/@Acumendrivenbydata'],
+  },
+  { '@type': 'WebSite', '@id': `${site}/#website`, url: `${site}/`, name: 'Acumen', publisher: org, inLanguage: 'en' },
+  {
+    '@type': 'WebPage', '@id': url, url, name: seo.title, description: seo.description, inLanguage: lang,
+    isPartOf: { '@id': `${site}/#website` }, primaryImageOfPage: { '@type': 'ImageObject', url: image },
+    datePublished: iso(seo.published), dateModified: iso(seo.modified), breadcrumb: { '@id': `${url}#breadcrumb` },
+  },
+  {
+    '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`,
+    itemListElement: breadcrumbs.map((b, i) => ({ '@type': 'ListItem', position: i + 1, name: b.name, item: b.href ? abs(b.href) : undefined })),
+  },
+  article && {
+    '@type': article.type, '@id': `${url}#article`, headline: article.headline, description: seo.description, image,
+    datePublished: iso(seo.published), dateModified: iso(seo.modified ?? seo.published), inLanguage: lang,
+    mainEntityOfPage: { '@id': url }, publisher: org, keywords: article.tags?.join(', ') || undefined, articleSection: article.section,
+    author: article.author.org ? org : { '@type': 'Person', name: article.author.name, url: abs(article.author.url), sameAs: article.author.sameAs, jobTitle: article.author.jobTitle, worksFor: org },
+  },
+  ...schema,
+].filter(Boolean);
+// "</" can't appear inside a <script>.
+const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/<\//g, '<\\/');
 ---
 <!doctype html>
-<html lang="nl-BE">
+<html lang={lang}>
 <head>
 <meta charset="UTF-8">
+<script is:inline>document.documentElement.classList.add('js')</script>
 <link rel="preload" href="/wp-content/uploads/2024/05/AtypDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<Fragment set:html={seo} />
-<link rel="stylesheet" href="/css/consent.css" />
+<title>{seo.title}</title>
+{seo.description && <meta name="description" content={seo.description} />}
+<meta name="robots" content={seo.noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
+<link rel="canonical" href={url} />
+<meta property="og:locale" content={lang.replace('-', '_')} />
+<meta property="og:type" content={article ? 'article' : 'website'} />
+<meta property="og:title" content={seo.title} />
+{seo.description && <meta property="og:description" content={seo.description} />}
+<meta property="og:url" content={url} />
+<meta property="og:site_name" content="Acumen" />
+<meta property="og:image" content={image} />
+{article && seo.published && <meta property="article:published_time" content={iso(seo.published)} />}
+{seo.modified && <meta property="article:modified_time" content={iso(seo.modified)} />}
+{article && !article.author.org && <meta name="author" content={article.author.name} />}
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json" set:html={jsonld} />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="icon" href="/wp-content/uploads/2024/05/Linkedin-kopie-150x150.webp" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2024/05/Linkedin-kopie-300x300.webp" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2024/05/Linkedin-kopie-300x300.webp" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2024/05/Linkedin-kopie-300x300.webp" />
 </head>
 <body class={bodyClass}>
+<a class="skip-link" href="#main">{lang === 'nl-BE' ? 'Naar de inhoud' : 'Skip to content'}</a>
 <Header current={route} home={home} />
+<main id="main" tabindex="-1">
 <slot />
+</main>
 <Footer current={route} home={home} />
 <ConsentBanner />
 <script src="../scripts/site.js"></script>

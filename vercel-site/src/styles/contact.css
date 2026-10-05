@@ -6,8 +6,8 @@
 .ct__form { position: relative; display: flex; flex-direction: column; width: 55%; min-width: 0; }
 .ct__box { position: relative; display: flex; flex-direction: column; }
 .ct__title { position: relative; }
-.ct__title h2 { margin: 0 0 17px; font-family: "Atype Display", Sans-serif; font-size: 44px; font-weight: 400; line-height: 1em; color: #002921; }
-.ct__text { position: relative; width: 355px; max-width: 100%; font-size: 16px; font-weight: 300; line-height: 22px; color: #AAAAAA; }
+.ct__title h1 { margin: 0 0 17px; font-family: "Atype Display", Sans-serif; font-size: 44px; font-weight: 400; line-height: 1em; color: #002921; }
+.ct__text { position: relative; width: 355px; max-width: 100%; font-size: 16px; font-weight: 300; line-height: 22px; color: #767676; }
 .ct__space { position: relative; flex-shrink: 0; }
 .ct__space--61 { height: 61px; }
 .ct__space--88 { height: 88px; }
@@ -16,7 +16,7 @@
 .ct__link { position: relative; max-width: 100%; }
 .ct__link > div { margin-bottom: 17px; font-family: "Atype Display", Sans-serif; font-size: 26px; font-weight: 400; line-height: 1.154em; color: #002921; }
 .ct__link a { color: inherit; transition: color .3s ease-in-out; }
-.ct__link a:hover { color: #B9D0D0; }
+.ct__link a:hover { color: #4F7777; }
 .ct__link--call { align-self: flex-start; }
 .ct__link--call > div { position: relative; cursor: pointer; transition: all .3s ease-in-out; }
 .ct__link--call a:hover { color: inherit; }
@@ -24,7 +24,7 @@
 .ct__link--call > div:hover::after { opacity: 1; }
 
 .ct__addresses { position: relative; display: flex; justify-content: space-between; gap: 20px; }
-.ct__address { position: relative; max-width: 100%; padding-left: 10px; font-size: 16px; font-weight: 300; line-height: 22px; color: #AAAAAA; }
+.ct__address { position: relative; max-width: 100%; padding-left: 10px; font-size: 16px; font-weight: 300; line-height: 22px; color: #767676; }
 .ct__address::before { content: ''; position: absolute; top: 10%; left: 0; width: 1px; height: 80%; background: #809490; }
 .ct__address p { margin: 0; }
 
@@ -55,7 +55,7 @@
   .ct__inner { flex-wrap: wrap; padding: 100px 0; }
   .ct__intro, .ct__form { width: 100%; }
   .ct__intro { padding-right: 0; }
-  .ct__title h2 { font-size: 40px; }
+  .ct__title h1 { font-size: 40px; }
   .ct__text { width: 100%; }
   .ct--desktop { display: none; }
   .ct--mobile { display: flex; }

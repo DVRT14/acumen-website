@@ -1,51 +1,44 @@
 {
- "seo": "<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />\n\n\t<!-- This site is optimized with the Yoast SEO plugin v22.8 - https://yoast.com/wordpress/plugins/seo/ -->\n\t<title>Data Visualization &amp;&nbsp;Reporting - Acumen</title>\n\t<meta name=\"description\" content=\"Data visualization&amp; eporting is the visual representation of data. After analysis of data and reports, we provide the tools.\" />\n\t<link rel=\"canonical\" href=\"/expertise/datavisualisation-reporting/\" />\n\t<meta property=\"og:locale\" content=\"nl_BE\" />\n\t<meta property=\"og:type\" content=\"article\" />\n\t<meta property=\"og:title\" content=\"Data Visualization &amp;&nbsp;Reporting - Acumen\" />\n\t<meta property=\"og:description\" content=\"Data visualization&amp; eporting is the visual representation of data. After analysis of data and reports, we provide the tools.\" />\n\t<meta property=\"og:url\" content=\"/expertise/datavisualisation-reporting/\" />\n\t<meta property=\"og:site_name\" content=\"Acumen\" />\n\t<meta property=\"article:modified_time\" content=\"2025-03-31T20:57:55+00:00\" />\n\t<meta name=\"twitter:card\" content=\"summary_large_image\" />\n\t<meta name=\"twitter:label1\" content=\"Geschatte leestijd\" />\n\t<meta name=\"twitter:data1\" content=\"1 minuut\" />\n\t<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"/expertise/datavisualisation-reporting/\",\"url\":\"/expertise/datavisualisation-reporting/\",\"name\":\"Data Visualization &&nbsp;Reporting - Acumen\",\"isPartOf\":{\"@id\":\"/#website\"},\"datePublished\":\"2024-05-26T18:10:16+00:00\",\"dateModified\":\"2025-03-31T20:57:55+00:00\",\"description\":\"Data visualization& eporting is the visual representation of data. After analysis of data and reports, we provide the tools.\",\"breadcrumb\":{\"@id\":\"/expertise/datavisualisation-reporting/#breadcrumb\"},\"inLanguage\":\"nl-BE\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"/expertise/datavisualisation-reporting/\"]}]},{\"@type\":\"BreadcrumbList\",\"@id\":\"/expertise/datavisualisation-reporting/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Our Expertise\",\"item\":\"/expertise/\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"Data Visualization &#038;&nbsp;Reporting\"}]},{\"@type\":\"WebSite\",\"@id\":\"/#website\",\"url\":\"/\",\"name\":\"Acumen\",\"description\":\"\",\"publisher\":{\"@id\":\"/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"/?s={search_term_string}\"},\"query-input\":\"required name=search_term_string\"}],\"inLanguage\":\"nl-BE\"},{\"@type\":\"Organization\",\"@id\":\"/#organization\",\"name\":\"Acumen\",\"url\":\"/\",\"logo\":{\"@type\":\"ImageObject\",\"inLanguage\":\"nl-BE\",\"@id\":\"/#/schema/logo/image/\",\"url\":\"/wp-content/uploads/2025/05/cropped-acumen-logo-mark-dark-green-rgb-934px@72ppi.webp\",\"contentUrl\":\"/wp-content/uploads/2025/05/cropped-acumen-logo-mark-dark-green-rgb-934px@72ppi.webp\",\"width\":693,\"height\":569,\"caption\":\"Acumen\"},\"image\":{\"@id\":\"/#/schema/logo/image/\"}}]}</script>\n\t<!-- / Yoast SEO plugin. -->\n<link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png\">\n<link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon-32x32.png\">\n<link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon-16x16.png\">\n<link rel=\"manifest\" href=\"/site.webmanifest\">\n<link rel=\"icon\" href=\"/wp-content/uploads/2024/05/Linkedin-kopie-150x150.webp\" sizes=\"32x32\" />\n<link rel=\"icon\" href=\"/wp-content/uploads/2024/05/Linkedin-kopie-300x300.webp\" sizes=\"192x192\" />\n<link rel=\"apple-touch-icon\" href=\"/wp-content/uploads/2024/05/Linkedin-kopie-300x300.webp\" />\n<meta name=\"msapplication-TileImage\" content=\"/wp-content/uploads/2024/05/Linkedin-kopie-300x300.webp\" />",
- "title": "Data Visualization <br><span>&#038;&nbsp;Reporting</span>",
- "content": "<p>Data visualization &amp; reporting is the visual representation of data using visual elements. After a thorough analysis of data and potentially already existing reports, we provide the tools to easily discover insights and patterns in your data in a simple, comprehensible and interactive way.</p>",
- "marquee": "Data visualization &amp; Reporting•",
- "bannerImage": "/wp-content/uploads/2024/05/Data-Visualization_2.webp",
- "authorImage": {
-  "fetchpriority": "high",
-  "width": "800",
-  "height": "523",
-  "src": "/wp-content/uploads/2024/05/Data-Visualization_3-1024x670.webp",
-  "alt": "Data visualization",
-  "srcset": "/wp-content/uploads/2024/05/Data-Visualization_3-1024x670.webp 1024w, /wp-content/uploads/2024/05/Data-Visualization_3-300x196.webp 300w, /wp-content/uploads/2024/05/Data-Visualization_3-768x502.webp 768w, /wp-content/uploads/2024/05/Data-Visualization_3.webp 1251w",
-  "sizes": "(max-width: 800px) 100vw, 800px"
- },
- "author": "AUTHOR – Jannis Ramaekers",
- "introTitle": "<span>Empower</span> your organisation",
- "introText": "Implementation of data visualization &amp; reporting empowers your organization with a powerful storytelling tool to support data-driven decision making. It allows communicating complex information internally and externally in a visual and intuitive manner. After an analysis of the available data, which can range from sales to purchasing, to financial, to even manufacturing data we collaborate with the relevant stakeholders in order to get a deep understanding of which reports, KPI’s and visualizations are required.",
- "featuresTitle": "An added value <span><br>in the daily course of events</span>",
- "featuresText": "Through a process of constant back-and-forth feedback we strive towards an inch-perfect and organization-specific bundle of reports and dashboards which provide an added value in the daily course of events.\n\nBy implementing a fitting data strategy, we make sure that the relevant data is easily consultable, freshly available and up-to-date. In terms of internal analysis, data visualization &amp; reporting allows for a more efficient way to analyze data, share data across the organization, discover event relations, explore opportunities &amp; trends and enhance comparison. By simplifying complex information, we provide the tools to make informed and impactful decisions. Since data-driven visuals attract more attention and assist in getting your message across to the audience, they can be an excellent tool for communication towards external stakeholders as well.",
- "photoImage": "/wp-content/uploads/2024/05/Data-Visualization_1.webp",
- "quote": "<span>A fitting data strategy</span>makes sure that relevant  data is easily consultable, freshly available and up-to-date.",
- "conclusionTitle": "Experience <span><br>great benefits</span>",
- "conclusionText": "Adapting a data visualization &amp; reporting strategy saves, to a great extent, loads of  valuable time and energy. Instead of ploughing through an overload of data in Excel, a database or even a CRM system, data is readily available and time can be spent on things that actually matter. Combine this elevated speed with a higher involvement of stakeholders, since visual-appealing reports are perceived and remembered better, and a better understanding of the data, it’s trends and the surrounding context. From technical specialists to analysts, managers and CEO’s, each and every employee will experience great benefits by hopping on this story-telling data train.",
- "contactImage": {
-  "loading": "lazy",
-  "width": "1134",
-  "height": "659",
-  "src": "/wp-content/uploads/2024/06/Group-27.webp",
-  "alt": "",
-  "srcset": "/wp-content/uploads/2024/06/Group-27.webp 1134w, /wp-content/uploads/2024/06/Group-27-300x174.webp 300w, /wp-content/uploads/2024/06/Group-27-1024x595.webp 1024w, /wp-content/uploads/2024/06/Group-27-768x446.webp 768w",
-  "sizes": "(max-width: 1134px) 100vw, 1134px"
- },
- "contactTitle": "Bram has the answers",
- "contactButton": {
-  "label": "Contact Bram",
-  "href": "mailto:info@acumen.be"
- },
- "related": [
-  "3891",
-  "3956",
-  "3810",
-  "3782",
-  "3755",
-  "3622",
-  "3589",
-  "3574",
-  "3555",
-  "3533"
- ]
+  "seo": {
+    "title": "Data Visualization & Reporting - Acumen",
+    "description": "Data visualization& eporting is the visual representation of data. After analysis of data and reports, we provide the tools.",
+    "published": "2024-05-26T18:10:16+00:00",
+    "modified": "2025-03-31T20:57:55+00:00"
+  },
+  "title": "Data Visualization <br><span>&#038;&nbsp;Reporting</span>",
+  "content": "<p>Data visualization &amp; reporting is the visual representation of data using visual elements. After a thorough analysis of data and potentially already existing reports, we provide the tools to easily discover insights and patterns in your data in a simple, comprehensible and interactive way.</p>",
+  "marquee": "Data visualization &amp; Reporting•",
+  "bannerImage": "/wp-content/uploads/2024/05/Data-Visualization_2.webp",
+  "authorImage": {
+    "fetchpriority": "high",
+    "width": "800",
+    "height": "523",
+    "src": "/wp-content/uploads/2024/05/Data-Visualization_3-1024x670.webp",
+    "alt": "Data visualization",
+    "srcset": "/wp-content/uploads/2024/05/Data-Visualization_3-1024x670.webp 1024w, /wp-content/uploads/2024/05/Data-Visualization_3-300x196.webp 300w, /wp-content/uploads/2024/05/Data-Visualization_3-768x502.webp 768w, /wp-content/uploads/2024/05/Data-Visualization_3.webp 1251w",
+    "sizes": "(max-width: 800px) 100vw, 800px"
+  },
+  "author": "AUTHOR – Jannis Ramaekers",
+  "introTitle": "<span>Empower</span> your organisation",
+  "introText": "Implementation of data visualization &amp; reporting empowers your organization with a powerful storytelling tool to support data-driven decision making. It allows communicating complex information internally and externally in a visual and intuitive manner. After an analysis of the available data, which can range from sales to purchasing, to financial, to even manufacturing data we collaborate with the relevant stakeholders in order to get a deep understanding of which reports, KPI’s and visualizations are required.",
+  "featuresTitle": "An added value <span><br>in the daily course of events</span>",
+  "featuresText": "Through a process of constant back-and-forth feedback we strive towards an inch-perfect and organization-specific bundle of reports and dashboards which provide an added value in the daily course of events.\n\nBy implementing a fitting data strategy, we make sure that the relevant data is easily consultable, freshly available and up-to-date. In terms of internal analysis, data visualization &amp; reporting allows for a more efficient way to analyze data, share data across the organization, discover event relations, explore opportunities &amp; trends and enhance comparison. By simplifying complex information, we provide the tools to make informed and impactful decisions. Since data-driven visuals attract more attention and assist in getting your message across to the audience, they can be an excellent tool for communication towards external stakeholders as well.",
+  "photoImage": "/wp-content/uploads/2024/05/Data-Visualization_1.webp",
+  "quote": "<span>A fitting data strategy</span>makes sure that relevant  data is easily consultable, freshly available and up-to-date.",
+  "conclusionTitle": "Experience <span><br>great benefits</span>",
+  "conclusionText": "Adapting a data visualization &amp; reporting strategy saves, to a great extent, loads of  valuable time and energy. Instead of ploughing through an overload of data in Excel, a database or even a CRM system, data is readily available and time can be spent on things that actually matter. Combine this elevated speed with a higher involvement of stakeholders, since visual-appealing reports are perceived and remembered better, and a better understanding of the data, it’s trends and the surrounding context. From technical specialists to analysts, managers and CEO’s, each and every employee will experience great benefits by hopping on this story-telling data train.",
+  "contactImage": {
+    "loading": "lazy",
+    "width": "1134",
+    "height": "659",
+    "src": "/wp-content/uploads/2024/06/Group-27.webp",
+    "alt": "",
+    "srcset": "/wp-content/uploads/2024/06/Group-27.webp 1134w, /wp-content/uploads/2024/06/Group-27-300x174.webp 300w, /wp-content/uploads/2024/06/Group-27-1024x595.webp 1024w, /wp-content/uploads/2024/06/Group-27-768x446.webp 768w",
+    "sizes": "(max-width: 1134px) 100vw, 1134px"
+  },
+  "contactTitle": "Bram has the answers",
+  "contactButton": {
+    "label": "Contact Bram",
+    "href": "mailto:info@acumen.be"
+  }
 }

@@ -1,0 +1,13 @@
+[
+  { "id": "acumen", "name": "Acumen", "org": true, "bio": "Acumen is a data & AI consultancy from Leuven, Belgium, founded in 2007: data strategy, governance, engineering, reporting, planning and AI." },
+  { "id": "arin", "name": "Arin" },
+  { "id": "geert-wouters", "name": "Geert Wouters" },
+  { "id": "hilde-houtmeyers", "name": "Hilde Houtmeyers", "role": "Functional Analyst", "image": "/wp-content/uploads/2024/06/Hilde-Houtmeyers-260x300.webp" },
+  { "id": "jannis-ramaekers", "name": "Jannis Ramaekers" },
+  { "id": "joris", "name": "Joris" },
+  { "id": "josse-marchoul", "name": "Josse Marchoul" },
+  { "id": "karsten", "name": "Karsten" },
+  { "id": "niels-donders", "name": "Niels Donders" },
+  { "id": "tjomme-vergauwen", "name": "Tjomme Vergauwen", "role": "Data Engineer", "image": "/wp-content/uploads/2024/06/Group-1491-1-260x300.webp" },
+  { "id": "yves", "name": "Yves" }
+]

@@ -4,10 +4,11 @@
   "headers": [
     {
       "source": "/(.*)",
+      "missing": [{ "type": "host", "value": "acumen.be" }],
       "headers": [
         {
           "key": "X-Robots-Tag",
-          "value": "index, follow"
+          "value": "noindex"
         }
       ]
     },
@@ -22,6 +23,11 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/:archive(category|tag|author)/:path*",
+      "destination": "/knowledge/",
+      "permanent": true
+    },
     {
       "source": "/genarative-ai-and-power-bi/:path*",
       "destination": "/knowledge/genarative-ai-and-power-bi/",
@@ -184,7 +190,7 @@
     },
     {
       "source": "/careers-a-great-team-for-great-results/:path*",
-      "destination": "/careers/",
+      "destination": "/culture/#careers",
       "permanent": true
     },
     {
@@ -205,6 +211,11 @@
     {
       "source": "/terms-conditions/:path*",
       "destination": "/legal/terms-conditions/",
+      "permanent": true
+    },
+    {
+      "source": "/careers/",
+      "destination": "/culture/#careers",
       "permanent": true
     },
     {

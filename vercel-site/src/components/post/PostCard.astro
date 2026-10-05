@@ -1,14 +1,20 @@
 ---
-// Knowledge post card (was loop item template 1145; 1441 showed the categories instead of the date).
-// Hover reveal handled by CSS + postItemHover.
-interface Props { card: { href: string; title: string; date: string; terms?: string | null; excerpt?: string | null; image?: Record<string, string> | null; bg?: string }; info?: 'date' | 'terms' }
+// Knowledge post card (card data: lib/knowledge.ts `card()`). Hover reveal handled by CSS + postItemHover.
+import type { Card } from '../../lib/knowledge';
+interface Props { card: Card; info?: 'date' | 'terms' }
 const { card, info = 'date' } = Astro.props;
+// The image covers the card (post-card.css: ≤767px ~100vw × 389px, ≤1024px ~46vw × 609px, else 552 × 678px),
+// so its rendered width is the larger of the card width and card height × aspect ratio.
+const ar = Number(card.image?.width) / Number(card.image?.height) || 1;
+// Decorative: the card's heading is the link text.
+const image = card.image && { ...card.image, alt: '', loading: 'lazy', decoding: 'async',
+  sizes: `(max-width: 767px) max(100vw, ${Math.ceil(389 * ar)}px), (max-width: 1024px) max(46vw, ${Math.ceil(609 * ar)}px), ${Math.max(552, Math.ceil(678 * ar))}px` };
 ---
 <a class="postItem" href={card.href} style={card.bg ? `background-color:${card.bg}` : undefined}>
-  <div class="postItem__bg">{card.image && <img {...card.image} />}</div>
-  <div class="postItem__info">{info === 'terms' ? <span set:html={card.terms} /> : <time>{card.date}</time>}</div>
+  <div class="postItem__bg">{image && <img {...image} />}</div>
+  <div class="postItem__info">{info === 'terms' ? <span>{card.terms}</span> : <time>{card.date}</time>}</div>
   <div class="postItem__contents">
-    <div class="postItem__title"><h1 set:html={card.title} /></div>
-    {card.excerpt && <div class="postItem__excerpt" set:html={card.excerpt} />}
+    <div class="postItem__title"><h3>{card.title}</h3></div>
+    {card.excerpt && <div class="postItem__excerpt"><p>{card.excerpt}</p></div>}
   </div>
 </a>

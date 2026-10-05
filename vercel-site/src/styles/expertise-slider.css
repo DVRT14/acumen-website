@@ -36,7 +36,7 @@
 .xcard__contents { position: relative; display: flex; flex-direction: column; overflow: hidden; transform: translateY(150%); transition: all .3s ease-in-out; }
 .xcard:hover .xcard__contents { transform: translateY(0) !important; }
 .xcard__title { position: relative; width: 73%; max-width: 73%; }
-.xcard__title h3 { margin: 0 0 .8vw; font-family: "Atype Display", Sans-serif; font-size: 2.3vw; font-weight: 400; line-height: 1.1em; color: #002921; }
+.xcard__title h2 { margin: 0 0 .8vw; font-family: "Atype Display", Sans-serif; font-size: 2.3vw; font-weight: 400; line-height: 1.1em; color: #002921; }
 .xcard__excerpt { position: relative; width: 73%; max-width: 73%; font-size: 1.25vw; font-weight: 300; line-height: 1.375em; color: #002921; opacity: 0; }
 .xcard:hover .xcard__excerpt { opacity: 1; }
 
@@ -59,6 +59,6 @@
   .xcard__icon { font-size: 10.667vw; }
   .xcard__contents { flex-wrap: nowrap; }
   .xcard__title { width: 117px; max-width: 117px; }
-  .xcard__title h3 { font-size: 4.267vw; line-height: 1.188em; }
+  .xcard__title h2 { font-size: 4.267vw; line-height: 1.188em; }
   .xcard__excerpt { width: 47vw; max-width: 47vw; font-size: 3.7vw; }
 }

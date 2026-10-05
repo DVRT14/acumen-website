@@ -5,7 +5,7 @@
 .wp-dl__box { position: relative; display: flex; flex-direction: column; }
 .wp-dl__title { position: relative; width: 376px; max-width: 100%; }
 .wp-dl__title h2 { margin: 0 0 30px; font-family: "Atype Display", Sans-serif; font-size: 44px; font-weight: 400; line-height: 1em; color: #002921; }
-.wp-dl__text { position: relative; width: 403px; max-width: 100%; font-size: 16px; font-weight: 300; line-height: 26px; color: #AAAAAA; }
+.wp-dl__text { position: relative; width: 403px; max-width: 100%; font-size: 16px; font-weight: 300; line-height: 26px; color: #767676; }
 .wp-dl__text a { color: inherit; text-decoration: underline !important; }
 .wp-dl__spacer { position: relative; flex-shrink: 0; height: 42px; }
 .wp-dl__form { position: relative; display: flex; flex-direction: column; width: 55%; min-width: 0; }

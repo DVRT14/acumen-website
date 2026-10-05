@@ -1,0 +1,92 @@
+---
+// Author profile (E-E-A-T): who wrote what. One page per person in src/data/authors.json (not the org author).
+// Pages without a bio are thin, so they stay out of the index until the bio is filled in.
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import Breadcrumbs from '../../../components/knowledge/Breadcrumbs.astro';
+import { posts, href, formatDate, TYPE_LABEL, type Author } from '../../../lib/knowledge';
+import '../../../styles/case.css';
+
+export async function getStaticPaths() {
+  return (await getCollection('authors', a => !a.data.org)).map(author => ({ params: { id: author.id }, props: { author } }));
+}
+const { author } = Astro.props as { author: Author };
+const a = author.data;
+const url = new URL(Astro.url.pathname, Astro.site).href;
+const list = (await posts()).filter(p => p.data.author.id === author.id);
+const description = a.bio ?? `Articles by ${a.name}${a.role ? `, ${a.role}` : ''} at Acumen, the data & AI consultancy from Leuven.`;
+const seo = { title: `${a.name} – Author at Acumen`, description, image: a.image, noindex: !a.bio };
+const breadcrumbs = [{ name: 'Home', href: '/' }, { name: 'Knowledge', href: '/knowledge/' }, { name: a.name }];
+const schema = [{
+  '@type': 'ProfilePage', '@id': `${url}#profilepage`, url, name: seo.title, isPartOf: { '@id': `${Astro.site!.origin}/#website` },
+  mainEntity: {
+    '@type': 'Person', '@id': `${url}#person`, name: a.name, url, jobTitle: a.role, description: a.bio,
+    image: a.image && new URL(a.image, Astro.site).href, sameAs: a.linkedin ? [a.linkedin] : undefined,
+    worksFor: { '@id': 'https://acumen.be/#organization' },
+  },
+}];
+---
+<Base seo={seo} schema={schema} breadcrumbs={breadcrumbs}>
+  <div class="case author-page">
+    <header class="case-wrap author-page__head">
+      <Breadcrumbs items={breadcrumbs} />
+      <div class="author-page__intro">
+        {a.image
+          ? <img class="author-page__photo" src={a.image} alt={a.name} width="160" height="160" />
+          : <span class="author-page__photo author-page__photo--initials" aria-hidden="true">{a.name.split(' ').map(w => w[0]).join('').slice(0, 2)}</span>}
+        <div>
+          <p class="case-label">Author</p>
+          <h1 class="case-hero__title">{a.name}</h1>
+          {a.role && <p class="author-page__role">{a.role} at <a href="/culture/">Acumen</a></p>}
+          {a.bio && <p class="author-page__bio">{a.bio}</p>}
+          {a.linkedin && <p class="author-page__links"><a href={a.linkedin} rel="me noopener" target="_blank">LinkedIn profile</a></p>}
+        </div>
+      </div>
+    </header>
+
+    <section class="case-wrap author-page__posts" aria-labelledby="author-posts">
+      <h2 id="author-posts" class="author-page__h2">Articles by {a.name}</h2>
+      <ul class="author-page__list">
+        {list.map(p => (
+          <li>
+            <a href={href(p)}>
+              <span class="author-page__meta">{TYPE_LABEL[p.data.type]} · <time datetime={p.data.date.toISOString()}>{formatDate(p.data.date)}</time></span>
+              <span class="author-page__title" lang={p.data.lang}>{p.data.title}</span>
+              <span class="author-page__excerpt" lang={p.data.lang}>{p.data.excerpt ?? p.data.description}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .author-page__head { padding-top: 50px; }
+  .author-page__intro { display: flex; align-items: center; gap: 48px; margin-top: 40px; }
+  .author-page .case-label { margin-top: 0; }
+  .author-page__photo { flex-shrink: 0; width: 160px; height: 160px; border-radius: 50%; object-fit: cover; object-position: center 20%; }
+  .author-page__photo--initials { display: flex; justify-content: center; align-items: center; background: #C8EF00; font: 400 56px/1 "Atype Display", sans-serif; letter-spacing: -0.04em; color: #002921; }
+  .author-page__role { margin: 16px 0 0; font-size: 20px; font-weight: 300; }
+  .author-page__bio { max-width: 65ch; margin: 16px 0 0; font-size: 18px; font-weight: 300; line-height: 1.65; }
+  .author-page__role a, .author-page__links a { color: #002921; text-decoration: underline; text-underline-offset: 3px; }
+  .author-page__links { margin: 16px 0 0; font-size: 16px; }
+  .author-page__posts { padding-top: 70px; padding-bottom: 100px; }
+  .author-page__h2 { margin: 0 0 16px; font: 400 44px/1.1 "Atype Display", sans-serif; letter-spacing: -0.04em; }
+  .author-page__list { margin: 0; padding: 0; list-style: none; }
+  .author-page__list li { border-top: 1px solid #D5DEDC; }
+  .author-page__list li:last-child { border-bottom: 1px solid #D5DEDC; }
+  .author-page__list a { display: grid; gap: 8px; padding: 28px 0; color: #002921; }
+  .author-page__meta { font-size: 14px; font-weight: 300; color: #5E6B68; }
+  .author-page__title { font: 400 clamp(22px, 2.4vw, 30px)/1.15 "Atype Display", sans-serif; letter-spacing: -0.03em; }
+  .author-page__list a:hover .author-page__title { text-decoration: underline; text-decoration-color: #9FBC00; text-underline-offset: 4px; }
+  .author-page__excerpt { max-width: 75ch; font-size: 16px; font-weight: 300; line-height: 1.6; }
+  @media (max-width: 767px) {
+    .author-page__intro { flex-direction: column; gap: 20px; margin-top: 28px; }
+    .author-page__photo { width: 112px; height: 112px; }
+    .author-page__photo--initials { font-size: 40px; }
+    .author-page__role { font-size: 17px; }
+    .author-page__bio { font-size: 16px; }
+    .author-page__list a { padding: 20px 0; }
+  }
+</style>

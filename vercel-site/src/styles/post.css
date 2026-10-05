@@ -12,7 +12,7 @@
 /* Hero */
 .post-hero__inner { flex-direction: column; padding: 65px 0; }
 .post-hero__title { position: relative; width: 955px; max-width: 100%; margin-bottom: 40px; }
-.post-hero__title h2 {
+.post-hero__title h1, .post-hero__title h2 {
   margin: 0;
   font-family: "Atype Display", Sans-serif;
   font-size: 82px;
@@ -21,7 +21,9 @@
   letter-spacing: -0.04em;
   color: #002921;
 }
-.post-hero__title span { color: #B9D0D0; }
+.post-hero__title span { color: #7A9794; }
+/* A note in the lead, styled as the old h6. */
+.post-hero__lead p.lead-note { margin: .5rem 0 1rem; font-size: 1rem; font-weight: 500; line-height: 1.2; }
 .post-hero__lead { position: relative; font-family: "Atype Display", Sans-serif; font-size: 34px; font-weight: 400; line-height: 47px; color: #002921; }
 
 .share-pill { position: relative; align-self: flex-start; margin-top: 60px; padding: 0 10px; font-size: 0; background-color: #B9D0D0; border-radius: 200px; }
@@ -83,7 +85,7 @@
   line-height: 1.07em;
   letter-spacing: -0.03em;
 }
-.post-heading span { color: #B9D0D0; }
+.post-heading span { color: #7A9794; }
 .post-text { position: relative; font-size: 22px; font-weight: 400; line-height: 37px; color: #0F0037; }
 
 .post-photo {
@@ -96,7 +98,7 @@
 
 .post-quote__inner { flex-direction: column; padding: 50px 0; }
 .post-quote__text { position: relative; font-family: "Atype Display", Sans-serif; font-size: 34px; font-weight: 400; line-height: 47px; text-align: center; color: #000; }
-.post-quote__text span { color: #B9D0D0; }
+.post-quote__text span { color: #7A9794; }
 
 /* Call to action + contact card */
 .post-cta__inner { flex-direction: column; padding: 50px 0; }
@@ -159,92 +161,9 @@
 .contact-card__button:hover, .contact-card__button:focus { color: #000; background-color: #fff; }
 .contact-card__button span { display: block; }
 
-/* Newsletter */
-.post-newsletter__inner { flex-direction: column; justify-content: center; gap: 30px; }
-.newsletter-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-  min-height: 420px;
-  padding: 200px 0 50px;
-  overflow: hidden;
-  border-radius: 15px;
-}
-.newsletter-card__title {
-  position: relative;
-  width: 762px;
-  max-width: 100%;
-  margin: 0;
-  font-family: "Atype Display", Sans-serif;
-  font-size: 82px;
-  font-weight: 400;
-  line-height: 0.976em;
-  letter-spacing: -0.01em;
-  text-align: center;
-  color: #002921;
-}
-.newsletter-card__form { position: relative; z-index: 999999; display: flex; flex-direction: column; width: 100%; padding: 0 50px; }
-.newsletter-card__form-inner { display: flex; flex-direction: column; flex-grow: 1; gap: 10px; width: 100%; max-width: 500px; margin: 0 auto; padding-top: 30px; }
-.newsletter-card__form-inner .nl-form { position: relative; z-index: 9999; }
-.newsletter-card__video { position: absolute; top: 0; left: 0; z-index: -1; width: 100%; height: 100%; overflow: hidden; }
-.newsletter-card__video video { display: flex; width: 100%; height: 100%; max-width: 100%; object-fit: cover; background: transparent; }
-.newsletter-card__spacer { position: relative; flex-shrink: 0; width: 100%; height: 163px; }
-.newsletter-card__note { position: relative; width: 767px; max-width: 100%; font-size: 21px; font-weight: 300; line-height: 33px; text-align: center; color: #000; }
-.newsletter-card__note a { text-decoration: underline !important; }
-
-/* Newsletter form */
-.nl-form__fields { display: flex; flex-wrap: wrap; margin: 0 -5px -10px; }
-.nl-form__group { position: relative; display: flex; flex-wrap: wrap; align-items: center; min-height: 1px; margin-bottom: 10px; padding: 0 5px; }
-.nl-form__group--wide { width: 66.666%; }
-.nl-form__group--submit { align-items: flex-end; width: 33.333%; }
-.nl-form .nl-form__input {
-  display: block;
-  flex-grow: 1;
-  width: 100%;
-  max-width: 100%;
-  min-height: 50px;
-  padding: 8px 16px;
-  border: 1px solid #002921;
-  border-radius: 100px;
-  background-color: transparent;
-  font-size: 16px;
-  font-weight: 300;
-  line-height: 22px;
-  color: #002921;
-  vertical-align: middle;
-  transition: all .3s;
-}
-.nl-form .nl-form__button {
-  display: block;
-  flex-basis: 100%;
-  min-height: 50px;
-  padding: 0 24px;
-  border: 1px solid #002921;
-  border-radius: 100px;
-  background-color: #02010100;
-  font-size: 15px;
-  line-height: 1;
-  color: #002921;
-  fill: #fff;
-  transition: all .3s;
-}
-.nl-form .nl-form__button:hover { color: #fff; background-color: #002921; }
-.nl-form .nl-form__button:focus { color: #002921; background-color: #02010100; }
-.nl-form__button-content { display: flex; flex-direction: row-reverse; justify-content: center; align-items: center; gap: 17px; }
-.nl-form__button-icon { display: flex; align-items: center; gap: 17px; }
-.nl-form__button-icon svg { display: block; width: 1em; height: auto; transform: rotate(-45deg); transition: all .3s ease-in-out; }
-.nl-form__button-icon path { fill: #002921; }
-.nl-form__button:hover svg { transform: rotate(0deg); }
-.nl-form__button:hover path { fill: #fff; }
-.nl-form__button-text { display: block; gap: 17px; }
-
 /* Related posts */
 .post-related { position: relative; display: flex; flex-direction: column; padding-top: 100px; }
-.post-related__band { position: relative; display: flex; flex-direction: column; overflow: hidden; }
+.post-related__band { position: relative; display: flex; flex-direction: column; overflow: clip; }
 .post-related__inner { display: flex; flex-direction: column; flex-grow: 1; width: 100%; max-width: min(100%, 1180px); margin: 0 auto; }
 
 @media (min-width: 1025px) {
@@ -252,14 +171,12 @@
 }
 
 @media (max-width: 1024px) {
-  .post-hero__title h2 { font-size: 50px; }
+  .post-hero__title h1, .post-hero__title h2 { font-size: 50px; }
   .post-hero__lead { font-size: 24px; line-height: 37px; }
   .share-pill { margin-top: 40px; }
   .post-parallax__layer { margin-top: 130px; }
   .post-heading, .post-cta__title, .contact-card__title { font-size: 40px; }
   .contact-card { border-radius: 100px; }
-  .post-newsletter { padding: 0 20px; }
-  .newsletter-card__title { font-size: 50px; }
 }
 
 @media (max-width: 767px) {
@@ -268,7 +185,7 @@
   .post-sec__inner { flex-wrap: wrap; }
   .post-hero__inner { padding: 50px 0; }
   .post-hero__title { margin-bottom: 30px; }
-  .post-hero__title h2 { font-size: 40px; line-height: 1.05em; }
+  .post-hero__title h1, .post-hero__title h2 { font-size: 40px; line-height: 1.05em; }
   .post-hero__lead { font-size: 16px; line-height: 20px; }
   .post-banner { flex-wrap: wrap; min-height: 685px; }
   .post-banner__marquee { padding: 10px 0; }
@@ -287,15 +204,8 @@
   .contact-card__title { text-align: center; }
   .contact-card__action { padding-top: 20px; }
   .contact-card__button { font-size: 16px; }
-  .post-newsletter { padding: 0 15px; }
-  .newsletter-card { gap: 35px; min-height: 540px; padding: 30px; }
-  .newsletter-card__title { font-size: 40px; line-height: 1.05em; }
-  .newsletter-card__form { padding: 0; }
-  .newsletter-card__form-inner { max-width: 100%; padding-top: 0; }
-  .nl-form__group, .nl-form__group--wide, .nl-form__group--submit { width: 100%; }
-  .nl-form__group--submit { justify-content: center; }
-  .nl-form .nl-form__button { flex-basis: auto; }
-  .newsletter-card__spacer { height: 24px; }
-  .newsletter-card__note { font-size: 10px; line-height: 17px; }
   .post-related { padding-bottom: 50px; }
 }
+
+/* Looped carousels: hide the clone peeking in on the left (the right-hand offset stays visible). */
+.post-related .posts-carousel { clip-path: inset(-20px -100vw -20px 0); }

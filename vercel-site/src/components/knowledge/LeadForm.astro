@@ -1,0 +1,44 @@
+---
+// Lead / download form (whitepapers, gated posts). Posts to /api/forms via widgets.js (form[data-form]);
+// the hidden fields identify the submission in the webhook, as on the old site. `data-success` replaces the
+// generic success message.
+interface Field { label: string; name: string; type?: string }
+interface Props {
+  form: { name: string; post_id: string; form_id: string; queried_id: string; referer_title?: string; submit?: string; fields?: Field[] };
+  title: string;          // page title, sent as referer_title
+  success?: string;
+  consent?: string;
+}
+const { form, title, success, consent = 'By submitting your details you agree to receive marketing emails from Acumen and accept our terms & conditions and privacy policy.' } = Astro.props;
+const fields: Field[] = form.fields ?? [
+  { label: 'First name', name: 'form_fields[name]' },
+  { label: 'Last name', name: 'form_fields[field_203132f]' },
+  { label: 'Email', name: 'form_fields[email]', type: 'email' },
+];
+const id = `lf-${form.form_id}`;
+---
+<form class="lead-form" method="post" name={form.name} data-form data-success={success}>
+  <input type="hidden" name="post_id" value={form.post_id} />
+  <input type="hidden" name="form_id" value={form.form_id} />
+  <input type="hidden" name="referer_title" value={form.referer_title ?? title} />
+  <input type="hidden" name="queried_id" value={form.queried_id} />
+  {fields.map((f, i) => (
+    <div class="lead-form__field form-field">
+      <label class="lead-form__label" for={`${id}-${i}`}>{f.label}</label>
+      <input class="lead-form__input" id={`${id}-${i}`} name={f.name} type={f.type ?? 'text'} autocomplete={f.type === 'email' ? 'email' : undefined} required />
+    </div>
+  ))}
+  <p class="lead-form__consent">{consent}</p>
+  <button class="lead-form__button" type="submit">{form.submit ?? 'Download'}</button>
+</form>
+
+<style>
+  .lead-form { display: flex; flex-direction: column; gap: 16px; }
+  .lead-form__label { display: block; margin-bottom: 6px; font-size: 16px; font-weight: 300; line-height: 22px; color: #002921; }
+  .lead-form__input { display: block; width: 100%; min-height: 50px; padding: 8px 18px; border: 1px solid transparent; border-radius: 25px; background: #F4F4F4; font: 400 15px/1.4 "DM Sans", sans-serif; color: #1F2124; transition: border-color .3s; }
+  .lead-form__input:focus { outline: none; border-color: #002921; }
+  .lead-form__consent { margin: 0; font-size: 13px; font-weight: 300; line-height: 1.5; color: #767676; }
+  .lead-form__button { align-self: flex-start; min-height: 50px; padding: 0 28px; border: 0; border-radius: 100px; background: #002921; font: 400 15px/1 "DM Sans", sans-serif; color: #fff; cursor: pointer; transition: background-color .3s, color .3s; }
+  .lead-form__button:hover, .lead-form__button:focus-visible { background: #C8EF00; color: #002921; }
+  .lead-form__button:disabled { opacity: .6; cursor: wait; }
+</style>

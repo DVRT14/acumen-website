@@ -42,6 +42,10 @@ impression count — wire up real GSC data before trusting the priority order be
 
 ## Notes
 
+- **How to add an FAQ now:** a `faq:` list in the post's frontmatter (`docs/CONTENT.md`); the
+  layout renders the questions and `Base.astro` adds the FAQPage JSON-LD. Posts are Markdown files in
+  `vercel-site/src/content/knowledge/`, one per row above (`agentic-ai` is listed there but its page is hand-built).
+
 - **Two near-duplicate posts flagged**: `ai-legal-assistant-animo-law` and
   `animo-ai-powered-legal-assistant` look like the same topic published twice. Per
   `references/content.md` §5, duplicates on the same question should be 301-merged to the

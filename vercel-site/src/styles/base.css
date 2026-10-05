@@ -1,5 +1,23 @@
 /* Global base: what every page needs from the old theme and global styles (verbatim unless noted). */
 
+/* Colour tokens (brand guide). One dark: --green. Accent: --lime (Neo) for fills, labels and text on --green;
+   --lime-2 is the older, slightly deeper lime kept for the home's typed word, culture marquee and underline
+   rules on white. Neither lime is ever text or an icon on white (≈1.1:1). Measured on white unless noted. */
+:root {
+  --green: #002921;          /* Burnham: text, dark bands, primary buttons (15.7:1) */
+  --lime: #D6FF00;           /* Neo: accent fills (--green on it 13.6:1), accent text on --green */
+  --lime-2: #C8EF00;
+  --grey: #F4F4F4;           /* light surface */
+  --muted: #767676;          /* secondary body text (4.5:1, the floor: not on --grey) */
+  --label: #5e5e5e;          /* small uppercase labels (6.5:1; 5.9:1 on --grey) */
+  --text-soft: #33544d;      /* lead / intro paragraphs (8.4:1) */
+  --line: #e3e3e3;           /* hairlines and card borders (decorative) */
+  --on-dark-muted: #cfe0dc;  /* secondary text on --green (11.5:1) */
+  --white: #fff;             /* text and fills on --green */
+  --line-on-dark: rgba(255, 255, 255, .2); /* hairlines on --green (decorative) */
+  --display: "Atype Display", Sans-serif;
+}
+
 /* Fonts — Atype Display */
 @font-face { font-family: 'Atype Display'; font-style: normal; font-weight: 300; font-display: swap; src: url('/wp-content/uploads/2024/05/AtypDisplay-Light.eot'); src: url('/wp-content/uploads/2024/05/AtypDisplay-Light.eot?#iefix') format('embedded-opentype'), url('/wp-content/uploads/2024/05/AtypDisplay-Light.woff2') format('woff2'), url('/wp-content/uploads/2024/05/AtypDisplay-Light.woff') format('woff'), url('/wp-content/uploads/2024/05/AtypDisplay-Light.ttf') format('truetype'), url('/wp-content/uploads/2024/05/AtypDisplay-Light.svg#AtypeDisplay') format('svg'); }
 @font-face { font-family: 'Atype Display'; font-style: normal; font-weight: 500; font-display: swap; src: url('/wp-content/uploads/2024/05/AtypDisplay-Medium.eot'); src: url('/wp-content/uploads/2024/05/AtypDisplay-Medium.eot?#iefix') format('embedded-opentype'), url('/wp-content/uploads/2024/05/AtypDisplay-Medium.woff2') format('woff2'), url('/wp-content/uploads/2024/05/AtypDisplay-Medium.woff') format('woff'), url('/wp-content/uploads/2024/05/AtypDisplay-Medium.ttf') format('truetype'), url('/wp-content/uploads/2024/05/AtypDisplay-Medium.svg#AtypeDisplay') format('svg'); }
@@ -375,8 +393,8 @@ html.lenis body {
 /* body.dropMenuActive, html.dropMenuActive {
 	overflow: hidden !important;
 } */
-/* CSS to initially hide the elements */
-.animateFromBottom {
+/* CSS to initially hide the elements (only with JS, which reveals them: html.js is set in Base.astro) */
+.js .animateFromBottom {
     opacity: 0;
     transform: translateY(50px); /* Start position */
 }
@@ -384,14 +402,16 @@ html.lenis body {
 
 
 
-.heroAnim1,
-.heroAnim2,
-.heroAnim3,
-.heroAnim4,
-.typingReveal{
+.js .heroAnim1,
+.js .heroAnim2,
+.js .heroAnim3,
+.js .typingReveal{
 
 	visibility: hidden;
 }
+/* The home hero photo is the LCP element: paint it at once, in the intro's start position
+   (homeLoadingHeroAnimation slides it up), instead of hiding it until the intro reaches it. */
+.js .heroAnim4 { transform: translateY(100px); }
 
 
 
@@ -470,6 +490,8 @@ button.cky-banner-btn-close img {
 
 /* Global custom CSS */
 p:last-child{margin-bottom:0}
+/* A paragraph ending <main> (Base.astro) was followed by the footer before; keep its margin. */
+#main > p:last-child { margin-bottom: .9rem; }
 
 /* Rebuilt markup: hooks equivalent to the old classes above */
 .form-field{opacity:0;transform:translateY(50px)}
@@ -478,3 +500,40 @@ p:last-child{margin-bottom:0}
 /* Form submit feedback (widgets.js forms) */
 .form-message { margin: 10px 0; font-size: 1em; line-height: 1; }
 .form-message--error { color: #d9534f; }
+
+/* Skip link (Base.astro): off-screen until focused. */
+.skip-link { position: absolute; top: 12px; left: 12px; z-index: 10000; display: inline-flex; align-items: center; min-height: 44px; padding: 10px 20px; border-radius: 30px; background: #002921; color: #D6FF00; font-size: 16px; line-height: 1.2; transform: translateY(-200%); }
+.skip-link:focus { transform: none; color: #D6FF00; outline: 3px solid var(--lime); outline-offset: 0; }
+
+/* Focus ring: brand green on light surfaces; dark surfaces switch it to lime (header.css, case.css, concept.css). */
+a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+.greenSection a:focus-visible, .greenSection button:focus-visible { outline-color: var(--lime); }
+#main:focus { outline: none; }
+
+/* Buttons: one pill family. Variants only set the colour custom properties.
+   .btn                  primary on light: green fill, lime on hover
+   .btn--outline         secondary on light: green line, fills green on hover
+   .btn--on-dark         primary on --green (CTA card, apply card): lime fill, lime line on hover
+   .btn--outline-on-dark secondary on --green: white line, lime line and text on hover
+   .case-cta__button (case.css) shares the colours and states of .btn--on-dark but keeps its own, slightly
+   larger geometry (14px 30px, no min-height) so the case and blog CTA cards stay pixel-identical. */
+.btn {
+  display: inline-flex; justify-content: center; align-items: center; min-height: 48px; padding: 12px 28px;
+  border: 1px solid; border-radius: 200px; font-size: 18px; font-weight: 400; line-height: 1.2; cursor: pointer;
+  --btn-bg: var(--green); --btn-fg: var(--white); --btn-bd: var(--green);
+  --btn-bg-h: var(--lime); --btn-fg-h: var(--green); --btn-bd-h: var(--lime);
+}
+.btn, .case-cta__button { transition: background-color .25s, color .25s, border-color .25s, transform .15s; }
+/* :focus repeats the rest colours: the reset paints a focused <button> #c36. */
+.btn, .btn:focus, .case-cta__button, .case-cta__button:focus { border-color: var(--btn-bd); background-color: var(--btn-bg); color: var(--btn-fg); }
+.btn:hover, .case-cta__button:hover { border-color: var(--btn-bd-h); background-color: var(--btn-bg-h); color: var(--btn-fg-h); }
+.btn:active, .case-cta__button:active { transform: translateY(1px); }
+.btn--outline { --btn-bg: transparent; --btn-fg: var(--green); --btn-bd: var(--green); --btn-bg-h: var(--green); --btn-fg-h: var(--white); --btn-bd-h: var(--green); }
+.btn--on-dark, .case-cta__button { --btn-bg: var(--lime); --btn-fg: var(--green); --btn-bd: var(--lime); --btn-bg-h: transparent; --btn-fg-h: var(--lime); --btn-bd-h: var(--lime); }
+.btn--outline-on-dark { --btn-bg: transparent; --btn-fg: var(--white); --btn-bd: color-mix(in srgb, var(--white) 50%, transparent); --btn-bg-h: transparent; --btn-fg-h: var(--lime); --btn-bd-h: var(--lime); }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: .5; cursor: not-allowed; pointer-events: none; }
+/* :root lifts these over `.case a:focus-visible`, which would square the pill off to 4px. */
+:root :is(.btn, .case-cta__button):focus-visible { outline: 3px solid var(--green); outline-offset: 3px; border-radius: 200px; }
+:root :is(.btn--on-dark, .btn--outline-on-dark, .case-cta__button):focus-visible { outline-color: var(--lime); }
+@media (prefers-reduced-motion: reduce) { .btn:active, .case-cta__button:active { transform: none; } }
+@media (max-width: 767px) { .btn { padding: 10px 22px; font-size: 16px; } }

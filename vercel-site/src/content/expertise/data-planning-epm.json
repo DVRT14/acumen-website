@@ -1,51 +1,44 @@
 {
- "seo": "<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />\n\n\t<!-- This site is optimized with the Yoast SEO plugin v22.8 - https://yoast.com/wordpress/plugins/seo/ -->\n\t<title>Data Planning &amp;&nbsp;EPM - Acumen</title>\n\t<meta name=\"description\" content=\"Enterprise Performance Management, EPM in short, is the process that translates an organization’s strategy into plans and execution.\" />\n\t<link rel=\"canonical\" href=\"/expertise/data-planning-epm/\" />\n\t<meta property=\"og:locale\" content=\"nl_BE\" />\n\t<meta property=\"og:type\" content=\"article\" />\n\t<meta property=\"og:title\" content=\"Data Planning &amp;&nbsp;EPM - Acumen\" />\n\t<meta property=\"og:description\" content=\"Enterprise Performance Management, EPM in short, is the process that translates an organization’s strategy into plans and execution.\" />\n\t<meta property=\"og:url\" content=\"/expertise/data-planning-epm/\" />\n\t<meta property=\"og:site_name\" content=\"Acumen\" />\n\t<meta property=\"article:modified_time\" content=\"2024-07-15T11:20:32+00:00\" />\n\t<meta name=\"twitter:card\" content=\"summary_large_image\" />\n\t<meta name=\"twitter:label1\" content=\"Geschatte leestijd\" />\n\t<meta name=\"twitter:data1\" content=\"1 minuut\" />\n\t<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"/expertise/data-planning-epm/\",\"url\":\"/expertise/data-planning-epm/\",\"name\":\"Data Planning &&nbsp;EPM - Acumen\",\"isPartOf\":{\"@id\":\"/#website\"},\"datePublished\":\"2024-05-26T18:03:38+00:00\",\"dateModified\":\"2024-07-15T11:20:32+00:00\",\"description\":\"Enterprise Performance Management, EPM in short, is the process that translates an organization’s strategy into plans and execution.\",\"breadcrumb\":{\"@id\":\"/expertise/data-planning-epm/#breadcrumb\"},\"inLanguage\":\"nl-BE\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"/expertise/data-planning-epm/\"]}]},{\"@type\":\"BreadcrumbList\",\"@id\":\"/expertise/data-planning-epm/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Our Expertise\",\"item\":\"/expertise/\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"Data Planning &#038;&nbsp;EPM\"}]},{\"@type\":\"WebSite\",\"@id\":\"/#website\",\"url\":\"/\",\"name\":\"Acumen\",\"description\":\"\",\"publisher\":{\"@id\":\"/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"/?s={search_term_string}\"},\"query-input\":\"required name=search_term_string\"}],\"inLanguage\":\"nl-BE\"},{\"@type\":\"Organization\",\"@id\":\"/#organization\",\"name\":\"Acumen\",\"url\":\"/\",\"logo\":{\"@type\":\"ImageObject\",\"inLanguage\":\"nl-BE\",\"@id\":\"/#/schema/logo/image/\",\"url\":\"/wp-content/uploads/2025/05/cropped-acumen-logo-mark-dark-green-rgb-934px@72ppi.webp\",\"contentUrl\":\"/wp-content/uploads/2025/05/cropped-acumen-logo-mark-dark-green-rgb-934px@72ppi.webp\",\"width\":693,\"height\":569,\"caption\":\"Acumen\"},\"image\":{\"@id\":\"/#/schema/logo/image/\"}}]}</script>\n\t<!-- / Yoast SEO plugin. -->\n<link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png\">\n<link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon-32x32.png\">\n<link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon-16x16.png\">\n<link rel=\"manifest\" href=\"/site.webmanifest\">\n<link rel=\"icon\" href=\"/wp-content/uploads/2024/05/Linkedin-kopie-150x150.webp\" sizes=\"32x32\" />\n<link rel=\"icon\" href=\"/wp-content/uploads/2024/05/Linkedin-kopie-300x300.webp\" sizes=\"192x192\" />\n<link rel=\"apple-touch-icon\" href=\"/wp-content/uploads/2024/05/Linkedin-kopie-300x300.webp\" />\n<meta name=\"msapplication-TileImage\" content=\"/wp-content/uploads/2024/05/Linkedin-kopie-300x300.webp\" />",
- "title": "Data Planning <br><span>&#038;&nbsp;EPM</span>",
- "content": "<p>Enterprise Performance Management, EPM in short, is the process that translates an organization’s strategy into plans and execution. </p>",
- "marquee": "Data Planning &amp; EPM•",
- "bannerImage": "/wp-content/uploads/2024/05/Data-planning_3.webp",
- "authorImage": {
-  "fetchpriority": "high",
-  "width": "800",
-  "height": "533",
-  "src": "/wp-content/uploads/2024/05/Data-planning_2-1024x682.webp",
-  "alt": "Data planning",
-  "srcset": "/wp-content/uploads/2024/05/Data-planning_2-1024x682.webp 1024w, /wp-content/uploads/2024/05/Data-planning_2-300x200.webp 300w, /wp-content/uploads/2024/05/Data-planning_2-768x512.webp 768w, /wp-content/uploads/2024/05/Data-planning_2.webp 1277w",
-  "sizes": "(max-width: 800px) 100vw, 800px"
- },
- "author": "AUTHOR – Glenn De Weerdt",
- "introTitle": "<span>Plan and analyze</span> an organization's performance",
- "introText": "EPM helps to plan and analyze an organization’s performance, which will provide better insights that will in turn enable data-driven decision-making. Setting clear and substantiated goals and tracking their progress will be made easier by providing you with the right tools for budgeting, forecasting and other types of planning.",
- "featuresTitle": "Manage<span> and integrate your data</span>",
- "featuresText": "Acumen guides clients through the full implementation process of an Enterprise Performance Management tool, and helps organizations face challenges along the way. We work with your organization to manage and integrate your data, automate calculations and other tasks, and much more, to enable improved planning processes. This increased efficiency will provide your team with more time for value-adding tasks instead of manually updating and linking together Excels of which multiple versions are being sent out to different stakeholders. Furthermore, we not only focus on creating plans, but also on reporting the KPIs in that plan and tracking their progress compared to actuals data. The implementation of a planning tool in your planning processes will result in more flexibility, automation and integration, resulting in better plans, shorter planning cycles and better decision-making.",
- "photoImage": "/wp-content/uploads/2024/05/Data-planning_1.webp",
- "quote": "<span>Acumen</span> guides clients through the full implementation process of an Enterprise Performance Management tool, and helps organizations face challenges along the way.",
- "conclusionTitle": "Navigate <span> the EPM landscape</span>",
- "conclusionText": "Acumen can help you navigate the EPM landscape, leveraging our expertise in multiple performance management tools to drive business success. At the end of the implementation, you will have a platform to integrate different types of planning to manage costs and budgeting effectively and efficiently. Integration and automation are two important factors that will drive change and ultimately increase the added value of the planning processes. We also value continuity by supporting you beyond the initial implementation in letting your planning processes change with the organization’s changing business environment.",
- "contactImage": {
-  "loading": "lazy",
-  "width": "1277",
-  "height": "851",
-  "src": "/wp-content/uploads/2024/05/Data-planning_2.webp",
-  "alt": "Data planning",
-  "srcset": "/wp-content/uploads/2024/05/Data-planning_2.webp 1277w, /wp-content/uploads/2024/05/Data-planning_2-300x200.webp 300w, /wp-content/uploads/2024/05/Data-planning_2-1024x682.webp 1024w, /wp-content/uploads/2024/05/Data-planning_2-768x512.webp 768w",
-  "sizes": "(max-width: 1277px) 100vw, 1277px"
- },
- "contactTitle": "Michel has the answers",
- "contactButton": {
-  "label": "Contact Michel",
-  "href": "mailto:info@acumen.be"
- },
- "related": [
-  "3891",
-  "3956",
-  "3810",
-  "3782",
-  "3755",
-  "3622",
-  "3589",
-  "3574",
-  "3555",
-  "3533"
- ]
+  "seo": {
+    "title": "Data Planning & EPM - Acumen",
+    "description": "Enterprise Performance Management, EPM in short, is the process that translates an organization’s strategy into plans and execution.",
+    "published": "2024-05-26T18:03:38+00:00",
+    "modified": "2024-07-15T11:20:32+00:00"
+  },
+  "title": "Data Planning <br><span>&#038;&nbsp;EPM</span>",
+  "content": "<p>Enterprise Performance Management, EPM in short, is the process that translates an organization’s strategy into plans and execution. </p>",
+  "marquee": "Data Planning &amp; EPM•",
+  "bannerImage": "/wp-content/uploads/2024/05/Data-planning_3.webp",
+  "authorImage": {
+    "fetchpriority": "high",
+    "width": "800",
+    "height": "533",
+    "src": "/wp-content/uploads/2024/05/Data-planning_2-1024x682.webp",
+    "alt": "Data planning",
+    "srcset": "/wp-content/uploads/2024/05/Data-planning_2-1024x682.webp 1024w, /wp-content/uploads/2024/05/Data-planning_2-300x200.webp 300w, /wp-content/uploads/2024/05/Data-planning_2-768x512.webp 768w, /wp-content/uploads/2024/05/Data-planning_2.webp 1277w",
+    "sizes": "(max-width: 800px) 100vw, 800px"
+  },
+  "author": "AUTHOR – Glenn De Weerdt",
+  "introTitle": "<span>Plan and analyze</span> an organization's performance",
+  "introText": "EPM helps to plan and analyze an organization’s performance, which will provide better insights that will in turn enable data-driven decision-making. Setting clear and substantiated goals and tracking their progress will be made easier by providing you with the right tools for budgeting, forecasting and other types of planning.",
+  "featuresTitle": "Manage<span> and integrate your data</span>",
+  "featuresText": "Acumen guides clients through the full implementation process of an Enterprise Performance Management tool, and helps organizations face challenges along the way. We work with your organization to manage and integrate your data, automate calculations and other tasks, and much more, to enable improved planning processes. This increased efficiency will provide your team with more time for value-adding tasks instead of manually updating and linking together Excels of which multiple versions are being sent out to different stakeholders. Furthermore, we not only focus on creating plans, but also on reporting the KPIs in that plan and tracking their progress compared to actuals data. The implementation of a planning tool in your planning processes will result in more flexibility, automation and integration, resulting in better plans, shorter planning cycles and better decision-making.",
+  "photoImage": "/wp-content/uploads/2024/05/Data-planning_1.webp",
+  "quote": "<span>Acumen</span> guides clients through the full implementation process of an Enterprise Performance Management tool, and helps organizations face challenges along the way.",
+  "conclusionTitle": "Navigate <span> the EPM landscape</span>",
+  "conclusionText": "Acumen can help you navigate the EPM landscape, leveraging our expertise in multiple performance management tools to drive business success. At the end of the implementation, you will have a platform to integrate different types of planning to manage costs and budgeting effectively and efficiently. Integration and automation are two important factors that will drive change and ultimately increase the added value of the planning processes. We also value continuity by supporting you beyond the initial implementation in letting your planning processes change with the organization’s changing business environment.",
+  "contactImage": {
+    "loading": "lazy",
+    "width": "1277",
+    "height": "851",
+    "src": "/wp-content/uploads/2024/05/Data-planning_2.webp",
+    "alt": "Data planning",
+    "srcset": "/wp-content/uploads/2024/05/Data-planning_2.webp 1277w, /wp-content/uploads/2024/05/Data-planning_2-300x200.webp 300w, /wp-content/uploads/2024/05/Data-planning_2-1024x682.webp 1024w, /wp-content/uploads/2024/05/Data-planning_2-768x512.webp 768w",
+    "sizes": "(max-width: 1277px) 100vw, 1277px"
+  },
+  "contactTitle": "Michel has the answers",
+  "contactButton": {
+    "label": "Contact Michel",
+    "href": "mailto:info@acumen.be"
+  }
 }

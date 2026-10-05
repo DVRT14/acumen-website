@@ -1,11 +1,12 @@
 ---
 // Sections of "What is Anaplan?" (old site page 3504); also the "Tool" tab of /anaplan-tabs/.
-interface Props { c: Record<string, any> }
-const { c } = Astro.props;
+// `heading`: h2 inside /anaplan-tabs/, which has its own h1.
+interface Props { c: Record<string, any>; heading?: 'h1' | 'h2' }
+const { c, heading: H = 'h1' } = Astro.props;
 ---
 <section class="ap-sec">
   <div class="ap-sec__inner ap-sec__inner--65">
-    <div class="post-hero__title"><h2 set:html={c.title} /></div>
+    <div class="post-hero__title"><H set:html={c.title} /></div>
     <div class="ap-text" set:html={c.intro} />
   </div>
 </section>
@@ -20,7 +21,7 @@ const { c } = Astro.props;
   <div class="ap-sec__inner ap-sec__inner--50 ap-split">
     <div class="ap-split__col ap-split__col--media ap-hide-mobile"><div class="ap-img"><img {...c.honeycomb} /></div></div>
     <div class="ap-split__col ap-connected">
-      <div class="ap-heading-wrap"><h6 class="ap-heading" set:html={c.connectedTitle} /></div>
+      <div class="ap-heading-wrap"><h2 class="ap-heading" set:html={c.connectedTitle} /></div>
       <div class="ap-text" set:html={c.connectedText} />
     </div>
   </div>
@@ -39,7 +40,7 @@ const { c } = Astro.props;
 
 <section class="ap-sec ap-sec--m30">
   <div class="ap-sec__inner ap-sec__inner--50 ap-sec__inner--gap">
-    <div class="ap-diff-title"><div><h4 class="ap-heading" set:html={c.diffTitle} /></div></div>
+    <div class="ap-diff-title"><div><h2 class="ap-heading" set:html={c.diffTitle} /></div></div>
     <div class="ap-cards">
       {c.cards.map(([title, text]) => (
         <div class="ap-card">

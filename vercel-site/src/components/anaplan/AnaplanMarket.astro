@@ -1,11 +1,12 @@
 ---
 // Sections of "How is Anaplan positioned in the market?" (old site page 3457); also the "Market" tab of /anaplan-tabs/.
-interface Props { c: Record<string, any> }
-const { c } = Astro.props;
+// `heading`: h2 inside /anaplan-tabs/, which has its own h1.
+interface Props { c: Record<string, any>; heading?: 'h1' | 'h2' }
+const { c, heading: H = 'h1' } = Astro.props;
 ---
 <section class="ap-sec am-hero">
   <div class="ap-sec__inner am-hero__inner">
-    <div class="post-hero__title"><h2 set:html={c.title} /></div>
+    <div class="post-hero__title"><H set:html={c.title} /></div>
     <div class="ap-text" set:html={c.intro} />
   </div>
 </section>
@@ -40,7 +41,7 @@ const { c } = Astro.props;
   <div class="ap-sec__inner am-cmp__inner">
     <div class="am-cmp__row">
       <div class="am-cmp__intro">
-        <div class="am-cmp__title"><div><h4 class="ap-heading" set:html={c.epmTitle} /></div></div>
+        <div class="am-cmp__title"><div><h2 class="ap-heading" set:html={c.epmTitle} /></div></div>
         <div class="ap-text" set:html={c.epmText} />
       </div>
       <div class="am-cmp__spacer"></div>

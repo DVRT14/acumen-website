@@ -15,11 +15,11 @@ const m = meta['white-paper-download-page'];
 <Base {...m}>
   <article class="post">
     <section class="post-related wpd-related">
-      <div class="post-related__band"><div class="post-related__inner"><PostsCarousel ids={c.related} info="terms" /></div></div>
+      <div class="post-related__band"><div class="post-related__inner"><PostsCarousel info="terms" /></div></div>
     </section>
     <section class="post-sec post-hero" id="start">
       <div class="post-sec__inner post-hero__inner">
-        <div class="post-hero__title"><h2 set:html={c.title} /></div>
+        <div class="post-hero__title"><h1 set:html={c.title} /></div>
         <div class="post-hero__lead" set:html={c.lead} />
         <ShareButtons />
       </div>

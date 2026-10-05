@@ -19,15 +19,17 @@ const socials = [
   { href: 'https://www.instagram.com/acumen.be', label: 'Instagram' },
   { href: 'https://www.linkedin.com/company/acumen', label: 'Linkedin' },
 ];
+// Only the default preview loads with the page; the hover previews (225 KB) load on the first
+// hover/focus/tap of a Menu button, before the drop-down slides in (script at the end).
 const previews = [
-  { cls: 'default show', img: '/wp-content/uploads/2024/05/Mask-Group-76.webp' },
+  { cls: 'default show', img: '/wp-content/uploads/2024/05/Mask-Group-76.webp', eager: true },
   { cls: 'image-culture', img: '/wp-content/uploads/2024/05/Mask-Group-2.webp' },
   { cls: 'image-expertise', img: '/wp-content/uploads/2024/05/Mask-Group-79.webp' },
   { cls: 'image-insights', img: '/wp-content/uploads/2024/05/Mask-Group-80.webp', top: true },
 ];
 const bars = home ? ['light', 'dark'] : ['light'];
 ---
-<div class:list={['masthead', { 'masthead--home': home }]}>
+<header class:list={['masthead', { 'masthead--home': home }]}>
   {bars.map(v => (
     <div class:list={['header-bar', 'show-hide-header', v === 'light' ? 'headerLight' : 'headerDark', `header-bar--${v}`]}>
       <div class="header-bar__inner">
@@ -38,7 +40,7 @@ const bars = home ? ['light', 'dark'] : ['light'];
               : <img width="206" height="30" src="/wp-content/uploads/2024/05/white-logo.svg" alt="Acumen" />}
           </a>
         </div>
-        <div class="header-bar__menu menuBtn"><a href="#drop-menu" aria-controls="drop-menu" aria-expanded="false">Menu</a></div>
+        <div class="header-bar__menu menuBtn"><button type="button" aria-controls="drop-menu" aria-expanded="false">Menu</button></div>
         <button type="button" class="header-bar__menu-mobile menuBtn" aria-controls="drop-menu" aria-expanded="false">
           <span class="header-bar__menu-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="57.983" height="57.983" viewBox="0 0 57.983 57.983" aria-hidden="true"><path d="M271.241-686.241H252v-2.518h19.241V-708h2.518v19.241H293v2.518H273.759V-667h-2.518Z" transform="translate(322.441 707.814) rotate(-45)"></path></svg>
@@ -56,14 +58,14 @@ const bars = home ? ['light', 'dark'] : ['light'];
       </div>
     </div>
   ))}
-</div>
+</header>
 
-<div class="dropMenu" id="drop-menu">
+<div class="dropMenu" id="drop-menu" inert>
   <div class="dropMenu__inner">
     <div class="dropMenu__row">
       <div class="imagesParent">
         {previews.map(p => (
-          <div class:list={['imageContainer', p.cls, { 'imageContainer--top': p.top }]} style={`background-image:url("${p.img}")`}>
+          <div class:list={['imageContainer', p.cls, { 'imageContainer--top': p.top }]} style={p.eager ? `background-image:url("${p.img}")` : undefined} data-bg={p.eager ? undefined : p.img}>
             <p class="imageContainer__caption">Our team specializes in analyzing data and crafting strategies.</p>
           </div>
         ))}
@@ -91,3 +93,15 @@ const bars = home ? ['light', 'dark'] : ['light'];
     </div>
   </div>
 </div>
+
+<script is:inline>
+(() => {
+  const ev = ['pointerover', 'focusin', 'click'];
+  const load = e => {
+    if (!e.target.closest?.('.menuBtn')) return;
+    ev.forEach(t => removeEventListener(t, load, true));
+    document.querySelectorAll('.imageContainer[data-bg]').forEach(el => { el.style.backgroundImage = 'url("' + el.dataset.bg + '")'; });
+  };
+  ev.forEach(t => addEventListener(t, load, true));
+})();
+</script>

@@ -1,0 +1,128 @@
+---
+// Blog post. Same visual system as the customer case (case.css), blog-specific parts in blog.css:
+// split hero with byline, key takeaways band, sticky sidebar (contents, topics, share), Markdown body,
+// FAQ, lead form, author box, CTA, related posts. Head + JSON-LD: pages/knowledge/[slug].astro.
+import type { Post, Author, Card } from '../../lib/knowledge';
+import type { MarkdownHeading } from 'astro';
+import { formatDate, TYPE_LABEL } from '../../lib/knowledge';
+import Breadcrumbs from './Breadcrumbs.astro';
+import LeadForm from './LeadForm.astro';
+import Faq from './Faq.astro';
+import AuthorBox from './AuthorBox.astro';
+import ShareButtons from '../post/ShareButtons.astro';
+import PostsCarousel from '../post/PostsCarousel.astro';
+import '../../styles/post.css';
+import '../../styles/post-card.css';
+import '../../styles/case.css';
+import '../../styles/blog.css';
+interface Props { post: Post; author: Author; headings: MarkdownHeading[]; related: Card[]; minutes: number }
+const { post, author, headings, related, minutes } = Astro.props;
+const d = post.data;
+const a = author.data;
+const lang = d.lang ?? 'en-GB';
+const nl = lang.startsWith('nl');
+const t = nl
+  ? { published: 'Gepubliceerd', updated: 'bijgewerkt', read: 'min lezen', by: 'Door', toc: 'Inhoud', topics: 'Onderwerpen', faq: 'Veelgestelde vragen', takeaways: 'Belangrijkste inzichten', share: 'Delen', related: 'Lees ook', crumbs: 'Kruimelpad',
+      success: 'Bedankt! We sturen je de whitepaper zo snel mogelijk.', consent: 'Door je gegevens te versturen ga je akkoord met het ontvangen van marketingmails van Acumen en aanvaard je onze algemene voorwaarden en privacybeleid.',
+      more: 'Meer weten?', ctaTitle: 'Benieuwd wat data voor jouw organisatie kan doen?', ctaText: 'Plan een vrijblijvend gesprek met één van onze experten.', ctaLabel: 'Contacteer ons' }
+  : { published: 'Published', updated: 'updated', read: 'min read', by: 'By', toc: 'Contents', topics: 'Topics', faq: 'Frequently asked questions', takeaways: 'Key takeaways', share: 'Share', related: 'Related knowledge', crumbs: 'Breadcrumb',
+      success: 'Thank you! Your download is on its way.', consent: undefined,
+      more: 'Want to know more?', ctaTitle: 'Curious what your data could do for you?', ctaText: 'Talk to one of our experts, no strings attached.', ctaLabel: 'Get in touch' };
+const iso = (x: Date) => x.toISOString();
+const showUpdated = d.updated && +d.updated - +d.date > 864e5;
+const toc = headings.filter(h => h.depth === 2);
+const lead = d.subtitle ?? d.excerpt ?? d.description;
+const cta = { title: d.cta?.title ?? t.ctaTitle, text: d.cta?.text ?? (d.cta ? undefined : t.ctaText), label: d.cta?.label ?? t.ctaLabel, href: d.cta?.href ?? '/contact/' };
+const authorPage = `/knowledge/authors/${author.id}/`;
+const initials = a.name.split(' ').map(w => w[0]).join('').slice(0, 2);
+const image = d.image && { ...d.image, alt: '', sizes: '(max-width: 767px) calc(100vw - 32px), (max-width: 1024px) calc(100vw - 100px), 520px' };
+---
+<article class="case blog" lang={d.lang}>
+  <header class="case-hero">
+    <div class="case-wrap case-hero__inner">
+      <div class="case-hero__text">
+        <Breadcrumbs label={t.crumbs} items={[{ name: 'Home', href: '/' }, { name: 'Knowledge', href: '/knowledge/' }, { name: d.title }]} />
+        <p class="case-label">{TYPE_LABEL.blog}<span aria-hidden="true"> · </span><span>{minutes} {t.read}</span></p>
+        <h1 class="case-hero__title">{d.title}</h1>
+        {lead && <p class="case-hero__lead">{lead}</p>}
+        <div class="blog-byline">
+          {a.org
+            ? <img class="blog-byline__photo blog-byline__photo--logo" src="/wp-content/uploads/2025/05/cropped-acumen-logo-mark-dark-green-rgb-934px@72ppi.webp" alt="" width="52" height="52" />
+            : a.image
+              ? <img class="blog-byline__photo" src={a.image} alt="" width="52" height="52" />
+              : <span class="blog-byline__photo blog-byline__photo--initials" aria-hidden="true">{initials}</span>}
+          <div>
+            <p class="blog-byline__who">{t.by} {a.org ? a.name : <a href={authorPage} rel="author">{a.name}</a>}{a.role && <span>, {a.role}</span>}</p>
+            <p class="blog-byline__meta">
+              {t.published} <time datetime={iso(d.date)}>{formatDate(d.date, lang)}</time>
+              {showUpdated && <>, {t.updated} <time datetime={iso(d.updated!)}>{formatDate(d.updated!, lang)}</time></>}
+            </p>
+          </div>
+        </div>
+      </div>
+      {image && <div class="case-hero__media"><img {...image} fetchpriority="high" decoding="async" /></div>}
+    </div>
+  </header>
+
+  {d.takeaways?.length ? (
+    <section class="case-results blog-takeaways" aria-labelledby="blog-takeaways-title">
+      <div class="case-wrap blog-takeaways__inner">
+        <h2 class="blog-takeaways__title" id="blog-takeaways-title">{t.takeaways}</h2>
+        <ol class="blog-takeaways__list">{d.takeaways.map(k => <li data-animate="fadeInUp">{k}</li>)}</ol>
+      </div>
+    </section>
+  ) : null}
+
+  <div class="case-wrap case-main">
+    <aside class="case-facts blog-aside" aria-label={nl ? 'Over dit artikel' : 'About this article'}>
+      {toc.length >= 3 && (
+        <nav class="blog-toc" aria-labelledby="blog-toc-title">
+          <p class="blog-aside__label" id="blog-toc-title">{t.toc}</p>
+          <ol>{toc.map(h => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+        </nav>
+      )}
+      {d.tags.length > 0 && (
+        <div class="blog-aside__box">
+          <p class="blog-aside__label">{t.topics}</p>
+          <ul class="case-chips">{d.tags.map(tag => <li>{tag}</li>)}</ul>
+        </div>
+      )}
+      <div class="blog-aside__share"><p class="blog-aside__label">{t.share}</p><ShareButtons /></div>
+    </aside>
+
+    <div class="case-content">
+      <div class="case-prose blog-prose"><slot /></div>
+
+      {d.faq && <Faq items={d.faq} title={t.faq} />}
+
+      {d.form && (
+        <section class="blog-lead" aria-labelledby="blog-lead-title">
+          <h2 id="blog-lead-title" class="blog-lead__title">{d.form.title ?? t.more}</h2>
+          {d.form.text && <p class="blog-lead__text">{d.form.text}</p>}
+          <LeadForm form={d.form} title={d.title} success={t.success} consent={t.consent} />
+        </section>
+      )}
+
+      <AuthorBox author={author} nl={nl} />
+    </div>
+  </div>
+
+  <section class="case-wrap case-cta" aria-labelledby="blog-cta-title">
+    <div class="case-cta__card">
+      <h2 class="case-cta__title" id="blog-cta-title">{cta.title}</h2>
+      {cta.text && <p class="case-cta__text">{cta.text}</p>}
+      <a class="case-cta__button" href={cta.href}>{cta.label}</a>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="post-related case-related" aria-labelledby="blog-related-title">
+      <div class="post-related__band">
+        <div class="post-related__inner">
+          <h2 class="case-related__title" id="blog-related-title">{t.related}</h2>
+          <PostsCarousel cards={related} />
+        </div>
+      </div>
+    </section>
+  )}
+</article>

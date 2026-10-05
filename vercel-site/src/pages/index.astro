@@ -2,7 +2,7 @@
 // Home (old site page 2774). Content: src/content/one-off/index.json. Behaviour from the site
 // scripts, keyed on the old class names: hero timeline (heroAnim1-4) + typed words, photo that widens
 // and pins while its text lights up (expand-section / parent / textAnim), logo and "Culture" marquees,
-// benefits with sticky videos (home-scroll_*), sticky data group section the next one scrolls over,
+// benefits with sticky videos (home-scroll_*; on mobile each benefit shows its image instead), sticky data group section the next one scrolls over,
 // story steps fading in (howWeHelpYouSectionAnimation), values revealing photos on hover.
 import Base from '../layouts/Base.astro';
 import meta from '../data/meta.json';
@@ -11,13 +11,13 @@ import ExpertiseCard from '../components/ExpertiseCard.astro';
 import PostsCarousel from '../components/post/PostsCarousel.astro';
 import cards from '../data/expertise-cards.json';
 import '../styles/post-card.css';
+import '../styles/home-hero.css';
 import '../styles/home.css';
 
 const arrow = '<svg xmlns="http://www.w3.org/2000/svg" width="46.819" height="46.819" viewBox="0 0 46.819 46.819"><path d="M5.838,24.92l19.7,19.7-2.127,2.2L0,23.409,23.409,0l2.128,2.2L5.838,21.9H46.819V24.92Z" transform="translate(46.819 46.819) rotate(180)"></path></svg>';
 const sticky = (o: object = {}) => JSON.stringify({ sticky: 'top', sticky_on: ['desktop', 'tablet', 'mobile'], sticky_offset: 0, sticky_effects_offset: 0, ...o });
 const mouseTrack = JSON.stringify({ motion_fx_motion_fx_mouse: 'yes', motion_fx_mouseTrack_effect: 'yes', motion_fx_mouseTrack_speed: { unit: 'px', size: 0.1, sizes: [] } });
 const benefitVideos = ['/wp-content/uploads/2024/06/WEBSITE_BLOK_11.mp4', '/wp-content/uploads/2024/06/WEBSITE_BLOK_22.mp4', '/wp-content/uploads/2024/06/WEBSITE_BLOK_33.mp4'];
-const posts = ['3891', '3956', '3810', '3782', '3755', '3622', '3589', '3574', '3555', '3533'];
 ---
 <Base {...meta.index}>
   <div class="hm">
@@ -39,7 +39,8 @@ const posts = ['3891', '3956', '3810', '3782', '3755', '3622', '3589', '3574', '
       </div>
     </section>
 
-    <section class="hm-logos">
+    <section class="hm-logos" aria-labelledby="hm-logos-title">
+      <h2 id="hm-logos-title" class="visually-hidden">{c.logosTitle}</h2>
       <div class="hm-logos__track marqueee" wb-data="marquee" duration="40" direction="left">
         <div class="hm-logos__row marquee-content">
           {c.logos.map(img => <div class="hm-logos__logo"><img {...img} /></div>)}
@@ -68,8 +69,9 @@ const posts = ['3891', '3956', '3810', '3782', '3755', '3622', '3589', '3574', '
       </div>
       <div class="hm-benefits__content">
         <div class="hm-benefits__list">
-          {c.benefits.map(([title, text]) => (
+          {c.benefits.map(([title, text], i) => (
             <div class="hm-benefits__item home-scroll_text-item">
+              <div class="hm-benefit__img"><img {...c.benefitImages[i]} /></div>
               <div class="hm-benefit">
                 <div class="hm-benefit__title"><h3 set:html={title} /></div>
                 <div class="hm-benefit__text" set:html={text} />
@@ -80,20 +82,6 @@ const posts = ['3891', '3956', '3810', '3782', '3755', '3622', '3589', '3574', '
       </div>
     </section>
 
-    <section class="hm-benefits-m">
-      <div class="hm-benefits-m__list">
-        {c.benefits.map(([title, text], i) => (
-          <div class="hm-benefits-m__item">
-            <div class="hm-benefits-m__img"><img {...c.benefitImages[i]} /></div>
-            <div class="hm-benefit">
-              <div class="hm-benefit__title"><h3 set:html={title} /></div>
-              <div class="hm-benefit__text" set:html={text} />
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-
     <section class="hm-group sectionDataGroup" data-sticky={sticky()}>
       <div class="hm-group__in">
         <div class="hm-group__bg sectionDataGroup__bgImg"><div><img {...c.groupImage} /></div></div>
@@ -101,7 +89,7 @@ const posts = ['3891', '3956', '3810', '3782', '3755', '3622', '3589', '3574', '
         <div class="hm-group__col">
           <div class="hm-group__text" set:html={c.groupText} />
           <div class="hm-group__space"></div>
-          <div class="hm-btn hm-btn--link"><a href={c.groupButton.href}><span><span class="hm-btn__icon" set:html={arrow} /><span set:html={c.groupButton.label} /></span></a></div>
+          <div class="hm-btn hm-btn--link"><a href={c.groupButton.href} target="_blank" rel="noopener"><span><span class="hm-btn__icon" set:html={arrow} /><span><Fragment set:html={c.groupButton.label} /><span class="visually-hidden"> (opens in a new tab)</span></span></span></a></div>
         </div>
       </div>
     </section>
@@ -129,8 +117,15 @@ const posts = ['3891', '3956', '3810', '3782', '3755', '3622', '3589', '3574', '
             <div class="hm-tools__head">
               <div class="hm-tools__title"><h2 set:html={c.toolsTitle} /></div>
               <div class="hm-tools__text" set:html={c.toolsText} />
+              <a class="hm-tools__link" href={c.toolsLink.href}>{c.toolsLink.label}<span class="hm-btn__icon" set:html={arrow} /></a>
             </div>
-            <div class="hm-tools__img"><div data-motion={mouseTrack}><img {...c.toolsImage} /></div></div>
+            <div class="hm-tools__img">
+              <div data-motion={mouseTrack}>
+                <ul class="hm-tools__logos" role="list">
+                  {c.tools.map(({ size, ...img }) => <li class={`hm-tools__logo hm-tools__logo--${size}`}><img {...img} loading="lazy" decoding="async" /></li>)}
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -199,7 +194,7 @@ const posts = ['3891', '3956', '3810', '3782', '3755', '3622', '3589', '3574', '
 
     <section class="hm-posts">
       <div class="hm-full"></div>
-      <div class="hm-posts__band"><div class="hm-posts__in"><PostsCarousel ids={posts} info="terms" animate={false} /></div></div>
+      <div class="hm-posts__band"><div class="hm-posts__in"><PostsCarousel info="terms" animate={false} /></div></div>
     </section>
   </div>
 </Base>

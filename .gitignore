@@ -4,3 +4,7 @@ start.bat
 .baseline/
 tools/visual/out/
 __pycache__/
+.claude/
+.agents/
+.impeccable/
+skills-lock.json

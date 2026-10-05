@@ -2,7 +2,7 @@
 // animations (data-animate), scroll/mouse motion (data-parallax, data-motion), carousels
 // (data-carousel, data-slider_options), tabs, share buttons (data-share), lottie (data-lottie) and
 // forms (data-form). Settings keep the old page builder's JSON shape, so the values carried over as-is.
-import { $$ } from './scroll.js';
+import { $$, reduceMotion } from './scroll.js';
 
 const BREAKPOINTS = { mobile: 767, tablet: 1024 };
 const deviceMode = () => innerWidth <= BREAKPOINTS.mobile ? 'mobile' : innerWidth <= BREAKPOINTS.tablet ? 'tablet' : 'desktop';
@@ -129,7 +129,8 @@ function sticky() {
 }
 
 /* ---------- Entrance animations ---------- */
-function entranceAnimations() {
+// Measures nothing: site.js starts it before the fonts are in, so above-the-fold content isn't held back.
+export function entranceAnimations() {
   // data-animate="fadeInUp" data-animate-delay="500", optionally per device (data-animate-tablet /
   // -mobile, same fallback as deviceSetting). Only data-animate starts hidden.
   $$('[data-animate], [data-animate-tablet], [data-animate-mobile]').forEach(el => {
@@ -212,6 +213,7 @@ class MotionFX {
         opts[mm[1]] = v && typeof v === 'object' ? (Object.keys(v.sizes).length ? v.sizes : v.size) : v;
       }
       const [interaction, actions] = EFFECTS[m[1]];
+      if (reduceMotion && interaction === 'mouseMove') continue; // no mouse tracking/tilt under reduced motion
       out[interaction] ||= {};
       actions.forEach(a => { out[interaction][a] = opts; });
     }
@@ -310,9 +312,9 @@ function motionEffects() {
 }
 
 /* ---------- Carousels: posts carousel (Swiper 8) + expertise listing slider (was slick) ---------- */
-const I18N = {
-  prev: 'Vorige slide', next: 'Volgende slide', first: 'Ga naar de eerste slide', last: 'Ga naar de laatste slide',
-};
+const I18N = document.documentElement.lang.startsWith('nl')
+  ? { prev: 'Vorige slide', next: 'Volgende slide', first: 'Ga naar de eerste slide', last: 'Ga naar de laatste slide', of: 'van' }
+  : { prev: 'Previous slide', next: 'Next slide', first: 'This is the first slide', last: 'This is the last slide', of: 'of' };
 
 // Swiper settings from the carousel's data-carousel options.
 function loopCarouselConfig(s) {
@@ -331,7 +333,7 @@ function loopCarouselConfig(s) {
   if (single) { cfg.effect = s.effect; if (s.effect === 'fade') cfg.fadeEffect = { crossFade: true }; }
   else cfg.slidesPerGroup = +s.slides_to_scroll || 1;
   if (s.image_spacing_custom) cfg.spaceBetween = spacing('desktop');
-  cfg.a11y = { enabled: true, prevSlideMessage: I18N.prev, nextSlideMessage: I18N.next, firstSlideMessage: I18N.first, lastSlideMessage: I18N.last };
+  cfg.a11y = { enabled: true, prevSlideMessage: I18N.prev, nextSlideMessage: I18N.next, firstSlideMessage: I18N.first, lastSlideMessage: I18N.last, slideLabelMessage: `{{index}} ${I18N.of} {{slidesLength}}` };
   if (s.offset_sides === 'right' || s.offset_sides === 'both') cfg.slidesPerView = show + 0.001;
   // The options key breakpoints by max-width; Swiper wants min-width.
   const values = [BREAKPOINTS.mobile, BREAKPOINTS.tablet];
@@ -351,15 +353,34 @@ async function carousels() {
   });
   const rebuilt = $$('.posts-carousel[data-carousel]');
   if (!rebuilt.length) return;
-  const { default: Swiper } = await import('swiper/bundle');
+  // Core + the modules the carousels use (their settings have no autoplay or effect).
+  const { default: Swiper, A11y, Navigation } = await import('swiper');
+  Swiper.use([A11y, Navigation]);
 
   rebuilt.forEach(w => {
     const s = JSON.parse(w.dataset.carousel), container = w.querySelector('.swiper');
-    const slides = $$('.swiper-slide', container);
+    const slides = $$('.swiper-slide', container), nav = w.querySelector('.posts-carousel__nav');
     if (slides.length < 2) return;
     if (s.offset_sides && s.offset_sides !== 'none') container.classList.add('offset-' + s.offset_sides);
-    slides.forEach((sl, i) => sl.setAttribute('aria-label', `${i + 1} van ${slides.length}`));
-    new Swiper(container, loopCarouselConfig(s));
+    // Loop clones stay clickable (they are what shows past the last card) but out of the tab order and
+    // hidden from assistive tech; the nav hides when every card fits. Both redone when a breakpoint
+    // re-creates the clones.
+    const sync = sw => {
+      $$('.swiper-slide-duplicate', container).forEach(d => {
+        d.setAttribute('aria-hidden', 'true');
+        $$('a, button, [tabindex]', d).forEach(el => el.setAttribute('tabindex', '-1'));
+      });
+      if (nav) nav.hidden = slides.length <= Math.floor(sw.params.slidesPerView);
+    };
+    const cfg = loopCarouselConfig(s);
+    if (nav) cfg.navigation = { prevEl: nav.querySelector('.posts-carousel__btn--prev'), nextEl: nav.querySelector('.posts-carousel__btn--next') };
+    cfg.on = { init: sync, breakpoint: sync };
+    const sw = new Swiper(container, cfg);
+    // Arrow keys only while focus is inside this carousel (Swiper 8's Keyboard module listens page-wide).
+    w.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') sw.slideNext(); else if (e.key === 'ArrowLeft') sw.slidePrev(); else return;
+      e.preventDefault();
+    });
   });
 
 }
@@ -552,7 +573,7 @@ function forms() {
       const msg = document.createElement('div');
       msg.className = `form-message form-message--${ok ? 'success' : 'error'}`;
       msg.setAttribute('role', 'alert');
-      msg.textContent = ok ? FORM_MESSAGES.success : FORM_MESSAGES.error;
+      msg.textContent = ok ? form.dataset.success || FORM_MESSAGES.success : FORM_MESSAGES.error;
       if (ok) form.reset();
       form.append(msg);
     });
@@ -562,7 +583,6 @@ function forms() {
 // Same order as the old handlers, after the theme animations.
 export function initWidgets() {
   sticky();
-  entranceAnimations();
   motionEffects();
   nestedTabs();
   shareButtons();

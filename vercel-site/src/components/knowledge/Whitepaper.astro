@@ -1,0 +1,85 @@
+---
+// White paper landing page: intro + "what's inside" on the left, sticky download card (cover + lead form) on the
+// right; then a trust strip, a contact CTA and related posts. SEO/JSON-LD come from Base (pages/knowledge/[slug]).
+import type { Post, Author, Card } from '../../lib/knowledge';
+import type { MarkdownHeading } from 'astro';
+import { TYPE_LABEL, formatDate } from '../../lib/knowledge';
+import Breadcrumbs from './Breadcrumbs.astro';
+import LeadForm from './LeadForm.astro';
+import PostsCarousel from '../post/PostsCarousel.astro';
+import '../../styles/post.css';
+import '../../styles/post-card.css';
+import '../../styles/whitepaper-page.css';
+interface Props { post: Post; author: Author; headings: MarkdownHeading[]; related: Card[]; minutes: number }
+const { post, author, related } = Astro.props;
+const d = post.data;
+const nl = d.lang?.startsWith('nl');
+const t = nl
+  ? { label: 'Whitepaper', inside: 'Wat vind je erin?', get: 'Ontvang je gratis exemplaar', cta: 'Download de whitepaper', submit: 'Download de whitepaper',
+      success: 'Bedankt! De whitepaper is onderweg naar je inbox.', free: 'Gratis', mail: 'Per e-mail naar je inbox', by: "Geschreven door de data-experts van Acumen",
+      talk: 'Praat met een expert', contact: 'Contacteer ons', more: 'Meer kennis', pub: 'Gepubliceerd', q: (x: string) => `Vragen over ${x}?` }
+  : { label: TYPE_LABEL.whitepaper, inside: "What's inside", get: 'Get your free copy', cta: 'Download the white paper', submit: 'Download the white paper',
+      success: 'Thank you! The white paper is on its way to your inbox.', free: 'Free download', mail: 'Sent to your inbox by email', by: "Written by Acumen's data experts",
+      talk: 'Talk to an expert', contact: 'Contact us', more: 'Related knowledge', pub: 'Published', q: (x: string) => `Questions about ${x}?` };
+
+// Topic from the first tag ("Data platform" -> "data platform"; "Power BI", "AI" stay as written).
+const tag = d.tags[0];
+const topic = tag ? (/^[A-Z][a-z]+( [a-z].*)?$/.test(tag) ? tag.toLowerCase() : tag) : 'data';
+const cover = d.cover ?? d.image;
+// referer_title: the old site sent the page <title>, i.e. seoTitle.
+const form = d.form && { ...d.form, submit: d.form.submit ?? t.submit };
+const cta = { title: d.cta?.title ?? t.q(topic), text: d.cta?.text ?? t.talk, label: d.cta?.label ?? t.contact, href: d.cta?.href ?? '/contact/' };
+const facts = [t.free, t.mail, author.data.org ? t.by : author.data.name, `${t.pub} ${formatDate(d.date, d.lang)}`];
+---
+<article class="post wpp">
+  <section class="wpp-hero">
+    <div class="wpp-hero__inner">
+      <div class="wpp-hero__main">
+        <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Knowledge', href: '/knowledge/' }, { name: d.title }]} />
+        <p class="wpp-label">{t.label}{tag && <span> · {tag}</span>}</p>
+        <h1 class="wpp-title">{d.title}</h1>
+        {d.subtitle && <p class="wpp-subtitle">{d.subtitle}</p>}
+        {form && <a class="wpp-btn wpp-jump" href="#download">{t.cta}</a>}
+        <div class="wpp-intro"><slot /></div>
+        {d.highlights?.length && (
+          <div class="wpp-inside">
+            <h2 class="wpp-inside__title">{t.inside}</h2>
+            <ul class="wpp-inside__list">{d.highlights.map(h => <li>{h}</li>)}</ul>
+          </div>
+        )}
+      </div>
+      {form && (
+        <aside class="wpp-card" id="download" aria-labelledby="wpp-get">
+          {cover && <div class="wpp-card__cover"><img src={cover.src} srcset={cover.srcset} sizes="(max-width: 767px) 100vw, 440px" width={cover.width} height={cover.height} alt={cover.alt} decoding="async" /></div>}
+          <div class="wpp-card__body">
+            <h2 class="wpp-card__title" id="wpp-get">{t.get}</h2>
+            <LeadForm form={form} title={d.seoTitle ?? d.title} success={t.success} />
+          </div>
+        </aside>
+      )}
+    </div>
+  </section>
+
+  <section class="wpp-trust" aria-label={t.label}>
+    <ul class="wpp-trust__list">{facts.map(f => <li>{f}</li>)}</ul>
+  </section>
+
+  <section class="wpp-cta">
+    <div class="wpp-cta__inner">
+      <div>
+        <h2 class="wpp-cta__title">{cta.title}</h2>
+        <p class="wpp-cta__text">{cta.text}</p>
+      </div>
+      <a class="wpp-btn wpp-btn--lime" href={cta.href}>{cta.label}</a>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="post-related wpp-related">
+      <div class="post-related__band"><div class="post-related__inner">
+        <h2 class="wpp-related__title">{t.more}</h2>
+        <PostsCarousel cards={related} info="terms" />
+      </div></div>
+    </section>
+  )}
+</article>

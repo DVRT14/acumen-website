@@ -1,7 +1,10 @@
 ---
-// Vacancies (old site pages 4122 / 4165, one layout). Content: src/content/vacatures/*.json.
-// The application form posts to the forms stub like every site form.
+// Vacancies (old site pages 4122 / 4165), on the case-page system (case.css + tokens in base.css).
+// Content: src/content/vacatures/*.json (Dutch). The application form posts to the forms webhook like every
+// site form; field names and hidden fields are unchanged so submissions stay identifiable.
 import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/knowledge/Breadcrumbs.astro';
+import '../../styles/case.css';
 import '../../styles/vacature.css';
 
 export function getStaticPaths() {
@@ -12,87 +15,110 @@ export function getStaticPaths() {
   }));
 }
 const { page } = Astro.props;
-const arrow = '<svg xmlns="http://www.w3.org/2000/svg" width="46.819" height="46.819" viewBox="0 0 46.819 46.819" aria-hidden="true"><path d="M5.838,24.92l19.7,19.7-2.127,2.2L0,23.409,23.409,0l2.128,2.2L5.838,21.9H46.819V24.92Z" transform="translate(46.819 46.819) rotate(180)"></path></svg>';
+const text = (html: string) => html.replace(/<[^>]+>/g, ' ').replace(/&#8211;/g, '–').replace(/\s+/g, ' ').trim();
+// WordPress left empty spacer paragraphs (<p>&nbsp;</p>) between blocks: drop them, spacing comes from CSS.
+const clean = (html: string) => html.replace(/<p>(\s|&nbsp;)*<\/p>/g, '');
+const title = text(page.title);
+const location = text(page.location);
+// JobPosting (Google Jobs), from the JSON only. No employmentType (the texts don't state it), no jobLocationType
+// (TELECOMMUTE means fully remote; these roles are hybrid), no validThrough/baseSalary (not in the data).
+// Description: the page's own sections, with Word-paste <span>s and attributes stripped (Google allows p/ul/li/strong/h*).
+const bare = (html: string) => clean(html).replace(/<\/?span[^>]*>/g, '').replace(/<([a-z0-9]+)\s[^>]*>/gi, '<$1>');
+const site = Astro.site!.origin;
+const jobPosting = {
+  '@type': 'JobPosting', '@id': `${site}${Astro.url.pathname}#job`, url: `${site}${Astro.url.pathname}`,
+  title, inLanguage: 'nl-BE', datePosted: page.seo.published, directApply: true,
+  description: [
+    `<h2>${text(page.aboutTitle)}</h2>`, bare(page.aboutText), `<h2>${text(page.roleTitle)}</h2>`, bare(page.roleText),
+    ...page.cards.map((c: { title: string; text: string }) => `<h3>${text(c.title).replace(/:$/, '')}</h3>${bare(c.text)}`),
+    `<h2>${text(page.whyTitle)}</h2>`, bare(page.whyText),
+  ].join(''),
+  hiringOrganization: { '@type': 'Organization', '@id': `${site}/#organization`, name: 'Acumen', sameAs: 'https://acumen.be' },
+  jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', streetAddress: 'Ambachtenlaan 14/8', postalCode: '3001', addressLocality: 'Leuven', addressCountry: 'BE' } },
+};
 const fields = [
-  { id: 'vac-first-name', name: 'form_fields[field_60ffdb1]', type: 'text', label: 'Voornaam', placeholder: 'Voornaam' },
-  { id: 'vac-last-name', name: 'form_fields[field_2d10064]', type: 'text', label: 'Achternaam', placeholder: 'Achternaam' },
-  { id: 'vac-email', name: 'form_fields[email]', type: 'email', label: 'Email', placeholder: 'E-mail' },
+  { id: 'vac-first-name', name: 'form_fields[field_60ffdb1]', type: 'text', label: 'Voornaam', autocomplete: 'given-name' },
+  { id: 'vac-last-name', name: 'form_fields[field_2d10064]', type: 'text', label: 'Achternaam', autocomplete: 'family-name' },
+  { id: 'vac-email', name: 'form_fields[email]', type: 'email', label: 'E-mail', autocomplete: 'email' },
 ];
 ---
-<Base seo={page.seo}>
-  <div class="vac">
-    <section class="vac__sec">
-      <div class="vac__inner">
-        <h1 class="vac__title" set:html={page.title} />
-        <div class="vac__location" set:html={page.location} />
-        <div class="vac__space vac__space--50"></div>
+<Base seo={page.seo} schema={[jobPosting]}>
+  <article class="case vac">
+    <header class="case-wrap vac-hero">
+      <Breadcrumbs label="Kruimelpad" items={[{ name: 'Home', href: '/' }, { name: 'Careers', href: '/culture/#careers' }, { name: title }]} />
+      <p class="case-label">Vacature<span aria-hidden="true"> · </span>{location}</p>
+      <h1 class="case-hero__title">{title}</h1>
+      <p class="case-hero__lead">{page.seo.description.replace(/^Vacature [^:]+:\s*/, '').replace(/^./, (ch: string) => ch.toUpperCase())}</p>
+      <div class="vac-actions">
+        <a class="btn" href="#solliciteer">Solliciteer</a>
+        <a class="btn btn--outline" href="/culture/">Onze cultuur</a>
       </div>
-    </section>
+    </header>
 
-    <section class="vac__sec">
-      <div class="vac__inner">
-        <h2 class="vac__heading" set:html={page.aboutTitle} />
-        <div class="vac__space vac__space--20"></div>
-        <div class="vac__text" set:html={page.aboutText} />
-        <div class="vac__space vac__space--50"></div>
-        <h2 class="vac__heading" set:html={page.roleTitle} />
-        <div class="vac__space vac__space--20"></div>
-        <div class="vac__text" set:html={page.roleText} />
-        <div class="vac__space vac__space--50"></div>
-        {[page.cards.slice(0, 2), page.cards.slice(2)].map((pair, i) => (
-          <Fragment>
-            {i > 0 && <div class="vac__space vac__space--20"></div>}
-            <div class="vac__grid">
-              {pair.map(c => (
-                <div class="vac__card">
-                  <h2 class="vac__card-title" set:html={c.title} />
-                  <div class="vac__space vac__space--20"></div>
-                  <div class="vac__card-text" set:html={c.text} />
-                </div>
-              ))}
-            </div>
-          </Fragment>
-        ))}
-      </div>
-    </section>
+    <div class="case-wrap case-main vac-main">
+      <aside class="case-facts vac-facts" aria-label="Over deze vacature">
+        <dl class="case-facts__list">
+          <div><dt>Functie</dt><dd>{title}</dd></div>
+          <div><dt>Locatie</dt><dd>{location}</dd></div>
+          <div><dt>Solliciteren</dt><dd>Je CV en contactgegevens, via het formulier onderaan.</dd></div>
+        </dl>
+        <a class="btn vac-facts__cta" href="#solliciteer">Solliciteer</a>
+      </aside>
 
-    <section class="vac__sec">
-      <div class="vac__inner">
-        <div class="vac__space vac__space--50 vac__space--m14"></div>
-        <h2 class="vac__heading" set:html={page.whyTitle} />
-        <div class="vac__space vac__space--20"></div>
-        <div class="vac__text" set:html={page.whyText} />
-        <div class="vac__space vac__space--50"></div>
-        <div class="vac__text" set:html={page.applyText} />
-        <div class="vac__space vac__space--50 vac__space--m14"></div>
-        <h2 class="vac__heading" set:html={page.applyTitle} />
-        <div class="vac__apply">
-          <div class="vac__space vac__space--13"></div>
-          <form class="vac-form" method="post" name={page.form.name} enctype="multipart/form-data" data-form>
-            <input type="hidden" name="post_id" value={page.form.post_id} />
-            <input type="hidden" name="form_id" value={page.form.form_id} />
-            <input type="hidden" name="referer_title" value={page.form.referer_title} />
-            <input type="hidden" name="queried_id" value={page.form.queried_id} />
-            <div class="vac-form__fields">
-              {fields.map(f => (
-                <div class="vac-form__group vac-form__group--66 form-field">
-                  <label for={f.id} class="visually-hidden">{f.label}</label>
-                  <input size="1" type={f.type} name={f.name} id={f.id} class="vac-form__input" placeholder={f.placeholder} required />
-                </div>
-              ))}
-              <div class="vac-form__group form-field">
-                <label for="vac-cv" class="visually-hidden">CV</label>
-                <input type="file" name="form_fields[field_bdfd5ff][]" id="vac-cv" class="vac-form__file" required multiple />
-              </div>
-              <div class="vac-form__group vac-form__group--33 vac-form__group--submit form-field">
-                <button class="vac-form__button" type="submit">
-                  <span class="vac-form__button-content"><span class="vac-form__button-icon" set:html={arrow} /><span>Solliciteer</span></span>
-                </button>
-              </div>
-            </div>
-          </form>
+      <div class="case-content">
+        <div class="case-prose vac-prose">
+          <h2>{text(page.aboutTitle)}</h2>
+          <Fragment set:html={clean(page.aboutText)} />
+          <h2>{text(page.roleTitle)}</h2>
+          <Fragment set:html={clean(page.roleText)} />
+        </div>
+
+        <div class="vac-lists">
+          {page.cards.map((card: { title: string; text: string }) => (
+            <section class="vac-list" aria-label={text(card.title).replace(/:$/, '')}>
+              <h3>{text(card.title).replace(/:$/, '')}</h3>
+              <div class="vac-list__body" set:html={clean(card.text)} />
+            </section>
+          ))}
+        </div>
+
+        <div class="case-prose vac-prose">
+          <h2>{text(page.whyTitle)}</h2>
+          <Fragment set:html={clean(page.whyText)} />
         </div>
       </div>
+    </div>
+
+    <section class="case-wrap vac-apply" id="solliciteer" aria-labelledby="vac-apply-title">
+      <div class="vac-apply__card">
+        <div class="vac-apply__intro">
+          <h2 id="vac-apply-title">{text(page.applyTitle).replace(/!$/, '')}</h2>
+          <p>{text(page.applyText)}</p>
+        </div>
+        <form class="vac-form" method="post" name={page.form.name} enctype="multipart/form-data" data-form data-success="Bedankt voor je sollicitatie. We nemen zo snel mogelijk contact met je op.">
+          <input type="hidden" name="post_id" value={page.form.post_id} />
+          <input type="hidden" name="form_id" value={page.form.form_id} />
+          <input type="hidden" name="referer_title" value={page.form.referer_title} />
+          <input type="hidden" name="queried_id" value={page.form.queried_id} />
+          <div class="vac-form__grid">
+            {fields.map(f => (
+              <div class={`vac-form__field form-field${f.type === 'email' ? ' vac-form__field--wide' : ''}`}>
+                <label for={f.id}>{f.label}</label>
+                <input type={f.type} name={f.name} id={f.id} autocomplete={f.autocomplete} required />
+              </div>
+            ))}
+            <div class="vac-form__field vac-form__field--wide form-field">
+              <span class="vac-form__label" id="vac-cv-label">CV</span>
+              <label class="vac-file" for="vac-cv">
+                <input type="file" name="form_fields[field_bdfd5ff][]" id="vac-cv" aria-labelledby="vac-cv-label" required multiple />
+                <span class="vac-file__button">Kies bestand</span>
+                <span class="vac-file__hint">PDF of Word, max. 4 MB</span>
+              </label>
+            </div>
+          </div>
+          <button class="btn btn--on-dark vac-form__submit" type="submit">Verstuur sollicitatie</button>
+        </form>
+      </div>
     </section>
-  </div>
+  </article>
 </Base>

@@ -6,10 +6,10 @@
 .ai-sec__in > *, .ai-value > *, .ai-compare > *, .ai-box > *, .ai-can__inner > *, .ai-use__body > *, .ai-why__in > * { position: relative; min-width: 0; max-width: 100%; }
 .ai-sp { flex-shrink: 0; }
 
-.ai h2, .ai h5 { margin: 0; line-height: 1; }
+.ai h1, .ai h2, .ai h3, .ai h5 { margin: 0; line-height: 1; }
 .ai p { margin-bottom: 0; }
 .ai-hero-title { text-align: left; }
-.ai-hero-title h2 { font-family: "Atype Display", Sans-serif; font-size: 44px; font-weight: 900; color: #020101; }
+.ai-hero-title h1 { font-family: "Atype Display", Sans-serif; font-size: 44px; font-weight: 900; color: #020101; }
 .ai-kicker { text-align: left; }
 .ai-kicker h2 { font-family: "Atype Display", Sans-serif; font-size: 20px; font-weight: 400; color: #7A7A7A; }
 .ai-title h2 { font-family: "Atype Display", Sans-serif; font-weight: 500; color: #002921; }
@@ -67,7 +67,7 @@
 .ai-can__body { position: relative; display: flex; flex-direction: column; width: 81%; min-width: 0; min-height: 23px; border-radius: 15px; }
 .ai-can__inner { position: relative; display: flex; flex-direction: column; width: 100%; }
 .ai-can__title > div { margin-top: 27px; }
-.ai-can__title h5, .ai-value__title h5, .ai-use__title h5, .ai-why__title h5 { font-family: "Atype Display", Sans-serif; }
+.ai-can__title h3, .ai-value__title h3, .ai-use__title h3, .ai-why__title h3 { font-family: "Atype Display", Sans-serif; font-size: 1.25rem; }
 .ai-can__text, .ai-why__text { font-family: "Atype Display", Sans-serif; font-size: 20px; line-height: 25px; }
 
 .ai-value { position: relative; display: flex; flex-direction: column; width: 100%; padding: 30px; border-radius: 15px; background-color: #D6FF00; }
@@ -101,7 +101,7 @@
 .ai-use__icon .ai-icon { font-size: 40px; color: #C8EF00; }
 .ai-use__title { align-self: center; }
 .ai-use__head > * { min-width: 0; }
-.ai-use__title h5 { color: #002921; }
+.ai-use__title h3 { color: #002921; }
 .ai-use__text { width: 91%; max-width: 91%; font-family: "Atype Display", Sans-serif; font-size: 20px; line-height: 25px; color: #002921; }
 .ai-use__text > div { padding-left: 22px; }
 .ai-use__text--examples > div { margin-bottom: 35px; }

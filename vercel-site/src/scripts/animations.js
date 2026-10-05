@@ -1,9 +1,20 @@
 // Site animations, ported from the old theme bundle (hello-theme-child-master/main.min.js).
 // Same selectors and GSAP parameters; jQuery replaced by DOM APIs. Deliberate fixes are marked "fix:".
 import scrollLock from 'scroll-lock';
-// Static (not lazy) so the pinned section's ScrollTrigger is created in order, before later triggers measure.
-import SplitType from 'split-type';
-import { gsap, ScrollTrigger, lenis, outerHeight, innerWidth, offsetTop, $$ } from './scroll.js';
+import { gsap, ScrollTrigger, loadScrollTrigger, lenis, reduceMotion, outerHeight, innerWidth, offsetTop, $$ } from './scroll.js';
+
+// Every element a ScrollTrigger below hangs off; pages without any skip downloading ScrollTrigger.
+const SCROLL_TRIGGER_HOOKS = '.greenSection, .expand-section, .howWeHelpYouSectionAnimation__text, .playInView video, '
+  + '.playInViewSingle video, .playInViewRepeat video, .textLeftOnScroll, .textLeftOnScrollFlex, .home-scroll_section, .typingReveal';
+let SplitType;
+// Page-specific libraries, loaded before initAnimations() runs so ScrollTriggers are still created in
+// order (the pinned section before later triggers measure).
+export function loadAnimationDeps() {
+  return Promise.all([
+    document.querySelector(SCROLL_TRIGGER_HOOKS) && loadScrollTrigger(),
+    document.querySelector('.expand-section') && import('split-type').then(m => { SplitType = m.default; }),
+  ]);
+}
 
 const $ = sel => document.querySelector(sel);
 const toggle = (els, cls, force) => els.forEach(el => el.classList.toggle(cls, force));
@@ -59,7 +70,7 @@ function headerNav() {
   menuTl.fromTo($$('.headerMenu .menu-item'), { opacity: 0, x: -50 }, { opacity: 1, x: 0, stagger: 0.2, duration: 1, ease: 'power2.out' }, '<');
   menuTl.fromTo($$('.headerSocial li'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, stagger: 0.2, duration: 1, ease: 'power2.out' }, '<');
 
-  let openTimer, closeTimer;
+  let openTimer, closeTimer, opener;
   const dropMenu = () => $('.dropMenu');
   const isOpen = () => dropMenu()?.classList.contains('show');
 
@@ -76,7 +87,12 @@ function headerNav() {
     toggle($$('.menuBtn'), 'active');
     toggle($$('.dropMenu'), 'show');
     toggle([document.body, document.documentElement], 'dropMenuActive');
-    $$('.menuBtn').forEach(b => b.setAttribute('aria-expanded', String(isOpen())));
+    // Closed menu (moved off-screen) stays out of the tab order; focus inside it returns to the opener.
+    const open = isOpen(), menu = dropMenu();
+    if (open) opener = document.activeElement;
+    else if (menu.contains(document.activeElement)) opener?.focus({ preventScroll: true });
+    menu.inert = !open;
+    $$('[aria-controls="drop-menu"]').forEach(b => b.setAttribute('aria-expanded', String(open)));
   }
 
   function toggleMenu() {
@@ -110,7 +126,9 @@ function headerNav() {
   });
 }
 
-function homeLoadingHeroAnimation() {
+// Runs before the fonts are in (site.js): it measures nothing. The photo (heroAnim4, the LCP element)
+// is already painted, 100px low (base.css); the timeline only slides it up.
+export function homeLoadingHeroAnimation() {
   const [a1, a2, a3, a4] = [1, 2, 3, 4].map(n => $$('.heroAnim' + n));
   const tl = gsap.timeline();
   if (a1.length) {
@@ -126,36 +144,62 @@ function homeLoadingHeroAnimation() {
 async function wordSwapTypingAnimation() {
   const containers = $$('.typedContainer');
   if (!containers.length) return;
+  // Reduced motion: show the first word instead of the looping typewriter.
+  if (reduceMotion) return containers.forEach(c => { c.querySelector('.typed').textContent = c.querySelector('.typed-strings p')?.textContent.trim() ?? ''; });
   const { default: Typed } = await import('typed.js');
   containers.forEach(c => {
+    // One pass through the words, then back to the first one and stop (typed.js stops on the last string).
+    const strings = $$('.typed-strings p', c).map(p => p.innerHTML.trim());
     setTimeout(() => new Typed(c.querySelector('.typed'), {
-      stringsElement: c.querySelector('.typed-strings'),
-      typeSpeed: 50, backSpeed: 50, loop: true, showCursor: false, backDelay: 1500,
+      strings: [...strings, strings[0]],
+      typeSpeed: 50, backSpeed: 50, loop: false, showCursor: false, backDelay: 1500,
     }), c.classList.contains('delay') ? 800 : 0);
   });
 }
 
 function expandSection() {
-  const section = $$('.expand-section');
-  if (!section.length) return;
+  const frame = $('.expand-section'), parent = $('.parent');
+  if (!frame || !parent) return;
+  // Reduced motion: the frame at its end state and the statement fully lit; no split, pin or zoom.
+  if (reduceMotion) return gsap.set(frame, { width: '100%' });
   const bg = $$('.expand-section .bgImage');
   const scaleAttr = bg[0]?.getAttribute('data-scale');
   const scale = scaleAttr && !isNaN(scaleAttr) ? parseFloat(scaleAttr) : 1.2;
   const durAttr = bg[0]?.getAttribute('data-duration');
   const duration = durAttr && !isNaN(durAttr) ? parseInt(durAttr, 10) : 30;
-  gsap.to(section, { width: '100%', scrollTrigger: { trigger: section[0], start: 'top 70%', end: 'top 5%', scrub: true, pinSpacing: false } });
-  const parent = $('.parent');
-  if (!parent) return;
-  $$('.textAnim').forEach(title => {
-    const split = new SplitType(title, { types: 'words, chars' });
-    gsap.from(split.chars, {
-      scrollTrigger: {
-        trigger: parent, start: 'top top', end: 'bottom top', scrub: 1.2, pin: true, pinSpacing: true, anticipatePin: 1,
-        onEnter: () => gsap.to(bg, { ease: 'none', scale, duration, yoyo: true, repeat: -1 }),
-      },
-      opacity: 0.2, stagger: 0.5, ease: 'power2.inOut',
-    });
+  const titles = $$('.textAnim');
+  // Letters are spans: assistive tech reads the sentence once, from a hidden copy.
+  const splits = titles.map(t => {
+    const text = t.textContent.trim().replace(/\s+/g, ' ');
+    const { words, chars } = new SplitType(t, { types: 'words, chars' });
+    words.forEach(w => w.setAttribute('aria-hidden', 'true'));
+    const copy = document.createElement('span');
+    copy.className = 'visually-hidden';
+    copy.textContent = text;
+    t.append(copy);
+    return { t, chars };
   });
+  // Reverted and rebuilt when the viewport crosses the mobile breakpoint.
+  gsap.matchMedia().add({ mobile: '(max-width: 767px)', desktop: '(min-width: 768px)' }, ({ conditions: { mobile } }) => {
+    // The statement keeps its full-width line length while the frame widens, so it never re-wraps (layout shift).
+    const lock = () => titles.forEach(t => {
+      const cs = getComputedStyle(t.parentElement);
+      Object.assign(t.style, { maxWidth: 'none', width: parent.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) + 'px' });
+    });
+    lock();
+    ScrollTrigger.addEventListener('refreshInit', lock);
+    gsap.to(frame, { width: '100%', scrollTrigger: { trigger: frame, start: 'top 70%', end: 'top 5%', scrub: true } });
+    // Desktop pins for half a viewport while the letters light up; mobile lights them up in passing.
+    splits.forEach(({ t, chars }) => gsap.from(chars, {
+      scrollTrigger: mobile
+        ? { trigger: t, start: 'top 85%', end: 'bottom 45%', scrub: 1.2 }
+        : { trigger: parent, start: 'top top', end: '+=50%', scrub: 1.2, pin: true, pinSpacing: true, anticipatePin: 1 },
+      opacity: 0.2, stagger: 0.5, ease: 'power2.inOut',
+    }));
+    return () => ScrollTrigger.removeEventListener('refreshInit', lock);
+  });
+  // Slow zoom once the photo reaches the top (was restarted, and stacked, on every re-entry).
+  gsap.to(bg, { ease: 'none', scale, duration, yoyo: true, repeat: -1, scrollTrigger: { trigger: parent, start: 'top top' } });
 }
 
 function sectionDataGroup() {
@@ -213,6 +257,7 @@ function videoPlayInViewRepeat() {
 }
 
 function scrollingText() {
+  if (reduceMotion) return;
   $$('.scrollingText').forEach(el => {
     const w = innerWidth(el);
     gsap.to(el, { x: -w, duration: w / 50, ease: 'none', repeat: -1,
@@ -221,12 +266,16 @@ function scrollingText() {
 }
 
 function marqueeFunction() {
+  if (reduceMotion) return;
   $$('[wb-data="marquee"]').forEach(el => {
     const duration = parseInt(el.getAttribute('duration'), 10) || 5;
     const direction = el.getAttribute('direction') || 'left';
     const first = el.firstElementChild;
     if (!first) return;
-    el.append(first.cloneNode(true));
+    // The copy only fills the loop: hidden from assistive tech so logos/words are not announced twice.
+    const copy = first.cloneNode(true);
+    copy.setAttribute('aria-hidden', 'true');
+    el.append(copy);
     let tween;
     const build = () => {
       const progress = tween ? tween.progress() : 0;
@@ -309,7 +358,8 @@ function benefitsSectionAnimation3() {
         imgs[i]?.classList.add('is-active');
         const video = imgs[i]?.querySelector('video');
         // fix: the old code set playsinline before checking the video exists.
-        if (video && !video.dataset.played) { video.setAttribute('playsinline', ''); video.play(); video.dataset.played = 'true'; }
+        // Skip the video column when it is hidden (mobile shows images instead).
+        if (video && video.offsetParent && !video.dataset.played) { video.setAttribute('playsinline', ''); video.play(); video.dataset.played = 'true'; }
       },
     }));
   });
@@ -339,7 +389,6 @@ function typingRevealEffectOnScroll() {
 export function initAnimations() {
   setDefaultsForVideos();
   headerNav();
-  homeLoadingHeroAnimation();
   wordSwapTypingAnimation();
   expandSection();
   sectionDataGroup();

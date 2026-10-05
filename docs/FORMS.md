@@ -1,40 +1,31 @@
-# Forms that need a new backend
+# Forms
 
-Every Elementor Pro form on this site currently POSTs to `/wp-admin/admin-ajax.php`, which no longer exists in this static export. Elementor Pro's own client-side error handling already shows visitors a generic failure message, so nothing silently "succeeds" — but nothing works either. Wire up a replacement (Formspree, Netlify Forms, a small serverless function, etc.) and update the form's action/JS config before shipping.
+Every form is a `<form data-form>` that `src/scripts/widgets.js` POSTs (FormData) to `/api/forms`
+(`vercel-site/api/forms.js`), which forwards it to the `FORMS_WEBHOOK_URL` webhook (see README →
+Forms). The hidden fields `post_id`, `form_id`, `referer_title`, `queried_id` are kept from the old
+Elementor forms so submissions stay identifiable; the webhook payload carries `form_id` and
+`page` (= `referer_title`). A form can set its own success text with `data-success`.
 
-Pages with a form (34), each marked with a TODO comment in its HTML:
+Forms in the build (2026-09-29):
 
-- knowledge/a-comparison-of-apache-iceberg-and-delta-lake/index.html
-- knowledge/agentic-ai-from-experiments-to-work-that-runs-itself/index.html
-- knowledge/ai-legal-assistant-animo-law/index.html
-- knowledge/ai-project-roadmap/index.html
-- knowledge/airflow-to-dagster-migration/index.html
-- knowledge/animo-ai-powered-legal-assistant/index.html
-- knowledge/bionerga-future-ready-data-platform/index.html
-- knowledge/building-a-robust-csrd-reporting-strategy-a-path-to-successful-compliance/index.html
-- contact/index.html
-- knowledge/continuous-data-support/index.html
-- knowledge/dagster-vs-airflow-data-orchestration/index.html
-- knowledge/data-intelligence-platform-databricks/index.html
-- knowledge/data-warehouse-to-lakehouse-whitepaper/index.html
-- knowledge/de-riziv-controleshoft-is-ingezet/index.html
-- knowledge/double-materiality-assessment/index.html
-- knowledge/embracing-esg-csrd/index.html
-- knowledge/enhanced-sales-insights-leveraging-power-bi-reporting/index.html
-- knowledge/esg-reporting-data-deadlines/index.html
-- knowledge/future-ready-data-strategy-microsoft-fabric/index.html
-- knowledge/genarative-ai-and-power-bi/index.html
-- knowledge/jump-start-your-data-lake-with-our-meta-data-driven-blueprint/index.html
-- knowledge/kaneka-powerbi-sap-datasphere/index.html
-- knowledge/modern-data-platform-whitepaper/index.html
-- knowledge/our-ai-and-ml-services-more-info/index.html
-- knowledge/power-bi-whitepaper/index.html
-- knowledge/requirements-analysis-no-sexy-buzzword-but-nevertheless-indispensable/index.html
-- knowledge/routing-optimization-essers-acumen/index.html
-- knowledge/the-five-key-takeaways-you-should-know-about-the-eu-ai-act/index.html
-- knowledge/the-necessity-and-benefits-of-extensive-logging-and-auditing-in-data-integration/index.html
-- knowledge/transforming-business-machine-learning-applications/index.html
-- knowledge/unlocking-data-orchestration-with-dagster/index.html
-- careers/vacature-ai-engineer/index.html
-- careers/vacature-analytics-engineer/index.html
-- white-paper-download-page/index.html
+| Page | Form name | `form_id` | Component / source |
+|---|---|---|---|
+| `/contact/` | New Form | `748be11` | `src/pages/contact.astro` |
+| `/careers/vacature-ai-engineer/` | Subscribe Form | `83bd617` | `src/pages/careers/[slug].astro` (with CV upload) |
+| `/careers/vacature-analytics-engineer/` | Subscribe Form | `83bd617` | same |
+| `/knowledge/power-bi-whitepaper/` | Whitepaper Power BI | `317928dc` | `LeadForm` ← frontmatter `form` |
+| `/knowledge/data-warehouse-to-lakehouse-whitepaper/` | Whitepaper Data Engineering | `73105cb4` | same |
+| `/knowledge/modern-data-platform-whitepaper/` | Whitepaper Data Engineering | `8e22492` | same |
+| `/knowledge/our-ai-and-ml-services-more-info/` | Whitepaper AI | `ad92be4` | same |
+| `/knowledge/animo-ai-powered-legal-assistant/` | Whitepaper AI | `ad92be4` | same |
+| `/knowledge/embracing-esg-csrd/` | Whitepaper ESG | `1442a231` | same |
+| `/knowledge/de-riziv-controleshoft-is-ingezet/` | New Form (RIZIV whitepaper, NL) | `8f1d034` | same |
+| `/white-paper-download-page/` | New Form | `442063c8` | `components/post/WhitepaperDownload.astro` |
+
+Whitepaper and gated-post forms are defined in the post's frontmatter (`form`, see
+`docs/CONTENT.md`) and rendered by `src/components/knowledge/LeadForm.astro`.
+
+**Removed:** the newsletter sign-up (`Subscribe Form`, `e914a34`) that ended every old blog/case
+post — Acumen no longer sends a newsletter (2026-09-29). Webhook flows that handled `e914a34` can go.
+
+Check the endpoint end to end: `node tools/forms-check.mjs`.

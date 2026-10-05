@@ -39,7 +39,8 @@
 .masthead.is-scrolled .header-bar__inner { padding-top: 20px; padding-bottom: 20px; }
 
 .header-bar__logo { position: relative; text-align: center; }
-.header-bar__logo a { display: inline-block; }
+.header-bar__logo a { position: relative; display: inline-block; }
+.header-bar__logo a::after { content: ''; position: absolute; inset: -12px 0; } /* 44px+ hit area without touching the bar's height */
 .header-bar__logo img { display: inline-block; width: 100%; max-width: 206px; vertical-align: middle; }
 
 .header-bar__menu {
@@ -51,7 +52,10 @@
   color: #002921;
 }
 .header-bar--dark .header-bar__menu { color: #fff; }
-.header-bar__menu a { color: inherit; }
+.header-bar__menu button,
+.header-bar__menu button:hover,
+.header-bar__menu button:focus { display: inline-block; margin: -12px 0; padding: 12px 0; border: 0; background: none; font: inherit; line-height: inherit; color: inherit; vertical-align: top; }
+.header-bar__menu button:focus:not(:focus-visible) { outline: none; }
 .header-bar__menu::after {
   content: '';
   position: absolute;
@@ -69,8 +73,8 @@
   display: none;
   position: relative;
   align-items: center;
-  margin: 0;
-  padding: 0;
+  margin: -12px;
+  padding: 12px;
   border: 0;
   border-radius: 0;
   background: none;
@@ -96,23 +100,25 @@
 
 .header-bar__cta { position: relative; margin-left: 40px; }
 
+/* Header CTA stays separate from .btn: arrow icon, 20px / line-height 1, transparent outline that flips between
+   the light and dark header, and the older --lime-2 hover. */
 .btn-pill {
   display: inline-block;
   padding: 12px 24px;
-  border: 1px solid #002921;
+  border: 1px solid var(--green);
   border-radius: 100px;
   background-color: transparent;
   font-size: 20px;
   font-weight: 400;
   line-height: 1;
   text-align: center;
-  color: #002921;
-  fill: #002921;
+  color: var(--green);
+  fill: var(--green);
   transition: all .3s;
 }
-.btn-pill:hover, .btn-pill:focus { color: #002921; background-color: #C8EF00; border-color: #C8EF00; }
-.header-bar--dark .btn-pill { color: #fff; fill: #fff; border-color: #fff; }
-.header-bar--dark .btn-pill:hover, .header-bar--dark .btn-pill:focus { color: #002921; fill: #002921; background-color: #C8EF00; border-color: #C8EF00; }
+.btn-pill:hover, .btn-pill:focus { color: var(--green); background-color: var(--lime-2); border-color: var(--lime-2); }
+.header-bar--dark .btn-pill { color: var(--white); fill: var(--white); border-color: var(--white); }
+.header-bar--dark .btn-pill:hover, .header-bar--dark .btn-pill:focus { color: var(--green); fill: var(--green); background-color: var(--lime-2); border-color: var(--lime-2); }
 .btn-pill__content { display: flex; flex-direction: row-reverse; justify-content: center; gap: 20px; }
 .btn-pill__icon { display: flex; align-items: center; transform: rotate(-45deg); transition: all .3s ease-in-out; }
 /* On scrollable pages the old header rendered this icon on its own compositor layer (slightly softer
@@ -188,7 +194,7 @@
   fill: #0E0F0C;
   transition: .4s;
 }
-.headerMenu .menuSmall > a { min-width: 5.6em; font-size: 23px; }
+.headerMenu .menuSmall > a { min-width: 5.6em; margin: -4px 0; padding-block: 4px; font-size: 23px; } /* hit area fills the 33px row pitch */
 .headerMenu a:hover, .headerMenu a.is-active { padding-left: .609em; }
 .headerMenu a::before,
 .headerMenu a::after {
@@ -227,12 +233,17 @@
   font-family: "Atype Display", Sans-serif;
   font-size: 15px;
   font-weight: 400;
+  margin: -16px 0;
+  padding: 16px 0; /* 45px hit area, same layout */
   line-height: 13px;
   color: #0029214F;
   transition: color .3s;
 }
 .menuSocial a:hover { color: #002921; }
 .menuSocial--mobile { display: none; }
+
+/* Focus ring: brand green (base.css), lime on the dark bar. */
+.header-bar--dark a:focus-visible, .header-bar--dark button:focus-visible { outline-color: var(--lime); }
 
 @media (max-width: 1024px) {
   .header-bar__cta { margin-left: 20px; }

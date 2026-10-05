@@ -20,6 +20,10 @@
 
 .postItem__bg { position: absolute; top: 0; left: 0; z-index: 1; width: 100%; height: 100%; text-align: center; opacity: 1; transition: opacity .3s ease-in-out !important; }
 .postItem:hover .postItem__bg { opacity: 0; }
+/* Scrim under the date/terms label (top) and the resting title (bottom); fades out with the photo on hover. */
+.postItem__bg:has(img)::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0, 41, 33, .75) 0, rgba(0, 41, 33, .5) 90px, rgba(0, 41, 33, 0) 200px), linear-gradient(to top, rgba(0, 41, 33, .8) 0, rgba(0, 41, 33, .5) 200px, rgba(0, 41, 33, 0) 340px); pointer-events: none; }
+/* Cards without a photo sit on a flat brand fill (lime / mist): white text fails there, use the dark green. */
+.postItem:not(:has(.postItem__bg img)) :is(.postItem__info, .postItem__title h3, .postItem__excerpt) { color: var(--green); }
 .postItem__bg img { display: inline-block; width: 100%; height: 100%; max-width: 100%; vertical-align: middle; object-fit: cover; object-position: center center; }
 
 .postItem__info {
@@ -52,7 +56,7 @@
 }
 .postItem:hover .postItem__contents { transform: translateY(0) !important; }
 .postItem__title { position: relative; z-index: 2; width: 438px; max-width: 100%; }
-.postItem__title h1 { margin: 0; font-family: "DM Sans", Sans-serif; font-size: 47px; font-weight: 300; line-height: 48px; color: #fff; }
+.postItem__title h3 { margin: 0; font-family: "DM Sans", Sans-serif; font-size: 47px; font-weight: 300; line-height: 48px; color: #fff; }
 .postItem__excerpt {
   position: relative;
   z-index: 2;
@@ -69,11 +73,11 @@
 .postItem:hover .postItem__excerpt { opacity: 1; }
 .postItem:hover .postItem__info, .postItem:hover .postItem__info *,
 .postItem:hover .postItem__title *, .postItem:hover .postItem__excerpt,
-.postItem:hover .postItem__excerpt * { color: #002921 !important; }
+.postItem:hover .postItem__excerpt * { color: var(--green) !important; }
 
 @media (max-width: 1024px) {
   .postItem { min-height: 609px; }
-  .postItem__title h1 { font-size: 28px; line-height: 1.1em; }
+  .postItem__title h3 { font-size: 28px; line-height: 1.1em; }
   .postItem__excerpt { font-size: 16px; line-height: 22px; }
 }
 @media (max-width: 767px) {
@@ -82,6 +86,6 @@
   .postItem__info { top: 25px; left: 25px; }
   .postItem__contents { flex-wrap: nowrap; padding: 58px 25px 25px; }
   .postItem__title, .postItem__excerpt { width: initial; max-width: initial; }
-  .postItem__title h1 { font-size: 24px; line-height: 26px; }
+  .postItem__title h3 { font-size: 24px; line-height: 26px; }
   .postItem__excerpt { font-size: 16px; line-height: 22px; }
 }

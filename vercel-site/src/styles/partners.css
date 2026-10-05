@@ -1,43 +1,79 @@
-/* Partners page (old site page 3430). */
+/* Partners overview and partner pages (old site page 3430). Scales to any number of partners. */
 .partners { overflow: hidden; }
 .partners__intro { position: relative; font-size: 22px; font-weight: 400; line-height: 37px; color: #002921; }
-.partners__inner { flex-direction: column; padding: 65px 0; }
-.partners__grid {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  grid-auto-flow: row;
-  justify-content: start;
-  justify-items: center;
-  align-content: start;
-  gap: 2% 0%;
-}
-.partner { position: relative; display: flex; flex-direction: column; flex-shrink: 0; width: 80%; min-width: 0; }
-.partner__logo { position: relative; max-width: 100%; text-align: center; }
-.partner__img { display: inline-block; width: 577px; height: 480px; max-width: 100%; vertical-align: middle; object-fit: contain; object-position: center center; transition: transform .1s; }
-.partner__logo:hover .partner__img { opacity: .3; }
-.partner__img:hover, .partner__img:focus, .partner__img:active { transform: scale(1.1); }
-.partner__box { position: relative; max-width: 100%; text-align: center; }
-.partner__name { margin: 8px 0 10px; font-family: "Poppins", Sans-serif; font-size: 24px; font-weight: 600; line-height: 140%; color: #1C244B; }
-.partner__text { margin: 0; font-family: "Poppins", Sans-serif; font-size: 16px; font-weight: 400; line-height: 1.5em; color: #324A6D; }
+.partners__inner { flex-direction: column; padding: 65px 0 120px; }
 
-@media (max-width: 1024px) {
-  .partners__grid { grid-template-columns: repeat(1, 1fr); grid-template-rows: repeat(1, 1fr); }
-  .partner { width: 48%; }
-  .partner__img { height: 400px; }
-  .partner__name { font-size: 22px; }
-  .partner__text { font-size: 14px; }
-}
+/* Card grid: the whole card is the name link (stretched), "Read more" is its visible cue */
+.partners__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px; margin: 0; padding: 0; list-style: none; }
+.pcard { position: relative; display: flex; flex-direction: column; padding: 24px 24px 28px; border-radius: 20px; background: #F4F4F4; transition: background-color .3s, transform .3s; }
+.pcard__logo { position: relative; aspect-ratio: 16 / 10; margin-bottom: 24px; border-radius: 12px; background: #fff; }
+.pcard__logo img { position: absolute; inset: 24px; display: block; width: calc(100% - 48px); height: calc(100% - 48px); object-fit: contain; transition: transform .3s; }
+.pcard__name { margin: 0 0 10px; font-family: "Atype Display", Sans-serif; font-size: 32px; font-weight: 400; line-height: 1.1; letter-spacing: -0.04em; color: #002921; }
+.pcard__name a { color: inherit; text-decoration: none; }
+.pcard__name a::after { content: ''; position: absolute; inset: 0; border-radius: 20px; }
+.pcard__name a:focus-visible { outline: none; }
+.pcard__name a:focus-visible::after { outline: 2px solid #002921; outline-offset: 3px; }
+.pcard__text { flex-grow: 1; margin: 0; font-family: "DM Sans", Sans-serif; font-size: 17px; font-weight: 300; line-height: 1.45; color: #002921; }
+.pcard__more { align-self: flex-start; margin-top: 20px; padding-bottom: 2px; border-bottom: 1px solid currentColor; font-family: "DM Sans", Sans-serif; font-size: 16px; font-weight: 400; color: #002921; }
+.pcard__more::after { content: ' \2192'; }
+.pcard:hover, .pcard:focus-within { background: #D6FF00; }
+.pcard:hover .pcard__logo img, .pcard:focus-within .pcard__logo img { transform: scale(1.05); }
+@media (prefers-reduced-motion: reduce) { .pcard, .pcard__logo img { transition: none; } }
 
 @media (max-width: 767px) {
   .partners__intro { font-size: 16px; line-height: 22px; }
-  .partners__inner { padding: 50px 0; }
-  .partners__grid { grid-template-rows: repeat(2, 1fr); }
-  .partner { flex-wrap: wrap; gap: 20px; width: 270px; margin-top: 20px; }
-  .partner--center { justify-content: center; align-items: center; }
-  .partner--align { align-items: center; }
-  .partner__logo { flex-grow: 1; flex-shrink: 0; }
-  .partner__img { width: 100%; height: 345px; }
-  .partner__name { font-size: 18px; }
+  .partners__inner { padding: 30px 0 70px; }
+  .partners__grid { grid-template-columns: 1fr; gap: 20px; }
+  .pcard__name { font-size: 28px; }
+  .pcard__text { font-size: 16px; }
+}
+
+/* Partner page */
+.partner__hero { flex-direction: column; gap: 40px; padding: 50px 0 60px; }
+.partner__head { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); align-items: center; gap: 60px; }
+.partner__logo { position: relative; aspect-ratio: 16 / 10; border-radius: 20px; background: #F4F4F4; }
+.partner__logo img { position: absolute; inset: 36px; display: block; width: calc(100% - 72px); height: calc(100% - 72px); object-fit: contain; }
+.partner__title { margin: 0 0 20px; font-family: "Atype Display", Sans-serif; font-size: 82px; font-weight: 400; line-height: 1.01em; letter-spacing: -0.04em; color: #002921; }
+.partner__summary { margin: 0; font-family: "DM Sans", Sans-serif; font-size: 22px; font-weight: 300; line-height: 1.5; color: #002921; }
+.partner__body { gap: 80px; padding: 20px 0 60px; }
+.partner__main { flex: 1 1 0; min-width: 0; }
+.partner__section + .partner__section { margin-top: 50px; }
+.partner__h2 { margin: 0 0 20px; font-family: "Atype Display", Sans-serif; font-size: 46px; font-weight: 400; line-height: 1.1; letter-spacing: -0.04em; color: #002921; }
+.partner__main p { margin: 0; font-family: "DM Sans", Sans-serif; font-size: 20px; font-weight: 300; line-height: 1.55; color: #002921; }
+.partner__main p + p { margin-top: 20px; }
+.partner__aside { flex: 0 0 320px; align-self: flex-start; padding: 30px; border-radius: 20px; background: #F4F4F4; }
+.partner__h3 { margin: 0 0 12px; font-family: "DM Sans", Sans-serif; font-size: 14px; font-weight: 400; letter-spacing: .06em; text-transform: uppercase; color: #767676; }
+.partner__links { margin: 0 0 28px; padding: 0; list-style: none; }
+.partner__links li + li { margin-top: 8px; }
+.partner__links a, .partner__ext { font-family: "DM Sans", Sans-serif; font-size: 18px; font-weight: 400; color: #002921; text-decoration: underline; text-underline-offset: 4px; }
+.partner__links a:hover, .partner__ext:hover { text-decoration: none; }
+.partner__links a::after { content: '\00a0\2192'; }
+.partner__ext::after { content: '\00a0\2197'; }
+.partner__related { padding-top: 40px; }
+.partner__related .post-sec__inner { padding-bottom: 10px; }
+.partner__cta { flex-direction: column; align-items: center; margin: 100px auto 120px; padding: 70px 30px; border-radius: 20px; background: #002921; text-align: center; color: #fff; }
+.partner__cta-title { margin: 0 0 16px; font-family: "Atype Display", Sans-serif; font-size: 54px; font-weight: 400; line-height: 1.05; letter-spacing: -0.04em; color: #fff; }
+.partner__cta p { margin: 0 0 30px; font-family: "DM Sans", Sans-serif; font-size: 20px; font-weight: 300; }
+.partner__cta-btn { display: inline-block; padding: 14px 28px; border: 1px solid #D6FF00; border-radius: 100px; background: #D6FF00; font-size: 18px; color: #002921; transition: background-color .3s, color .3s; }
+.partner__cta-btn:hover, .partner__cta-btn:focus-visible { background: transparent; color: #D6FF00; }
+
+@media (max-width: 1024px) {
+  .partner__title { font-size: 50px; }
+  .partner__head { grid-template-columns: minmax(0, 280px) minmax(0, 1fr); gap: 40px; }
+  .partner__summary { font-size: 20px; }
+  .partner__body { flex-direction: column; gap: 40px; }
+  .partner__aside { flex: none; width: 100%; }
+  .partner__h2 { font-size: 35px; }
+  .partner__cta-title { font-size: 40px; }
+}
+@media (max-width: 767px) {
+  .partner__hero { gap: 30px; padding: 30px 0 40px; }
+  .partner__head { grid-template-columns: 1fr; gap: 30px; }
+  .partner__title { font-size: 40px; line-height: 1.05em; }
+  .partner__summary, .partner__main p { font-size: 16px; }
+  .partner__h2 { font-size: 28px; }
+  .partner__aside { padding: 24px; }
+  .partner__cta { margin: 60px auto 70px; padding: 50px 20px; }
+  .partner__cta-title { font-size: 32px; }
+  .partner__cta p { font-size: 16px; }
 }

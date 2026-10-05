@@ -15,7 +15,7 @@ const tab = (i: number) => ({ title: `ap-tab-${i}`, panel: `ap-tab-panel-${i}`, 
   <div class="ap">
     <section class="ap-sec">
       <div class="ap-sec__inner ap-sec__inner--65">
-        <div class="post-hero__title"><h2 set:html={c.title} /></div>
+        <div class="post-hero__title"><h1 set:html={c.title} /></div>
         <div class="ap-text" set:html={c.intro} />
       </div>
     </section>
@@ -32,8 +32,8 @@ const tab = (i: number) => ({ title: `ap-tab-${i}`, panel: `ap-tab-panel-${i}`, 
               ))}
             </div>
             <div class="e-n-tabs-content">
-              <div id={tab(1).panel} role="tabpanel" aria-labelledby={tab(1).title} data-tab-index="1" style={tab(1).style} class="ap-tabs__panel e-active"><AnaplanTool c={c.tool} /></div>
-              <div id={tab(2).panel} role="tabpanel" aria-labelledby={tab(2).title} data-tab-index="2" style={tab(2).style} class="ap-tabs__panel"><AnaplanMarket c={c.market} /></div>
+              <div id={tab(1).panel} role="tabpanel" aria-labelledby={tab(1).title} data-tab-index="1" style={tab(1).style} class="ap-tabs__panel e-active"><AnaplanTool c={c.tool} heading="h2" /></div>
+              <div id={tab(2).panel} role="tabpanel" aria-labelledby={tab(2).title} data-tab-index="2" style={tab(2).style} class="ap-tabs__panel"><AnaplanMarket c={c.market} heading="h2" /></div>
               <div id={tab(3).panel} role="tabpanel" aria-labelledby={tab(3).title} data-tab-index="3" style={tab(3).style} class="ap-tabs__panel"></div>
             </div>
           </div>

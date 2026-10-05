@@ -1,9 +1,12 @@
 /* Entrance animations: elements with data-animate start hidden; widgets.js adds
-   `animated <name>` once they scroll into view. */
-[data-animate]:not(.animated) { visibility: hidden; }
+   `animated <name>` once they scroll into view. Without JS (no html.js) they stay visible. */
+.js [data-animate]:not(.animated) { visibility: hidden; }
 .animated { animation-duration: 1.25s; }
 .animated.animated-fast { animation-duration: .75s; }
-@media (prefers-reduced-motion: reduce) { .animated { animation: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .animated { animation: none; }
+  *, ::before, ::after { transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 .fadeIn { animation-name: fadeIn; }
 @keyframes fadeInUp { from { opacity: 0; transform: translate3d(0, 100%, 0); } to { opacity: 1; transform: none; } }

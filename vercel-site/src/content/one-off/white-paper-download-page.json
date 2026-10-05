@@ -1,76 +1,64 @@
 {
- "template": "whitepaper",
- "title": "<span>Renewable energy</span> trends and developments powering a cleaner future",
- "lead": "<p class=\"p1\">Al technology is widely used throughout industry, government, and science. Some high-profile applications include advanced web search engines (e.g., Google Search); recommendation systems (used by YouTube, Amazon, and Netflix); interacting via human speech (e.g., Google Assistant, Siri, and Alexa); autonomous vehicles (e.g., Waymo);</p><p class=\"p1\">generative</p>",
- "downloadTitle": "Download our white paper",
- "downloadText": "<p>By submitting your email address, you agree to receive marketing emails from Acumen, and accept our <a href=\"/legal/terms-conditions/\">terms &amp; conditions</a> and <a href=\"/legal/privacy-policy/\">privacy policy</a>.</p>",
- "form": {
-  "name": "New Form",
-  "post_id": "2628",
-  "form_id": "442063c8",
-  "referer_title": "White Paper Download Page - Acumen",
-  "queried_id": "2628"
- },
- "fields": [
-  {
-   "label": "First name",
-   "tag": "input",
-   "type": "text",
-   "name": "form_fields[name]",
-   "col": "50",
-   "required": true
+  "template": "whitepaper",
+  "title": "<span>Renewable energy</span> trends and developments powering a cleaner future",
+  "lead": "<p class=\"p1\">Al technology is widely used throughout industry, government, and science. Some high-profile applications include advanced web search engines (e.g., Google Search); recommendation systems (used by YouTube, Amazon, and Netflix); interacting via human speech (e.g., Google Assistant, Siri, and Alexa); autonomous vehicles (e.g., Waymo);</p><p class=\"p1\">generative</p>",
+  "downloadTitle": "Download our white paper",
+  "downloadText": "<p>By submitting your email address, you agree to receive marketing emails from Acumen, and accept our <a href=\"/legal/terms-conditions/\">terms &amp; conditions</a> and <a href=\"/legal/privacy-policy/\">privacy policy</a>.</p>",
+  "form": {
+    "name": "New Form",
+    "post_id": "2628",
+    "form_id": "442063c8",
+    "referer_title": "White Paper Download Page - Acumen",
+    "queried_id": "2628"
   },
-  {
-   "label": "Last name",
-   "tag": "input",
-   "type": "text",
-   "name": "form_fields[field_203132f]",
-   "col": "50",
-   "required": true
+  "fields": [
+    {
+      "label": "First name",
+      "tag": "input",
+      "type": "text",
+      "name": "form_fields[name]",
+      "col": "50",
+      "required": true
+    },
+    {
+      "label": "Last name",
+      "tag": "input",
+      "type": "text",
+      "name": "form_fields[field_203132f]",
+      "col": "50",
+      "required": true
+    },
+    {
+      "label": "Email",
+      "tag": "input",
+      "type": "email",
+      "name": "form_fields[email]",
+      "col": "50",
+      "required": true
+    },
+    {
+      "label": "Company (optional)",
+      "tag": "input",
+      "type": "text",
+      "name": "form_fields[field_f063ed2]",
+      "col": "50"
+    }
+  ],
+  "hello": "Say hello",
+  "contactImage": {
+    "loading": "lazy",
+    "decoding": "async",
+    "width": "1134",
+    "height": "659",
+    "src": "/wp-content/uploads/2024/06/Group-27.webp",
+    "alt": "",
+    "srcset": "/wp-content/uploads/2024/06/Group-27.webp 1134w, /wp-content/uploads/2024/06/Group-27-300x174.webp 300w, /wp-content/uploads/2024/06/Group-27-1024x595.webp 1024w, /wp-content/uploads/2024/06/Group-27-768x446.webp 768w",
+    "sizes": "(max-width: 1134px) 100vw, 1134px"
   },
-  {
-   "label": "Email",
-   "tag": "input",
-   "type": "email",
-   "name": "form_fields[email]",
-   "col": "50",
-   "required": true
+  "contactTitle": "Bram has the answers",
+  "contactButton": {
+    "label": "Contact Bram",
+    "href": "#"
   },
-  {
-   "label": "Company (optional)",
-   "tag": "input",
-   "type": "text",
-   "name": "form_fields[field_f063ed2]",
-   "col": "50"
-  }
- ],
- "hello": "Say hello",
- "contactImage": {
-  "loading": "lazy",
-  "decoding": "async",
-  "width": "1134",
-  "height": "659",
-  "src": "/wp-content/uploads/2024/06/Group-27.webp",
-  "alt": "",
-  "srcset": "/wp-content/uploads/2024/06/Group-27.webp 1134w, /wp-content/uploads/2024/06/Group-27-300x174.webp 300w, /wp-content/uploads/2024/06/Group-27-1024x595.webp 1024w, /wp-content/uploads/2024/06/Group-27-768x446.webp 768w",
-  "sizes": "(max-width: 1134px) 100vw, 1134px"
- },
- "contactTitle": "Bram has the answers",
- "contactButton": {
-  "label": "Contact Bram",
-  "href": "#"
- },
- "related": [
-  "3891",
-  "3956",
-  "3810",
-  "3782",
-  "3755",
-  "3622",
-  "3589",
-  "3574",
-  "3555",
-  "3533"
- ],
- "appendix": null
+  "appendix": null
 }

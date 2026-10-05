@@ -1,127 +1,31 @@
 ---
-// Knowledge posts: the old single-post template (996), or the whitepaper template (`template: "whitepaper"`,
-// was five identical template copies). Content: src/content/knowledge/*.json, extracted from the old
-// pages by tools/extract_posts.py.
+// Knowledge posts (src/content/knowledge/*.md): one layout per type. SEO + JSON-LD are built here from the
+// frontmatter; the layout renders the page and the Markdown body in its default slot.
+import { getCollection, getEntry, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import ShareButtons from '../../components/post/ShareButtons.astro';
-import NewsletterForm from '../../components/post/NewsletterForm.astro';
-import PostsCarousel from '../../components/post/PostsCarousel.astro';
-import WhitepaperDownload from '../../components/post/WhitepaperDownload.astro';
-import ContactCta from '../../components/cta/ContactCta.astro';
-import Article from '../../components/post/Article.astro';
-import '../../styles/post.css';
-import '../../styles/post-card.css';
+import CaseStudy from '../../components/knowledge/CaseStudy.astro';
+import Blog from '../../components/knowledge/Blog.astro';
+import Whitepaper from '../../components/knowledge/Whitepaper.astro';
+import { related, card, readingTime, TYPE_LABEL } from '../../lib/knowledge';
 
-export function getStaticPaths() {
-  const posts = import.meta.glob('../../content/knowledge/*.json', { eager: true, import: 'default' });
-  return Object.entries(posts).map(([file, post]) => ({
-    params: { slug: file.split('/').pop().replace(/\.json$/, '') },
-    props: { post },
-  }));
+export async function getStaticPaths() {
+  return (await getCollection('knowledge', p => !p.data.custom)).map(post => ({ params: { slug: post.id }, props: { post } }));
 }
 const { post } = Astro.props;
+const d = post.data;
+const author = (await getEntry(d.author))!;
+const { Content, headings } = await render(post);
+const Layout = { case: CaseStudy, blog: Blog, whitepaper: Whitepaper }[d.type];
+
+const seo = { title: d.seoTitle ?? `${d.title} | Acumen`, description: d.description, image: d.ogImage ?? d.image?.src, published: d.date, modified: d.updated, noindex: d.noindex, lang: d.lang };
+const a = author.data;
+const article = {
+  type: d.type === 'blog' ? 'BlogPosting' : 'Article', headline: d.title, tags: d.tags, section: TYPE_LABEL[d.type],
+  author: { name: a.name, org: a.org, url: a.org ? undefined : `/knowledge/authors/${author.id}/`, sameAs: a.linkedin, jobTitle: a.role },
+} as const;
+const schema = d.faq ? [{ '@type': 'FAQPage', mainEntity: d.faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }] : [];
+const props = { post, author, headings, related: (await related(post)).map(card), minutes: readingTime(post.body) };
 ---
-<Base seo={post.seo} bodyClass={post.template === 'whitepaper' ? undefined : 'p-spaced'}>
-  {post.template === 'article' ? <Article blocks={post.blocks} /> : (
-  <article class="post">
-    <section class="post-sec post-hero" id="start">
-      <div class="post-sec__inner post-hero__inner">
-        <div class="post-hero__title"><h2 set:html={post.title} /></div>
-        <div class="post-hero__lead" set:html={post.lead} />
-        <ShareButtons />
-      </div>
-    </section>
-
-    {post.template === 'whitepaper' ? (
-      <Fragment>
-        <WhitepaperDownload title={post.downloadTitle} text={post.downloadText} form={post.form} fields={post.fields} />
-        <ContactCta hello={post.hello} image={post.contactImage} title={post.contactTitle} button={post.contactButton} />
-      </Fragment>
-    ) : (
-      <Fragment>
-        <section class="post-banner" style={`background-image:url("${post.bannerImage}")`}>
-          <div class="post-banner__marquee marqueee" wb-data="marquee" duration="20" direction="left"><div class="marquee-content"></div></div>
-        </section>
-
-        <section class="post-sec post-split post-split--intro">
-          <div class="post-sec__inner post-split__inner">
-            <div class="post-split__aside"><div class="post-parallax" data-parallax="2"><div class="post-parallax__layer"></div></div></div>
-            <div class="post-split__main">
-              {post.author && <div class="post-author" set:html={post.author} />}
-              {post.introTitle && <h2 class="post-heading" set:html={post.introTitle} />}
-              {post.introText && <div class="post-text" set:html={post.introText} />}
-            </div>
-          </div>
-        </section>
-
-        <section class="post-sec post-photo" style={`background-image:url("${post.photoImage}")`}>
-          <div class="post-sec__inner post-photo__inner"></div>
-        </section>
-
-        <section class="post-sec post-split post-split--features">
-          <div class="post-sec__inner post-split__inner">
-            <div class="post-split__aside post-split__aside--wide"></div>
-            <div class="post-split__main">
-              {post.featuresTitle && <h2 class="post-heading" set:html={post.featuresTitle} />}
-              {post.featuresText && <div class="post-text" set:html={post.featuresText} />}
-            </div>
-          </div>
-        </section>
-
-        <section class="post-sec post-quote">
-          <div class="post-sec__inner post-quote__inner">
-            <div class="post-quote__text" set:html={post.quote} />
-          </div>
-        </section>
-
-        <section class="post-sec post-split post-split--conclusion">
-          <div class="post-sec__inner post-split__inner">
-            <div class="post-split__aside post-split__aside--wide"></div>
-            <div class="post-split__main">
-              {post.conclusionTitle && <h2 class="post-heading" set:html={post.conclusionTitle} />}
-              {post.conclusionText && <div class="post-text" set:html={post.conclusionText} />}
-            </div>
-          </div>
-        </section>
-
-        <section class="post-sec post-cta">
-          <div class="post-sec__inner post-cta__inner">
-            <div class="post-cta__intro">
-              {post.ctaTitle && <h2 class="post-cta__title" set:html={post.ctaTitle} />}
-              {post.ctaText && <div class="post-cta__text" set:html={post.ctaText} />}
-            </div>
-            <div class="contact-card">
-              {post.contactImage && <div class="contact-card__bg sectionBG"><img {...post.contactImage} /></div>}
-              {post.contactTitle && <h2 class="contact-card__title" set:html={post.contactTitle} />}
-              {post.contactButton && (
-                <div class="contact-card__action" data-animate="fadeInUp" data-animate-delay="500">
-                  <a class="contact-card__button" href={post.contactButton.href}><span set:html={post.contactButton.label} /></a>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-
-        <section class="post-sec post-newsletter">
-          <div class="post-sec__inner post-newsletter__inner">
-            <div class="newsletter-card">
-              <h2 class="newsletter-card__title">Stay informed about our latest insights</h2>
-              <div class="newsletter-card__form"><div class="newsletter-card__form-inner"><NewsletterForm postId={post.postId} title={post.formTitle} /></div></div>
-              <div class="newsletter-card__video playInViewRepeat">
-                <video src="/wp-content/uploads/2024/05/Background-video_subscribe.mp4" preload="metadata" muted controlslist="nodownload"></video>
-              </div>
-              <div class="newsletter-card__spacer"></div>
-              <div class="newsletter-card__note">By submitting your email address, you agree to receive marketing emails from Acumen, and accept our terms &amp; conditions and privacy policy.</div>
-            </div>
-          </div>
-        </section>
-      </Fragment>
-    )}
-
-    <section class="post-related">
-      <div class="post-related__band"><div class="post-related__inner"><PostsCarousel ids={post.related} /></div></div>
-    </section>
-  </article>
-  )}
-  {post.appendix && <Fragment set:html={post.appendix} />}
+<Base seo={seo} article={article} schema={schema}>
+  <Layout {...props}><Content /></Layout>
 </Base>

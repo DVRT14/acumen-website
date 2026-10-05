@@ -1,16 +1,23 @@
 // One GSAP + ScrollTrigger + Lenis instance for the whole site.
+// GSAP and Lenis are global (smooth scrolling and the header menu run on every page); ScrollTrigger
+// is only downloaded by pages that have scroll-driven sections (loadScrollTrigger, called by site.js).
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 
-gsap.registerPlugin(ScrollTrigger);
+export let ScrollTrigger;
+export async function loadScrollTrigger() {
+  ({ ScrollTrigger } = await import('gsap/ScrollTrigger'));
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on('scroll', ScrollTrigger.update);
+}
 
-export const lenis = new Lenis();
-lenis.on('scroll', ScrollTrigger.update);
+export const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+// Reduced motion: native wheel scrolling (Lenis keeps driving ScrollTrigger and scroll locking).
+export const lenis = new Lenis({ smoothWheel: !reduceMotion });
 gsap.ticker.add(time => lenis.raf(time * 1000));
 gsap.ticker.lagSmoothing(0);
 
-export { gsap, ScrollTrigger };
+export { gsap };
 
 // jQuery-equivalent measurements (fractional, from computed style) so ported maths stays identical.
 export function outerHeight(el) {

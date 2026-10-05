@@ -1,0 +1,20 @@
+---
+// Visible breadcrumb trail (the BreadcrumbList JSON-LD comes from Base.astro).
+interface Props { items: { name: string; href?: string }[]; label?: string }
+const { items, label = 'Breadcrumb' } = Astro.props;
+---
+<nav class="crumbs" aria-label={label}>
+  <ol>
+    {items.map((b, i) => <li>{b.href && i < items.length - 1 ? <a href={b.href}>{b.name}</a> : <span aria-current="page">{b.name}</span>}</li>)}
+  </ol>
+</nav>
+
+<style>
+  /* Inline flow: a long current title wraps with the trail instead of dropping to its own line. */
+  .crumbs ol { margin: 0; padding: 0; list-style: none; font-size: 14px; line-height: 1.4; color: #002921; }
+  .crumbs li { display: inline; }
+  .crumbs li + li::before { content: '/'; margin: 0 6px; opacity: .5; }
+  .crumbs a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+  .crumbs a:hover { text-decoration: none; }
+  .crumbs [aria-current] { opacity: .7; }
+</style>

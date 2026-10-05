@@ -1,12 +1,14 @@
 ---
-// "Related posts" carousel (was a loop carousel on the old site). widgets.js initialises Swiper with the
-// same settings JSON the old widget carried.
-import 'swiper/css/bundle';
+// Post cards carousel. widgets.js initialises Swiper with the settings JSON below (old widget shape).
+// Without `cards` it shows the latest posts.
+import 'swiper/css';
+import 'swiper/css/a11y';
 import PostCard from './PostCard.astro';
-import cards from '../../data/cards.json';
+import { posts, card, type Card } from '../../lib/knowledge';
 
-interface Props { ids: string[]; info?: 'date' | 'terms'; animate?: boolean }
-const { ids, info, animate = true } = Astro.props;
+interface Props { cards?: Card[]; info?: 'date' | 'terms'; animate?: boolean }
+const { info, animate = true } = Astro.props;
+const cards = Astro.props.cards ?? (await posts()).slice(0, 10).map(card);
 const settings = {
   slides_to_show: '2', slides_to_show_tablet: '2', slides_to_show_mobile: '1', slides_to_scroll: '1',
   offset_sides: 'right', offset_width: { unit: 'px', size: 50, sizes: [] }, offset_width_mobile: { unit: 'px', size: 30, sizes: [] },
@@ -17,9 +19,24 @@ const settings = {
 <div class="posts-carousel animated-fast" data-animate={animate ? 'fadeIn' : undefined} data-animate-delay={animate ? '500' : undefined} data-carousel={JSON.stringify(settings)}>
   <div class="swiper posts-carousel__swiper">
     <div class="swiper-wrapper">
-      {ids.map((id, i) => cards[id] && (
-        <div class="swiper-slide posts-carousel__slide" role="group" aria-roledescription="slide"><PostCard card={cards[id]} info={info} /></div>
+      {cards.map(c => (
+        <div class="swiper-slide posts-carousel__slide" role="group" aria-roledescription="slide"><PostCard card={c} info={info} /></div>
       ))}
     </div>
   </div>
+  <!-- Revealed by widgets.js once Swiper runs (hidden again when every card fits); Swiper's A11y labels them. -->
+  <div class="posts-carousel__nav" hidden>
+    <button type="button" class="posts-carousel__btn posts-carousel__btn--prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg></button>
+    <button type="button" class="posts-carousel__btn posts-carousel__btn--next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg></button>
+  </div>
 </div>
+
+<style is:global>
+  .posts-carousel__nav { display: flex; justify-content: flex-end; gap: 12px; margin-top: 30px; }
+  .posts-carousel__nav[hidden] { display: none; }
+  .posts-carousel__btn { display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 2px solid #D6FF00; border-radius: 50%; background: #002921; color: #D6FF00; cursor: pointer; transition: background-color .2s, color .2s; }
+  .posts-carousel__btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  .posts-carousel__btn:hover { background: #D6FF00; color: #002921; }
+  .posts-carousel__btn:focus-visible { outline: 3px solid #002921; outline-offset: 3px; box-shadow: 0 0 0 3px #D6FF00; }
+  @media (max-width: 767px) { .posts-carousel__nav { margin-top: 20px; } }
+</style>

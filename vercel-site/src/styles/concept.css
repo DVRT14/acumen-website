@@ -1,0 +1,181 @@
+/* Home page concept (pages/concept/home.astro). Builds on case.css (tokens, label, CTA card) and home.css (hero, photo, tools).
+   Rules that override case.css / home.css are prefixed with .cx: the bundled stylesheet order is not guaranteed.
+   H2 ladder: need/approach 48 → proof 72 (the peak) → tools/team 44 → CTA 56 (case.css).
+   Section rhythm: 120px between sections on desktop, 90 at ≤1024, 64 at ≤767. */
+.cx-draft { margin: 0; padding: 20px 16px 0; font-size: 12px; text-align: center; color: var(--label); }
+
+/* Shared */
+.cx-h2 { margin: 0; font-family: var(--display); font-size: 48px; font-weight: 400; line-height: 1.06; letter-spacing: -0.04em; text-wrap: balance; }
+.cx-head { max-width: 860px; margin-bottom: 64px; }
+.cx-head__text { margin: 20px 0 0; max-width: 40em; font-size: 20px; color: var(--text-soft); }
+.cx-nowrap { white-space: nowrap; }
+.cx-meta { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.4; color: var(--label); }
+.cx .hm-hero__title .cx-h1 { color: inherit; } /* home.css tints every span in the title; only the typed word is lime */
+
+/* Buttons: shared .btn family (base.css); the CTA card uses .btn--on-dark / .btn--outline-on-dark. */
+
+/* Client logos */
+.cx-logos { padding-top: 60px; }
+.cx-logos__inner { display: flex; align-items: center; gap: 40px; padding-top: 28px; padding-bottom: 28px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.cx-logos__title { flex-shrink: 0; max-width: 11em; margin: 0; font-size: 15px; font-weight: 500; line-height: 1.4; color: var(--label); }
+.cx-logos__track { position: relative; display: flex; gap: 56px; min-width: 0; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.cx-logos__row { display: flex; flex-shrink: 0; align-items: center; gap: 56px; min-width: 100%; }
+.cx-logos__logo img { display: block; width: auto; max-width: 120px; height: 44px; object-fit: contain; filter: grayscale(1); opacity: .75; transition: opacity .3s, filter .3s; }
+.cx-logos__logo img:hover { filter: none; opacity: 1; }
+
+/* Information need: heading left, the three pains as a ruled list right */
+.cx-need { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 80px; align-items: start; padding-top: 120px; }
+.cx-pains { margin: 0; padding: 0; list-style: none; }
+.cx-pain { padding: 28px 0 30px; border-top: 1px solid var(--line); }
+.cx-pain:last-child { border-bottom: 1px solid var(--line); }
+.cx-pain h3 { margin: 0 0 10px; font-family: var(--display); font-size: 28px; font-weight: 400; line-height: 1.15; letter-spacing: -0.04em; }
+.cx-pain p { margin: 0; max-width: 36em; font-size: 18px; line-height: 1.55; color: var(--text-soft); }
+
+/* Approach → doors: one dark band. Steps 3 and 4 drop straight into the two doors below them. */
+.cx-approach { margin-top: 120px; background: var(--green); color: #fff; }
+.cx-approach__inner { padding-top: 110px; padding-bottom: 110px; }
+.cx-approach .cx-head__text { color: var(--on-dark-muted); }
+.cx-steps, .cx-flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
+.cx-steps { counter-reset: step; }
+.cx-step { counter-increment: step; position: relative; padding-right: 30px; }
+.cx-step::before { content: counter(step); display: block; margin-bottom: 24px; font-family: var(--display); font-size: 56px; line-height: 1; letter-spacing: -0.04em; color: var(--lime); }
+.cx-step::after { content: ''; position: absolute; top: 28px; left: 56px; right: 24px; height: 1px; background: color-mix(in srgb, var(--lime) 40%, transparent); }
+.cx-step:last-child::after { display: none; }
+.cx-step h3 { margin: 0 0 12px; font-family: var(--display); font-size: 28px; font-weight: 400; line-height: 1.15; letter-spacing: -0.04em; }
+.cx-step p { margin: 0; font-size: 17px; line-height: 1.55; color: var(--on-dark-muted); }
+.cx-flow { margin-top: 90px; }
+/* Head in columns 1–2 next to the doors, at the approach H2 size; one rule runs across all four columns.
+   Sticky, so on shorter viewports it stays beside the doors while they scroll. */
+.cx-flow__head { grid-column: 1 / 3; align-self: start; position: sticky; top: 120px; padding: 26px 60px 0 0; border-top: 1px solid color-mix(in srgb, #fff 18%, transparent); }
+.cx-flow__title { margin: 0; font-family: var(--display); font-size: 48px; font-weight: 400; line-height: 1.08; letter-spacing: -0.04em; }
+.cx-flow__text { margin: 20px 0 0; max-width: 24em; font-size: 20px; line-height: 1.55; color: var(--on-dark-muted); }
+.cx-door { position: relative; padding: 26px 30px 0 0; border-top: 1px solid var(--lime); }
+.cx-door::before { content: ''; position: absolute; bottom: 100%; left: 0; height: 90px; border-left: 1px dashed color-mix(in srgb, var(--lime) 60%, transparent); }
+.cx-door__step { margin: 0 0 12px; font-size: 15px; font-weight: 500; color: var(--lime); }
+.cx-door__title { margin: 0; font-family: var(--display); font-size: 28px; font-weight: 400; line-height: 1.12; letter-spacing: -0.04em; }
+.cx-door__text { margin: 14px 0 20px; font-size: 16px; line-height: 1.55; color: var(--on-dark-muted); }
+.cx-door__links { margin: 0; padding: 0; list-style: none; }
+.cx-door__links a { display: block; padding: 11px 0; border-bottom: 1px solid color-mix(in srgb, #fff 18%, transparent); font-size: 17px; line-height: 1.3; color: #fff; transition: color .3s, border-color .3s; }
+.cx-door__links a:hover { border-color: var(--lime); color: var(--lime); }
+
+/* Proof: the peak. One case walked through the four steps, three smaller cases under it. */
+.cx-proof { padding-top: 140px; }
+.cx-proof__head { max-width: 900px; }
+.cx-proof__title { margin: 0; font-family: var(--display); font-size: 72px; font-weight: 400; line-height: 1; letter-spacing: -0.04em; text-wrap: balance; }
+.cx-lead { display: grid; grid-template-columns: minmax(0, 460px) minmax(0, 1fr); gap: 64px; margin-top: 64px; }
+.cx-lead__media { min-height: 100%; overflow: hidden; border-radius: 32px; background: var(--grey); }
+.cx-lead__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cx-lead__body { display: flex; flex-direction: column; align-items: flex-start; padding: 8px 0; }
+.cx-lead__steps { width: 100%; margin: 22px 0 36px; }
+.cx-lead__steps > div { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 24px; padding: 20px 0; border-top: 1px solid var(--line); }
+.cx-lead__steps > div:first-child { padding-top: 0; border-top: 0; grid-template-columns: 1fr; gap: 12px; }
+.cx-lead__steps dt { font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--label); }
+.cx-lead__steps dd { margin: 0; font-size: 18px; line-height: 1.55; }
+.cx-lead__title { margin: 0; font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.08; letter-spacing: -0.04em; text-wrap: balance; }
+.cx-cases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin: 104px 0 0; padding: 0; list-style: none; }
+.cx-case { display: flex; flex-direction: column; height: 100%; padding: 30px 30px 26px; border-radius: 24px; background: var(--grey); color: var(--green); transition: background-color .3s; }
+.cx-case:hover, .cx-case:focus-visible { background: var(--lime); }
+.cx-case__decision { margin-top: 16px; font-family: var(--display); font-size: 26px; line-height: 1.15; letter-spacing: -0.04em; }
+.cx-case__result { margin-top: 14px; font-size: 17px; line-height: 1.5; color: var(--text-soft); }
+.cx-case__cta { margin-top: auto; padding-top: 24px; font-size: 16px; font-weight: 400; }
+.cx-more { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 28px; border-bottom: 1px solid var(--green); font-size: 18px; color: var(--green); }
+.cx-more:hover { border-bottom-width: 2px; }
+
+/* Tools block (home.css), tuned to this page's type and palette. Scoped under .cx so / is unaffected. */
+.cx .hm-tools .hm-box__in { padding: 120px 0 0; }
+.cx .hm-tools__card { background-color: var(--grey); }
+.cx .hm-tools__title h2 { font-size: 44px; line-height: 1.08; letter-spacing: -0.04em; color: var(--green); text-wrap: balance; }
+.cx .hm-tools__link { min-height: 44px; }
+.cx .hm-tools__text { max-width: 100%; font-size: 20px; font-weight: 300; line-height: 1.5; color: var(--text-soft); }
+
+/* Team, with the reasons to choose Acumen next to the people */
+.cx-team { display: grid; grid-template-columns: minmax(0, 460px) minmax(0, 1fr); gap: 80px; align-items: center; padding-top: 120px; }
+.cx-team__media { aspect-ratio: 4 / 5; overflow: hidden; border-radius: 32px; background: var(--grey); }
+.cx-team__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cx-team .cx-h2 { font-size: 44px; }
+.cx-team__lead { margin: 20px 0 0; max-width: 32em; font-size: 20px; line-height: 1.6; color: var(--text-soft); }
+.cx-reasons { margin: 28px 0 36px; padding: 0; list-style: none; }
+.cx-reasons li { max-width: 36em; padding: 14px 0; border-top: 1px solid var(--line); font-size: 17px; line-height: 1.55; }
+.cx-reasons strong { font-weight: 500; }
+
+/* Final CTA */
+.cx .cx-cta { padding-top: 120px; }
+.cx-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 14px; margin-top: 36px; }
+.cx-next { width: 100%; max-width: 980px; margin-top: 64px; padding-top: 36px; border-top: 1px solid color-mix(in srgb, #fff 20%, transparent); text-align: left; }
+.cx-next__title { margin: 0 0 20px; font-size: 16px; font-weight: 500; line-height: 1.4; color: var(--lime); }
+.cx-next__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin: 0; padding: 0; list-style: none; }
+.cx-next__list li { font-size: 17px; line-height: 1.55; color: var(--on-dark-muted); }
+.cx-next__list strong { display: block; font-weight: 500; color: #fff; }
+
+@media (max-width: 1024px) {
+  .cx-h2, .cx-team .cx-h2 { font-size: 40px; }
+  .cx-logos__inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .cx-logos__title { max-width: none; }
+  .cx-logos__track { width: 100%; }
+  .cx-need { grid-template-columns: 1fr; gap: 36px; padding-top: 90px; }
+  .cx-approach { margin-top: 90px; }
+  .cx-approach__inner { padding-top: 80px; padding-bottom: 80px; }
+  .cx-steps, .cx-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cx-steps { gap: 44px 0; }
+  .cx-step::after, .cx-door::before { display: none; }
+  .cx-flow { gap: 40px 0; margin-top: 70px; }
+  .cx-flow__head { grid-column: 1 / -1; position: static; padding: 0; border-top: 0; }
+  .cx-flow__title { font-size: 40px; }
+  .cx-proof { padding-top: 100px; }
+  .cx-proof__title { font-size: 56px; }
+  .cx-lead { grid-template-columns: 1fr; gap: 36px; }
+  .cx-lead__media { aspect-ratio: 16 / 10; min-height: 0; }
+  .cx-cases { grid-template-columns: 1fr; gap: 16px; margin-top: 72px; }
+  .cx .hm-tools .hm-box__in { padding-top: 90px; }
+  .cx .hm-tools__title h2 { font-size: 36px; }
+  .cx-team { grid-template-columns: 1fr; gap: 40px; padding-top: 90px; }
+  .cx-team__media { aspect-ratio: 16 / 10; }
+  .cx .cx-cta { padding-top: 90px; }
+  .cx-next__list { gap: 24px; }
+}
+
+@media (max-width: 767px) {
+  .cx-h2, .cx-team .cx-h2 { font-size: 32px; }
+  .cx-head { margin-bottom: 40px; }
+  .cx-head__text, .cx-team__lead { font-size: 17px; }
+  .cx-logos { padding-top: 40px; }
+  .cx-logos__logo img { height: 34px; max-width: 90px; }
+  .cx-need { gap: 24px; padding-top: 64px; }
+  .cx-pain { padding: 22px 0 24px; }
+  .cx-pain h3, .cx-step h3, .cx-door__title { font-size: 24px; }
+  .cx-pain p { font-size: 16px; }
+  .cx-approach { margin-top: 64px; }
+  .cx-approach__inner { padding-top: 56px; padding-bottom: 56px; }
+  .cx-steps, .cx-flow { grid-template-columns: 1fr; }
+  .cx-steps { gap: 32px; }
+  .cx-step { padding-right: 0; }
+  .cx-step::before { margin-bottom: 12px; font-size: 44px; }
+  .cx-flow { gap: 40px; margin-top: 56px; }
+  .cx-flow__title { font-size: 30px; }
+  .cx-flow__text { font-size: 16px; }
+  .cx-door { padding-right: 0; }
+  .cx-proof { padding-top: 72px; }
+  .cx-proof__title { font-size: 40px; }
+  .cx-lead { margin-top: 40px; gap: 28px; }
+  .cx-lead__media { aspect-ratio: 4 / 3; border-radius: 20px; }
+  .cx-lead__title { font-size: 30px; }
+  .cx-lead__steps > div { grid-template-columns: 1fr; gap: 4px; padding: 16px 0; }
+  .cx-lead__steps dd { font-size: 16px; }
+  .cx-cases { margin-top: 56px; }
+  .cx-case { padding: 24px 22px 22px; border-radius: 20px; }
+  .cx-case__decision { font-size: 22px; }
+  .cx-case__result { font-size: 16px; }
+  .cx .hm-tools .hm-box__in { padding-top: 64px; }
+  .cx .hm-tools__title h2 { font-size: 28px; }
+  .cx .hm-tools__text { font-size: 16px; line-height: 1.5; }
+  .cx-team { gap: 28px; padding-top: 64px; }
+  .cx-team__media { aspect-ratio: 4 / 3; border-radius: 20px; }
+  .cx-reasons li { font-size: 16px; }
+  .cx .cx-cta { padding-top: 64px; }
+  .cx-next { margin-top: 44px; padding-top: 28px; }
+  .cx-next__list { grid-template-columns: 1fr; gap: 18px; }
+  .cx-next__list li { font-size: 16px; }
+}
+
+/* harden */
+/* Lime focus ring on the dark hero, approach band and CTA card: case.css (.case .greenSection / .cx-approach / .case-cta__card). */

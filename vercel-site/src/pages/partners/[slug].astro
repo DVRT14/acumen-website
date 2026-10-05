@@ -1,0 +1,77 @@
+---
+// One page per partner, from src/data/partners.json. Related posts: knowledge posts sharing a tag.
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/knowledge/Breadcrumbs.astro';
+import PostsCarousel from '../../components/post/PostsCarousel.astro';
+import partners from '../../data/partners.json';
+import { posts, card } from '../../lib/knowledge';
+import '../../styles/post.css';
+import '../../styles/post-card.css';
+import '../../styles/partners.css';
+
+export function getStaticPaths() {
+  return partners.map(p => ({ params: { slug: p.slug }, props: { p } }));
+}
+
+const { p } = Astro.props;
+const related = p.tags.length ? (await posts()).filter(post => post.data.tags.some(t => p.tags.includes(t))).map(card) : [];
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Partners', href: '/partners/' }, { name: p.name }];
+const schema = [{ '@type': 'Organization', '@id': `${p.url}#organization`, name: p.name, url: p.url }];
+---
+<Base seo={{ title: `${p.name} partner | Acumen`, description: p.description, image: p.logo.src }} breadcrumbs={crumbs} schema={schema}>
+  <article class="partner">
+    <section class="post-sec">
+      <div class="post-sec__inner partner__hero">
+        <Breadcrumbs items={crumbs} />
+        <div class="partner__head">
+          <div class="partner__logo"><img {...p.logo} decoding="async" fetchpriority="high" /></div>
+          <div>
+            <h1 class="partner__title">{p.name}</h1>
+            <p class="partner__summary">{p.summary}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="post-sec">
+      <div class="post-sec__inner partner__body">
+        <div class="partner__main">
+          {p.sections.map(s => (
+            <section class="partner__section">
+              <h2 class="partner__h2">{s.title}</h2>
+              {s.paragraphs.map(t => <p>{t}</p>)}
+            </section>
+          ))}
+        </div>
+        <aside class="partner__aside" aria-label={`More about ${p.name}`}>
+          <h2 class="partner__h3">Related expertise</h2>
+          <ul class="partner__links" role="list">
+            {p.expertise.map(l => <li><a href={l.href}>{l.label}</a></li>)}
+          </ul>
+          {p.links.length > 0 && <>
+            <h2 class="partner__h3">Read more</h2>
+            <ul class="partner__links" role="list">
+              {p.links.map(l => <li><a href={l.href}>{l.label}</a></li>)}
+            </ul>
+          </>}
+          <a class="partner__ext" href={p.url} target="_blank" rel="noopener">Visit {new URL(p.url).hostname.replace(/^www\./, '')}<span class="visually-hidden"> (opens in a new tab)</span></a>
+        </aside>
+      </div>
+    </section>
+
+    {related.length > 0 && (
+      <section class="post-related partner__related" aria-labelledby="partner-posts">
+        <div class="post-sec"><div class="post-sec__inner"><h2 id="partner-posts" class="partner__h2">Related knowledge</h2></div></div>
+        <div class="post-related__band"><div class="post-related__inner"><PostsCarousel cards={related} info="terms" /></div></div>
+      </section>
+    )}
+
+    <section class="post-sec">
+      <div class="post-sec__inner partner__cta">
+        <h2 class="partner__cta-title">Planning a project with {p.name}?</h2>
+        <p>Tell us where you are today and we will show you how we can help.</p>
+        <a class="partner__cta-btn" href="/contact/">Get in touch</a>
+      </div>
+    </section>
+  </article>
+</Base>

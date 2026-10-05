@@ -19,7 +19,7 @@ const Sp = (h: number) => `<div class="ai-sp" style="height:${h}px"></div>`;
     <section class="ai-sec ai-sec--hero">
       <div class="ai-sec__in">
         <Fragment set:html={Sp(50)} />
-        <div class="ai-hero-title"><h2 set:html={c.title} /></div>
+        <div class="ai-hero-title"><h1 set:html={c.title} /></div>
         <Fragment set:html={Sp(20)} />
         <div class="ai-text" set:html={c.lead} />
         <Fragment set:html={Sp(20)} />
@@ -63,7 +63,7 @@ const Sp = (h: number) => `<div class="ai-sp" style="height:${h}px"></div>`;
               <div class="ai-can__tile"><div class="ai-can__icon" style={`--m:${can[i].m}`}><div><div class="ai-icon" set:html={icon} /></div></div></div>
               <div class="ai-can__body">
                 <div class="ai-can__inner">
-                  <div class="ai-can__title"><div><h5 set:html={title} /></div></div>
+                  <div class="ai-can__title"><div><h3 set:html={title} /></div></div>
                   <Fragment set:html={Sp(10)} />
                   <div class="ai-can__text" style={can[i].w ? `width:${can[i].w};max-width:${can[i].w}` : undefined} set:html={text} />
                 </div>
@@ -85,7 +85,7 @@ const Sp = (h: number) => `<div class="ai-sp" style="height:${h}px"></div>`;
           <div class="ai-value__row">
             {c.value.map(([title, text]) => (
               <div class="ai-value__card">
-                <div class="ai-value__title"><div><h5 set:html={title} /></div></div>
+                <div class="ai-value__title"><div><h3 set:html={title} /></div></div>
                 <div class="ai-value__text"><div set:html={text} /></div>
               </div>
             ))}
@@ -136,7 +136,7 @@ const Sp = (h: number) => `<div class="ai-sp" style="height:${h}px"></div>`;
                   <div class="ai-use__head">
                     <div class="ai-use__heading">
                       <div class="ai-use__icon"><div><div class="ai-icon" set:html={icon} /></div></div>
-                      <div class="ai-use__title"><div><h5 set:html={title} /></div></div>
+                      <div class="ai-use__title"><div><h3 set:html={title} /></div></div>
                     </div>
                     <div class="ai-btn ai-btn--badge"><div><a role="button"><span><span set:html={badge.label} /></span></a></div></div>
                   </div>
@@ -206,7 +206,7 @@ const Sp = (h: number) => `<div class="ai-sp" style="height:${h}px"></div>`;
               <div class="ai-why__body">
                 <div class="ai-why__box">
                   <div class="ai-why__in">
-                    <div class="ai-why__title"><div><h5 set:html={title} /></div></div>
+                    <div class="ai-why__title"><div><h3 set:html={title} /></div></div>
                     <Fragment set:html={Sp(10)} />
                     <div class="ai-why__text" set:html={text} />
                   </div>

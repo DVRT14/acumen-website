@@ -1,51 +1,44 @@
 {
- "seo": "<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />\n\n\t<!-- This site is optimized with the Yoast SEO plugin v22.8 - https://yoast.com/wordpress/plugins/seo/ -->\n\t<title>Data Science &amp;&nbsp;AI - Acumen</title>\n\t<meta name=\"description\" content=\"Harness the potential of AI and machine learning in your organization. Let us assist you in identifying the ideal use cases &amp; integrate them.\" />\n\t<link rel=\"canonical\" href=\"/expertise/datascience-ai/\" />\n\t<meta property=\"og:locale\" content=\"nl_BE\" />\n\t<meta property=\"og:type\" content=\"article\" />\n\t<meta property=\"og:title\" content=\"Data Science &amp;&nbsp;AI - Acumen\" />\n\t<meta property=\"og:description\" content=\"Harness the potential of AI and machine learning in your organization. Let us assist you in identifying the ideal use cases &amp; integrate them.\" />\n\t<meta property=\"og:url\" content=\"/expertise/datascience-ai/\" />\n\t<meta property=\"og:site_name\" content=\"Acumen\" />\n\t<meta property=\"article:modified_time\" content=\"2024-06-21T11:49:53+00:00\" />\n\t<meta name=\"twitter:card\" content=\"summary_large_image\" />\n\t<meta name=\"twitter:label1\" content=\"Geschatte leestijd\" />\n\t<meta name=\"twitter:data1\" content=\"1 minuut\" />\n\t<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"/expertise/datascience-ai/\",\"url\":\"/expertise/datascience-ai/\",\"name\":\"Data Science &&nbsp;AI - Acumen\",\"isPartOf\":{\"@id\":\"/#website\"},\"datePublished\":\"2024-05-26T18:09:37+00:00\",\"dateModified\":\"2024-06-21T11:49:53+00:00\",\"description\":\"Harness the potential of AI and machine learning in your organization. Let us assist you in identifying the ideal use cases & integrate them.\",\"breadcrumb\":{\"@id\":\"/expertise/datascience-ai/#breadcrumb\"},\"inLanguage\":\"nl-BE\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"/expertise/datascience-ai/\"]}]},{\"@type\":\"BreadcrumbList\",\"@id\":\"/expertise/datascience-ai/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Our Expertise\",\"item\":\"/expertise/\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"Data Science &#038;&nbsp;AI\"}]},{\"@type\":\"WebSite\",\"@id\":\"/#website\",\"url\":\"/\",\"name\":\"Acumen\",\"description\":\"\",\"publisher\":{\"@id\":\"/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"/?s={search_term_string}\"},\"query-input\":\"required name=search_term_string\"}],\"inLanguage\":\"nl-BE\"},{\"@type\":\"Organization\",\"@id\":\"/#organization\",\"name\":\"Acumen\",\"url\":\"/\",\"logo\":{\"@type\":\"ImageObject\",\"inLanguage\":\"nl-BE\",\"@id\":\"/#/schema/logo/image/\",\"url\":\"/wp-content/uploads/2025/05/cropped-acumen-logo-mark-dark-green-rgb-934px@72ppi.webp\",\"contentUrl\":\"/wp-content/uploads/2025/05/cropped-acumen-logo-mark-dark-green-rgb-934px@72ppi.webp\",\"width\":693,\"height\":569,\"caption\":\"Acumen\"},\"image\":{\"@id\":\"/#/schema/logo/image/\"}}]}</script>\n\t<!-- / Yoast SEO plugin. -->\n<link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png\">\n<link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon-32x32.png\">\n<link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon-16x16.png\">\n<link rel=\"manifest\" href=\"/site.webmanifest\">\n<link rel=\"icon\" href=\"/wp-content/uploads/2024/05/Linkedin-kopie-150x150.webp\" sizes=\"32x32\" />\n<link rel=\"icon\" href=\"/wp-content/uploads/2024/05/Linkedin-kopie-300x300.webp\" sizes=\"192x192\" />\n<link rel=\"apple-touch-icon\" href=\"/wp-content/uploads/2024/05/Linkedin-kopie-300x300.webp\" />\n<meta name=\"msapplication-TileImage\" content=\"/wp-content/uploads/2024/05/Linkedin-kopie-300x300.webp\" />",
- "title": "Data Science <br><span>&#038;&nbsp;AI</span>",
- "content": "<p>Are you looking to harness the potential of AI and machine learning in your organization? Acumen can assist you in identifying the ideal use cases and integrate them into your processes. Our services include defining suitable AI and ML applications, experimenting with these concepts to evaluate their feasibility and added value, and implementing the solutions effectively.</p>",
- "marquee": "Data Science and AI•",
- "bannerImage": "/wp-content/uploads/2024/05/Data-Science_1.webp",
- "authorImage": {
-  "fetchpriority": "high",
-  "width": "780",
-  "height": "1024",
-  "src": "/wp-content/uploads/2024/05/Data-Science_2-780x1024.webp",
-  "alt": "Data science",
-  "srcset": "/wp-content/uploads/2024/05/Data-Science_2-780x1024.webp 780w, /wp-content/uploads/2024/05/Data-Science_2-228x300.webp 228w, /wp-content/uploads/2024/05/Data-Science_2-768x1009.webp 768w, /wp-content/uploads/2024/05/Data-Science_2-1169x1536.webp 1169w, /wp-content/uploads/2024/05/Data-Science_2.webp 1273w",
-  "sizes": "(max-width: 780px) 100vw, 780px"
- },
- "author": "AUTHOR – Niels Donders",
- "introTitle": "<span>End-to-end expertise</span> in every phase",
- "introText": "Many organizations struggle with a lack of ideas on how to apply AI and ML, leading to a lack of inspiration. Additionally, there is a need to avoid failed AI/ML projects and prevent excessive investments without yielding results.\nWe offer end-to-end expertise in every phase of the entire process, known as ML Ops. Our approach is pragmatic and focused on delivering tangible results. We believe in a collaborative partnership with our clients, ensuring that their needs and goals are met effectively. Our philosophy is to start small and think big, meaning there is no need for a large upfront investment to begin leveraging AI.",
- "featuresTitle": "Machine Learning <span>and Artificial Intelligence</span>",
- "featuresText": "Our Machine Learning (ML) and Artificial Intelligence (AI) consulting services are designed to make your data work for you. We employ a practical and hands-on approach through three key steps: ideation, experimentation, and production.\nIn the ideation phase, we collaborate to come up with creative solutions tailored to your specific needs and challenges. During the experimentation phase, we develop and test custom ML and AI models to ensure they meet your requirements. In the production phase, we integrate these models into your existing systems to unlock the true value of AI and ML. Our solutions help you make better predictions, automate routine tasks, and uncover advanced insights and hidden patterns in your data. Our team of experts supports you at every step to ensure you get the most out of your data.<br>",
- "photoImage": "/wp-content/uploads/2024/05/Data-Science_3.webp",
- "quote": "<span>Our solutions</span> help you make better predictions, automate routine tasks, and uncover advanced insights and hidden patterns in your data.",
- "conclusionTitle": "Integrating AI and ML <span>into your business processes</span>",
- "conclusionText": "Integrating AI and ML into your business processes has a direct impact, making them more efficient, faster, and less error-prone. While AI isn&#8217;t a magical solution for all problems, it can act as the oil that helps your machine run more smoothly. Our motto, &#8220;Think big, start small,&#8221; is crucial. We provide assistance and support at every step to ensure the effective and valuable use of AI and ML.",
- "contactImage": {
-  "loading": "lazy",
-  "width": "1290",
-  "height": "860",
-  "src": "/wp-content/uploads/2024/05/Our-team.webp",
-  "alt": "Acumen team",
-  "srcset": "/wp-content/uploads/2024/05/Our-team.webp 1290w, /wp-content/uploads/2024/05/Our-team-300x200.webp 300w, /wp-content/uploads/2024/05/Our-team-1024x683.webp 1024w, /wp-content/uploads/2024/05/Our-team-768x512.webp 768w",
-  "sizes": "(max-width: 1290px) 100vw, 1290px"
- },
- "contactTitle": "Our team has the answers",
- "contactButton": {
-  "label": "Contact Our team",
-  "href": "mailto:info@acumen.be"
- },
- "related": [
-  "3891",
-  "3956",
-  "3810",
-  "3782",
-  "3755",
-  "3622",
-  "3589",
-  "3574",
-  "3555",
-  "3533"
- ]
+  "seo": {
+    "title": "Data Science & AI - Acumen",
+    "description": "Harness the potential of AI and machine learning in your organization. Let us assist you in identifying the ideal use cases & integrate them.",
+    "published": "2024-05-26T18:09:37+00:00",
+    "modified": "2024-06-21T11:49:53+00:00"
+  },
+  "title": "Data Science <br><span>&#038;&nbsp;AI</span>",
+  "content": "<p>Are you looking to harness the potential of AI and machine learning in your organization? Acumen can assist you in identifying the ideal use cases and integrate them into your processes. Our services include defining suitable AI and ML applications, experimenting with these concepts to evaluate their feasibility and added value, and implementing the solutions effectively.</p>",
+  "marquee": "Data Science and AI•",
+  "bannerImage": "/wp-content/uploads/2024/05/Data-Science_1.webp",
+  "authorImage": {
+    "fetchpriority": "high",
+    "width": "780",
+    "height": "1024",
+    "src": "/wp-content/uploads/2024/05/Data-Science_2-780x1024.webp",
+    "alt": "Data science",
+    "srcset": "/wp-content/uploads/2024/05/Data-Science_2-780x1024.webp 780w, /wp-content/uploads/2024/05/Data-Science_2-228x300.webp 228w, /wp-content/uploads/2024/05/Data-Science_2-768x1009.webp 768w, /wp-content/uploads/2024/05/Data-Science_2-1169x1536.webp 1169w, /wp-content/uploads/2024/05/Data-Science_2.webp 1273w",
+    "sizes": "(max-width: 780px) 100vw, 780px"
+  },
+  "author": "AUTHOR – Niels Donders",
+  "introTitle": "<span>End-to-end expertise</span> in every phase",
+  "introText": "Many organizations struggle with a lack of ideas on how to apply AI and ML, leading to a lack of inspiration. Additionally, there is a need to avoid failed AI/ML projects and prevent excessive investments without yielding results.\nWe offer end-to-end expertise in every phase of the entire process, known as ML Ops. Our approach is pragmatic and focused on delivering tangible results. We believe in a collaborative partnership with our clients, ensuring that their needs and goals are met effectively. Our philosophy is to start small and think big, meaning there is no need for a large upfront investment to begin leveraging AI.",
+  "featuresTitle": "Machine Learning <span>and Artificial Intelligence</span>",
+  "featuresText": "Our Machine Learning (ML) and Artificial Intelligence (AI) consulting services are designed to make your data work for you. We employ a practical and hands-on approach through three key steps: ideation, experimentation, and production.\nIn the ideation phase, we collaborate to come up with creative solutions tailored to your specific needs and challenges. During the experimentation phase, we develop and test custom ML and AI models to ensure they meet your requirements. In the production phase, we integrate these models into your existing systems to unlock the true value of AI and ML. Our solutions help you make better predictions, automate routine tasks, and uncover advanced insights and hidden patterns in your data. Our team of experts supports you at every step to ensure you get the most out of your data.<br>",
+  "photoImage": "/wp-content/uploads/2024/05/Data-Science_3.webp",
+  "quote": "<span>Our solutions</span> help you make better predictions, automate routine tasks, and uncover advanced insights and hidden patterns in your data.",
+  "conclusionTitle": "Integrating AI and ML <span>into your business processes</span>",
+  "conclusionText": "Integrating AI and ML into your business processes has a direct impact, making them more efficient, faster, and less error-prone. While AI isn&#8217;t a magical solution for all problems, it can act as the oil that helps your machine run more smoothly. Our motto, &#8220;Think big, start small,&#8221; is crucial. We provide assistance and support at every step to ensure the effective and valuable use of AI and ML.",
+  "contactImage": {
+    "loading": "lazy",
+    "width": "1290",
+    "height": "860",
+    "src": "/wp-content/uploads/2024/05/Our-team.webp",
+    "alt": "Acumen team",
+    "srcset": "/wp-content/uploads/2024/05/Our-team.webp 1290w, /wp-content/uploads/2024/05/Our-team-300x200.webp 300w, /wp-content/uploads/2024/05/Our-team-1024x683.webp 1024w, /wp-content/uploads/2024/05/Our-team-768x512.webp 768w",
+    "sizes": "(max-width: 1290px) 100vw, 1290px"
+  },
+  "contactTitle": "Our team has the answers",
+  "contactButton": {
+    "label": "Contact Our team",
+    "href": "mailto:info@acumen.be"
+  }
 }

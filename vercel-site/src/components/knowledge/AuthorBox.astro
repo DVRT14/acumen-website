@@ -1,0 +1,56 @@
+---
+// "Written by" box at the end of a blog post. The org author (Acumen) shows the organisation instead.
+import type { Author } from '../../lib/knowledge';
+interface Props { author: Author; nl?: boolean }
+const { author, nl = false } = Astro.props;
+const a = author.data;
+const page = `/knowledge/authors/${author.id}/`;
+const t = nl
+  ? { by: 'Geschreven door', about: 'Over', more: `Alle artikels van ${a.name}`, li: 'LinkedIn-profiel', team: 'Ontmoet het team', contact: 'Contacteer ons' }
+  : { by: 'Written by', about: 'About', more: `All articles by ${a.name}`, li: 'LinkedIn profile', team: 'Meet the team', contact: 'Contact us' };
+---
+<aside class="author-box" aria-labelledby="author-box-name">
+  {a.org
+    ? <img class="author-box__photo author-box__photo--logo" src="/wp-content/uploads/2025/05/cropped-acumen-logo-mark-dark-green-rgb-934px@72ppi.webp" alt="" width="96" height="79" loading="lazy" />
+    : a.image
+      ? <img class="author-box__photo" src={a.image} alt="" width="96" height="96" loading="lazy" />
+      : <span class="author-box__photo author-box__photo--initials" aria-hidden="true">{a.name.split(' ').map(w => w[0]).join('').slice(0, 2)}</span>}
+  <div class="author-box__body">
+    <p class="author-box__label">{a.org ? t.about : t.by}</p>
+    <p id="author-box-name" class="author-box__name">
+      {a.org ? a.name : <a href={page} rel="author">{a.name}</a>}
+    </p>
+    {a.role && <p class="author-box__role">{a.role}</p>}
+    {a.bio && <p class="author-box__bio">{a.bio}</p>}
+    <p class="author-box__links">
+      {a.org
+        ? <><a href="/culture/">{t.team}</a><a href="/contact/">{t.contact}</a></>
+        : <><a href={page}>{t.more}</a>{a.linkedin && <a href={a.linkedin} rel="noopener" target="_blank">{t.li}</a>}</>}
+    </p>
+  </div>
+</aside>
+
+<style>
+  .author-box { display: flex; gap: 24px; margin-top: 64px; padding: 32px; border-radius: 24px; background: #F4F4F4; color: #002921; }
+  .author-box__photo { flex-shrink: 0; width: 96px; height: 96px; border-radius: 50%; object-fit: cover; object-position: center 20%; background: #fff; }
+  .author-box__photo--logo { padding: 18px; object-fit: contain; }
+  .author-box__photo--initials { display: flex; justify-content: center; align-items: center; background: #C8EF00; font: 400 34px/1 "Atype Display", sans-serif; letter-spacing: -0.04em; }
+  .author-box__body { min-width: 0; }
+  .author-box__body p { margin: 0; }
+  .author-box__label { font-size: 13px; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: #5E6B68; }
+  .author-box__name { margin-top: 6px !important; font: 400 28px/1.1 "Atype Display", sans-serif; letter-spacing: -0.04em; }
+  .author-box__name a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+  .author-box__name a:hover { text-decoration-color: #C8EF00; }
+  .author-box__role { margin-top: 4px !important; font-size: 16px; font-weight: 400; }
+  .author-box__bio { margin-top: 12px !important; font-size: 16px; font-weight: 300; line-height: 1.6; }
+  .author-box__links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 16px !important; font-size: 15px; }
+  .author-box__links a { color: #002921; font-weight: 400; text-decoration: underline; text-underline-offset: 3px; }
+  .author-box__links a:hover { text-decoration: none; }
+  .author-box a:focus-visible { outline: 2px solid #002921; outline-offset: 3px; border-radius: 2px; }
+  @media (max-width: 767px) {
+    .author-box { flex-direction: column; gap: 16px; padding: 24px; }
+    .author-box__photo { width: 72px; height: 72px; }
+    .author-box__photo--logo { padding: 12px; }
+    .author-box__photo--initials { font-size: 26px; }
+  }
+</style>

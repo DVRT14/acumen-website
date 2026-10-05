@@ -1,0 +1,81 @@
+---
+// Customer case layout: hero, key figures, sticky fact box + Markdown body, quote, CTA, related posts.
+// SEO + JSON-LD come from pages/knowledge/[slug].astro; this renders the page only.
+import '../../styles/post.css';
+import '../../styles/post-card.css';
+import '../../styles/case.css';
+import Breadcrumbs from './Breadcrumbs.astro';
+import PostsCarousel from '../post/PostsCarousel.astro';
+import ShareButtons from '../post/ShareButtons.astro';
+import { formatDate, TYPE_LABEL, type Post, type Author, type Card } from '../../lib/knowledge';
+import type { MarkdownHeading } from 'astro';
+interface Props { post: Post; author: Author; headings: MarkdownHeading[]; related: Card[]; minutes: number }
+const { post, related, minutes } = Astro.props;
+const d = post.data;
+const lead = d.subtitle ?? d.excerpt ?? d.description;
+const cta = { title: "Got a similar challenge? Let's talk.", label: 'Contact us', href: '/contact/', ...d.cta };
+const image = d.image && { ...d.image, alt: '', sizes: '(max-width: 767px) calc(100vw - 32px), (max-width: 1024px) calc(100vw - 100px), 520px' };
+---
+<article class="case">
+  <header class="case-hero">
+    <div class="case-wrap case-hero__inner">
+      <div class="case-hero__text">
+        <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Knowledge', href: '/knowledge/' }, { name: d.title }]} />
+        {d.clientLogo && <img class="case-hero__logo" src={d.clientLogo.src} alt={d.clientLogo.alt} width={d.clientLogo.width} height={d.clientLogo.height} />}
+        <p class="case-label">{TYPE_LABEL.case}<span aria-hidden="true"> · </span><span>{minutes} min read</span></p>
+        <h1 class="case-hero__title">{d.title}</h1>
+        <p class="case-hero__lead">{lead}</p>
+      </div>
+      {image && <div class="case-hero__media"><img {...image} fetchpriority="high" decoding="async" /></div>}
+    </div>
+  </header>
+
+  {d.results?.length ? (
+    <section class="case-results" aria-label="Key results">
+      <ul class="case-wrap case-results__list">
+        {d.results.map(r => <li class="case-results__item" data-animate="fadeInUp"><span class="case-results__value">{r.value}</span><span class="case-results__label">{r.label}</span></li>)}
+      </ul>
+    </section>
+  ) : null}
+
+  <div class="case-wrap case-main">
+    <aside class="case-facts" aria-label="Project facts">
+      <dl class="case-facts__list">
+        {d.client && <div><dt>Client</dt><dd>{d.client}</dd></div>}
+        {d.industry && <div><dt>Industry</dt><dd>{d.industry}</dd></div>}
+        {d.technologies?.length ? <div><dt>Technologies</dt><dd><ul class="case-chips">{d.technologies.map(t => <li>{t}</li>)}</ul></dd></div> : null}
+        <div><dt>Published</dt><dd><time datetime={d.date.toISOString()}>{formatDate(d.date, d.lang)}</time></dd></div>
+      </dl>
+      <ShareButtons />
+    </aside>
+
+    <div class="case-content">
+      <div class="case-prose"><slot /></div>
+      {d.quote && (
+        <figure class="case-quote">
+          <blockquote><p>{d.quote.text}</p></blockquote>
+          {d.quote.author && <figcaption><strong>{d.quote.author}</strong>{d.quote.role && <span>{d.quote.role}</span>}</figcaption>}
+        </figure>
+      )}
+    </div>
+  </div>
+
+  <section class="case-wrap case-cta" aria-labelledby="case-cta-title">
+    <div class="case-cta__card">
+      <h2 class="case-cta__title" id="case-cta-title">{cta.title}</h2>
+      {cta.text && <p class="case-cta__text">{cta.text}</p>}
+      <a class="case-cta__button" href={cta.href}>{cta.label}</a>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="post-related case-related" aria-labelledby="case-related-title">
+      <div class="post-related__band">
+        <div class="post-related__inner">
+          <h2 class="case-related__title" id="case-related-title">Related knowledge</h2>
+          <PostsCarousel cards={related} />
+        </div>
+      </div>
+    </section>
+  )}
+</article>

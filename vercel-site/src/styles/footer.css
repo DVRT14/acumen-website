@@ -21,7 +21,8 @@
 .colophon__brand, .colophon__col { position: relative; display: flex; flex-direction: column; width: 50%; }
 
 .colophon__logo { position: relative; text-align: left; }
-.colophon__logo a { display: inline-block; }
+.colophon__logo a { position: relative; display: inline-block; }
+.colophon__logo a::after { content: ''; position: absolute; inset: -12px 0; }
 .colophon__logo img { display: inline-block; width: 100%; max-width: 269px; vertical-align: middle; }
 
 .footerMenu { position: relative; z-index: 2; margin: 0; padding: 0; list-style: none; }
@@ -31,7 +32,8 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: 0;
+  margin: -7px 0;
+  padding: 7px 0; /* hit area fills the 35px row pitch, same layout */
   font-family: "DM Sans", Sans-serif;
   font-size: 21px;
   font-weight: 300;
@@ -40,15 +42,15 @@
   fill: #002921;
   transition: .4s;
 }
-.footerMenu a:hover, .footerMenu a:focus, .footerMenu a.is-active { color: #B9D0D0; fill: #B9D0D0; }
+.footerMenu a:hover, .footerMenu a:focus, .footerMenu a.is-active { color: #4F7777; fill: #4F7777; }
 
 .footerSocial { margin: 0; padding: 0; list-style: none; }
 .footerSocial li { position: relative; display: flex; align-items: center; }
 .footerSocial li:not(:last-child) { padding-bottom: 7px; }
 .footerSocial li:not(:first-child) { margin-top: 7px; }
-.footerSocial a { display: flex; align-items: center; width: 100%; font-family: "DM Sans", Sans-serif; font-size: 21px; font-weight: 300; line-height: 1em; }
+.footerSocial a { display: flex; margin: -7px 0; padding: 7px 0; align-items: center; width: 100%; font-family: "DM Sans", Sans-serif; font-size: 21px; font-weight: 300; line-height: 1em; }
 .footerSocial span { color: #002921; transition: color .3s; }
-.footerSocial li:hover span { color: #B9D0D0; }
+.footerSocial li:hover span { color: #4F7777; }
 
 .colophon__bottom {
   position: relative;
@@ -57,7 +59,6 @@
   gap: 20px;
   width: 100%;
   padding-top: 17px;
-  overflow: hidden;
   border-top: 1px solid #BEBEBE;
   transition: all .5s ease-in-out;
 }
@@ -67,11 +68,11 @@
   font-weight: 300;
   line-height: 33px;
   color: #002921;
-  opacity: .26;
+  opacity: .65;
   transition: all .3s ease-in-out;
 }
 .colophon__legal:hover { opacity: 1; }
-.colophon__legal a { color: inherit; }
+.colophon__legal a { padding: 11px 0; color: inherit; } /* inline: taller hit area, same line box */
 
 /* Home: careers banner */
 .careers-banner {

@@ -1,6 +1,6 @@
 ---
 // Expertise pages built on the old single-expertise template (1047). Content: src/content/expertise/*.json
-// (extracted from the old pages by tools/extract_posts.py). Shares its section styles with the posts.
+// Shares its section styles with the posts.
 import Base from '../../layouts/Base.astro';
 import ExpertiseSlider from '../../components/ExpertiseSlider.astro';
 import PostsCarousel from '../../components/post/PostsCarousel.astro';
@@ -27,7 +27,7 @@ const { page } = Astro.props;
 
     <section class="post-sec post-hero" id="start">
       <div class="post-sec__inner post-hero__inner">
-        <div class="post-hero__title"><h2 set:html={page.title} /></div>
+        <div class="post-hero__title"><h1 set:html={page.title} /></div>
         <div class="post-hero__lead" set:html={page.content} />
       </div>
     </section>
@@ -84,7 +84,7 @@ const { page } = Astro.props;
     <ContactCta hello="Say hello" image={page.contactImage} title={page.contactTitle} button={page.contactButton} />
 
     <section class="post-related xrelated">
-      <div class="post-related__band"><div class="post-related__inner"><PostsCarousel ids={page.related} info="terms" /></div></div>
+      <div class="post-related__band"><div class="post-related__inner"><PostsCarousel info="terms" /></div></div>
     </section>
   </article>
 </Base>

@@ -1,110 +1,128 @@
 ---
-// Culture (old site page 135). Content: src/content/one-off/culture.json. Behaviour from the site
-// scripts: sticky hero (data-sticky), typed words (.typedContainer), story blocks fading in on scroll
-// (howWeHelpYouSectionAnimation). An empty, zero-height section of the old page is left out.
+// Culture & careers (old site page 135), rebuilt on the case-page system (case.css + tokens in base.css).
+// Content: src/content/one-off/culture.json; open positions come from src/content/vacatures/*.json, so a new
+// vacancy file shows up here automatically. /careers/ redirects to #careers.
 import Base from '../layouts/Base.astro';
 import meta from '../data/meta.json';
 import c from '../content/one-off/culture.json';
+import '../styles/case.css';
 import '../styles/culture.css';
-const sticky = JSON.stringify({ sticky: 'top', sticky_on: ['desktop', 'tablet', 'mobile'], sticky_offset: 0, sticky_effects_offset: 0 });
+
+// WordPress-exported strings carry HTML entities (&amp;, &#8211;); Astro escapes text, so decode first.
+const decode = (s = '') => s.replace(/<[^>]+>/g, '').replace(/&(#x?[0-9a-f]+|amp|lt|gt|quot|apos|nbsp);/gi, (_, e: string) =>
+  e[0] === '#' ? String.fromCodePoint(parseInt(e.slice(1).replace(/^x/i, '0x'))) : ({ amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: '00a0' } as any)[e.toLowerCase()]).trim();
+const vacancies = Object.entries(import.meta.glob('../content/vacatures/*.json', { eager: true, import: 'default' }))
+  .map(([file, v]: [string, any]) => ({
+    href: `/careers/${file.split('/').pop()!.replace(/\.json$/, '')}/`,
+    title: decode(v.title),
+    location: decode(v.location),
+    dutch: v.seo?.lang === 'nl-BE',
+  })).map(v => ({ ...v, meta: [v.location, v.dutch && 'Dutch-speaking'].filter(Boolean) as string[] }));
+const words = ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
+const n = vacancies.length;
+const countLine = n === 0 ? '' : `${words[n - 1] ?? n} ${n === 1 ? 'role is' : 'roles are'} open right now.`;
+const allDutch = n > 0 && vacancies.every(v => v.dutch);
+const text = (html: string) => html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+const u = '/wp-content/uploads/2024/06/';
+const hero = { src: `${u}acumen-data-group-4-713x1024.webp`, srcset: `${u}acumen-data-group-4-713x1024.webp 713w, ${u}acumen-data-group-4-768x1104.webp 768w, ${u}acumen-data-group-4.webp 1024w`, sizes: '(max-width: 767px) calc(100vw - 32px), (max-width: 1024px) calc(100vw - 100px), 520px', width: 713, height: 1024, alt: 'Acumen colleague at work in the Leuven office' };
+// Team cards: [image, social (dead # links on the old page, dropped), "Name<br>Role"].
+const team = c.team.map(([img, , name]: any) => {
+  const [who, role] = text(name.replace(/<br\s*\/?>/gi, '|')).split('|').map((s: string) => s.trim());
+  return { img: { ...img, alt: who, loading: 'lazy', fetchpriority: undefined, sizes: '(max-width: 767px) calc(50vw - 24px), (max-width: 1024px) calc(50vw - 62px), 277px' }, who, role };
+});
+const gallery = [c.photoLeft, c.quoteImage, c.photoRight].map(img => ({ ...img, alt: '', loading: 'lazy' }));
 ---
 <Base {...meta.culture}>
-  <div class="cu">
-    <section class="cu-hero" data-sticky={sticky}>
-      <div class="cu-hero__inner">
-        <div class="cu-typed typedContainer">
-          <div class="cu-typed__strings" set:html={c.typedHero} />
-          <div class="cu-hero__title"><h1 set:html={c.hero} /></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cu-photo"><div class="cu-photo__inner"></div></section>
-
-    <section class="cu-how howWeHelpYouSectionAnimation">
-      <div class="cu-how__inner">
-        <div class="cu-how__cols">
-          <div class="cu-how__images"></div>
-          <div class="cu-how__text">
-            {c.story.map(([title, text]) => (
-              <div class="cu-how__block howWeHelpYouSectionAnimation__text">
-                <div class="cu-how__heading"><h3 set:html={title} /></div>
-                <div class="cu-how__copy" set:html={text} />
-              </div>
-            ))}
+  <div class="case cul">
+    <header class="case-hero">
+      <div class="case-wrap case-hero__inner">
+        <div class="case-hero__text">
+          <h1 class="case-hero__title">Build data and AI that reaches production.</h1>
+          <p class="case-hero__lead">Join about 45 data and AI engineers in Leuven. You build platforms, data products and AI solutions for real clients, grow in a competence center that shares what it knows, and help shape how Acumen works.</p>
+          <div class="cul-actions">
+            {n > 0
+              ? <a class="btn" href="#careers">See open positions</a>
+              : <a class="btn" href="#open-application">Send an open application</a>}
+            <a class="btn btn--outline" href="#team">Meet the team</a>
           </div>
         </div>
+        <div class="case-hero__media"><img {...hero} fetchpriority="high" decoding="async" /></div>
+      </div>
+    </header>
+
+    <section class="case-wrap cul-story" aria-labelledby="cul-story-title">
+      <div class="cul-story__head">
+        <h2 class="cul-story__title" id="cul-story-title"><span>Since</span> 2007</h2>
+        <p class="cul-story__facts">Based in Leuven · Part of collecd</p>
+      </div>
+      <ol class="cul-story__list">
+        {c.story.map(([title, body]: [string, string]) => (
+          <li class="cul-story__item">
+            <h3>{text(title)}</h3>
+            <p>{text(body)}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="case-wrap cul-team" id="team" aria-labelledby="cul-team-title">
+      <h2 class="cul-h2" id="cul-team-title">Some of the people you’ll work with</h2>
+      <ul class="cul-team__grid">
+        {team.map(m => (
+          <li class="cul-member">
+            <div class="cul-member__photo"><img {...m.img} decoding="async" /></div>
+            <p class="cul-member__name">{m.who}</p>
+            {m.role && <p class="cul-member__role">{m.role}</p>}
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="case-wrap cul-gallery" aria-labelledby="cul-gallery-title">
+      <h2 class="cul-h2" id="cul-gallery-title">Life at Acumen</h2>
+      <div class="cul-gallery__grid">
+        {gallery.map(img => <div class="cul-gallery__item"><img {...img} decoding="async" /></div>)}
       </div>
     </section>
 
-    <section class="cu-team">
-      <div class="cu-team__quote-wrap"><div class="cu-team__quote"><div class="cu-team__quote-text" set:html={c.quote} /></div></div>
-      {[c.team.slice(0, 2), c.team.slice(2)].map(row => (
-        <div class="cu-team__row">
-          {row.map(([img, social, name]) => (
-            <div class="cu-member">
-              <div class="cu-member__box">
-                <div class="cu-member__card">
-                  <div class="cu-member__inner">
-                    <div class="cu-member__bg"><img {...img} /></div>
-                    <div class="cu-member__social"><div set:html={social} /></div>
-                    <div class="cu-member__name" set:html={name} />
-                  </div>
-                </div>
-              </div>
-            </div>
+    <section class="cul-careers" id="careers" aria-labelledby="cul-careers-title">
+      <div class:list={["case-wrap cul-careers__inner", { "cul-careers__inner--empty": n === 0 }]}>
+        <div class="cul-careers__intro">
+          <h2 class="cul-h2" id="cul-careers-title">Open roles</h2>
+          <p>We hire engineers who want to own their work and see it reach production.{allDutch && ' Our current roles are Dutch-speaking, so the job descriptions are in Dutch.'}{countLine && ` ${countLine}`}</p>
+          {n === 0 && <p>No roles are open right now, but we're always glad to meet good data and AI engineers. Send an open application and we'll keep you in mind.</p>}
+          <ul class="cul-proof" aria-label="Acumen at a glance">
+            <li>About 45 experts</li><li>Leuven</li><li>Since 2007</li><li>Part of collecd</li>
+          </ul>
+        </div>
+        <ul class="cul-jobs">
+          {vacancies.map(v => (
+            <li>
+              <a class="cul-job" href={v.href} aria-label={[v.title, ...v.meta].join(', ')}>
+                <span class="cul-job__title">{v.title}</span>
+                <span class="cul-job__meta">{v.meta.join(' · ')}</span>
+                <span class="cul-job__cta" aria-hidden="true">View job →</span>
+              </a>
+            </li>
           ))}
+          {/* [CONFIRM] "Dutch or English" in the meta; fallback is plain "Open application". */}
+          <li>
+            <a class="cul-job cul-job--open" id="open-application" href="mailto:info@acumen.be?subject=Open%20application" aria-label="Don't see your role? Open application, Dutch or English. Email us">
+              <span class="cul-job__title">Don't see your role?</span>
+              <span class="cul-job__meta">Open application · Dutch or English</span>
+              <span class="cul-job__cta" aria-hidden="true">Email us →</span>
+            </a>
+          </li>
+        </ul>
+        {/* How we hire: [CONFIRM] all three steps and their wording with the owner. No timings until confirmed. */}
+        <div class="cul-hire">
+          <h3 class="cul-hire__title">How we hire</h3>
+          <ol class="cul-hire__steps" role="list">
+            <li><strong>Send your CV.</strong> Apply through the form on the role page, or mail us.</li>
+            <li><strong>Meet the team.</strong> A conversation about your experience, the work and how we run projects.</li>
+            <li><strong>Get an offer.</strong> If it's a fit on both sides, we make you a proposal.</li>
+          </ol>
         </div>
-      ))}
-    </section>
-
-    <section class="cu-box">
-      <div class="cu-box__inner">
-        <div class="cu-full"></div>
-        <div class="cu-banner"><div class="cu-banner__img cu-banner__img--support"></div></div>
-      </div>
-    </section>
-
-    <section class="cu-box">
-      <div class="cu-box__inner">
-        <div id="careers"></div>
-        <div class="cu-join"><h2 set:html={c.joinTitle} /></div>
-        <div class="cu-open"><div><h2 set:html={c.positionsTitle} /></div></div>
-        <div class="cu-divider"><span></span></div>
-        <div class="cu-positions">
-          {c.positions.map(([title, button], i) => (
-            <div class="cu-position">
-              <div class={`cu-position__title${i === 0 ? ' cu-position__title--indent' : ''}`}><div set:html={title} /></div>
-              <div class="cu-position__action"><a href={button.href}><span><span set:html={button.label} /></span></a></div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="cu-box cu-box--end">
-      <div class="cu-box__inner">
-        <div class="cu-banner"><div class="cu-banner__img cu-banner__img--office"></div></div>
-      </div>
-    </section>
-
-    <section class="cu-box">
-      <div class="cu-box__inner cu-quote">
-        <div class="cu-quote__photo"><div class="cu-quote__img"><img {...c.quoteImage} /></div></div>
-        <div class="cu-quote__body">
-          <div class="cu-typed cu-quote__typed typedContainer">
-            <div class="cu-typed__strings" set:html={c.typedQuote} />
-            <div class="cu-quote__title"><h1 set:html={c.quoteText} /></div>
-          </div>
-          <div class="cu-quote__author"><div set:html={c.quoteAuthor} /></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cu-box cu-pair">
-      <div class="cu-box__inner cu-pair__inner">
-        <div class="cu-pair__col"><div class="cu-pair__img" data-parallax="1"><img {...c.photoLeft} /></div></div>
-        <div class="cu-pair__col"><div class="cu-pair__img" data-parallax="2"><img {...c.photoRight} /></div></div>
       </div>
     </section>
   </div>

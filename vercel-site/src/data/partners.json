@@ -1,0 +1,158 @@
+[
+  {
+    "slug": "aimplan",
+    "name": "Aimplan",
+    "url": "https://aimplan.com/",
+    "logo": { "src": "/logos/partners/aimplan.svg", "width": 3000, "height": 790, "alt": "Aimplan logo" },
+    "summary": "Aimplan is a planning, budgeting and forecasting platform built into Power BI. As an Aimplan implementation partner, Acumen builds planning solutions on top of your Power BI and Microsoft Fabric environment, so planning happens in the reports people already use.",
+    "description": "Acumen is an Aimplan implementation partner: Power BI-native planning, budgeting and forecasting on top of your Power BI and Microsoft Fabric environment.",
+    "sections": [
+      {
+        "title": "What Aimplan brings",
+        "paragraphs": [
+          "Aimplan is a cloud planning, budgeting and forecasting platform that runs natively in Power BI. Users enter and adjust plans inside Power BI reports, so there is no separate planning tool to learn. For organisations already standardised on Power BI, it is a lighter and faster alternative to traditional multidimensional EPM tools.",
+          "Mid-sized organisations use it for full FP&A planning. In larger enterprises it covers targeted planning apps, master data management and write-back from Power BI."
+        ]
+      },
+      {
+        "title": "What we do together",
+        "paragraphs": [
+          "We implement Aimplan on top of your Power BI and Microsoft Fabric environment, combining it with our data platform and Power BI expertise. In the right setup, your planning data can stay in your own Azure or Fabric tenant.",
+          "Aimplan fits organisations that work in Power BI and want planning without a separate EPM platform. For complex, enterprise-scale planning, Anaplan and IBM Planning Analytics remain our options."
+        ]
+      }
+    ],
+    "links": [],
+    "expertise": [
+      { "label": "Data Planning & EPM", "href": "/expertise/data-planning-epm/" },
+      { "label": "Data Visualization & Reporting", "href": "/expertise/datavisualisation-reporting/" }
+    ],
+    "tags": ["Power BI"]
+  },
+  {
+    "slug": "anaplan",
+    "name": "Anaplan",
+    "url": "https://www.anaplan.com/",
+    "logo": { "src": "/wp-content/uploads/2025/06/anaplan-logo-rgb-1-1024x386.webp", "width": 1024, "height": 386, "alt": "Anaplan logo" },
+    "summary": "Anaplan is a cloud platform for connected planning. As an Anaplan partner, Acumen implements it for budgeting, forecasting and planning that link finance to operations, so data, people and plans stay in one place.",
+    "description": "How Acumen implements Anaplan for connected planning: budgeting, forecasting and planning that link finance to operations.",
+    "sections": [
+      {
+        "title": "What Anaplan brings",
+        "paragraphs": [
+          "Anaplan is a cloud-based platform that helps businesses streamline planning, forecasting and decision-making. It runs on an in-memory calculation engine, so a change in the data shows up across models and departments straight away.",
+          "Anaplan is built around connected planning: financial plans are no longer disconnected from operational tactics and events. Use cases such as long-term strategic planning, revenue forecasting and OpEx planning feed into each other, so a change in one area flows through to the others."
+        ]
+      },
+      {
+        "title": "What we do together",
+        "paragraphs": [
+          "Acumen guides clients through the full implementation of a planning tool. We manage and integrate your data, automate calculations and replace the many Excel versions that get sent around with one shared model.",
+          "We don't stop at the plan: we report the KPIs in it and track them against actuals. After go-live, our support and maintenance team keeps the models in line with your business."
+        ]
+      }
+    ],
+    "links": [
+      { "label": "What is Anaplan?", "href": "/anaplan/" },
+      { "label": "How Anaplan compares in the market", "href": "/anaplan-market/" }
+    ],
+    "expertise": [
+      { "label": "Data Planning & EPM", "href": "/expertise/data-planning-epm/" },
+      { "label": "Support & Maintenance", "href": "/expertise/support-maintenance/" }
+    ],
+    "tags": []
+  },
+  {
+    "slug": "dagster",
+    "name": "Dagster",
+    "url": "https://dagster.io/",
+    "logo": { "src": "/wp-content/uploads/2025/06/dagster-primary-mark.svg", "width": 560, "height": 560, "alt": "Dagster logo" },
+    "summary": "Dagster orchestrates data pipelines around the data assets they produce. As an official Dagster implementation partner, Acumen builds data platforms with Dagster at the core and helps teams move from Airflow step by step.",
+    "description": "Acumen is an official Dagster implementation partner: data platforms orchestrated with Dagster and step-by-step migrations from Airflow.",
+    "sections": [
+      {
+        "title": "Why Dagster",
+        "paragraphs": [
+          "Dagster defines, schedules and monitors data pipelines in an asset-centric way. Instead of only running tasks, it tracks the tables, files and models those tasks produce, which gives you lineage, data quality checks and one overview of the state of your whole data platform.",
+          "We believe this newer approach is better suited to orchestrating a modern data platform than task-based tools such as Airflow."
+        ]
+      },
+      {
+        "title": "What we do together",
+        "paragraphs": [
+          "We design and build data platforms with Dagster as the control centre, tracking every step from collecting data to refreshing dashboards. At Bionerga, for example, Dagster runs alongside Microsoft Fabric and Power BI.",
+          "Already on Airflow? With Airlift by Dagster Labs we migrate in three incremental steps (peer, observe, migrate), so you get value from the first step without a big-bang project."
+        ]
+      }
+    ],
+    "links": [
+      { "label": "Customer case: Bionerga", "href": "/knowledge/bionerga-future-ready-data-platform/" }
+    ],
+    "expertise": [
+      { "label": "Data Integration & Engineering", "href": "/expertise/dataintegration-engineering/" },
+      { "label": "Support & Maintenance", "href": "/expertise/support-maintenance/" }
+    ],
+    "tags": ["Dagster"]
+  },
+  {
+    "slug": "ibm",
+    "name": "IBM",
+    "url": "https://www.ibm.com/",
+    "logo": { "src": "/wp-content/uploads/2025/06/IBM_Partner_Plus_silver_partner_mark_pos_black_RGB-1024x799.webp", "width": 1024, "height": 799, "alt": "IBM Partner Plus Silver partner mark" },
+    "summary": "IBM Planning Analytics (TM1) is the planning platform Acumen has worked with longest. As an IBM Partner Plus Silver partner, we build budgeting, forecasting and planning solutions on it, from first model to ongoing support.",
+    "description": "Acumen is an IBM Partner Plus Silver partner and builds budgeting, forecasting and planning solutions on IBM Planning Analytics (TM1).",
+    "sections": [
+      {
+        "title": "What IBM Planning Analytics brings",
+        "paragraphs": [
+          "IBM Planning Analytics, built on the TM1 engine, supports complex planning, budgeting and forecasting models with top-down and bottom-up versions and what-if scenarios. Users work in Planning Analytics Workspace or straight from Excel."
+        ]
+      },
+      {
+        "title": "What we do together",
+        "paragraphs": [
+          "Enterprise performance management translates your strategy into plans and tracks their execution. We implement Planning Analytics end to end: integrating your data, automating calculations and replacing manual Excel consolidation, then reporting plans against actuals.",
+          "We also move existing TM1 environments to Planning Analytics Workspace, and keep them running through our Continued Care support and maintenance."
+        ]
+      }
+    ],
+    "links": [],
+    "expertise": [
+      { "label": "Data Planning & EPM", "href": "/expertise/data-planning-epm/" },
+      { "label": "Support & Maintenance", "href": "/expertise/support-maintenance/" }
+    ],
+    "tags": []
+  },
+  {
+    "slug": "microsoft",
+    "name": "Microsoft",
+    "url": "https://www.microsoft.com/",
+    "logo": { "src": "/wp-content/uploads/2025/06/MS-Acumen-Mark-TransparentBackground-1024x626.webp", "width": 1024, "height": 626, "alt": "Microsoft Solutions Partner badge for Data & AI (Azure)" },
+    "summary": "Acumen is a Microsoft Solutions Partner for Data & AI (Azure). We build data platforms on Microsoft Fabric and Azure and turn them into Power BI reporting that people use to make decisions.",
+    "description": "Acumen is a Microsoft Solutions Partner for Data & AI (Azure): data platforms on Microsoft Fabric and Azure, and Power BI reporting.",
+    "sections": [
+      {
+        "title": "What Microsoft brings",
+        "paragraphs": [
+          "Microsoft Fabric is an all-in-one data platform on Azure that brings data sources, tools and teams together, from ingestion to reporting. Power BI turns that data into interactive reports and dashboards, and Copilot helps build them faster."
+        ]
+      },
+      {
+        "title": "What we do together",
+        "paragraphs": [
+          "We have worked with Microsoft Fabric since its early stages and built a reusable blueprint for future-ready data platforms on it, as we did for Bionerga together with Dagster.",
+          "On top of the platform we design Power BI datasets and reports with the business, as we did for Kaneka and Spaas, so self-service users can explore validated data. After go-live, we keep it all running."
+        ]
+      }
+    ],
+    "links": [
+      { "label": "Customer case: Bionerga", "href": "/knowledge/bionerga-future-ready-data-platform/" }
+    ],
+    "expertise": [
+      { "label": "Data Integration & Engineering", "href": "/expertise/dataintegration-engineering/" },
+      { "label": "Data Visualization & Reporting", "href": "/expertise/datavisualisation-reporting/" },
+      { "label": "Data Science & AI", "href": "/expertise/datascience-ai/" }
+    ],
+    "tags": ["Microsoft Fabric", "Power BI"]
+  }
+]

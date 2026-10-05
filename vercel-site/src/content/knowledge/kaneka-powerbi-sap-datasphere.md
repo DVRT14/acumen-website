@@ -1,6 +1,6 @@
 ---
 type: "case"
-title: "Driving efficiency and insights at Kaneka with PowerBI and SAP Datasphere"
+title: "Driving efficiency and insights at Kaneka with Power BI and SAP Datasphere"
 seoTitle: "Transforming Data at Kaneka with Power BI and SAP Datasphere"
 description: "Discover how Acumen helped Kaneka streamline complex data into real-time insights by integrating SAP Datasphere with Power BI."
 excerpt: "Kaneka partnered with Acumen to overcome data fragmentation by integrating SAP Datasphere and Power BI. The result? Real-time insights, improved reporting and scalable analytics tailored to their growth ambitions."

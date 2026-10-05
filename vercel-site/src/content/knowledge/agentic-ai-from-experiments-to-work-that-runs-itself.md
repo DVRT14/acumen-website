@@ -14,11 +14,11 @@ takeaways:
   - "A person stays in the loop wherever a decision carries real risk, and the agent flags anything outside its rules."
   - "Start with one use case, prove it with a scoped proof of concept on real cases, then scale."
 image:
-  width: 1748
+  width: 1707
   height: 2560
-  src: "/wp-content/uploads/2026/07/DSCF0732-scaled.webp"
+  src: "/wp-content/uploads/2025/02/DSCF0948-scaled.webp"
   alt: ""
-  srcset: "/wp-content/uploads/2026/07/DSCF0732-scaled.webp 1748w, /wp-content/uploads/2026/07/DSCF0732-205x300.webp 205w, /wp-content/uploads/2026/07/DSCF0732-699x1024.webp 699w, /wp-content/uploads/2026/07/DSCF0732-768x1125.webp 768w, /wp-content/uploads/2026/07/DSCF0732-1049x1536.webp 1049w, /wp-content/uploads/2026/07/DSCF0732-1398x2048.webp 1398w"
+  srcset: "/wp-content/uploads/2025/02/DSCF0948-scaled.webp 1707w, /wp-content/uploads/2025/02/DSCF0948-200x300.webp 200w, /wp-content/uploads/2025/02/DSCF0948-683x1024.webp 683w, /wp-content/uploads/2025/02/DSCF0948-768x1152.webp 768w, /wp-content/uploads/2025/02/DSCF0948-1024x1536.webp 1024w, /wp-content/uploads/2025/02/DSCF0948-1365x2048.webp 1365w"
 ogImage: "/wp-content/uploads/2026/07/DSCF0732-scaled.jpg"
 cta:
   title: "Want our AI expertise in your organization?"

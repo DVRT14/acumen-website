@@ -1,10 +1,14 @@
-/* Entrance animations: elements with data-animate start hidden; widgets.js adds
-   `animated <name>` once they scroll into view. Without JS (no html.js) they stay visible. */
-.js [data-animate]:not(.animated) { visibility: hidden; }
+/* Entrance animations: elements with data-animate start transparent; widgets.js adds
+   `animated <name>` once they scroll into view (or at once when focus lands inside, so fast Tab never skips them).
+   Opacity, not visibility: hidden content would drop out of the tab order. Without JS (no html.js) they stay visible. */
+.js [data-animate]:not(.animated) { opacity: 0; }
 .animated { animation-duration: 1.25s; }
 .animated.animated-fast { animation-duration: .75s; }
 @media (prefers-reduced-motion: reduce) {
-  .animated { animation: none; }
+  /* !important: .fadeIn/.animated-fast below set animation-* at equal specificity and would win.
+     Delayed entrances also show at once instead of sitting hidden until the timeout fires. */
+  .animated { animation: none !important; }
+  .js [data-animate]:not(.animated) { opacity: 1; }
   *, ::before, ::after { transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

@@ -1,6 +1,6 @@
 ---
 type: "blog"
-title: "Requirements Analysis no sexy buzzword, but nevertheless indispensable"
+title: "Requirements analysis: no sexy buzzword, but nevertheless indispensable"
 seoTitle: "requirements analysis"
 description: "Mastering the art of requirements analysis. ‘Requirements Analysis’ no sexy buzzword, but nevertheless indispensable."
 date: 2024-08-22T11:18:26.000Z
@@ -13,6 +13,9 @@ takeaways:
   - "Analysts should keep an open mind and worry about technical implementation later, because this phase is about asking questions."
   - "Write requirements down, ask for a review and stay close to stakeholders and end users to see how they operate."
 image:
+  width: 799
+  height: 602
+  srcset: "/wp-content/uploads/2024/06/Hilde_5.webp 799w, /wp-content/uploads/2024/06/Hilde_5-300x226.webp 300w, /wp-content/uploads/2024/06/Hilde_5-768x579.webp 768w"
   src: "/wp-content/uploads/2024/06/Hilde_5.webp"
   alt: ""
 ogImage: "/wp-content/uploads/2024/06/Hilde_5.jpg"

@@ -1,6 +1,6 @@
 ---
 type: "blog"
-title: "Generative AI & Power BI: using Microsoft Copilot to enhance Report Creation"
+title: "Generative AI & Power BI: Using Microsoft Copilot to enhance report creation"
 seoTitle: "Acumen - Generative AI & Power BI:  using Microsoft Copilot to enhance Report Creation"
 description: "Generative AI & Power BI: using Microsoft Copilot to enhance Report Creation. data-driven decision making is becoming a necessity."
 date: 2024-06-04T11:00:02.000Z
@@ -13,6 +13,9 @@ takeaways:
   - "Suggested content and generated pages are a starting point that report builders still customize with the traditional tools."
   - "Copilot needs at least Power BI Premium P1 or Fabric F64 capacity and a clean data model, and it can make mistakes."
 image:
+  width: 1284
+  height: 849
+  srcset: "/wp-content/uploads/2024/06/Power-BI_4.webp 1284w, /wp-content/uploads/2024/06/Power-BI_4-300x198.webp 300w, /wp-content/uploads/2024/06/Power-BI_4-768x508.webp 768w, /wp-content/uploads/2024/06/Power-BI_4-1024x677.webp 1024w"
   src: "/wp-content/uploads/2024/06/Power-BI_4.webp"
   alt: ""
 ogImage: "/wp-content/uploads/2024/06/Power-BI_4.png"

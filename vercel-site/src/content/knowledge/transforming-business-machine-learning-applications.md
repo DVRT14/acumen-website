@@ -13,6 +13,9 @@ takeaways:
   - "Predictive models forecast employee absenteeism from historical data, demographics and seasonal trends, so companies can plan ahead."
   - "Real-time NLP sentiment analysis in contact centers helps agents adapt their responses and de-escalate negative interactions."
 image:
+  width: 2104
+  height: 2560
+  srcset: "/wp-content/uploads/2024/06/Mask-Group-22-not-compress-scaled.webp 2104w, /wp-content/uploads/2024/06/Mask-Group-22-not-compress-246x299.webp 246w, /wp-content/uploads/2024/06/Mask-Group-22-not-compress-768x934.webp 768w, /wp-content/uploads/2024/06/Mask-Group-22-not-compress-1262x1536.webp 1262w, /wp-content/uploads/2024/06/Mask-Group-22-not-compress-1683x2048.webp 1683w"
   src: "/wp-content/uploads/2024/06/Mask-Group-22-not-compress-scaled.webp"
   alt: ""
 ogImage: "/wp-content/uploads/2024/06/Mask-Group-22-not-compress-scaled.jpg"

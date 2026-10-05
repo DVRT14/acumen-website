@@ -1,6 +1,6 @@
 ---
 type: "case"
-title: "Routing Optimization: A commercial simulation engine for smarter logistics decisions"
+title: "Routing optimization: A commercial simulation engine for smarter logistics decisions"
 seoTitle: "AI-Powered Routing Optimization for Logistics"
 description: "Discover how Essers uses an AI-driven routing optimization simulation to handle complex logistics networks, identify efficiency gains, and support smarter customer decisions."
 excerpt: "Together with Essers, Acumen developed a routing optimization simulation that makes complex logistics networks manageable. By analyzing large volumes of orders across multiple scenarios, the solution reveals efficiency gains and supports more informed, data-driven customer conversations."

@@ -13,11 +13,11 @@ takeaways:
   - "Databricks pioneered the lakehouse architecture and uses AI to automatically optimize queries, infrastructure and data workflows."
   - "Unity Catalog provides unified governance, and open standards like Delta Lake, Apache Spark and MLflow help prevent vendor lock-in."
 image:
-  width: 1707
-  height: 2560
-  src: "/wp-content/uploads/2025/04/DSCF0954-scaled.webp"
+  width: 1365
+  height: 1527
+  src: "/wp-content/uploads/2025/05/DSCF1219-scaled-e1747818243908.webp"
   alt: ""
-  srcset: "/wp-content/uploads/2025/04/DSCF0954-scaled.webp 1707w, /wp-content/uploads/2025/04/DSCF0954-200x300.webp 200w, /wp-content/uploads/2025/04/DSCF0954-683x1024.webp 683w, /wp-content/uploads/2025/04/DSCF0954-768x1152.webp 768w, /wp-content/uploads/2025/04/DSCF0954-1024x1536.webp 1024w, /wp-content/uploads/2025/04/DSCF0954-1365x2048.webp 1365w"
+  srcset: "/wp-content/uploads/2025/05/DSCF1219-scaled-e1747818243908.webp 1365w, /wp-content/uploads/2025/05/DSCF1219-scaled-e1747818243908-268x300.webp 268w, /wp-content/uploads/2025/05/DSCF1219-scaled-e1747818243908-768x859.webp 768w, /wp-content/uploads/2025/05/DSCF1219-scaled-e1747818243908-915x1024.webp 915w"
 ogImage: "/wp-content/uploads/2025/04/DSCF0954-scaled.jpg"
 cta:
   title: "Ready to unlock your data’s full potential? Reach out!"

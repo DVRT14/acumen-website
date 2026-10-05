@@ -140,9 +140,15 @@ export function entranceAnimations() {
       if (!inView) return;
       io.unobserve(el);
       if (name === 'none') { el.classList.add('animated'); return; }
-      setTimeout(() => el.classList.add('animated', name), +d.animateDelay || 0);
+      // Skip the entrance if focus already revealed it (no fade-out-and-in under the focus ring).
+      setTimeout(() => el.classList.contains('animated') || el.classList.add('animated', name), +d.animateDelay || 0);
     });
     io.observe(el);
+  });
+  // Keyboard: focus can land inside content still waiting for its entrance (fast Tab outruns the observer
+  // and the delay). Show it, and any waiting ancestors, at once without animating.
+  document.addEventListener('focusin', e => {
+    for (let el = e.target.closest?.('[data-animate]'); el; el = el.parentElement?.closest('[data-animate]')) el.classList.add('animated');
   });
 }
 
@@ -348,18 +354,28 @@ function loopCarouselConfig(s) {
 async function carousels() {
   const posts = $$('.posts-carousel[data-carousel]'), xsliders = $$('.xslider');
   if (!posts.length && !xsliders.length) return;
-  const { default: Swiper, A11y, Mousewheel, Pagination } = await import('swiper');
-  Swiper.use([A11y, Mousewheel, Pagination]);
+  const { default: Swiper, A11y, Lazy, Mousewheel, Pagination } = await import('swiper');
+  Swiper.use([A11y, Lazy, Mousewheel, Pagination]);
 
   // Shared feel: sideways trackpad swipes, clickable dots, arrow keys while focus is inside.
   // No loop, so a drag past either end springs back.
   const carousel = (w, cfg) => {
     const container = w.querySelector('.swiper');
     if ($$('.swiper-slide', container).length < 2) return;
+    // Dots are a pointer shortcut: keyboard and screen reader users reach every slide through its card link
+    // (A11y slides a focused slide into view), so the dots stay out of the tab order and the accessibility tree.
+    const dots = w.querySelector('.carousel-dots');
+    dots.setAttribute('aria-hidden', 'true');
+    const untab = () => $$('.carousel-dots__dot', dots).forEach(b => { b.tabIndex = -1; });
     Object.assign(cfg, {
       mousewheel: { forceToAxis: true },
-      pagination: { el: w.querySelector('.carousel-dots'), clickable: true, bulletElement: 'button', bulletClass: 'carousel-dots__dot', bulletActiveClass: 'is-active' },
+      pagination: { el: dots, clickable: true, bulletElement: 'button', bulletClass: 'carousel-dots__dot', bulletActiveClass: 'is-active' },
       a11y: { enabled: true, paginationBulletMessage: `${I18N.goTo} {{index}}`, slideLabelMessage: `{{index}} ${I18N.of} {{slidesLength}}` },
+      // Off-screen post cards render with data-src (PostCard `defer`); load them once the carousel is in view,
+      // a page ahead of the visible slides.
+      lazy: { enabled: true, checkInView: true, loadPrevNext: true, loadOnTransitionStart: true },
+      // A11y re-adds tabindex="0" whenever the bullets render or update.
+      on: { 'afterInit paginationRender paginationUpdate': untab },
     });
     const sw = new Swiper(container, cfg);
     // Arrow keys only while focus is inside this carousel (Swiper 8's Keyboard module listens page-wide).

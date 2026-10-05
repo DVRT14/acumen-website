@@ -1,6 +1,6 @@
 ---
 type: "blog"
-title: "The Importance of Logging and Auditing in Data Integration"
+title: "The importance of logging and auditing in data integration"
 seoTitle: "Necessity and Benefits of Logging and Auditing in Data Integration"
 description: "The Necessity and Benefits of Extensive Logging and Auditing in Data Integration. It is vital for achieving business objectives."
 date: 2024-07-16T09:13:59.000Z
@@ -13,6 +13,9 @@ takeaways:
   - "Audit trails of data access, usage and modifications help demonstrate compliance with regulations such as GDPR."
   - "Logging also reveals performance bottlenecks, helping teams fine-tune workflows, meet SLAs and minimize downtime."
 image:
+  width: 1236
+  height: 824
+  srcset: "/wp-content/uploads/2024/06/Power-BI_2.webp 1236w, /wp-content/uploads/2024/06/Power-BI_2-300x200.webp 300w, /wp-content/uploads/2024/06/Power-BI_2-768x512.webp 768w, /wp-content/uploads/2024/06/Power-BI_2-1024x683.webp 1024w"
   src: "/wp-content/uploads/2024/06/Power-BI_2.webp"
   alt: ""
 ogImage: "/wp-content/uploads/2024/06/Power-BI_2.png"

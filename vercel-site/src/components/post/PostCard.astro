@@ -1,20 +1,47 @@
 ---
 // Knowledge post card (card data: lib/knowledge.ts `card()`). Hover reveal handled by CSS + postItemHover.
 import type { Card } from '../../lib/knowledge';
-interface Props { card: Card; info?: 'date' | 'terms' }
-const { card, info = 'date' } = Astro.props;
-// The image covers the card (post-card.css: ≤767px ~100vw × 389px, ≤1024px ~46vw × 609px, else 552 × 678px),
-// so its rendered width is the larger of the card width and card height × aspect ratio.
+// box: the card's rendered [width (CSS length), height (px)] at ≤767px, ≤1024px and desktop.
+// defer: off-screen carousel slide; Swiper's Lazy module (widgets.js) sets src/srcset/sizes when it comes into view.
+interface Props { card: Card; info?: 'date' | 'terms'; box?: [string, number][]; defer?: boolean }
+const { card, info = 'date', defer = false } = Astro.props;
+// Default box: the 2-up carousel in post-card.css (≤767px ~100vw × 389px, ≤1024px ~46vw × 609px, else 552 × 678px).
+const box = Astro.props.box ?? [['100vw', 389], ['46vw', 609], ['552px', 678]];
+// The image covers the card, so its rendered width is the larger of the card width and card height × aspect ratio.
 const ar = Number(card.image?.width) / Number(card.image?.height) || 1;
+const [m, t, d] = box.map(([w, h]) => `max(${w}, ${Math.ceil(h * ar)}px)`);
+const sizes = `(max-width: 767px) ${m}, (max-width: 1024px) ${t}, ${d}`;
 // Decorative: the card's heading is the link text.
-const image = card.image && { ...card.image, alt: '', loading: 'lazy', decoding: 'async',
-  sizes: `(max-width: 767px) max(100vw, ${Math.ceil(389 * ar)}px), (max-width: 1024px) max(46vw, ${Math.ceil(609 * ar)}px), ${Math.max(552, Math.ceil(678 * ar))}px` };
+const image = card.image && (defer
+  ? { 'data-src': card.image.src, 'data-srcset': card.image.srcset, 'data-sizes': sizes, class: 'swiper-lazy', width: card.image.width, height: card.image.height, alt: '' }
+  : { ...card.image, alt: '', loading: 'lazy', decoding: 'async', sizes });
+// Non-English post: the title/excerpt carry `lang` for screen readers; the label shows a short marker ("NL").
+const langName = card.lang && new Intl.DisplayNames(['en'], { type: 'language' }).of(card.lang.split('-')[0]);
 ---
 <a class="postItem" href={card.href} style={card.bg ? `background-color:${card.bg}` : undefined}>
-  <div class="postItem__bg">{image && <img {...image} />}</div>
-  <div class="postItem__info">{info === 'terms' ? <span>{card.terms}</span> : <time>{card.date}</time>}</div>
-  <div class="postItem__contents">
-    <div class="postItem__title"><h3>{card.title}</h3></div>
+  <div class="postItem__bg">{image && <img {...image} />}{defer && card.image && <noscript><img {...card.image} alt="" loading="lazy" decoding="async" sizes={sizes} /></noscript>}</div>
+  <div class="postItem__info">
+    {card.pdf && <abbr class="postItem__mark postItem__mark--lead" title="PDF download">PDF</abbr>}
+    {info === 'terms' ? <span>{card.terms}</span> : <>{card.topic}<span aria-hidden="true"> · </span><time datetime={card.datetime}>{card.date}</time></>}
+    {langName && <abbr class="postItem__mark postItem__lang" title={langName}>{card.lang!.split('-')[0]}</abbr>}
+  </div>
+  <div class="postItem__contents" lang={card.lang}>
+    <div class="postItem__title">
+      <h3>{card.title}</h3>
+      {/* Inside the title block: the reveal offset (animations.js) measures it, so it rests under the title and stays on reveal. */}
+      {(card.author || card.minutes) && <p class="postItem__byline">{card.author}{card.author && card.minutes && <span aria-hidden="true"> · </span>}{card.minutes && `${card.minutes} min read`}</p>}
+    </div>
     {card.excerpt && <div class="postItem__excerpt"><p>{card.excerpt}</p></div>}
   </div>
 </a>
+
+<style>
+  /* One line at every width: a long topic truncates instead of wrapping into the title. */
+  .postItem__info { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* Small bordered markers in the label: NL (language) trails it, PDF (white paper download) leads so truncation never hides it. */
+  .postItem__mark { margin-left: 8px; padding: 1px 4px; border: 1px solid currentColor; border-radius: 2px; font-size: 11px; line-height: 1; text-decoration: none; vertical-align: 1px; }
+  .postItem__mark--lead { margin: 0 8px 0 0; }
+  /* Byline: one line under the title, on the bottom scrim at rest (white, >=9:1) and green on the reveal panel. */
+  .postItem__byline { margin: 12px 0 0; font-size: 14px; line-height: 17px; letter-spacing: .02em; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .postItem:not(:has(.postItem__bg img)) .postItem__byline { color: var(--green); }
+</style>

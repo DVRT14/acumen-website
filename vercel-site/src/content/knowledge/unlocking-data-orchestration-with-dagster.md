@@ -13,11 +13,11 @@ takeaways:
   - "Dagster integrates with tools like dbt, Power BI and Databricks, and helps enforce data quality rules."
   - "Dagster manages dependencies across systems, tracks data lineage and provides built-in observability."
 image:
-  width: 1673
-  height: 821
-  src: "/wp-content/uploads/2024/05/Mask-Group-2.webp"
+  width: 2560
+  height: 1707
+  src: "/wp-content/uploads/2025/09/DSCF6864-scaled.webp"
   alt: ""
-  srcset: "/wp-content/uploads/2024/05/Mask-Group-2.webp 1673w, /wp-content/uploads/2024/05/Mask-Group-2-300x147.webp 300w, /wp-content/uploads/2024/05/Mask-Group-2-1024x503.webp 1024w, /wp-content/uploads/2024/05/Mask-Group-2-768x377.webp 768w, /wp-content/uploads/2024/05/Mask-Group-2-1536x754.webp 1536w"
+  srcset: "/wp-content/uploads/2025/09/DSCF6864-scaled.webp 2560w, /wp-content/uploads/2025/09/DSCF6864-300x200.webp 300w, /wp-content/uploads/2025/09/DSCF6864-768x512.webp 768w, /wp-content/uploads/2025/09/DSCF6864-1024x683.webp 1024w, /wp-content/uploads/2025/09/DSCF6864-1536x1024.webp 1536w, /wp-content/uploads/2025/09/DSCF6864-2048x1365.webp 2048w"
 ogImage: "/wp-content/uploads/2024/05/Mask-Group-2.jpg"
 cta:
   title: "Need our Dagster guidance?"

@@ -8,11 +8,11 @@ updated: 2026-02-05T13:22:07.000Z
 author: "acumen"
 tags: ["Data platform"]
 image:
-  width: 1707
-  height: 2560
-  src: "/wp-content/uploads/2025/09/DSCF6493-scaled.webp"
+  width: 2560
+  height: 1707
+  src: "/wp-content/uploads/2025/04/DSCF1208-scaled.webp"
   alt: ""
-  srcset: "/wp-content/uploads/2025/09/DSCF6493-scaled.webp 1707w, /wp-content/uploads/2025/09/DSCF6493-200x300.webp 200w, /wp-content/uploads/2025/09/DSCF6493-683x1024.webp 683w, /wp-content/uploads/2025/09/DSCF6493-768x1152.webp 768w, /wp-content/uploads/2025/09/DSCF6493-1024x1536.webp 1024w, /wp-content/uploads/2025/09/DSCF6493-1365x2048.webp 1365w"
+  srcset: "/wp-content/uploads/2025/04/DSCF1208-scaled.webp 2560w, /wp-content/uploads/2025/04/DSCF1208-300x200.webp 300w, /wp-content/uploads/2025/04/DSCF1208-768x512.webp 768w, /wp-content/uploads/2025/04/DSCF1208-1024x683.webp 1024w, /wp-content/uploads/2025/04/DSCF1208-1536x1024.webp 1536w, /wp-content/uploads/2025/04/DSCF1208-2048x1365.webp 2048w"
 ogImage: "/wp-content/uploads/2025/09/DSCF6493-scaled.jpg"
 highlights:
   - "Why the missing piece is rarely the tools, but a clear data platform strategy"

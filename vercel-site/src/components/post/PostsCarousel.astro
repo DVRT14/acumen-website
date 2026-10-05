@@ -6,21 +6,26 @@ import 'swiper/css/a11y';
 import PostCard from './PostCard.astro';
 import { posts, card, type Card } from '../../lib/knowledge';
 
-interface Props { cards?: Card[]; info?: 'date' | 'terms'; animate?: boolean }
-const { info, animate = true } = Astro.props;
+interface Props { cards?: Card[]; info?: 'date' | 'terms'; animate?: boolean; show?: number }
+const { info, animate = true, show = 2 } = Astro.props;
 const cards = Astro.props.cards ?? (await posts()).slice(0, 10).map(card);
 const settings = {
-  slides_to_show: '2', slides_to_show_tablet: '2', slides_to_show_mobile: '1.2', slides_to_scroll: '1',
+  slides_to_show: String(show), slides_to_show_tablet: '2', slides_to_show_mobile: '1.2', slides_to_scroll: '1',
   offset_sides: 'right', offset_width: { unit: 'px', size: 50, sizes: [] }, offset_width_mobile: { unit: 'px', size: 30, sizes: [] },
   image_spacing_custom: { unit: 'px', size: 25, sizes: [] }, image_spacing_custom_mobile: { unit: 'px', size: 15, sizes: [] },
   infinite: 'no', speed: 500,
 };
+// show=3 is the knowledge overview: 3-up in the 1180px column (50px side padding, no offset gutter above 767px, 25px gaps), 2-up on
+// tablet, 1.2-up on mobile; card heights from knowledge/index.astro. Otherwise PostCard's 2-up default.
+const box: [string, number][] | undefined = show === 3
+  ? [['calc((100vw - 63px) / 1.2)', 389], ['calc(50vw - 63px)', 420], ['calc((min(100vw, 1280px) - 150px) / 3)', 460]]
+  : undefined;
 ---
-<div class="posts-carousel animated-fast" data-animate={animate ? 'fadeIn' : undefined} data-animate-delay={animate ? '500' : undefined} data-carousel={JSON.stringify(settings)}>
+<div class="posts-carousel animated-fast" style={`--pc-show:${show}`} data-animate={animate ? 'fadeIn' : undefined} data-animate-delay={animate ? '500' : undefined} data-carousel={JSON.stringify(settings)}>
   <div class="swiper posts-carousel__swiper">
     <div class="swiper-wrapper">
-      {cards.map(c => (
-        <div class="swiper-slide posts-carousel__slide" role="group" aria-roledescription="slide"><PostCard card={c} info={info} /></div>
+      {cards.map((c, i) => (
+        <div class="swiper-slide posts-carousel__slide" role="group" aria-roledescription="slide"><PostCard card={c} info={info} box={box} defer={i > show} /></div>
       ))}
     </div>
   </div>

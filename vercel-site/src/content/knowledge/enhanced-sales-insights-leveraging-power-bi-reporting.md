@@ -1,6 +1,6 @@
 ---
 type: "case"
-title: "Spaas Candles Leveraging Power BI’s Dynamic and Interactive Reporting for enhanced sales insights"
+title: "Spaas Candles leveraging Power BI’s dynamic and interactive reporting for enhanced sales insights"
 seoTitle: "Spaas Candles Leveraging Power BI's Dynamic and Interactive Reporting for enhanced sales insights"
 description: "For Spaas to visualize their data, they had to manually extract data from SAP and import it into Excel on a monthly basis."
 excerpt: "We prioritized listening to our clients' specific objectives, ensuring that the reports delivered precisely the insights necessary for the company's growth."

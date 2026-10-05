@@ -1,49 +1,265 @@
 ---
-// Knowledge overview (old site page 143): one carousel per post type, generated from the collection. The fourth section of the old page
-// ("Technical info") was hidden on every device and is left out.
+// Knowledge overview: a hero that says what is here (jump links with counts), the newest customer case featured large,
+// one topic filter for all sections, then one grid per post type. Closing CTA card.
 import Base from '../../layouts/Base.astro';
 import meta from '../../data/meta.json';
-import PostsCarousel from '../../components/post/PostsCarousel.astro';
-import { posts, card } from '../../lib/knowledge';
+import PostCard from '../../components/post/PostCard.astro';
+import { posts, card, TOPICS, topicsOf, type Post } from '../../lib/knowledge';
 import '../../styles/post.css';
 import '../../styles/post-card.css';
+import '../../styles/case.css';
+
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const topics = Object.keys(TOPICS).map(name => ({ name, slug: slug(name) }));
+const item = (p: Post) => ({ card: card(p), topics: topicsOf(p).map(slug).join('|') });
+
+const cases = await posts('case');
+// Featured: the newest customer case (client proof is the strongest opener). It stays in the cases grid too, so the counts
+// match the jump links and the grid rows stay full.
+const [lead] = cases;
+const leadCard = card(lead);
+const leadTopics = topicsOf(lead);
+
+const INSIGHTS_LIMIT = 9; // three rows on desktop before "Show all"; the script drops it to 4 on phones
+// Grid card [width, height] at ≤767px, ≤1024px, desktop (matches the .kx-grid and .kx .postItem rules below), for image sizes.
+const GRID_BOX: [string, number][] = [['calc(100vw - 30px)', 389], ['calc(50vw - 63px)', 420], ['calc((min(100vw, 1280px) - 150px) / 3)', 460]];
 
 const sections = [
-  { title: 'Customer cases', cards: (await posts('case')).map(card) },
-  { title: 'Our insights', cards: (await posts('blog')).map(card), hidden: true, clip: true },
-  { title: 'White papers', cards: (await posts('whitepaper')).map(card) },
+  { id: 'cases', title: 'Customer cases', noun: ['customer case', 'customer cases'], text: 'What we built with our clients, and what changed for them.', items: cases.map(item) },
+  { id: 'insights', title: 'Insights', noun: ['insight', 'insights'], text: 'Our consultants on data platforms, AI, reporting and planning.', items: (await posts('blog')).map(item), limit: INSIGHTS_LIMIT },
+  { id: 'white-papers', title: 'White papers', noun: ['white paper', 'white papers'], text: 'In-depth guides to download, from lakehouse migrations to ESG reporting.', items: (await posts('whitepaper')).map(item) },
 ];
+const plural = (n: number, [one, many]: string[]) => `${n} ${n === 1 ? one : many}`;
 ---
 <Base {...meta.knowledge}>
-  <h1 class="visually-hidden">Knowledge</h1>
-  {sections.map((s, i) => (
-    <section class={`kx kx--${i + 1}${s.clip ? ' kx--clip' : ''}`}>
-      <div class="kx__band">
-        <div class={`kx__title typingReveal${s.hidden ? ' kx__title--hidden' : ''}`}><h2>{s.title}</h2></div>
-        <div class="kx__box"><div class="post-related__inner"><PostsCarousel cards={s.cards} /></div></div>
+  <section class="post-sec post-hero">
+    <div class="post-sec__inner post-hero__inner">
+      <div class="post-hero__title"><h1>Knowledge</h1></div>
+      <p class="kx-lead">Customer cases, insights and white papers from the Acumen team.</p>
+      <nav class="kx-nav" aria-label="Knowledge sections">
+        {sections.map(s => <a href={`#${s.id}`}>{s.title} <span>{s.items.length}</span></a>)}
+      </nav>
+    </div>
+  </section>
+
+  <section class="kx-top" aria-label="Featured customer case">
+    <div class="post-related__inner">
+      <a class="kx-feature" href={leadCard.href}>
+        <div class="kx-feature__media">
+          {leadCard.image && <img {...leadCard.image} alt="" decoding="async"
+            sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1024px) calc(50vw - 50px), 620px" />}
+        </div>
+        <div class="kx-feature__body">
+          <p class="kx-feature__meta">
+            Customer case<span aria-hidden="true"> · </span>{leadCard.topic}
+            {leadTopics.length > 0 && <><span aria-hidden="true"> · </span>{leadTopics.join(', ')}</>}
+          </p>
+          <h2 class="kx-feature__title">{leadCard.title}</h2>
+          {leadCard.excerpt && <p class="kx-feature__excerpt">{leadCard.excerpt}</p>}
+          <span class="kx-feature__go">Read the case
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+
+    <!-- One topic filter for all three sections. Hidden without JS: then everything shows. -->
+    <div class="post-related__inner kx-filter" hidden>
+      <div class="kx-chips" role="group" aria-label="Filter cases, insights and white papers by topic">
+        <button type="button" aria-pressed="true" data-topic="">All</button>
+        {topics.map(t => <button type="button" aria-pressed="false" data-topic={t.slug}>{t.name}</button>)}
+      </div>
+      <p class="kx-status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  {sections.map(s => (
+    <section class="kx" id={s.id} aria-labelledby={`${s.id}-h`} data-one={s.noun[0]} data-many={s.noun[1]} data-limit={s.limit}>
+      <div class="post-related__inner">
+        <header class="kx__head">
+          <h2 id={`${s.id}-h`}>{s.title}</h2>
+          <p>{s.text}</p>
+          <p class="kx-count">{plural(s.items.length, s.noun)}</p>
+        </header>
+        <ul class="kx-grid" role="list">
+          {s.items.map(i => <li data-topics={i.topics}><PostCard card={i.card} box={GRID_BOX} /></li>)}
+        </ul>
+        <p class="kx-empty" hidden></p>
+        {s.limit && <button type="button" class="btn btn--outline kx-more" hidden>Show all {plural(s.items.length, s.noun)}</button>}
       </div>
     </section>
   ))}
+
+  <section class="case-wrap case-cta kx-cta" aria-labelledby="kx-cta-title">
+    <div class="case-cta__card">
+      <h2 class="case-cta__title" id="kx-cta-title">Want this applied to your data?</h2>
+      <p class="case-cta__text">Tell us where your data, reporting or planning gets stuck. One of our consultants will tell you what we would do.</p>
+      <a class="case-cta__button" href="/contact/">Talk to our team</a>
+    </div>
+  </section>
 </Base>
 
+<script>
+  // Progressive enhancement: without JS every card shows and the topic chips stay hidden.
+  const bar = document.querySelector<HTMLElement>('.kx-filter');
+  if (bar) {
+    const chips = [...bar.querySelectorAll<HTMLButtonElement>('button[data-topic]')];
+    const status = bar.querySelector<HTMLElement>('.kx-status')!;
+    const phone = matchMedia('(max-width: 767px)');
+    const sections = [...document.querySelectorAll<HTMLElement>('.kx')].map(el => ({
+      el, one: el.dataset.one!, many: el.dataset.many!, limit: Number(el.dataset.limit) || 0,
+      items: [...el.querySelectorAll<HTMLLIElement>('.kx-grid > li')],
+      count: el.querySelector<HTMLElement>('.kx-count')!, empty: el.querySelector<HTMLElement>('.kx-empty')!,
+      grid: el.querySelector<HTMLElement>('.kx-grid')!, more: el.querySelector<HTMLButtonElement>('.kx-more'), expanded: false,
+    }));
+    const names = Object.fromEntries(chips.map(b => [b.dataset.topic!, b.textContent!]));
+    const plural = (n: number, s: { one: string; many: string }) => `${n} ${n === 1 ? s.one : s.many}`;
+    let topic = new URLSearchParams(location.search).get('topic') ?? '';
+    if (!(topic in names)) topic = '';
+
+    const render = () => {
+      const name = names[topic];
+      const summary: string[] = [];
+      for (const s of sections) {
+        // Collapse to "Show all" only on the unfiltered view; a topic shows every match.
+        const limit = s.limit && !topic && !s.expanded ? (phone.matches ? 4 : s.limit) : Infinity;
+        let n = 0;
+        for (const li of s.items) {
+          const match = !topic || li.dataset.topics!.split('|').includes(topic);
+          if (match) n++;
+          li.hidden = !match || n > limit;
+        }
+        const shown = Math.min(n, limit);
+        s.grid.hidden = n === 0;
+        s.empty.hidden = n > 0;
+        s.empty.textContent = `No ${s.many} on ${name} yet.`;
+        s.count.textContent = n === 0 ? '' : shown < n ? `Showing ${shown} of ${n} ${s.many}` : topic ? `${plural(n, s)} on ${name}` : plural(n, s);
+        if (s.more) s.more.hidden = shown >= n;
+        summary.push(plural(n, { one: s.one.replace("customer ", ""), many: s.many.replace("customer ", "") }));
+      }
+      status.textContent = `${topic ? name : 'All topics'}: ${summary.join(', ')}`;
+      chips.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.topic === topic)));
+    };
+
+    bar.addEventListener('click', e => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>('button[data-topic]');
+      if (!b || b.dataset.topic === topic) return;
+      topic = b.dataset.topic!;
+      const url = new URL(location.href);
+      topic ? url.searchParams.set('topic', topic) : url.searchParams.delete('topic');
+      history.replaceState(history.state, '', url);
+      render();
+    });
+    for (const s of sections) s.more?.addEventListener('click', () => {
+      const next = s.items.find(li => li.hidden); // first card the expansion reveals
+      s.expanded = true;
+      render();
+      next?.querySelector('a')?.focus(); // keep keyboard users where the new cards start
+    });
+    phone.addEventListener('change', render);
+    bar.hidden = false;
+    render();
+  }
+</script>
+
 <style>
-  .kx { position: relative; display: flex; flex-direction: column; padding-top: 80px; }
-  .kx--clip { overflow: clip; }
-  .kx__band { position: relative; display: flex; flex-direction: column; width: 100%; padding-left: 40px; overflow: clip; }
-  .kx__title { position: relative; max-width: 100%; }
-  .kx__title--hidden { opacity: 0; visibility: hidden; }
-  .kx__title h2 { margin: 0 0 73px; font-family: "Atype Display", Sans-serif; font-size: 82px; font-weight: 400; text-transform: none; line-height: 1.05em; letter-spacing: -0.04em; color: #002921; }
-  .kx__box { position: relative; display: flex; flex-direction: column; width: 100%; }
+  .kx-lead { margin: -10px 0 32px; max-width: 760px; font-family: var(--display); font-size: 30px; line-height: 1.35; color: var(--text-soft); }
+  /* Section links: quiet underlined text with the count as a small superscript. */
+  .kx-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 36px; }
+  .kx-nav a { padding: 4px 0; font-size: 18px; color: var(--green); text-decoration: underline; text-decoration-color: var(--line); text-decoration-thickness: 1px; text-underline-offset: 7px; transition: text-decoration-color .25s; }
+  .kx-nav a span { display: inline-block; margin-left: 3px; font-size: 12px; vertical-align: super; letter-spacing: .04em; color: var(--label); }
+  .kx-nav a:hover, .kx-nav a:focus-visible { text-decoration-color: var(--green); }
+
+  /* Featured case: one wide link, photo left, text at rest on the right. */
+  .kx-top { padding: 0 50px; }
+  .kx-feature { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); min-height: 460px; overflow: hidden; border-radius: 20px; background: var(--grey); color: var(--green); text-decoration: none; }
+  .kx-feature:hover, .kx-feature:active { color: var(--green); }
+  .kx-feature:focus-visible { outline-offset: 4px; }
+  .kx-feature__media { position: relative; overflow: hidden; background: var(--green); }
+  .kx-feature__media img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; transition: transform .8s cubic-bezier(.16, 1, .3, 1); }
+  .kx-feature:is(:hover, :focus-visible) .kx-feature__media img { transform: scale(1.04); }
+  .kx-feature__body { display: flex; flex-direction: column; align-items: flex-start; padding: 48px; }
+  .kx-feature__meta { margin: 0 0 24px; font-size: 14px; line-height: 1.3; letter-spacing: .69px; text-transform: uppercase; color: var(--label); }
+  .kx-feature__title { margin: 0 0 32px; max-width: 18ch; font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.08; letter-spacing: -0.03em; text-wrap: balance; color: var(--green); }
+  .kx-feature__excerpt { margin: -12px 0 32px; max-width: 52ch; font-size: 18px; font-weight: 300; line-height: 1.5; color: var(--text-soft); }
+  .kx-feature__go { display: inline-flex; align-items: center; gap: 10px; margin-top: auto; padding: 13px 22px 13px 26px; border: 1px solid var(--green); border-radius: 200px; font-size: 17px; line-height: 1.2; transition: background-color .3s, border-color .3s; }
+  .kx-feature__go svg { transition: transform .3s cubic-bezier(.16, 1, .3, 1); }
+  .kx-feature:is(:hover, :focus-visible) .kx-feature__go { background: var(--lime); border-color: var(--lime); }
+  .kx-feature:is(:hover, :focus-visible) .kx-feature__go svg { transform: translateX(4px); }
+
+  /* Topic filter: a slim bar between the featured case and the sections it filters. */
+  .kx-filter { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 30px; padding-top: 48px; }
+  .kx-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .kx-filter[hidden], .kx-grid[hidden], .kx-grid > li[hidden], .kx-more[hidden], .kx-empty[hidden] { display: none; }
+  .kx-chips button, .kx-chips button:focus { min-height: 44px; padding: 8px 18px; border: 1px solid var(--line); border-radius: 200px; background: var(--white); font: inherit; font-size: 16px; line-height: 1.2; color: var(--green); cursor: pointer; transition: background-color .25s, border-color .25s, color .25s; }
+  .kx-chips button:hover { border-color: var(--green); background: var(--white); color: var(--green); }
+  .kx-chips button[aria-pressed="true"] { border-color: var(--green); background: var(--green); color: var(--white); }
+  .kx-status { margin: 0; font-size: 14px; letter-spacing: .69px; text-transform: uppercase; color: var(--label); }
+
+  /* Every section has the same top padding, so every jump target lands its heading the same distance under the fixed header. */
+  .kx { position: relative; padding: 70px 50px 0; overflow: clip; scroll-margin-top: 40px; }
+  .kx__head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 8px 30px; margin-bottom: 40px; padding-top: 30px; border-top: 1px solid var(--line); }
+  .kx__head h2 { grid-column: 1 / -1; margin: 0; font-family: var(--display); font-size: 56px; font-weight: 400; line-height: 1.05; letter-spacing: -0.04em; color: var(--green); }
+  .kx__head p { margin: 0; font-size: 20px; font-weight: 300; line-height: 1.4; color: var(--text-soft); }
+  .kx__head .kx-count { font-size: 14px; font-weight: 400; letter-spacing: .69px; text-transform: uppercase; color: var(--label); }
+  .kx-empty { margin: 0; font-size: 18px; color: var(--text-soft); }
+
+  .kx-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 25px; margin: 0; padding: 0; list-style: none; }
+  .kx-grid > li { display: flex; }
+  .kx-grid :global(.postItem) { flex: 1; }
+  .kx-more { display: flex; margin: 40px auto 0; }
+
+  .kx-cta { padding-top: 110px; padding-bottom: 40px; }
+
+  /* Three across: shorter cards so the whole card, title included, fits on screen. */
+  .kx :global(.postItem) { min-height: 460px; padding: 32px; }
+  .kx :global(.postItem__info) { top: 32px; left: 32px; right: 32px; }
+  .kx :global(.postItem__contents) { padding: 70px 32px 32px; }
+  .kx :global(.postItem__title h3) { font-size: 30px; line-height: 1.12; }
+  .kx :global(.postItem__excerpt) { font-size: 18px; line-height: 1.4; }
+
   @media (max-width: 1024px) {
-    .kx { padding-top: 50px; }
-    .kx--2 { padding-top: 100px; }
-    .kx__title h2 { margin-bottom: 50px; font-size: 40px; }
+    .kx-lead { font-size: 24px; }
+    .kx__head h2 { font-size: 40px; }
+    .kx-feature { min-height: 420px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .kx-feature__body { padding: 36px; }
+    .kx-feature__title { font-size: 34px; }
+    .kx-feature__excerpt { font-size: 16px; }
+    .kx :global(.postItem) { min-height: 420px; }
+    .kx :global(.postItem__title h3) { font-size: 26px; }
+    .kx :global(.postItem__excerpt) { font-size: 16px; }
+    .kx-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
   @media (max-width: 767px) {
-    .kx, .kx--3 { padding-top: 34px; }
-    .kx--2 { padding-top: 50px; }
-    .kx, .kx__band { flex-wrap: wrap; }
-    .kx__band { padding-left: 15px; }
-    .kx__title h2 { margin-bottom: 30px; }
+    .kx-lead { margin-bottom: 30px; font-size: 18px; }
+    .kx-nav { gap: 6px 24px; }
+    .kx-nav a { font-size: 16px; }
+    .kx-top { padding: 0 15px; }
+    .kx-feature { grid-template-columns: 1fr; min-height: 0; }
+    .kx-feature__media { aspect-ratio: 16 / 10; }
+    .kx-feature__body { padding: 25px 25px 28px; }
+    .kx-feature__meta { margin-bottom: 14px; }
+    .kx-feature__title { margin-bottom: 26px; font-size: 28px; }
+    .kx-feature__excerpt { margin: -12px 0 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; line-clamp: 4; overflow: hidden; }
+    .kx-feature__go { margin-top: 24px; padding: 11px 18px 11px 22px; font-size: 16px; }
+    .kx-filter { padding-top: 32px; gap: 12px; }
+    /* One swipeable row of chips instead of three wrapped rows. */
+    .kx-chips { flex-wrap: nowrap; width: calc(100% + 30px); margin: 0 -15px; padding: 0 15px; overflow-x: auto; scrollbar-width: none; }
+    .kx-chips button { flex: none; }
+    .kx-chips button, .kx-chips button:focus { font-size: 15px; padding: 8px 14px; }
+    .kx-status { font-size: 12px; }
+    .kx { padding: 40px 15px 0; }
+    .kx-grid { grid-template-columns: 1fr; gap: 15px; }
+    .kx-more { margin-top: 30px; }
+    .kx-cta { padding: 60px 15px 20px; }
+    .kx__head { grid-template-columns: 1fr; margin-bottom: 24px; padding-top: 24px; }
+    .kx__head h2 { font-size: 34px; }
+    .kx__head p { font-size: 16px; }
+    .kx__head .kx-count { font-size: 12px; }
+    .kx-empty { font-size: 16px; }
+    .kx :global(.postItem) { min-height: 389px; padding: 25px; }
+    .kx :global(.postItem__info) { top: 25px; left: 25px; right: 25px; }
+    .kx :global(.postItem__contents) { padding: 58px 25px 25px; }
+    .kx :global(.postItem__title h3) { font-size: 24px; }
   }
 </style>

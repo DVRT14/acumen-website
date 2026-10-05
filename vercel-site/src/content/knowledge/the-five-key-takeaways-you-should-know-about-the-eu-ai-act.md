@@ -13,6 +13,9 @@ takeaways:
   - "Users must be clearly informed when AI is involved in decisions, so they can understand and challenge those decisions."
   - "Practices such as social scoring and real-time biometric surveillance are prohibited, and compliance may raise costs for companies."
 image:
+  width: 1262
+  height: 841
+  srcset: "/wp-content/uploads/2024/05/Support-and-Maintenance_3.webp 1262w, /wp-content/uploads/2024/05/Support-and-Maintenance_3-300x200.webp 300w, /wp-content/uploads/2024/05/Support-and-Maintenance_3-768x512.webp 768w, /wp-content/uploads/2024/05/Support-and-Maintenance_3-1024x682.webp 1024w"
   src: "/wp-content/uploads/2024/05/Support-and-Maintenance_3.webp"
   alt: ""
 ogImage: "/wp-content/uploads/2024/05/Support-and-Maintenance_3.png"

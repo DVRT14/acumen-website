@@ -1,6 +1,6 @@
 ---
 type: "blog"
-title: "From AI Ideas to Impact: Roadmap for Successful Projects"
+title: "From AI ideas to impact: Roadmap for successful projects"
 seoTitle: "From AI idea to reality: A roadmap for successful AI projects"
 description: "Discover how to turn your AI ideas into reality with our step-by-step roadmap for successful AI projects. Learn the essentials of goal setting, prototyping, and scaling up AI solutions to drive sustainable business growth."
 excerpt: "Bringing AI ideas to life requires more than just ambition, it needs a clear roadmap. Discover how to go from concept to production with our step-by-step guide to successful AI implementation."

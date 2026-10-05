@@ -13,6 +13,9 @@ takeaways:
   - "Support works best when the people behind it know data solutions, not just generic IT."
   - "No two environments are the same, so the service scope is agreed together with each client."
 image:
+  width: 1761
+  height: 2035
+  srcset: "/wp-content/uploads/2024/06/Jan-Timmermans-260x300.webp 260w, /wp-content/uploads/2024/06/Jan-Timmermans-768x887.webp 768w, /wp-content/uploads/2024/06/Jan-Timmermans-886x1024.webp 886w, /wp-content/uploads/2024/06/Jan-Timmermans-1329x1536.webp 1329w, /wp-content/uploads/2024/06/Jan-Timmermans.jpg 1761w"
   src: "/wp-content/uploads/2024/06/Jan-Timmermans.jpg"
   alt: ""
 ogImage: "/wp-content/uploads/2024/06/Jan-Timmermans.jpg"

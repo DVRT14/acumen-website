@@ -88,10 +88,13 @@ function headerNav() {
     toggle($$('.dropMenu'), 'show');
     toggle([document.body, document.documentElement], 'dropMenuActive');
     // Closed menu (moved off-screen) stays out of the tab order; focus inside it returns to the opener.
+    // Open menu: the page behind it is inert, so Tab cycles through the header (Menu/close) and the menu only.
     const open = isOpen(), menu = dropMenu();
     if (open) opener = document.activeElement;
     else if (menu.contains(document.activeElement)) opener?.focus({ preventScroll: true });
     menu.inert = !open;
+    $$('#main, body > footer, .skip-link').forEach(el => { el.inert = open; });
+    if (open) menu.querySelector('a[href]')?.focus({ preventScroll: true });
     $$('[aria-controls="drop-menu"]').forEach(b => b.setAttribute('aria-expanded', String(open)));
   }
 

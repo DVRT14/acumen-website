@@ -52,6 +52,9 @@
 }
 
 @media (max-width: 1024px) {
+  /* 1024px copy (56 KB) instead of the 289 KB full-size photo. */
+  .ct-photo:not(.fx-background),
+  .ct-photo > .fx-container > .fx-layer { background-image: url("/wp-content/uploads/2024/06/DSCF6504-full-size-scaled-m.webp"); }
   .ct__inner { flex-wrap: wrap; padding: 100px 0; }
   .ct__intro, .ct__form { width: 100%; }
   .ct__intro { padding-right: 0; }

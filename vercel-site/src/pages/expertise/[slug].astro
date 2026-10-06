@@ -17,6 +17,8 @@ export function getStaticPaths() {
   }));
 }
 const { page } = Astro.props;
+// Photo band: full photo plus its 1024px "-m" copy (public/, made with sharp) for ≤1024px; expertise.css picks one.
+const bg = (src: string) => `--bg:url("${src}");--bg-m:url("${src.replace(/\.webp$/, '-m.webp')}")`;
 ---
 <Base seo={page.seo} bodyClass="p-spaced">
   <article class="post xpage">
@@ -32,7 +34,7 @@ const { page } = Astro.props;
       </div>
     </section>
 
-    <section class="post-banner" style={`background-image:url("${page.bannerImage}")`}>
+    <section class="post-banner" style={bg(page.bannerImage)}>
       <div class="post-banner__marquee marqueee" wb-data="marquee" duration="20" direction="left">
         <div class="marquee-content"><h2 class="xmarquee__title" set:html={page.marquee} /></div>
       </div>
@@ -51,7 +53,7 @@ const { page } = Astro.props;
       </div>
     </section>
 
-    <section class="post-sec post-photo" style={`background-image:url("${page.photoImage}")`}>
+    <section class="post-sec post-photo" style={bg(page.photoImage)}>
       <div class="post-sec__inner post-photo__inner"></div>
     </section>
 

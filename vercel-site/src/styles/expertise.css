@@ -1,6 +1,10 @@
 /* Expertise pages: where the old template 1047 differs from the post template (post.css). */
 .xpage .post-heading, .xpage .post-text, .xpage .post-quote__text { color: #002921; }
 
+/* Photo bands: --bg is the full photo, --bg-m its 1024px "-m" copy for tablets and phones. */
+.xpage :is(.post-banner, .post-photo) { background-image: var(--bg); }
+@media (max-width: 1024px) { .xpage :is(.post-banner, .post-photo) { background-image: var(--bg-m); } }
+
 /* "Our Expertise" slider band */
 .xsec { position: relative; display: flex; flex-direction: column; padding: 100px 0 0 50px; }
 .xsec__box { position: relative; display: flex; flex-direction: column; }

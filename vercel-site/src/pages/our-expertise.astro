@@ -1,20 +1,329 @@
 ---
-// Our Expertise (old site page 151): the expertise cards in a two-column grid.
+// Our Expertise: the overview that routes to the /expertise/* pages. Decision intelligence rests on two expertises:
+// Data Engineering (the cellar: one place for data and the context AI needs) and Data Science & AI (built on top).
+// A short story section first explains why, ending in what decision intelligence means here.
+// The other disciplines are embedded in the two expertises, so they are listed under them as smaller links.
 import Base from '../layouts/Base.astro';
 import meta from '../data/meta.json';
-import ExpertiseCard from '../components/ExpertiseCard.astro';
-import cards from '../data/expertise-cards.json';
-import '../styles/our-expertise.css';
+import '../styles/post.css';
+import '../styles/case.css';
 const m = meta['our-expertise'];
+
+const arrow = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>';
+
+// Too slow → fast but meaningless → fast and meaningful.
+const steps = [
+  { title: 'Too slow', text: 'Traditional reporting took one to two weeks from data to report. By the time the numbers arrived, the moment to decide had often passed.' },
+  { title: 'Fast, without meaning', text: 'Self-service made data quick to reach, but nobody agreed on what the numbers meant. Speed turned into a question of trust.' },
+  { title: 'Fast and meaningful', text: 'AI can now answer questions and take routine decisions directly. That only works when the data carries its context: what each number means, where it comes from and who owns it.' },
+];
+
+// The house, told in four scroll steps: each step that reaches mid-screen adds its layer to the drawing (s1…s4 classes).
+const build = [
+  { title: 'Dig the cellar', text: 'Data Engineering comes first: all your data, from every source, in one platform. Pipelines bring it in cleaned, tested and documented.' },
+  { title: 'Label every shelf', text: 'Definitions, ownership and lineage live next to the data, so every number says what it means. That context is what makes an AI answer checkable.' },
+  { title: 'Build the house', text: 'On that foundation, Data Science & AI builds the models that predict, plan and schedule, inside the processes where decisions are made.' },
+  { title: 'Lights on', text: 'Each window is a decision: no-shows predicted, routes planned, staff scheduled. Most run on their own; your experts take the ones that need judgement.' },
+];
+// Data blocks on the cellar shelves: [x, y].
+const blocks = [[140, 362], [176, 362], [212, 362], [316, 362], [352, 362], [388, 362], [140, 412], [176, 412], [280, 412], [316, 412], [388, 412], [140, 462], [212, 462], [248, 462], [284, 462], [352, 462], [388, 462]];
+// Windows: [x, y]; the last one is the expert's.
+const windows = [[168, 168], [258, 168], [348, 168], [168, 258], [348, 258], [258, 258]];
+
+// role: the metaphor word that opens the intro. The main card names the detail page in its text, so its title can say what we do
+// instead of repeating the section heading.
+const groups = [
+  {
+    id: 'data-engineering', role: 'The cellar.', title: 'Data Engineering',
+    text: 'Ask an AI about data without context and you get confident, wrong answers. So we start underneath: all your data in one place, with its context built in. Definitions, tests, ownership and lineage live in the code next to the data, so they stay in step with it.',
+    main: { href: '/expertise/dataintegration-engineering/', title: 'How we build your data platform', page: 'Data Integration & Engineering', text: 'pipelines that bring data from every source into one platform, cleaned, tested and documented. Standard stack: dbt, Databricks or Microsoft Fabric, Dagster.' },
+    embedded: [
+      { href: '/expertise/data-governance/', title: 'Data Governance', text: 'Makes every answer checkable: agreed definitions and quality tests, built into the platform.' },
+      { href: '/expertise/datavisualisation-reporting/', title: 'Data Visualization & Reporting', text: 'Dashboards and reports that put the right numbers in front of the people who decide.' },
+      { href: '/expertise/support-maintenance/', title: 'Support & Maintenance', text: 'Keeps the foundation reliable as your business changes.' },
+    ],
+  },
+  {
+    id: 'data-science-ai', role: 'The house.', title: 'Data Science & AI',
+    text: 'On that foundation we put AI to work in the operational decisions made every day: predicting no-shows, planning routes, forecasting demand, scheduling staff.',
+    main: { href: '/expertise/datascience-ai/', title: 'How we take AI to production', page: 'Data Science & AI', text: 'we choose the decisions worth automating, prove the model on your data and build it into the process.' },
+    embedded: [
+      { href: '/expertise/data-strategy/', title: 'Data Strategy', text: 'Decides which decisions come first, and what they need.' },
+      { href: '/expertise/data-planning-epm/', title: 'Data Planning & EPM', text: 'Turns strategy into plans, budgets and forecasts.' },
+    ],
+  },
+];
 ---
 <Base {...m}>
-  <section class="oxp">
-    <h1 class="visually-hidden">Our expertise</h1>
-    <div class="oxp__spacer"></div>
-    <div class="oxp__grid">
-      <div class="oxp__items">
-        {cards.map(card => <div class="oxp__item"><ExpertiseCard card={card} /></div>)}
+  <section class="post-sec post-hero">
+    <div class="post-sec__inner post-hero__inner">
+      <div class="post-hero__title"><h1>Our expertise</h1></div>
+      <p class="oxp-lead">Every decision starts with a question. Too often, the answer comes too late, or nobody trusts it. We are experts in decision intelligence: making your processes data- and AI-driven, so the right answer is there when the decision is made.</p>
+      <nav class="oxp-nav" aria-label="Expertises">
+        {groups.map(g => <a href={`#${g.id}`}>{g.title}<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6" /></svg></a>)}
+      </nav>
+    </div>
+  </section>
+
+  <section class="oxp oxp--story" aria-labelledby="oxp-story-title">
+    <div class="oxp__inner oxp__inner--story">
+      <header class="oxp__head">
+        <h2 id="oxp-story-title">Two attempts, one lesson</h2>
+        <p>Since 2007 we have helped companies make informed decisions, and watched the market try twice to get answers faster. A report can stay wrong for years; a model built on the wrong meaning fails within weeks. Our operational AI work showed us what was missing.</p>
+      </header>
+      <ol class="oxp-steps">
+        {steps.map((s, i) => (
+          <li class:list={['oxp-step', { 'oxp-step--now': i === steps.length - 1 }]}>
+            <span class="oxp-step__n" aria-hidden="true">0{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="oxp-di"><strong>That is decision intelligence.</strong> Routine decisions run on data automatically, and your experts own the exceptions, where their knowledge matters most. We build it in that order: the cellar first, then the house on top.</p>
+    </div>
+  </section>
+
+  <section class="oxp oxh" aria-labelledby="oxh-title">
+    <div class="oxp__inner oxh__inner">
+      <header class="oxh__head"><h2 id="oxh-title">From cellar to house</h2></header>
+      <div class="oxh__stage">
+        <svg class="oxh-svg" viewBox="0 0 560 560" role="img" aria-label="A house in cross-section: a cellar of labelled data under the ground, a house on top with windows lit as decisions.">
+          <rect class="oxh-earth" x="0" y="330" width="560" height="230" />
+          <g class="oxh-cellar">
+            <path class="oxh-pipe" d="M0 372H120M0 452H60V422H120M560 402H440" />
+            <path class="oxh-flow" d="M0 372H120M0 452H60V422H120M560 402H440" />
+            <rect class="oxh-pit" x="120" y="330" width="320" height="180" rx="4" />
+            <path class="oxh-shelf" d="M132 386H428M132 436H428M132 486H428" />
+            {blocks.map(([x, y], i) => <rect class="oxh-block" x={x} y={y} width="28" height="20" rx="3" style={`--i:${i}`} />)}
+          </g>
+          <g class="oxh-context">
+            {blocks.map(([x, y], i) => <circle class="oxh-tag" cx={x + 24} cy={y + 4} r="4" style={`--i:${i}`} />)}
+          </g>
+          <g class="oxh-house">
+            <rect class="oxh-walls" x="140" y="140" width="280" height="190" />
+            <path class="oxh-floor" d="M140 235H420" />
+            <path class="oxh-lift" d="M235 330V150" />
+            {windows.map(([x, y], i) => <rect class:list={['oxh-win', { 'oxh-win--expert': i === windows.length - 1 }]} x={x} y={y} width="44" height="44" rx="3" style={`--i:${i}`} />)}
+            <path class="oxh-roof" d="M116 142L280 40L444 142Z" />
+          </g>
+          <g class="oxh-expert">
+            <circle cx="280" cy="270" r="6" />
+            <path d="M268 302v-10a12 12 0 0 1 24 0v10Z" />
+          </g>
+          <path class="oxh-ground" d="M0 330H560" />
+        </svg>
       </div>
+      <ol class="oxh-steps">
+        {build.map((s, i) => (
+          <li class="oxh-step" data-step={i + 1}>
+            <span class="oxp-step__n" aria-hidden="true">0{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  {groups.map(g => (
+    <section class="oxp" id={g.id} aria-labelledby={`${g.id}-title`}>
+      <div class="oxp__inner">
+        <header class="oxp__head">
+          <h2 id={`${g.id}-title`}>{g.title}</h2>
+          <p><strong>{g.role}</strong> {g.text}</p>
+        </header>
+        <div class="oxp__body">
+          <a class="oxp-main" href={g.main.href}>
+            <span class="oxp-main__title">{g.main.title}</span>
+            <span class="oxp-main__text"><span class="oxp-main__page">{g.main.page}:</span> {g.main.text}</span>
+            <span class="oxp-go" aria-hidden="true" set:html={arrow} />
+          </a>
+          <p class="oxp__sub">Embedded in this expertise</p>
+          <ul class="oxp__list">
+            {g.embedded.map(it => (
+              <li>
+                <a class="oxp-link" href={it.href}>
+                  <span class="oxp-link__title">{it.title}</span>
+                  <span class="oxp-link__text">{it.text}</span>
+                  <span class="oxp-go" aria-hidden="true" set:html={arrow} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="case-wrap case-cta oxp-cta" aria-labelledby="oxp-cta-title">
+    <div class="case-cta__card">
+      <h2 class="case-cta__title" id="oxp-cta-title">Which decision matters most?</h2>
+      <p class="case-cta__text">If you can’t trust your data yet, start with the cellar. If you can, put AI to work. Tell us the decision and we’ll map the information it needs and the first step.</p>
+      <a class="case-cta__button" href="/contact/">Get in touch</a>
     </div>
   </section>
 </Base>
+
+<script>
+  // The step crossing 60% down the screen (below the pinned drawing on mobile) sets the house's stage: s1…sN on the section, cumulative. Above step 1: empty plot.
+  const sec = document.querySelector('.oxh');
+  if (sec) {
+    const steps = [...sec.querySelectorAll('.oxh-step')];
+    const set = n => {
+      steps.forEach((s, i) => s.classList.toggle('is-on', i === n - 1));
+      steps.forEach((_, i) => sec.classList.toggle(`s${i + 1}`, i < n));
+    };
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      const n = +(e.target as HTMLElement).dataset.step!;
+      if (e.isIntersecting) set(n);
+      else if (n === 1 && e.boundingClientRect.top > innerHeight * .6) set(0);
+    }), { rootMargin: '-60% 0px -40% 0px' });
+    steps.forEach(s => io.observe(s));
+    sec.classList.add('is-live');
+  }
+</script>
+
+<style>
+  .oxp-lead { margin: -10px 0 32px; max-width: 800px; font-family: var(--display); font-size: 30px; line-height: 1.35; color: var(--text-soft); }
+  /* Jump links: outlined pills with a down arrow, so they read as "go to section". */
+  .oxp-nav { display: flex; flex-wrap: wrap; gap: 10px; }
+  .oxp-nav a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 18px 8px 22px; border: 1px solid var(--green); border-radius: 200px; font-size: 17px; line-height: 1.2; color: var(--green); text-decoration: none; transition: background-color .25s, color .25s; }
+  .oxp-nav a:hover, .oxp-nav a:focus-visible { background: var(--green); color: var(--white); }
+  .oxp-nav svg { transition: transform .3s cubic-bezier(.16, 1, .3, 1); }
+  .oxp-nav a:hover svg { transform: translateY(2px); }
+
+  /* One section: intro left (sticky on desktop), content right. scroll-margin clears the fixed header (96px). */
+  .oxp { padding: 70px 50px 0; scroll-margin-top: 100px; }
+  .oxp--story { padding-top: 10px; }
+  .oxp__head strong { font-weight: 500; color: var(--green); }
+  .oxp__inner { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 30px 60px; max-width: 1180px; margin: 0 auto; padding-top: 30px; border-top: 1px solid var(--line); }
+  .oxp__head { align-self: start; position: sticky; top: 120px; }
+  .oxp__head h2 { margin: 0 0 20px; font-family: var(--display); font-size: 56px; font-weight: 400; line-height: 1.05; letter-spacing: -0.04em; color: var(--green); }
+  .oxp__head p:last-child { margin: 0; max-width: 46ch; font-size: 20px; font-weight: 300; line-height: 1.45; color: var(--text-soft); }
+  .oxp__sub { margin: 36px 0 14px; font-size: 14px; letter-spacing: .69px; text-transform: uppercase; color: var(--label); }
+
+  /* Story: three steps, the last one (now) dark. Then the decision intelligence line across the full width. */
+  .oxp__inner--story { row-gap: 50px; }
+  .oxp-steps { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+  .oxp-step { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 20px; padding: 26px 28px; border-radius: 20px; background: var(--grey); color: var(--green); }
+  .oxp-step__n { grid-row: 1 / span 2; padding-top: 8px; font-size: 14px; letter-spacing: .69px; color: var(--label); }
+  .oxp-step h3 { margin: 0; font-family: var(--display); font-size: 28px; font-weight: 400; line-height: 1.15; letter-spacing: -0.02em; color: inherit; }
+  .oxp-step p { margin: 0; font-size: 17px; font-weight: 300; line-height: 1.45; color: var(--text-soft); }
+  .oxp-step--now { background: var(--green); color: var(--white); }
+  .oxp-step--now .oxp-step__n { color: var(--lime); }
+  .oxp-step--now p { color: var(--on-dark-muted); }
+  .oxp-di { grid-column: 1 / -1; margin: 0; max-width: 900px; font-family: var(--display); font-size: 34px; line-height: 1.3; letter-spacing: -0.02em; color: var(--green); }
+  .oxp-di strong { font-weight: 400; background: linear-gradient(transparent 62%, var(--lime) 62%); }
+
+  /* Main card: dark, the expertise itself. */
+  .oxp-main { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px 24px; align-items: end; min-height: 220px; padding: 36px; border-radius: 20px; background: var(--green); color: var(--white); text-decoration: none; }
+  .oxp-main:hover, .oxp-main:active { color: var(--white); }
+  .oxp-main:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+  .oxp-main__title { grid-column: 1 / -1; align-self: start; font-family: var(--display); font-size: 40px; line-height: 1.08; letter-spacing: -0.03em; }
+  .oxp-main__text { font-size: 18px; font-weight: 300; line-height: 1.45; color: var(--on-dark-muted); }
+  .oxp-main__page { font-weight: 500; color: var(--white); }
+  .oxp-main .oxp-go { border-color: var(--lime); color: var(--lime); }
+  .oxp-main:is(:hover, :focus-visible) .oxp-go { background: var(--lime); color: var(--green); }
+
+  /* Embedded disciplines: lighter rows. */
+  .oxp__list { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
+  /* Hover stays quiet (white with a green ring); lime is kept for the arrow only. */
+  .oxp-link { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 24px; align-items: center; padding: 20px 24px; border-radius: 16px; background: var(--grey); color: var(--green); text-decoration: none; transition: background-color .3s, box-shadow .3s; }
+  .oxp-link:hover, .oxp-link:active { color: var(--green); background: var(--white); box-shadow: inset 0 0 0 1px var(--green); }
+  .oxp-link:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+  .oxp-link__title { font-family: var(--display); font-size: 24px; line-height: 1.15; letter-spacing: -0.02em; }
+  .oxp-link__text { grid-column: 1; font-size: 16px; font-weight: 300; line-height: 1.45; color: var(--text-soft); }
+  .oxp-link .oxp-go { grid-row: 1 / span 2; width: 44px; height: 44px; }
+  .oxp-link:is(:hover, :focus-visible) .oxp-go { background: var(--green); color: var(--lime); }
+
+  .oxp-go { grid-column: 2; display: grid; place-items: center; width: 52px; height: 52px; border: 1px solid var(--green); border-radius: 50%; transition: background-color .3s, color .3s; }
+  .oxp-go :global(svg) { transition: transform .3s cubic-bezier(.16, 1, .3, 1); }
+  :is(.oxp-main, .oxp-link):is(:hover, :focus-visible) .oxp-go :global(svg) { transform: translateX(3px); }
+
+  .oxp-cta { padding-top: 110px; padding-bottom: 40px; }
+
+  /* House: sticky drawing left, four steps right. Without JS (.is-live missing) the finished house shows. */
+  .oxh__inner { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); }
+  .oxh__head { grid-column: 1 / -1; }
+  .oxh__head h2 { margin: 0; font-family: var(--display); font-size: 56px; font-weight: 400; line-height: 1.05; letter-spacing: -0.04em; color: var(--green); }
+  .oxh__stage { align-self: start; position: sticky; top: 120px; }
+  .oxh-svg { display: block; width: 100%; height: auto; max-height: calc(100vh - 160px); }
+  .oxh-steps { margin: 0; padding: 0 0 20vh; list-style: none; }
+  .oxh-step { display: flex; flex-direction: column; justify-content: center; gap: 8px; min-height: 60vh; transition: opacity .4s; }
+  .oxh-step h3 { margin: 0; font-family: var(--display); font-size: 32px; font-weight: 400; line-height: 1.15; letter-spacing: -0.02em; color: var(--green); }
+  .oxh-step p { margin: 0; max-width: 40ch; font-size: 19px; font-weight: 300; line-height: 1.45; color: var(--text-soft); }
+  @media (min-width: 1025px) { .is-live .oxh-step:not(.is-on) { opacity: .3; } }
+
+  .oxh-earth { fill: var(--grey); }
+  .oxh-ground { fill: none; stroke: var(--green); stroke-width: 3; }
+  .oxh-pit { fill: var(--green); }
+  .oxh-shelf { stroke: var(--line-on-dark); stroke-width: 2; }
+  .oxh-pipe { fill: none; stroke: var(--green); stroke-width: 8; }
+  .oxh-flow, .oxh-lift { fill: none; stroke: var(--lime); stroke-width: 3; stroke-dasharray: 6 14; animation: oxh-flow 1s linear infinite; }
+  .oxh-block { fill: rgba(255, 255, 255, .28); }
+  .oxh-tag { fill: var(--lime); }
+  .oxh-walls { fill: var(--white); stroke: var(--green); stroke-width: 3; }
+  .oxh-floor { stroke: var(--green); stroke-width: 3; }
+  .oxh-roof { fill: var(--green); }
+  .oxh-win { fill: var(--lime); stroke: var(--green); stroke-width: 2; }
+  .oxh-win--expert { fill: var(--white); }
+  .oxh-expert { fill: var(--green); }
+  @keyframes oxh-flow { to { stroke-dashoffset: -20; } }
+
+  .oxh-svg * { transform-box: fill-box; transition: opacity .5s, transform .7s cubic-bezier(.16, 1, .3, 1), fill .4s; transition-delay: calc(var(--i, 0) * 40ms); }
+  .oxh-pit { transform-origin: top; }
+  :is(.oxh-walls, .oxh-floor, .oxh-lift) { transform-origin: bottom; }
+  .oxh-tag { transform-origin: center; }
+  .is-live:not(.s1) :is(.oxh-pipe, .oxh-flow, .oxh-shelf, .oxh-block) { opacity: 0; }
+  .is-live:not(.s1) .oxh-pit { transform: scaleY(0); }
+  .is-live:not(.s1) .oxh-block { transform: translateY(-10px); }
+  .is-live:not(.s2) .oxh-tag { opacity: 0; transform: scale(0); }
+  .is-live:not(.s3) :is(.oxh-walls, .oxh-floor, .oxh-lift) { transform: scaleY(0); }
+  .is-live:not(.s3) :is(.oxh-win, .oxh-roof) { opacity: 0; }
+  .is-live:not(.s3) .oxh-roof { transform: translateY(-30px); }
+  .is-live:not(.s4) .oxh-win { fill: var(--grey); }
+  .is-live:not(.s4) .oxh-expert { opacity: 0; }
+
+  @media (max-width: 1024px) {
+    .oxh__head h2 { font-size: 40px; }
+    /* Drawing pinned under the header; steps scroll beneath it. */
+    .oxh__stage { top: 0; z-index: 1; padding: 80px 0 12px; background: var(--white); }
+    .oxh-svg { width: auto; max-height: 36vh; margin: 0 auto; }
+    .oxh-steps { padding-bottom: 0; }
+    .oxh-step { justify-content: flex-start; min-height: 35vh; }
+    .oxh-step h3 { font-size: 24px; }
+    .oxh-step p { font-size: 17px; }
+  }
+  @media (max-width: 767px) { .oxh__head h2 { font-size: 34px; } }
+  @media (prefers-reduced-motion: reduce) { .oxh-svg * { transition: none; animation: none; } }
+
+  @media (max-width: 1024px) {
+    .oxp-lead { font-size: 24px; }
+    .oxp__inner { grid-template-columns: 1fr; }
+    .oxp__head { position: static; }
+    .oxp__head h2 { font-size: 40px; }
+    .oxp-main__title { font-size: 32px; }
+    .oxp-di { font-size: 28px; }
+  }
+  @media (max-width: 767px) {
+    .oxp-lead { margin-bottom: 30px; font-size: 18px; }
+    .oxp-nav a { font-size: 16px; }
+    .oxp { padding: 50px 16px 0; }
+    .oxp--story { padding-top: 0; }
+    .oxp__head h2 { font-size: 34px; }
+    .oxp__head p:last-child { font-size: 17px; }
+    .oxp-step { padding: 20px; gap: 4px 14px; }
+    .oxp-step h3 { font-size: 22px; }
+    .oxp-step p { font-size: 16px; }
+    .oxp-di { font-size: 22px; }
+    .oxp-main { min-height: 0; padding: 24px 22px; }
+    .oxp-main__title { font-size: 26px; }
+    .oxp-main__text { font-size: 16px; }
+    .oxp-link { padding: 18px 18px; gap: 4px 14px; }
+    .oxp-link__title { font-size: 20px; }
+    .oxp-go, .oxp-link .oxp-go { width: 40px; height: 40px; }
+    .oxp-cta { padding-top: 70px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .oxp-go :global(svg), .oxp-nav svg { transition: none; } }
+</style>

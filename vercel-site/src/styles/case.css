@@ -6,7 +6,7 @@
 }
 .case-wrap { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 50px; }
 .case a:focus-visible, .case [tabindex]:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; border-radius: 4px; }
-.case .greenSection a:focus-visible, .case .cx-approach a:focus-visible, .case .case-cta__card a:focus-visible { outline-color: var(--lime); }
+.case .greenSection a:focus-visible, .case .cx-approach a:focus-visible, .case-cta__card :is(a, button, [tabindex]):focus-visible { outline-color: var(--lime); } /* card also used outside .case (home, expertise, knowledge) */
 
 /* Hero */
 .case-hero__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 60px; align-items: center; padding-top: 50px; padding-bottom: 70px; }

@@ -181,7 +181,7 @@
 
 @media (max-width: 767px) {
   :where(.p-spaced) p + p { margin-top: 25px; }
-  .post-sec { padding: 0 15px; }
+  .post-sec { padding: 0 16px; }
   .post-sec__inner { flex-wrap: wrap; }
   .post-hero__inner { padding: 50px 0; }
   .post-hero__title { margin-bottom: 30px; }

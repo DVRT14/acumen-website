@@ -1,0 +1,133 @@
+---
+// Concept overview (noindex): the audit of the live /expertise/* pages, the new template's storyline, and per-page
+// notes on what changed and what to confirm. Page data: data/concept-expertise.ts.
+import Base from '../../../layouts/Base.astro';
+import { expertises } from '../../../data/concept-expertise';
+import '../../../styles/case.css';
+
+const seo = { title: 'Expertise pages concept | Acumen', description: 'Audit of the expertise detail pages and a proposed template and storyline.', noindex: true };
+
+// Audit of the live pages (src/content/expertise/*.json on template pages/expertise/[slug].astro).
+const findings = [
+  { t: 'A blog template, not a service page', d: 'Every page reuses the post layout: author line, marquee, intro, features, pull quote, conclusion. Headings are slots (“Experience great benefits”, “Acumen Expertise”, “Continued Care”), so nothing on the page says what the buyer gets.' },
+  { t: 'Each page opens with a definition', d: '“Data visualization & reporting is the visual representation of data using visual elements.” “EPM … is the process that translates strategy into plans.” The first line explains the category instead of the problem it solves.' },
+  { t: 'No proof on any page', d: 'Zero links to customer cases, although the knowledge base has published cases for most of them (Bionerga, Kaneka, H.Essers, Animo, Spaas Candles). The related carousel at the bottom is generic.' },
+  { t: 'Not connected to the new story', d: '/our-expertise/ now says decision intelligence, foundation and house. The detail pages still read as six separate pillars, and none links back to the stack or to its neighbours.' },
+  { t: 'Pull quotes repeat the body', d: 'Five of seven quotes are a sentence copied from the text around them, so the biggest type on the page adds nothing.' },
+  { t: 'Wrong or outdated content', d: 'Data Strategy is a copy of the governance argument (metadata, data quality). Support & Maintenance names Wouter Mertens, who is no longer engaged. EPM doesn’t mention Anaplan, Planning Analytics or Aimplan. Data Science & AI opens with “many organizations struggle with a lack of ideas”.' },
+  { t: 'Contacts don’t match', d: 'The author and the “has the answers” person differ on most pages (Glenn vs. Michel, Jannis vs. Bram), two pages say “Our team”, and every button is a mailto to info@acumen.be.' },
+  { t: 'Weak for search and AI answers', d: 'Titles like “Data Governance Services at Acumen”, no FAQ, no structured Q&A, and the standard stack (dbt, Databricks, Fabric) appears on one page only, in the middle of a paragraph.' },
+  { t: 'Navigation before the content', d: 'Each page starts with the old “Our Expertise” slider above the H1, so the first screen is a menu of other pages.' },
+  { t: 'Copy errors', d: '“Monitoring data quality expose the various sources”, “data anlytics”, “add hoc”, “return of your investment”, a lowercase heading (“prioritize data quality and metadata”).' },
+];
+
+// The template, beat by beat: what each section does for the reader.
+const beats = [
+  { t: 'Hero: the decision', d: 'H1 is the expertise name (search). The lead says which decision gets better, in one line. Label shows its place in the stack. Two actions: plan a call, or jump to proof.' },
+  { t: 'Sound familiar?', d: 'Three symptoms the buyer lives with, in their words. Recognition before explanation.' },
+  { t: 'Why it matters for AI', d: 'The one dark band. Ties this layer to decision intelligence and to “why pilots stall”, so every page carries the same thesis.' },
+  { t: 'What we build', d: 'Four named deliverables, then the tools as chips. Concrete enough to compare, and it puts the stack terms on the page.' },
+  { t: 'How we work', d: 'Three steps specific to this expertise, not a generic method.' },
+  { t: 'In practice', d: 'Published cases as linked cards (decision → result), anonymised work as plain cards. Every page gets proof.' },
+  { t: 'Where it sits', d: 'The /our-expertise/ stack in miniature, this layer highlighted, the others linked. Routing and the foundation/house story in one block.' },
+  { t: 'FAQ', d: 'Three buyer questions with direct answers, also as FAQPage structured data for search and AI answers.' },
+  { t: 'CTA', d: 'A question about the reader’s own decision, with the expert who will take the call.' },
+];
+---
+<Base seo={seo}>
+  <article class="case xo">
+    <section class="case-wrap xo-hero">
+      <p class="case-label">Concept · not linked, noindex</p>
+      <h1 class="case-hero__title">Expertise pages, rethought</h1>
+      <p class="case-hero__lead">The seven pages linked from <a href="/our-expertise/">Our expertise</a>: what is wrong with them today, a new template, and a new storyline for each. The live pages and code are unchanged.</p>
+      <ol class="xo-index">
+        {expertises.map(e => <li><a href={`/concept/expertise/${e.slug}/`}><strong>{e.page}</strong><span>{e.lead}</span></a></li>)}
+      </ol>
+    </section>
+
+    <section class="case-wrap xo-sec" aria-labelledby="audit">
+      <h2 class="xo-h2" id="audit">1. What the current pages get wrong</h2>
+      <ul class="xo-list">{findings.map(f => <li><h3>{f.t}</h3><p>{f.d}</p></li>)}</ul>
+    </section>
+
+    <section class="case-wrap xo-sec" aria-labelledby="template">
+      <h2 class="xo-h2" id="template">2. The new template</h2>
+      <p class="xo-text">One storyline for all seven pages: from the decision, through what breaks without this layer, to proof and a call. It reuses the case page’s hero, chips and CTA card, so it looks like the rest of the rebuilt site.</p>
+      <ol class="xo-list xo-list--num">{beats.map(b => <li><h3>{b.t}</h3><p>{b.d}</p></li>)}</ol>
+    </section>
+
+    <section class="case-wrap xo-sec" aria-labelledby="story">
+      <h2 class="xo-h2" id="story">3. Storyline per page</h2>
+      <p class="xo-text">For each page: the new lead, its thesis, and what to confirm before it replaces the live page.</p>
+      <div class="xo-pages">
+        {expertises.map(e => (
+          <section class="xo-page" aria-labelledby={`p-${e.slug}`}>
+            <p class="xo-meta">{e.group === 'house' ? 'The house' : 'The foundation'} · {e.layer}</p>
+            <h3 id={`p-${e.slug}`}><a href={`/concept/expertise/${e.slug}/`}>{e.page}</a></h3>
+            <p class="xo-page__lead">{e.lead}</p>
+            <p><strong>Thesis:</strong> {e.why.title}</p>
+            <ul>{e.review.map(r => <li>{r}</li>)}</ul>
+          </section>
+        ))}
+      </div>
+    </section>
+
+    <section class="case-wrap xo-sec" aria-labelledby="next">
+      <h2 class="xo-h2" id="next">Before any of this goes live</h2>
+      <ul class="xo-list">
+        <li><h3>Support & Maintenance</h3><p>Confirm the delivery model after the Romania closure, and remove Wouter Mertens from the live page now.</p></li>
+        <li><h3>EPM placement</h3><p>Still parked. The concept treats planning as the operational decision layer; decide that explicitly.</p></li>
+        <li><h3>Anonymised cases</h3><p>Only published cases are shown. Seven anonymised items stay in the data, hidden, until the clients sign off. EPM has no published case yet, so its page has no proof section.</p></li>
+        <li><h3>Experts</h3><p>Confirm one owner per page, with a portrait. The concept reuses the live pages’ photos.</p></li>
+      </ul>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .xo { padding-bottom: 80px; }
+  .xo-hero { padding-top: 50px; }
+  .xo .case-hero__lead a { color: inherit; text-decoration-color: var(--lime-2); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+  .xo-index { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin: 48px 0 0; padding: 0; list-style: none; }
+  .xo-index a { display: flex; flex-direction: column; gap: 6px; height: 100%; padding: 20px 22px; border-radius: 16px; background: var(--grey); color: var(--green); text-decoration: none; }
+  .xo-index strong { font-family: var(--display); font-size: 22px; font-weight: 400; letter-spacing: -0.02em; }
+  .xo-index span { font-size: 16px; line-height: 1.45; color: var(--text-soft); }
+  @media (hover: hover) { .xo-index a:hover { box-shadow: inset 0 0 0 1px var(--green); } }
+
+  .xo-sec { padding-top: 100px; }
+  .xo-h2 { margin: 0 0 20px; font-family: var(--display); font-size: 48px; font-weight: 400; line-height: 1.06; letter-spacing: -0.04em; }
+  .xo-text { margin: 0 0 32px; max-width: 46em; color: var(--text-soft); }
+  .xo-meta { margin: 0; font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--label); }
+  .xo h3 { margin: 0; font-family: var(--display); font-size: 24px; font-weight: 400; line-height: 1.2; letter-spacing: -0.02em; }
+
+  .xo-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 60px; margin: 0; padding: 0; list-style: none; }
+  .xo-list li { padding: 22px 0; border-top: 1px solid var(--line); }
+  .xo-list p { margin: 6px 0 0; font-size: 17px; line-height: 1.5; color: var(--text-soft); }
+  .xo-list--num { counter-reset: n; }
+  .xo-list--num li { counter-increment: n; }
+  .xo-list--num h3::before { content: counter(n) '. '; color: var(--label); }
+
+  .xo-pages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .xo-page { padding: 28px; border: 1px solid var(--line); border-radius: 20px; font-size: 17px; line-height: 1.5; }
+  .xo-page h3 { margin-top: 8px; }
+  .xo-page h3 a { color: inherit; text-decoration-color: var(--lime-2); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+  .xo-page p { margin: 12px 0 0; }
+  .xo-page__lead { font-family: var(--display); font-size: 20px; letter-spacing: -0.01em; }
+  .xo-page ul { margin: 14px 0 0; padding-left: 1.2em; color: var(--text-soft); }
+  .xo-page li + li { margin-top: 8px; }
+  .xo-page strong { font-weight: 600; }
+
+  @media (max-width: 1024px) {
+    .xo-sec { padding-top: 70px; }
+    .xo-h2 { font-size: 38px; }
+    .xo-list, .xo-pages { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 767px) {
+    .xo-hero { padding-top: 30px; }
+    .xo-sec { padding-top: 56px; }
+    .xo-h2 { font-size: 30px; }
+    .xo h3 { font-size: 21px; }
+    .xo-list p, .xo-page { font-size: 16px; }
+    .xo-page { padding: 22px 18px; }
+  }
+</style>

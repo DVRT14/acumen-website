@@ -1,7 +1,6 @@
 ---
 // Page shell: head (SEO tags + JSON-LD built from the page's `seo` data), header, footer, consent.
-// consent.css first: it was linked ahead of the page styles.
-import '../styles/consent.css';
+// The consent UI's styles load as a separate cached file from scripts/consent.js, not inline on every page.
 import '../styles/base.css';
 import '../styles/motion.css';
 import Header from '../components/Header.astro';

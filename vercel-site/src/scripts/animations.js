@@ -76,6 +76,8 @@ function headerNav() {
 
   function toggleState() {
     const body = document.body;
+    // Read before the menu hides: once it does, focus inside it has already dropped to <body>.
+    const focusInMenu = dropMenu().contains(document.activeElement) || document.activeElement === body;
     if (body.getAttribute('data-lenis-prevent') === 'true') { body.removeAttribute('data-lenis-prevent'); lenis.start(); }
     else { body.setAttribute('data-lenis-prevent', 'true'); lenis.stop(); }
     scrollLock.getScrollState() ? scrollLock.disablePageScroll() : scrollLock.enablePageScroll();
@@ -91,7 +93,8 @@ function headerNav() {
     // Open menu: the page behind it is inert, so Tab cycles through the header (Menu/close) and the menu only.
     const open = isOpen(), menu = dropMenu();
     if (open) opener = document.activeElement;
-    else if (menu.contains(document.activeElement)) opener?.focus({ preventScroll: true });
+    // The opener's header bar can still be hidden here (the dark bar returns 300ms after close): focus whichever Menu button shows.
+    else if (focusInMenu) setTimeout(() => [opener, ...$$('.menuBtn button, button.menuBtn')].find(b => b?.checkVisibility())?.focus({ preventScroll: true }), headerDarkVisible ? 300 : 0);
     menu.inert = !open;
     $$('#main, body > footer, .skip-link').forEach(el => { el.inert = open; });
     if (open) menu.querySelector('a[href]')?.focus({ preventScroll: true });

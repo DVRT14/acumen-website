@@ -1,5 +1,7 @@
 // Cookie consent + tracker loading. Nothing third-party loads until its category is accepted.
 // Keeps CookieYes' cookie name/format so choices made on the old site stay valid.
+import consentCss from '../styles/consent.css?url';
+
 const COOKIE = 'cookieyes-consent';
 const EXPIRY_DAYS = 365;
 const CATEGORIES = ['necessary', 'functional', 'analytics', 'performance', 'advertisement'];
@@ -69,10 +71,19 @@ function applyConsent(consent) {
   }
 }
 
+// The consent UI's 20 KB of styles come as one cached file instead of inline on every page. The UI stays hidden
+// (base.css) until they apply; if they fail to load, the banner never shows and nothing third-party loads.
+function loadStyles(ui) {
+  const link = Object.assign(document.createElement('link'), { rel: 'stylesheet', href: consentCss });
+  link.onload = () => ui.classList.add('cky-ready');
+  document.head.append(link);
+}
+
 export function initConsent() {
   const q = sel => document.querySelector(sel);
   const banner = q('.cky-consent-container'), modal = q('.cky-modal'), overlay = q('.cky-overlay'), revisit = q('.cky-btn-revisit-wrapper');
   if (!banner || !modal) return;
+  loadStyles(q('[data-consent-ui]'));
   let consent = readConsent();
   let lastFocus = null;
 

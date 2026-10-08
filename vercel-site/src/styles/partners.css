@@ -42,7 +42,7 @@
 .partner__main p { margin: 0; font-family: "DM Sans", Sans-serif; font-size: 20px; font-weight: 300; line-height: 1.55; color: #002921; }
 .partner__main p + p { margin-top: 20px; }
 .partner__aside { flex: 0 0 320px; align-self: flex-start; padding: 30px; border-radius: 20px; background: #F4F4F4; }
-.partner__h3 { margin: 0 0 12px; font-family: "DM Sans", Sans-serif; font-size: 14px; font-weight: 400; letter-spacing: .06em; text-transform: uppercase; color: #767676; }
+.partner__h3 { margin: 0 0 12px; font-family: "DM Sans", Sans-serif; font-size: 14px; font-weight: 400; letter-spacing: .06em; text-transform: uppercase; color: var(--label); }
 .partner__links { margin: 0 0 28px; padding: 0; list-style: none; }
 .partner__links li + li { margin-top: 8px; }
 .partner__links a, .partner__ext { font-family: "DM Sans", Sans-serif; font-size: 18px; font-weight: 400; color: #002921; text-decoration: underline; text-underline-offset: 4px; }

@@ -98,7 +98,7 @@ const gallery = [c.photoLeft, c.quoteImage, c.photoRight].map(img => ({ ...img, 
         <ul class="cul-jobs">
           {vacancies.map(v => (
             <li>
-              <a class="cul-job" href={v.href} aria-label={[v.title, ...v.meta].join(', ')}>
+              <a class="cul-job" href={v.href}>
                 <span class="cul-job__title">{v.title}</span>
                 <span class="cul-job__meta">{v.meta.join(' · ')}</span>
                 <span class="cul-job__cta" aria-hidden="true">View job →</span>

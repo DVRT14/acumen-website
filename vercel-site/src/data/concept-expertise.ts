@@ -18,7 +18,15 @@ export type Signature = {
   head?: [string, string] | [string, string, string]; rows?: { k: string; v: string; w?: string }[];
   steps?: { t: string; d: string }[];
 };
+// Team photos. Defaults come from the live page (banner, photo, author image); `photos` overrides a slot so no
+// photo repeats across the seven pages and the dark band shows people. `how: false` drops that slot.
+// src = the file for desktop, srcset optional, pos = object-position for the crop.
+export type Photo = { src: string; srcset?: string; pos?: string };
+// Sizes are WordPress's own (from the file names): it rounds heights its own way, so never derive them.
+const up = (path: string, sizes: [number, number][]) =>
+  ({ src: `/wp-content/uploads/${path}-${sizes.at(-1)!.join('x')}.webp`, srcset: sizes.map(([w, h]) => `/wp-content/uploads/${path}-${w}x${h}.webp ${w}w`).join(', ') });
 export type Expertise = {
+  photos?: { band?: Photo; why?: Photo; how?: Photo | false };
   slug: string; page: string; group: 'house' | 'foundation'; layer: string; ai?: boolean;
   // shape: 'phase' (strategy: a first phase), 'outcome' (AI, EPM, reporting, engineering, governance), 'service' (support: ongoing).
   shape?: 'phase' | 'outcome' | 'service';
@@ -45,7 +53,7 @@ const button = 'Plan a call';
 
 export const expertises: Expertise[] = [
   {
-    slug: 'data-strategy', page: 'Data Strategy', group: 'house', layer: 'Which decisions to automate first',
+    slug: 'data-strategy', photos: { band: { src: '/wp-content/uploads/2024/05/Tjomme_data-strategy-and-governance_4.webp', pos: '20% 50%' }, why: { src: '/wp-content/uploads/2024/05/Tjomme_data-strategy-and-governance_3-m.webp', pos: '78% 50%' }, how: false }, page: 'Data Strategy', group: 'house', layer: 'Which decisions to automate first',
     shape: 'phase', eyebrow: 'Data Strategy · where to start', depends: [],
     seo: { title: 'Data Strategy: start with the decision | Acumen', description: 'A data strategy that starts from your recurring decisions, picks where data and AI pay off first and checks whether your data can carry them.' },
     lead: 'Start with the decision, not the data.',
@@ -102,7 +110,7 @@ export const expertises: Expertise[] = [
     ],
   },
   {
-    slug: 'datascience-ai', page: 'Data Science & AI', group: 'house', layer: 'AI in your processes', ai: true,
+    slug: 'datascience-ai', photos: { why: { ...up('2025/01/DSCF6831-scaled-e1737554254247', [[768, 476], [1024, 635], [1536, 952]]), pos: '45% 40%' }, how: false }, page: 'Data Science & AI', group: 'house', layer: 'AI in your processes', ai: true,
     shape: 'outcome', eyebrow: 'Data Science & AI · decisions in your processes', depends: ['dataintegration-engineering', 'data-governance'],
     seo: { title: 'Data Science & AI for operational decisions | Acumen', description: 'AI inside your processes: predictions, optimisation, language models and agents that handle routine decisions and leave the exceptions to your experts.' },
     lead: 'AI that takes the routine decisions and hands your experts the exceptions.',
@@ -150,7 +158,7 @@ export const expertises: Expertise[] = [
     ],
     proof: [
       { client: 'H.Essers', kind: 'case', href: '/knowledge/routing-optimization-essers-acumen/', decision: 'Which routing and consolidation options to propose to each customer?', result: 'Routing scenarios compared on real order data, so every customer conversation starts from substantiated options.', tags: ['Databricks', 'Google OR-Tools'] },
-      { client: 'Animo', kind: 'case', href: '/knowledge/ai-legal-assistant-animo-law/', decision: 'Which sources answer this client’s legal question?', result: 'Lawyers of every experience level retrieve relevant legal information instantly, from Animo’s own knowledge base.', tags: ['RAG', 'Large language models'], metric: { value: '50,000+', label: 'configuration variations evaluated to tune retrieval and answer quality' } },
+      { client: 'Animo', kind: 'case', href: '/knowledge/ai-legal-assistant-animo-law/', decision: 'Which sources answer this client’s legal question?', result: 'Lawyers of every experience level retrieve relevant legal information instantly, from Animo’s own knowledge base.', tags: ['Retrieval-augmented generation', 'Large language models'] },
       { client: 'Home-cleaning company', kind: 'anon', decision: 'Which household does each field employee visit, when, and in what order?', result: 'Weekly schedules within every legal and travel constraint. A planner’s own schedule is checked and repaired with minimal changes.', tags: ['AMPL'] },
       { client: 'Nationwide repair service', kind: 'anon', decision: 'Which booked customers won’t show up?', result: 'High-risk bookings get a confirmation call before parts are shipped and mechanics are scheduled.' },
     ],
@@ -169,7 +177,7 @@ export const expertises: Expertise[] = [
     ],
   },
   {
-    slug: 'data-planning-epm', page: 'Data Planning & EPM', group: 'house', layer: 'Plans, budgets and forecasts',
+    slug: 'data-planning-epm', photos: { how: up('2025/04/DSCF1208', [[768, 512], [1024, 683], [1536, 1024]]) }, page: 'Data Planning & EPM', group: 'house', layer: 'Plans, budgets and forecasts',
     shape: 'outcome', eyebrow: 'Planning & EPM · budgets and forecasts', depends: ['dataintegration-engineering'],
     seo: { title: 'Data Planning & EPM: plans that update with the business | Acumen', description: 'Budgets, forecasts and what-if scenarios in one connected model, from the yearly budget to operational capacity plans. Anaplan, IBM Planning Analytics and Aimplan.' },
     lead: 'Plans that update when the business does.',
@@ -288,8 +296,8 @@ export const expertises: Expertise[] = [
     ],
   },
   {
-    slug: 'dataintegration-engineering', page: 'Data Integration & Engineering', group: 'foundation', layer: 'One platform for all your data',
-    shape: 'outcome', eyebrow: 'Data Engineering · the platform underneath', depends: [],
+    slug: 'dataintegration-engineering', photos: { how: up('2026/05/DSCF6525', [[768, 508], [1024, 677]]) }, page: 'Data Integration & Engineering', group: 'foundation', layer: 'One platform for all your data',
+    shape: 'outcome', eyebrow: 'Data Integration & Engineering · the platform underneath', depends: [],
     seo: { title: 'Data engineering on dbt, Databricks, Fabric and Dagster | Acumen', description: 'One data platform where definitions, tests, ownership and lineage live in the code. Built on dbt, Databricks or Microsoft Fabric, and Dagster.' },
     lead: 'One platform where every number carries its meaning.',
     intro: 'We build data platforms on dbt, Databricks or Microsoft Fabric, and Dagster. Definitions, tests, ownership and lineage live in the code next to the data. Every answer, in a report or from AI, can be traced back to its source.',
@@ -349,7 +357,7 @@ export const expertises: Expertise[] = [
     ],
   },
   {
-    slug: 'data-governance', page: 'Data Governance', group: 'foundation', layer: 'Definitions, quality and ownership',
+    slug: 'data-governance', photos: { why: { ...up('2025/02/DSCF1029', [[768, 512], [1024, 683], [1536, 1024]]), pos: '60% 50%' } }, page: 'Data Governance', group: 'foundation', layer: 'Definitions, quality and ownership',
     shape: 'outcome', eyebrow: 'Data Governance · definitions and quality', depends: ['dataintegration-engineering'],
     seo: { title: 'Data governance as code: definitions you can trust | Acumen', description: 'Definitions, quality tests, ownership and lineage built into the data platform itself, so governance deploys with the data and makes AI answers checkable.' },
     lead: 'Agree once what each number means, and keep it true in the code.',
@@ -410,7 +418,7 @@ export const expertises: Expertise[] = [
     ],
   },
   {
-    slug: 'support-maintenance', page: 'Support & Maintenance', group: 'foundation', layer: 'Kept reliable as your business changes',
+    slug: 'support-maintenance', photos: { how: { ...up('2026/06/DSCF6533-scaled-e1782802625587', [[768, 646], [1024, 862], [1536, 1293]]), pos: '60% 30%' } }, page: 'Support & Maintenance', group: 'foundation', layer: 'Kept reliable as your business changes',
     shape: 'service', eyebrow: 'Support & Maintenance · once you are live', depends: ['dataintegration-engineering', 'data-governance', 'datavisualisation-reporting'],
     seo: { title: 'Support & Maintenance for data platforms and models | Acumen', description: 'Monitoring, incident handling and change for data platforms, reports and AI models, so they stay reliable as sources, definitions and questions change.' },
     lead: 'Your data keeps changing after launch. We keep it reliable.',
